@@ -1,0 +1,10 @@
+#LYX save files
+**/\#*\#
+
+#Backup Files
+**/*~
+!**/~
+**/*.bak
+
+#Pdf
+**/*.pdf
