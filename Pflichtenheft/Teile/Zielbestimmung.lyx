@@ -1,0 +1,209 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass paper
+\use_default_options true
+\master ../Pflichtenheft.lyx
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Zielbestimmung
+\end_layout
+
+\begin_layout Standard
+Verschieden Gruppen von Leuten sollen durch die App in die Lage versetzt
+ werden sich für ein gemeinsames Treffen ohne einen genauen Treffpunkt zu
+ verabreden und sich dann live gegenseitig zu finden.
+\end_layout
+
+\begin_layout Subsection
+Muss-Kriterien
+\end_layout
+
+\begin_layout Itemize
+Organisation in Gruppen
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Gruppen-Admin erstellt Gruppe
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Erstellen von Terminen
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Admin kann termin ändern bzw.
+ absagen
+\end_layout
+
+\begin_layout Itemize
+statische und dynamische Treffen unterscheiden
+\end_layout
+
+\begin_layout Itemize
+zu Termin an-/abmelden
+\end_layout
+
+\begin_layout Itemize
+über angemeldete Termine benachrichtigen
+\end_layout
+
+\begin_layout Itemize
+Erinnerungen an bevorstehende Termine
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Gemittelte Lokation der anderen Gruppenmitglieder
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+GPS in Bestimmten Zeitraum oder Umgebung aktivieren
+\end_layout
+
+\begin_layout Itemize
+Position speichern
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Kann-Kriterien
+\end_layout
+
+\begin_layout Itemize
+Sicherheit
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Über das Internet übertragene Daten sollen verschlüsselt sein
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Navigation zum Ort der Gruppe
+\end_layout
+
+\begin_layout Itemize
+Neue Leute treffen
+\end_layout
+
+\begin_layout Itemize
+Freundeskreis
+\end_layout
+
+\begin_layout Itemize
+Chat
+\end_layout
+
+\begin_layout Itemize
+Abfragen
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Wer ist schon da?
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Essenstipps
+\end_layout
+
+\begin_layout Itemize
+Benutzerverwaltung
+\end_layout
+
+\begin_layout Itemize
+Notizen zu Marker oder Termin hinzufügen
+\end_layout
+
+\begin_layout Itemize
+Treffen ohne konkreten Treffpunkt
+\end_layout
+
+\begin_layout Itemize
+Benachrichtigungen
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Wann ist der Erste vor Ort
+\end_layout
+
+\begin_layout Itemize
+Zwei Termine überschneiden sich
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
