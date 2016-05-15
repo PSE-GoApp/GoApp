@@ -71,139 +71,97 @@
 \begin_body
 
 \begin_layout Section
+
+\lang english
 Zielbestimmung
 \end_layout
 
-\begin_layout Standard
-Verschieden Gruppen von Leuten sollen durch die App in die Lage versetzt
- werden sich für ein gemeinsames Treffen ohne einen genauen Treffpunkt zu
- verabreden und sich dann live gegenseitig zu finden.
+\begin_layout Paragraph*
+
+\lang english
+Benutzer dieser App sollen dazu in die Lage versetzt werden, sich in Gruppen
+ zu organisieren, um Treffen auszumachen und sich bei den jeweiligen Treffen
+ unterstützt durch GPS zu finden.
 \end_layout
 
 \begin_layout Subsection
-Muss-Kriterien
+
+\lang english
+Musskriterien
 \end_layout
 
 \begin_layout Itemize
-Organisation in Gruppen
-\end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Gruppen-Admin erstellt Gruppe
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Erstellen von Terminen
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Admin kann termin ändern bzw.
- absagen
+\lang english
+Verwaltung der Gruppen
 \end_layout
 
 \begin_layout Itemize
-statische und dynamische Treffen unterscheiden
+
+\lang english
+Verwaltung der Termine
 \end_layout
 
 \begin_layout Itemize
-zu Termin an-/abmelden
+
+\lang english
+Ortung der beteiligten Personen
 \end_layout
 
 \begin_layout Itemize
-über angemeldete Termine benachrichtigen
+
+\lang english
+Schnittstelle zu Benutzerverwaltung
 \end_layout
 
-\begin_layout Itemize
-Erinnerungen an bevorstehende Termine
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Gemittelte Lokation der anderen Gruppenmitglieder
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-GPS in Bestimmten Zeitraum oder Umgebung aktivieren
-\end_layout
-
-\begin_layout Itemize
-Position speichern
-\end_layout
-
-\end_deeper
 \begin_layout Subsection
-Kann-Kriterien
+
+\lang english
+Wunschkriterien
 \end_layout
 
 \begin_layout Itemize
-Sicherheit
-\end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Über das Internet übertragene Daten sollen verschlüsselt sein
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Navigation zum Ort der Gruppe
+\lang english
+Angaben, wer sich am Treffpunkt befindet
 \end_layout
 
 \begin_layout Itemize
-Neue Leute treffen
+
+\lang english
+erweiterte Einstellungen und Funktionen bei Terminen 
 \end_layout
 
 \begin_layout Itemize
-Freundeskreis
+
+\lang english
+erweiterte Einstellungen und Funktionen bei Gruppenverwaltung 
 \end_layout
 
 \begin_layout Itemize
-Chat
+
+\lang english
+alternative Benutzerverwaltung anstatt Google-Account 
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+Abgrenzungskriterien
 \end_layout
 
 \begin_layout Itemize
-Abfragen
-\end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Wer ist schon da?
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Essenstipps
+\lang english
+Termine ausmachen und Teilnehmer am Treffpunkt ausfindig machen steht im
+ Vordergrund --> keine Funktion als Terminkalender 
 \end_layout
 
 \begin_layout Itemize
-Benutzerverwaltung
+
+\lang english
+Entwicklung vorerst nur für Android 
 \end_layout
 
-\begin_layout Itemize
-Notizen zu Marker oder Termin hinzufügen
-\end_layout
-
-\begin_layout Itemize
-Treffen ohne konkreten Treffpunkt
-\end_layout
-
-\begin_layout Itemize
-Benachrichtigungen
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Wann ist der Erste vor Ort
-\end_layout
-
-\begin_layout Itemize
-Zwei Termine überschneiden sich
-\end_layout
-
-\end_deeper
 \end_body
 \end_document
