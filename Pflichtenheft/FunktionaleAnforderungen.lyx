@@ -1,0 +1,391 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Funktionale Anforderungen
+\end_layout
+
+\begin_layout Subsection
+Gruppenverwaltung
+\end_layout
+
+\begin_layout Subsubsection
+Priorität A
+\end_layout
+
+\begin_layout Itemize
+/F10/ Erstellen und Löschen von Gruppen
+\end_layout
+
+\begin_layout Itemize
+/F20/ Gruppe einen Namen beim Erstellen geben
+\end_layout
+
+\begin_layout Itemize
+/F30/ Ersteller der Gruppe als Administrator, der Gruppe verwaltet
+\end_layout
+
+\begin_layout Itemize
+/F40/ Hinzufügen und Löschen von Benutzern durch Administrator
+\end_layout
+
+\begin_layout Itemize
+/F50/ Suchfunktion beim Erstellen, um andere Benutzer zu finden
+\end_layout
+
+\begin_layout Itemize
+/F60/ Abmeldung der Benutzer aus Gruppen
+\end_layout
+
+\begin_layout Itemize
+/F70/ Übersicht über eigene Gruppen mit jeweiligen Gruppeninformationen
+ (Gruppenname, Administrator, Teilnehmer)
+\end_layout
+
+\begin_layout Subsubsection
+Priorität B
+\end_layout
+
+\begin_layout Itemize
+/F80/ Hinzufügen anderer Benutzer als Freunde 
+\end_layout
+
+\begin_layout Itemize
+/F90/ mehrere Gruppenmitglieder können Administratorrechte auf unterschiedlichen
+ Zugriffsebenen haben 
+\end_layout
+
+\begin_layout Subsection
+Terminverwaltung
+\end_layout
+
+\begin_layout Subsubsection
+Priorität A
+\end_layout
+
+\begin_layout Itemize
+/F100/ Erstellen eines Termins mittels Angabe von 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Terminname 
+\end_layout
+
+\begin_layout Itemize
+Gruppe 
+\end_layout
+
+\begin_layout Itemize
+Ort 
+\end_layout
+
+\begin_layout Itemize
+Zeit
+\end_layout
+
+\begin_layout Itemize
+Datum 
+\end_layout
+
+\begin_layout Itemize
+Wahl zwischen statischem und dynamischem Treffen (bei dynamischen Treffen:
+ Dauer des Termins)
+\end_layout
+
+\begin_layout Itemize
+Notiz (optional)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/F110/ Änderung und Löschen von Terminen durch Ersteller
+\end_layout
+
+\begin_layout Itemize
+/F120/ Anzeigen der Termine für Gruppenmitglieder in dynamischer Liste
+\end_layout
+
+\begin_layout Itemize
+/F130/ Zugriff auf Termine (Teilnehmerliste, Ort, Zeit, Datum, Notiz) nur
+ für Gruppenmitglieder 
+\end_layout
+
+\begin_layout Itemize
+/F140/ An- und Abmeldung der Gruppenmitglieder zu Terminen
+\end_layout
+
+\begin_layout Itemize
+/F150/ separate Listen für an- und abgemeldete Termine für jedes Gruppenmitglied
+ 
+\end_layout
+
+\begin_layout Itemize
+/F160/ Einladungen zu Terminen in Liste mit angemeldeten Terminen integriert
+\end_layout
+
+\begin_layout Itemize
+/F170/ Anmeldung zu bereits abgemeldeten Terminen möglich
+\end_layout
+
+\begin_layout Itemize
+/F180/ Abmeldung zu bereits angemeldeten Terminen möglich 
+\end_layout
+
+\begin_layout Itemize
+/F190/ Benachrichtigung über anstehende Termine 
+\end_layout
+
+\begin_layout Itemize
+/F200/ Zugriff auf Karte nur nach Anmeldung für Termine
+\end_layout
+
+\begin_layout Itemize
+/F210/ Automatisches Löschen von abgelaufenen Terminen 
+\end_layout
+
+\begin_layout Subsubsection
+Priorität B
+\end_layout
+
+\begin_layout Itemize
+/F220/ Benachrichtigung, wenn der erste aus der Gruppe den Treffpunkt erreicht
+\end_layout
+
+\begin_layout Itemize
+/F230/ Angeben einer Liste von Teilnehmer, die sich bereits am Treffpunkt
+ befinden
+\end_layout
+
+\begin_layout Itemize
+/F240/ Warnung bei Anmeldung bei zwei Terminen, die gleichzeitig stattfinden
+\end_layout
+
+\begin_layout Itemize
+/F250/ Navigation zum Treffpunkt 
+\end_layout
+
+\begin_layout Itemize
+/F260/ Anzeigen, wenn bei einem Termin ein Teilnehmer keine Internetverbindung
+ hat 
+\end_layout
+
+\begin_layout Itemize
+/F270/ Angabe, ob Termin offenes Ende hat oder begrenzt ist
+\end_layout
+
+\begin_layout Itemize
+/F280/ Hinzufügen einer Notiz bei Terminen 
+\end_layout
+
+\begin_layout Itemize
+/F290/ Einrichten eines Chats 
+\end_layout
+
+\begin_layout Itemize
+/F300/ Möglichkeit, Gruppe auf verschiedene Termine aufzuteilen 
+\end_layout
+
+\begin_layout Subsection
+Lokalisierung
+\end_layout
+
+\begin_layout Subsubsection
+Priorität A
+\end_layout
+
+\begin_layout Itemize
+/F310/ Lokalisierung der Benutzer per GPS
+\end_layout
+
+\begin_layout Itemize
+/F320/ andere Benutzer durch GPS-Lokalisierung auf Karte finden
+\end_layout
+
+\begin_layout Itemize
+/F330/ andere Benutzer nur anzeigen, wenn sie in derselben Gruppe sind und
+ dem Termin zugestimmt haben 
+\end_layout
+
+\begin_layout Itemize
+/F340/ GPS-Daten nur in bestimmtem Zeitraum sichtbar: ab 30 Minuten vor
+ Beginn des Termins bis 60 Minuten (Standardeinstellung; individuell anpassbar)
+ nach Beginn des Termins
+\end_layout
+
+\begin_layout Itemize
+/F350/ Teilnehmer, die bereits vor Ort/Zentrum sind, anzeigen
+\end_layout
+
+\begin_layout Itemize
+/F360/ GPS-Lokalisierung ausschalten /F/ Karte anzeigen mithilfe von Google
+ Maps
+\end_layout
+
+\begin_layout Itemize
+bei statischen Terminen: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+/F370/ Treffpunkt als fester Ort dargestellt 
+\end_layout
+
+\begin_layout Itemize
+/F380/ Personen individuell als Marker auf der Karte dargestellt
+\end_layout
+
+\begin_layout Itemize
+/F390/ GPS-Daten nur in bestimmten Umkreis des Treffpunkts sichtbar
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+bei dynamischen Terminen: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+/F400/ kein fester Ort, sondern variabel, abhängig davon, wo sich Gruppe
+ befindet
+\end_layout
+
+\begin_layout Itemize
+/F410/ größte Ansammlung an Teilnehmern an demselben Ort werden als Zentrum
+ zu einem Punkt auf der Karte zusammengefasst 
+\end_layout
+
+\begin_layout Itemize
+/F420/ GPS-Daten nur in bestimmten Umkreis um das Zentrum sichtbar
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Priorität B
+\end_layout
+
+\begin_layout Itemize
+/F430/ Warnung des Benutzers, wenn GPS aus ist 
+\end_layout
+
+\begin_layout Subsection
+Schnittstelle zu Benutzerverwaltung
+\end_layout
+
+\begin_layout Subsubsection
+Priorität A
+\end_layout
+
+\begin_layout Itemize
+/F440/ Registrierung des Benutzers durch Google-Account 
+\end_layout
+
+\begin_layout Itemize
+/F450/ An- und Abmeldung des Benutzers 
+\end_layout
+
+\begin_layout Itemize
+/F460/ Speicherung der Benutzer auf dem Server 
+\end_layout
+
+\begin_layout Itemize
+/F470/ globales Benutzerverzeichnis auf dem Server
+\end_layout
+
+\begin_layout Subsubsection
+Priorität B
+\end_layout
+
+\begin_layout Itemize
+/F480/ Implementierung eigener Benutzerverwaltung ohne Google-Account 
+\end_layout
+
+\begin_layout Subsection
+Sonstiges 
+\end_layout
+
+\begin_layout Itemize
+/F490/ Datenschutzbestimmungen für Benutzer einsehbar
+\end_layout
+
+\begin_layout Itemize
+/F500/ Löschen der Benutzerdaten durch den Benutzer
+\end_layout
+
+\begin_layout Itemize
+/F510/ Benachrichtigen deaktivieren und aktivieren durch Benutzer
+\end_layout
+
+\begin_layout Itemize
+/F520/ Kommunikation App <-> Server 
+\end_layout
+
+\end_body
+\end_document
