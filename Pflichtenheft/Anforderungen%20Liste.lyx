@@ -201,10 +201,29 @@ Datum
 \begin_layout Itemize
 
 \lang english
-Wahl zwischen statischem und dynamischem Treffen (bei dynamischen Treffen:
- Dauer des Termins)
+Wahl zwischen Veranstaltung und Tour 
 \end_layout
 
+\begin_layout Itemize
+
+\lang english
+Zeitraum, in dem Teilnehmer auf der Karte lokalisiert werden 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\lang english
+Standardwert Veranstaltung: eine Stunde nach Beginn des Termins
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+Standardwert Tour: zwei Stunden nach Beginn des Termins
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 
 \lang english
@@ -390,14 +409,19 @@ Priorität A
 \begin_layout Itemize
 
 \lang english
-/F360/ GPS-Lokalisierung ausschalten /F/ Karte anzeigen mithilfe von Google
- Maps
+/F360/ GPS-Lokalisierung ausschalten
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-bei statischen Terminen: 
+/F/ Karte anzeigen mithilfe von Google Maps
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+bei Veranstaltungen: 
 \end_layout
 
 \begin_deeper
@@ -423,7 +447,7 @@ bei statischen Terminen:
 \begin_layout Itemize
 
 \lang english
-bei dynamischen Terminen: 
+bei Touren: 
 \end_layout
 
 \begin_deeper
