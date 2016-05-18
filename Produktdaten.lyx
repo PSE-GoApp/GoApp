@@ -1,0 +1,125 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\options \setcounter{section}{6}}
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Productdaten
+\end_layout
+
+\begin_layout Subsection
+Personendaten
+\end_layout
+
+\begin_layout Itemize
+/D10/ Über eine Person sind folgende Daten für die Authentifizierung zu
+ speichern: Name (Username von Google), PersonId (von Google)
+\end_layout
+
+\begin_layout Itemize
+/D20/ Wenn eine Person Mitglieder einer Gruppe ist, ist die Gruppenid zu
+ speichern.
+\end_layout
+
+\begin_layout Itemize
+/D30/ Wenn eine Person einverstanden ist, seinen Standort zu teilen , sind
+ seine letzte GPS-Koordinaten zu speichern.
+\end_layout
+
+\begin_layout Itemize
+/D40/ Wenn man zu einem Termin eingeladen ist, ist diese Termin zu speichern.
+\end_layout
+
+\begin_layout Itemize
+/D50/ Wenn man bei einem Termin teilnimmt, ist diese Termin zu speichern.
+\end_layout
+
+\begin_layout Itemize
+/D60/ Wenn man einen Termin absagt, ist diese Termin zu speichern.
+\end_layout
+
+\begin_layout Subsection
+Gruppendaten
+\end_layout
+
+\begin_layout Itemize
+/D70/ Für jede Gruppe ist die Liste alle Teilnehmer zu speichern.
+\end_layout
+
+\begin_layout Subsection
+Termindaten 
+\end_layout
+
+\begin_layout Itemize
+/D80/ Für jedes Termin ist eine Liste mit alle Teilnehmer zu speichern.
+\end_layout
+
+\end_body
+\end_document
