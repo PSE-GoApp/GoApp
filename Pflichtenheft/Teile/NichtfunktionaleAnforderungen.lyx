@@ -73,7 +73,7 @@ Nichtfunktionale Anforderungen
 \end_layout
 
 \begin_layout Itemize
-/NF10/ Die Reaktionszeiten des Systems müssen unter 5 Sekunden liegen
+/NF10/ Die Reaktionszeiten des Systems müssen unter 1 Sekunde liegen
 \end_layout
 
 \begin_layout Itemize
