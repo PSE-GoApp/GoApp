@@ -75,8 +75,8 @@ Produkteinsatz
 \end_layout
 
 \begin_layout Standard
-Die GoApp dient zum gegenseitigen finden einer Gruppe, die sich zu einem
- bestimmten Termin an einem Ort verabredet hat.
+Die GoApp dient zum Finden untereinander innerhalb einer Gruppe, die sich
+ zu einem bestimmten Termin an einem Ort verabredet hat.
  Damit unterstützt sie die Organisation in Gruppen, das Erstellen von Terminen
  und die Filterung der Standorte der Gruppenmitglieder, so dass unter Beachtung
  der Privatssphäre einzelne Gruppenmitglieder den Rest der Gruppe finden
@@ -96,7 +96,7 @@ Zielgruppen
 \end_layout
 
 \begin_layout Itemize
-alle die ein Android Phone besitzen
+jüngere, sozialaktive Menschen mit einem Android Smartphone
 \end_layout
 
 \begin_layout Subsection
@@ -104,11 +104,11 @@ Betriebsbedingungen
 \end_layout
 
 \begin_layout Itemize
-Auf dem mobilen Gerät
+auf einem mobilen Gerät
 \end_layout
 
 \begin_layout Itemize
-Unterwegs
+unterwegs
 \end_layout
 
 \end_body
