@@ -102,32 +102,26 @@ Priorität A
 \begin_layout Itemize
 
 \lang english
-/F30/ Ersteller der Gruppe als Administrator, der Gruppe verwaltet
+/F30/ Hinzufügen und Löschen von Benutzern 
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F40/ Hinzufügen und Löschen von Benutzern durch Administrator
+/F40/ Suchfunktion beim Erstellen, um andere Benutzer zu finden
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F50/ Suchfunktion beim Erstellen, um andere Benutzer zu finden
+/F50/ Abmeldung der Gruppenmitglieder aus Gruppen
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F60/ Abmeldung der Benutzer aus Gruppen
-\end_layout
-
-\begin_layout Itemize
-
-\lang english
-/F70/ Übersicht über eigene Gruppen mit jeweiligen Gruppeninformationen
- (Gruppenname, Administrator, Teilnehmer)
+/F60/ Übersicht über eigene Gruppen mit jeweiligen Gruppeninformationen
+ (Gruppenname, Gruppenmitglieder)
 \end_layout
 
 \begin_layout Subsubsection
@@ -139,14 +133,57 @@ Priorität B
 \begin_layout Itemize
 
 \lang english
-/F80/ Hinzufügen anderer Benutzer als Freunde 
+/F70/ Benachrichtigung über Einladung zu Gruppe
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F90/ mehrere Gruppenmitglieder können Administratorrechte auf unterschiedlichen
- Zugriffsebenen haben 
+/F80/ Ersteller der Gruppe als Administrator, der Gruppe verwaltet:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\lang english
+Erstellen und Löschen von Gruppen
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+Hinzufügen und Löschen von Benutzern 
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+Administrator kann sich nur aus Gruppe abmelden, wenn es weitere Administartoren
+ gibt
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/F90/ Anzeigen des Administrators in den Gruppeninformationen
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang english
+Priorität C
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F100/ mehrere Gruppenmitglieder können Administratorrechte auf unterschiedliche
+n Zugriffsebenen haben 
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F110/Annehmen oder Absagen von Gruppeneinladungen
 \end_layout
 
 \begin_layout Subsection
@@ -164,7 +201,7 @@ Priorität A
 \begin_layout Itemize
 
 \lang english
-/F100/ Erstellen eines Termins mittels Angabe von 
+/F120/ Erstellen eines Termins mittels Angabe von 
 \end_layout
 
 \begin_deeper
@@ -183,7 +220,7 @@ Gruppe
 \begin_layout Itemize
 
 \lang english
-Ort 
+Ort (Adresse in Textfeld eingeben)
 \end_layout
 
 \begin_layout Itemize
@@ -201,7 +238,7 @@ Datum
 \begin_layout Itemize
 
 \lang english
-Wahl zwischen Veranstaltung und Tour 
+Wahl zwischen Veranstaltung und Tour (Standardeinstellung)
 \end_layout
 
 \begin_layout Itemize
@@ -234,69 +271,33 @@ Notiz (optional)
 \begin_layout Itemize
 
 \lang english
-/F110/ Änderung und Löschen von Terminen durch Ersteller
+/F130/ Löschen von Terminen durch Ersteller
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F120/ Anzeigen der Termine für Gruppenmitglieder in dynamischer Liste
+/F140/ dynamische Liste für Einladungen/Anmeldungen zu Terminen für jedes
+ Gruppenmitglied 
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F130/ Zugriff auf Termine (Teilnehmerliste, Ort, Zeit, Datum, Notiz) nur
- für Gruppenmitglieder 
+/F150/ Zugriff auf Termine (Teilnehmerliste, Ort, Zeit, Datum, Dauer, Notiz)
+ nur für Gruppenmitglieder 
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F140/ An- und Abmeldung der Gruppenmitglieder zu Terminen
+/F160/ An- und Abmeldung der Gruppenmitglieder zu Terminen
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F150/ separate Listen für an- und abgemeldete Termine für jedes Gruppenmitglied
- 
-\end_layout
-
-\begin_layout Itemize
-
-\lang english
-/F160/ Einladungen zu Terminen in Liste mit angemeldeten Terminen integriert
-\end_layout
-
-\begin_layout Itemize
-
-\lang english
-/F170/ Anmeldung zu bereits abgemeldeten Terminen möglich
-\end_layout
-
-\begin_layout Itemize
-
-\lang english
-/F180/ Abmeldung zu bereits angemeldeten Terminen möglich 
-\end_layout
-
-\begin_layout Itemize
-
-\lang english
-/F190/ Benachrichtigung über anstehende Termine 
-\end_layout
-
-\begin_layout Itemize
-
-\lang english
-/F200/ Zugriff auf Karte nur nach Anmeldung für Termine
-\end_layout
-
-\begin_layout Itemize
-
-\lang english
-/F210/ Automatisches Löschen von abgelaufenen Terminen 
+/F170/ Zugriff auf Karte nur nach Anmeldung für Termine
 \end_layout
 
 \begin_layout Subsubsection
@@ -308,57 +309,86 @@ Priorität B
 \begin_layout Itemize
 
 \lang english
-/F220/ Benachrichtigung, wenn der erste aus der Gruppe den Treffpunkt erreicht
+/F180/ Benachrichtigung, wenn das erste Gruppenmitglied den Treffpunkt erreicht
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F230/ Angeben einer Liste von Teilnehmer, die sich bereits am Treffpunkt
- befinden
+/F190/ Warnung bei Anmeldung bei zwei Terminen, die gleichzeitig stattfinden
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F240/ Warnung bei Anmeldung bei zwei Terminen, die gleichzeitig stattfinden
+/F200/ Hinzufügen einer Notiz bei Terminen 
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F250/ Navigation zum Treffpunkt 
+/F210/ Anmeldung zu bereits abgemeldeten Terminen möglich
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F260/ Anzeigen, wenn bei einem Termin ein Teilnehmer keine Internetverbindung
- hat 
+/F220/ Abmeldung zu bereits angemeldeten Terminen möglich 
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F270/ Angabe, ob Termin offenes Ende hat oder begrenzt ist
+/F230/ Ändern von Terminen
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F280/ Hinzufügen einer Notiz bei Terminen 
+/F240/ Benachrichtigung, wenn neuer Termin in einer Gruppe erstellt wurde
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F290/ Einrichten eines Chats 
+/F250/ Benachrichtigung über anstehende Termine am Tag des Termins
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F300/ Möglichkeit, Gruppe auf verschiedene Termine aufzuteilen 
+/F260/ Liste für abgemeldete Termine für jedes Gruppenmitglied
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F270/ Benachrichtigung über gelöschte Termine
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F280/ Automatisches Löschen von abgelaufenen Terminen 
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F290/ Ort beim Erstellen eines Termins auf Karte suchen
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang english
+Priorität C
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F300/ mehrere verschiedene Gruppen können sich für einen Termin zusammen
+ verabreden
 \end_layout
 
 \begin_layout Subsection
@@ -376,13 +406,13 @@ Priorität A
 \begin_layout Itemize
 
 \lang english
-/F310/ Lokalisierung der Benutzer per GPS
+/F310/ Lokalisierung der Teilnehmer per GPS
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F320/ andere Benutzer durch GPS-Lokalisierung auf Karte finden
+/F320/ andere Teilnehmer durch GPS-Lokalisierung auf Karte finden
 \end_layout
 
 \begin_layout Itemize
@@ -396,26 +426,20 @@ Priorität A
 
 \lang english
 /F340/ GPS-Daten nur in bestimmtem Zeitraum sichtbar: ab 30 Minuten vor
- Beginn des Termins bis 60 Minuten (Standardeinstellung; individuell anpassbar)
- nach Beginn des Termins
+ Beginn des Termins bis 60 Minuten (Standardeinstellung Veranstaltung) bzw.
+ 120 min (Standardeinstellung Tour) nach Beginn des Termins
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F350/ Teilnehmer, die bereits vor Ort/Zentrum sind, anzeigen
+/F350/ Karte anzeigen mithilfe von Google Maps
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
 /F360/ GPS-Lokalisierung ausschalten
-\end_layout
-
-\begin_layout Itemize
-
-\lang english
-/F/ Karte anzeigen mithilfe von Google Maps
 \end_layout
 
 \begin_layout Itemize
@@ -434,7 +458,7 @@ bei Veranstaltungen:
 \begin_layout Itemize
 
 \lang english
-/F380/ Personen individuell als Marker auf der Karte dargestellt
+/F380/ Teilnehmer individuell als Marker auf der Karte dargestellt
 \end_layout
 
 \begin_layout Itemize
@@ -461,8 +485,8 @@ bei Touren:
 \begin_layout Itemize
 
 \lang english
-/F410/ größte Ansammlung an Teilnehmern an demselben Ort werden als Zentrum
- zu einem Punkt auf der Karte zusammengefasst 
+/F410/ größte Ansammlung an Teilnehmern an demselben Ort werden anonymisiert
+ als Zentrum zu einem Punkt auf der Karte zusammengefasst 
 \end_layout
 
 \begin_layout Itemize
@@ -481,7 +505,26 @@ Priorität B
 \begin_layout Itemize
 
 \lang english
-/F430/ Warnung des Benutzers, wenn GPS aus ist 
+/F430/ Warnung des Teilnehmers, wenn GPS aus ist 
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F440/ Angeben einer Liste von Teilnehmer, die sich bereits am Treffpunkt/im
+ Zentrum befinden
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang english
+Priorität C
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F450/ Navigation zum Treffpunkt 
 \end_layout
 
 \begin_layout Subsection
@@ -499,25 +542,25 @@ Priorität A
 \begin_layout Itemize
 
 \lang english
-/F440/ Registrierung des Benutzers durch Google-Account 
+/F460/ Registrierung des Benutzers durch Google-Account 
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F450/ An- und Abmeldung des Benutzers 
+/F470/ Anmeldung des Benutzers 
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F460/ Speicherung der Benutzer auf dem Server 
+/F480/ Speicherung der Benutzer auf dem Server 
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F470/ globales Benutzerverzeichnis auf dem Server
+/F490/ globales Benutzerverzeichnis auf dem Server
 \end_layout
 
 \begin_layout Subsubsection
@@ -529,7 +572,25 @@ Priorität B
 \begin_layout Itemize
 
 \lang english
-/F480/ Implementierung eigener Benutzerverwaltung ohne Google-Account 
+/F500/ Abmeldung des Benutzers aus der App
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang english
+Priorität C
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F510/ Implementierung eigener Benutzerverwaltung ohne Google-Account 
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F520/ Abmeldung des Benutzers aus dem kompletten System 
 \end_layout
 
 \begin_layout Subsection
@@ -538,28 +599,86 @@ Priorität B
 Sonstiges 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Subsubsection
 
 \lang english
-/F490/ Datenschutzbestimmungen für Benutzer einsehbar
+Priorität A
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F500/ Löschen der Benutzerdaten durch den Benutzer
+/F530/ Datenschutzbestimmungen für Benutzer einsehbar
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F510/ Benachrichtigen deaktivieren und aktivieren durch Benutzer
+/F540/ Kommunikation App <-> Server 
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang english
+Priorität B
 \end_layout
 
 \begin_layout Itemize
 
 \lang english
-/F520/ Kommunikation App <-> Server 
+/F550/ Benachrichtigen deaktivieren und aktivieren durch Benutzer
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang english
+Priorität C
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F560/ Kommunikation zwischen Client und Server durch SSL-Verschlüsselung
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+Verworfene funktionale Anforderungen
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+Chat: Erfolgreiche Apps konzentrieren sich nur auf wenige Funktionen und
+ nicht auf alle möglichen Funktionen gleichzeitig.
+ Außerdem gibt es schon genügend Messenger-Apps.
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+Anzeigen, wenn jemand der Teilnehmer im Zeitraum eines Termins keine Internetver
+bindung hat: Verstoß gegen Datenschutzrechte.
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+Freundeskreis, um einfacher neue Gruppen zu erstellen: App ist nicht für
+ Kommunikation und Freundefinden zuständig.
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+Gruppe bei einem Termin aufteilen: nicht nötig, da man einfach einen weiteren
+ Termin in der Gruppe erstellen kann.
+\end_layout
+
+\begin_layout Itemize
+Mitteln der Lokalisierung: gemittelter Wert zu ungenau --> man möchte wissen,
+ wo sich Gruppe genau befindet.
 \end_layout
 
 \end_body
