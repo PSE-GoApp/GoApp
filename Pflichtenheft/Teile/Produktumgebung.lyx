@@ -92,7 +92,7 @@ Clientseite
 
 \begin_deeper
 \begin_layout Itemize
-Betriebsystem: Android 4
+Betriebsystem: Android 4.2 oder höher
 \end_layout
 
 \end_deeper
@@ -102,7 +102,11 @@ Serverseite
 
 \begin_deeper
 \begin_layout Itemize
-Tomcat 8
+Tomcat 8 mit HTTP
+\end_layout
+
+\begin_layout Itemize
+MySQL-Datenbank
 \end_layout
 
 \end_deeper
@@ -116,7 +120,7 @@ Clientseite
 
 \begin_deeper
 \begin_layout Itemize
-Standard Smartphone
+Standard Android Smartphone
 \end_layout
 
 \end_deeper
@@ -126,9 +130,29 @@ Serverseite
 
 \begin_deeper
 \begin_layout Itemize
-Leistungsstarke Standardrechner
+Leistungsstarker Standardrechner
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Produktschnittstellen
+\end_layout
+
+\begin_layout Itemize
+Google API
+\end_layout
+
+\begin_layout Itemize
+Google Maps API
+\end_layout
+
+\begin_layout Itemize
+MySQL-Interface
+\end_layout
+
+\begin_layout Itemize
+Schnittstelle zu GPS-Position des Android-Betriebssystems
+\end_layout
+
 \end_body
 \end_document
