@@ -158,7 +158,7 @@ Hinzufügen und Löschen von Benutzern
 \begin_layout Itemize
 
 \lang english
-Administrator kann sich nur aus Gruppe abmelden, wenn es weitere Administartoren
+Administrator kann sich nur aus Gruppe abmelden, wenn es weitere Administratoren
  gibt
 \end_layout
 
@@ -339,7 +339,13 @@ Priorität B
 \begin_layout Itemize
 
 \lang english
-/F230/ Ändern von Terminen
+/F230/ Ändern von Terminen durch den Ersteller
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+/F235/ Benachrichtigung, wenn Termin geändert wurde
 \end_layout
 
 \begin_layout Itemize
@@ -418,8 +424,8 @@ Priorität A
 \begin_layout Itemize
 
 \lang english
-/F330/ andere Benutzer nur anzeigen, wenn sie in derselben Gruppe sind und
- dem Termin zugestimmt haben 
+/F330/ andere Benutzer auf der Karte nur anzeigen, wenn sie in derselben
+ Gruppe sind und dem Termin zugestimmt haben 
 \end_layout
 
 \begin_layout Itemize
@@ -486,7 +492,8 @@ bei Touren:
 
 \lang english
 /F410/ größte Ansammlung an Teilnehmern an demselben Ort werden anonymisiert
- als Zentrum zu einem Punkt auf der Karte zusammengefasst 
+ als Zentrum zu einem Punkt auf der Karte zusammengefasst mit dem ersten
+ vor Ort beginnend
 \end_layout
 
 \begin_layout Itemize
@@ -679,6 +686,66 @@ Gruppe bei einem Termin aufteilen: nicht nötig, da man einfach einen weiteren
 \begin_layout Itemize
 Mitteln der Lokalisierung: gemittelter Wert zu ungenau --> man möchte wissen,
  wo sich Gruppe genau befindet.
+\end_layout
+
+\begin_layout Subsection
+Topologie
+\end_layout
+
+\begin_layout Subsubsection
+Abhängigkeiten zwischen funktionalen Anforderungen der Gruppenverwaltung
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Abhängigkeiten/Gruppenverwaltung.jpg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Abhängigkeiten zwischen funktionalen Anforderungen der Terminverwaltung
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Abhängigkeiten/Terminverwaltung.jpg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Abhängigkeiten zwischen funktionalen Anforderungen der Lokalisierung
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Abhängigkeiten/Lokalisierung.jpg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsubsection
+Abhängigkeiten zwischen funktionalen Anforderungen der Benutzerverwaltung
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Abhängigkeiten/Benutzerverwaltung.jpg
+
+\end_inset
+
+
 \end_layout
 
 \end_body
