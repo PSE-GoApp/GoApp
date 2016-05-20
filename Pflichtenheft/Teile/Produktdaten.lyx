@@ -3,6 +3,7 @@
 \begin_document
 \begin_header
 \textclass article
+\options \setcounter{section}{6}}
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -25,6 +26,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -69,24 +71,105 @@
 \begin_body
 
 \begin_layout Section
-Nichtfunktionale Anforderungen
+Produktdaten
+\end_layout
+
+\begin_layout Subsection
+Personendaten
 \end_layout
 
 \begin_layout Itemize
-/NF10/ Die Reaktionszeiten des Systems müssen unter 5 Sekunden liegen
+/D10/ Über eine Person sind folgenden Daten für die Authentifizierung zu
+ speichern: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Name (Username von Google)
 \end_layout
 
 \begin_layout Itemize
-/NF20/ Maximal 5000 Benutzer können das System gleichzeitig benutzen
+PersonId (von Google)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/D20/ Wenn eine Person Mitglieder einer Gruppe ist, ist die Gruppenid zu
+ speichern.
 \end_layout
 
 \begin_layout Itemize
-/NF30/ Zuverlässigkeit: Nicht mehr als sechs Ausfälle pro Jahr 
+/D30/ Wenn eine Person einverstanden ist, seinen Standort zu teilen , sind
+ seine letzte GPS-Koordinaten zu speichern.
 \end_layout
 
 \begin_layout Itemize
-/NF40/ Das System sollte in 99% der Fälle verfügbar sein 
+/D40/ Wenn man zu einem Termin eingeladen ist, ist diese Termin zu speichern.
 \end_layout
 
+\begin_layout Itemize
+/D50/ Wenn man bei einem Termin teilnimmt, ist diese Termin zu speichern.
+\end_layout
+
+\begin_layout Itemize
+/D60/ Wenn man einen Termin absagt, ist diese Termin zu speichern.
+\end_layout
+
+\begin_layout Subsection
+Gruppendaten
+\end_layout
+
+\begin_layout Itemize
+/D70/ Für jede Gruppe sind folgenden Daten zu speichern:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Name
+\end_layout
+
+\begin_layout Itemize
+Mitglieder
+\end_layout
+
+\begin_layout Itemize
+Admin (B Priorität)
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Termindaten 
+\end_layout
+
+\begin_layout Itemize
+/D80/ Für jedes Termin sind die folgenden Daten zu speichern:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+eine Liste mit allen Teilnehmern
+\end_layout
+
+\begin_layout Itemize
+Name
+\end_layout
+
+\begin_layout Itemize
+Uhrzeit
+\end_layout
+
+\begin_layout Itemize
+Ort
+\end_layout
+
+\begin_layout Itemize
+Tour oder Veranstalltung
+\end_layout
+
+\begin_layout Itemize
+Notiz (B Priorität)
+\end_layout
+
+\end_deeper
 \end_body
 \end_document

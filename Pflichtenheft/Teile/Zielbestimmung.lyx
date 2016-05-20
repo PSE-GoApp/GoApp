@@ -2,11 +2,10 @@
 \lyxformat 474
 \begin_document
 \begin_header
-\textclass paper
+\textclass article
 \use_default_options true
-\master ../Pflichtenheft.lyx
 \maintain_unincluded_children false
-\language ngerman
+\language english
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -26,11 +25,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
-\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry true
-\use_package amsmath 2
+\use_geometry false
+\use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
 \use_package esint 1
@@ -53,11 +51,11 @@
 \shortcut idx
 \color #008000
 \end_index
-\secnumdepth 2
-\tocdepth 2
+\secnumdepth 3
+\tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language german
+\quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -71,95 +69,87 @@
 \begin_body
 
 \begin_layout Section
-
-\lang english
 Zielbestimmung
 \end_layout
 
 \begin_layout Paragraph*
-
-\lang english
 Benutzer dieser App sollen dazu in die Lage versetzt werden, sich in Gruppen
  zu organisieren, um Treffen auszumachen und sich bei den jeweiligen Treffen
  unterstützt durch GPS zu finden.
 \end_layout
 
 \begin_layout Subsection
-
-\lang english
 Musskriterien
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Verwaltung der Gruppen
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Verwaltung der Termine
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Ortung der beteiligten Personen
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Schnittstelle zu Benutzerverwaltung
 \end_layout
 
 \begin_layout Subsection
-
-\lang english
 Wunschkriterien
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
-Angaben, wer sich am Treffpunkt befindet
+erweiterte Einstellungen beim Erstellen eines Termins
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
-erweiterte Einstellungen und Funktionen bei Terminen 
+alternative Benutzerverwaltung, anstatt Google-Account 
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
-erweiterte Einstellungen und Funktionen bei Gruppenverwaltung 
+Benachrichtigungen des Benutzers über Gruppeneinladungen und wichtige Termininfo
+rmationen (z.B.
+ neu erstellt, geändert, gelöscht etc.)
 \end_layout
 
 \begin_layout Itemize
+Einführung von Administratoren von einer Gruppe
+\end_layout
 
-\lang english
-alternative Benutzerverwaltung anstatt Google-Account 
+\begin_layout Itemize
+Ändern von Terminen durch den Ersteller möglich
+\end_layout
+
+\begin_layout Itemize
+größere Freiheiten beim An- und Anmelden von Terminen
+\end_layout
+
+\begin_layout Itemize
+Angaben, wer sich bereits am Treffpunkt befindet
+\end_layout
+
+\begin_layout Itemize
+Warnungen des Benutzer bei Überschneidungen von Terminen
 \end_layout
 
 \begin_layout Subsection
-
-\lang english
 Abgrenzungskriterien
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
-Termine ausmachen und Teilnehmer am Treffpunkt ausfindig machen steht im
+Termine ausmachen und Teilnehmer am Treffpunkt ausfindig machen stehen im
  Vordergrund --> keine Funktion als Terminkalender 
 \end_layout
 
 \begin_layout Itemize
+keine App mit Chatfunktion
+\end_layout
 
-\lang english
+\begin_layout Itemize
 Entwicklung vorerst nur für Android 
 \end_layout
 
