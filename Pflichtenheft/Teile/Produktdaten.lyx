@@ -71,7 +71,7 @@
 \begin_body
 
 \begin_layout Section
-Produktdaten
+Productdaten
 \end_layout
 
 \begin_layout Subsection
@@ -79,40 +79,29 @@ Personendaten
 \end_layout
 
 \begin_layout Itemize
-/D10/ Über eine Person sind folgenden Daten für die Authentifizierung zu
- speichern: 
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Name (Username von Google)
+/D10/ Über eine Person sind folgende Daten für die Authentifizierung zu
+ speichern: Name (Username von Google), PersonID (von Google)
 \end_layout
 
 \begin_layout Itemize
-PersonId (von Google)
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-/D20/ Wenn eine Person Mitglieder einer Gruppe ist, ist die Gruppenid zu
- speichern.
+/D20/ Wenn eine Person Mitglied einer Gruppe ist, ist die GruppenID zu speichern.
 \end_layout
 
 \begin_layout Itemize
 /D30/ Wenn eine Person einverstanden ist, seinen Standort zu teilen , sind
- seine letzte GPS-Koordinaten zu speichern.
+ seine letzten GPS-Koordinaten zu speichern.
 \end_layout
 
 \begin_layout Itemize
-/D40/ Wenn man zu einem Termin eingeladen ist, ist diese Termin zu speichern.
+/D40/ Wenn man zu einem Termin eingeladen ist, ist dieser Termin zu speichern.
 \end_layout
 
 \begin_layout Itemize
-/D50/ Wenn man bei einem Termin teilnimmt, ist diese Termin zu speichern.
+/D50/ Wenn man an einem Termin teilnimmt, ist dieser Termin zu speichern.
 \end_layout
 
 \begin_layout Itemize
-/D60/ Wenn man einen Termin absagt, ist diese Termin zu speichern.
+/D60/ Wenn man einen Termin absagt, ist dieser Termin zu speichern.
 \end_layout
 
 \begin_layout Subsection
@@ -120,56 +109,16 @@ Gruppendaten
 \end_layout
 
 \begin_layout Itemize
-/D70/ Für jede Gruppe sind folgenden Daten zu speichern:
+/D70/ Für jede Gruppe ist die Liste aller Teilnehmer zu speichern.
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Name
-\end_layout
-
-\begin_layout Itemize
-Mitglieder
-\end_layout
-
-\begin_layout Itemize
-Admin (B Priorität)
-\end_layout
-
-\end_deeper
 \begin_layout Subsection
 Termindaten 
 \end_layout
 
 \begin_layout Itemize
-/D80/ Für jedes Termin sind die folgenden Daten zu speichern:
+/D80/ Für jeden Termin ist eine Liste mit allen Teilnehmern zu speichern.
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-eine Liste mit allen Teilnehmern
-\end_layout
-
-\begin_layout Itemize
-Name
-\end_layout
-
-\begin_layout Itemize
-Uhrzeit
-\end_layout
-
-\begin_layout Itemize
-Ort
-\end_layout
-
-\begin_layout Itemize
-Tour oder Veranstalltung
-\end_layout
-
-\begin_layout Itemize
-Notiz (B Priorität)
-\end_layout
-
-\end_deeper
 \end_body
 \end_document
