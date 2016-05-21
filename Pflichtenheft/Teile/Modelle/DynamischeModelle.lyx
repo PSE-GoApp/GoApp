@@ -3,7 +3,6 @@
 \begin_document
 \begin_header
 \textclass article
-\options \setcounter{section}{6}}
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -26,7 +25,6 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
-\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -71,105 +69,90 @@
 \begin_body
 
 \begin_layout Section
-Produktdaten
+Dynamische Modelle
 \end_layout
 
 \begin_layout Subsection
-Personendaten
+Sequenzdiagramm: Erstellen von Gruppen
 \end_layout
 
-\begin_layout Itemize
-/D10/ Über eine Person sind folgenden Daten für die Authentifizierung zu
- speichern: 
-\end_layout
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/SequenzdiagrammErstellenVonGruppen.jpg
 
-\begin_deeper
-\begin_layout Itemize
-Name (Username von Google)
-\end_layout
+\end_inset
 
-\begin_layout Itemize
-PersonId (von Google)
-\end_layout
 
-\end_deeper
-\begin_layout Itemize
-/D20/ Wenn eine Person Mitglieder einer Gruppe ist, ist die Gruppenid zu
- speichern.
-\end_layout
-
-\begin_layout Itemize
-/D30/ Wenn eine Person einverstanden ist, seinen Standort zu teilen , sind
- seine letzte GPS-Koordinaten zu speichern.
-\end_layout
-
-\begin_layout Itemize
-/D40/ Wenn man zu einem Termin eingeladen ist, ist diese Termin zu speichern.
-\end_layout
-
-\begin_layout Itemize
-/D50/ Wenn man bei einem Termin teilnimmt, ist diese Termin zu speichern.
-\end_layout
-
-\begin_layout Itemize
-/D60/ Wenn man einen Termin absagt, ist diese Termin zu speichern.
 \end_layout
 
 \begin_layout Subsection
-Gruppendaten
+Sequenzdiagramm: Gruppenverwaltung des Benutzers 
 \end_layout
 
-\begin_layout Itemize
-/D70/ Für jede Gruppe sind folgenden Daten zu speichern:
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/GruppenverwaltungBenutzer.jpg
+
+\end_inset
+
+
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Name
-\end_layout
-
-\begin_layout Itemize
-Mitglieder
-\end_layout
-
-\begin_layout Itemize
-Admin (B Priorität)
-\end_layout
-
-\end_deeper
 \begin_layout Subsection
-Termindaten 
+Erstellen eines Termins
 \end_layout
 
-\begin_layout Itemize
-/D80/ Für jedes Termin sind die folgenden Daten zu speichern:
+\begin_layout Subsubsection
+Aktivitätsdiagramm
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-eine Liste mit allen Teilnehmern
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/AktivitätsdiaTerminErstellen.jpg
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Itemize
-Name
+\begin_layout Subsubsection
+Sequenzdiagramm
 \end_layout
 
-\begin_layout Itemize
-Uhrzeit
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/Terminerstellen.jpg
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Itemize
-Ort
+\begin_layout Subsection
+An- und Abmeldung von Gruppenmitgliedern zu Terminen
 \end_layout
 
-\begin_layout Itemize
-Tour oder Veranstalltung
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/ZustandsdiagrammAn-Abmeldung.jpg
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Itemize
-Notiz (B Priorität)
+\begin_layout Subsection
+Ablauf eines Termins (Veranstaltung) aus Sicht eines Teilnehmers
 \end_layout
 
-\end_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/Terminablauf.jpg
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document

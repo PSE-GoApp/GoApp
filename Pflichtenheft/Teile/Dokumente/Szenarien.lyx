@@ -1,0 +1,453 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Szenarien
+\end_layout
+
+\begin_layout Part*
+Szenario 1
+\end_layout
+
+\begin_layout Standard
+Eine Gruppe Studenten möchte am Abend eine Kneipentour durchführen.
+ Sie möchte dabei nacheinander mehrere Kneipen in der Stadt besuchen.
+ Leider können Tobias und Lisa erst später dazu kommen.
+ Da die beiden nicht wissen, in welcher Kneipe sich die Gruppe inzwischen
+ befindet, wenn sie dazu stoßen, beschließt die Gruppe, die Go-App zu benutzen.
+ Sie soll Tobias und Lisa helfen, ihre Gruppe schneller zu finden.
+\end_layout
+
+\begin_layout Standard
+Da die Gruppe die Go-App schon öfter eingesetzt hat, haben die Studenten
+ die Go-App bereits auf ihrem Android-Smartphone installiert.
+ Die Studenten sind alle Mitglieder der Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Info-Studenten
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Karl erstellt einen Termin für die Kneipentour in der Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Info-Studenten
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Es öffnet sich ein Fenster, in dem Karl verschiedene Angaben zu seiner
+ Veranstaltung machen muss.
+ Zuerst gibt er als Terminnamen 
+\begin_inset Quotes eld
+\end_inset
+
+Kneipentour
+\begin_inset Quotes erd
+\end_inset
+
+ an.
+ Nun legt er Datum, Uhrzeit und die voraussichtliche Dauer der Kneipentour
+ fest.
+ Gibt Alex keine Veranstaltungsdauer an, so wird die Dauer auf den Standartwert
+ zwei Stunden gesetzt.
+ Danach wird die Lokalisierung der Teilnehmer beendet.
+ Falls Lisa und Tobias aber mehr als zwei Stunden später kommen, können
+ sie nicht mehr sehen, wo sich die Gruppe aktuell befindet.
+ Daher gibt Karl manuell eine andere Veranstaltungsdauer an.
+ Er wählt den Button 
+\begin_inset Quotes eld
+\end_inset
+
+Tour
+\begin_inset Quotes erd
+\end_inset
+
+ aus, da der Veranstaltungsort der Kneipentour sich immer wieder ändert.
+ Als Veranstaltungsort gibt Karl in einem Textfeld die Adresse der ersten
+ Kneipe ein, in der sich die Gruppe am Freitag Abend um 20.00 Uhr trifft.
+ Alle weiteren Kneipen, die die Gruppe an diesem Abend besuchen will, zählt
+ er im Feld 
+\begin_inset Quotes eld
+\end_inset
+
+Notiz
+\begin_inset Quotes erd
+\end_inset
+
+ auf (Priorität B).
+\end_layout
+
+\begin_layout Standard
+Alle Gruppenmitglieder bekommen nun eine Benachrichtigung über die Kneipentour
+ (Priorität B).
+ Zusätzlich wird die Kneipentour in der chronologischen Liste der eigenen
+ bevorstehenden Termine mit Veranstaltungsnamen und Uhrzeit angezeigt.
+\end_layout
+
+\begin_layout Standard
+Als Max sich anmelden will, meldet die Go-App ihm jedoch sofort, dass er
+ zur gleichen Zeit schon an einer anderen Veranstaltung teilnimmt (Priorität
+ B).
+ Max entscheidet sich für die andere Veranstaltung und sagt die Kneipentour
+ ab.
+ Dafür drückt er auf den Button mit 
+\begin_inset Quotes eld
+\end_inset
+
+X
+\begin_inset Quotes erd
+\end_inset
+
+, der sich rechts neben dem Veranstaltungsnamen befindet.
+ Damit verschwindet die Kneipentour aus seiner Terminliste.
+\end_layout
+
+\begin_layout Standard
+Alle anderen Gruppenmitglieder sagen der Veranstaltung zu, indem sie in
+ der Terminliste auf den Haken rechts neben der Veranstaltung drücken.
+ Dann verschwinden die beiden Symbole zum Zu- oder Absagen und es erscheinen
+ an dieser Stelle zwei Symbole, über die man die Google-Maps-Karte mit dem
+ Veranstaltungsort sowie eine Liste mit den Teilnehmern direkt erreichen
+ kann.
+\end_layout
+
+\begin_layout Standard
+Nun ist es Freitag.
+ Die Go-App erinnert alle Teilnehmer vor Beginn der Kneipentour mit einer
+ Push-Benachrichtigung an den Termin (Priorität B).
+ Da fällt Martin plötzlich ein, dass er an diesem Abend arbeiten muss und
+ leider doch nicht teilnehmen kann.
+ Obwohl er sich schon angemeldet hatte, meldet er sich nun wieder von der
+ Kneipentour ab (Priorität B).
+ Dazu drückt er auf die Veranstaltung und lässt sich die Veranstaltungsdetails
+ anzeigen.
+ Dort findet er dann einen Button, um eine bereits zugesagte Veranstaltung
+ wieder abzusagen.
+\end_layout
+
+\begin_layout Standard
+Eine halbe Stunde vor Veranstaltungsbeginn wird nun die Lokalisierung der
+ Gruppenmitglieder aktiviert.
+ Sobald sich mehrere Teilnehmer am gleichen Ort befinden, werden sie zu
+ einem Zentrum zusammengefügt und als ein Punkt auf der Karte dargestellt.
+ Jeder Teilnehmer kann nun abfragen, wer sich schon im Zentrum, also am
+ Treffpunkt, befindet.
+ Die Standorte der anderen Teilnehmer werden nicht angezeigt.
+\end_layout
+
+\begin_layout Standard
+Als Tobias und Lisa mit einer Stunde Verspätung in die Stadt kommen, sehen
+ sie genau, dass die Gruppe sich inzwischen in der zweiten Kneipe befindet
+ und sie kommen sofort dort hin.
+\end_layout
+
+\begin_layout Standard
+Nachdem die voraussichtliche Dauer der Veranstaltung abgelaufen ist, wird
+ die Lokalisierung der Teilnehmer beendet und der Termin gelöscht.
+\end_layout
+
+\begin_layout Part*
+Szenario 2
+\end_layout
+
+\begin_layout Standard
+Am Ende eines mehrtägigen Lehrgangs möchten die Teilnehmer gemeinsam essen
+ gehen.
+ Zur Organisation des gemeinsamen Essens benutzen sie die Go-App.
+\end_layout
+
+\begin_layout Standard
+Zunächst installieren alle Teilnehmer die Go-App auf ihrem Android-Smartphone
+ und registrieren sich mit ihrem Google-Account.
+\end_layout
+
+\begin_layout Standard
+Dann gründet Herr Schneider, der Leiter des Lehrgangs die Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Lehrgang
+\begin_inset Quotes erd
+\end_inset
+
+ in der Go-App.
+ Dabei fügt er sofort über eine Suchfunktion alle Mitglieder des Lehrgangs
+ zu der Gruppe hinzu.
+\end_layout
+
+\begin_layout Standard
+Er erstellt für die Lehrgangsteilnehmer eine Veranstaltung, die er 
+\begin_inset Quotes eld
+\end_inset
+
+Essen gehen
+\begin_inset Quotes erd
+\end_inset
+
+ nennt.
+ Dafür gibt er als Datum Freitag Abend ein und wählt den Button 
+\begin_inset Quotes eld
+\end_inset
+
+Veranstaltung
+\begin_inset Quotes erd
+\end_inset
+
+ aus, da die Veranstaltung an einem festen, sich nicht verändernden Ort
+ stattfindet.
+ Danach gibt er über ein Textfeld die Adresse des Restaurants ein.
+\end_layout
+
+\begin_layout Standard
+Alle Gruppenmitglieder der Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Lehrgang
+\begin_inset Quotes erd
+\end_inset
+
+ werden jetzt per Push-Benachrichtigung über die Kneipentour informiert
+ (Priorität B) und die Veranstaltung erscheint in der eigenen Terminliste.
+ Mit einem Klick auf die Veranstaltung werden den Teilnehmern Veranstaltungsdeta
+ils angezeigt.
+\end_layout
+
+\begin_layout Standard
+Nun haben die Teilnehmer des Lehrgangs die Möglichkeit, den Termin zu- oder
+ abzusagen, indem sie in der Terminliste rechts neben der Veranstaltung
+ ein Kreuz oder einen Haken auswählen.
+ Herr Maier sagt zunächst ab, da er am Freitag Abend schon zurück in seine
+ Heimat fahren will.
+ Die Veranstaltung ist aus seiner Terminliste verschwunden.
+\end_layout
+
+\begin_layout Standard
+Am nächsten Tag überlegt er sich, doch erst am Samstag wieder nach Hause
+ zu fahren und doch an dem Essen teilzunehmen.
+ Er ruft in der App eine Liste mit den abgesagten Terminen auf.
+ Dort kann er sich doch wieder zum Essen anmelden (Priorität B).
+\end_layout
+
+\begin_layout Standard
+Da Herr Fischer nicht am gemeinsamen Essen teilnehmen möchte, meldet er
+ sich aus der Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Lehrgang
+\begin_inset Quotes erd
+\end_inset
+
+ sofort wieder ab.
+\end_layout
+
+\begin_layout Standard
+Frau Schmidt, die erst am zweiten Tag zum Lehrgang hinzustößt, erfährt durch
+ die anderen Teilnehmer von dem geplanten Essen am letzten Abend.
+ Sie wendet sich an den Lehrgangsleiter, der gleichzeitig Gruppenadministrator
+ der Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Lehrgang
+\begin_inset Quotes erd
+\end_inset
+
+ ist, um in die Go-App-Gruppe aufgenommen zu werden, denn nur der Administrator
+ kann Personen zu einer Gruppe hinzufügen oder aus einer Gruppe entfernen
+ (Priorität B).
+\end_layout
+
+\begin_layout Standard
+Da inzwischen alle Personen zu- oder abgesagt haben, ruft Herr Schneider
+ nun in dem Restaurant an, um einen Tisch zu reservieren.
+ Doch leider ist das Restaurant am Freitag Abend schon sehr ausgebucht und
+ er kann keinen ausreichend großen Tisch mehr bekommen.
+ Also reserviert er einen Tisch in einem anderen Restaurant.
+ Dann ändert er in der Go-App-Veranstaltung den Veranstaltungsort (Priorität
+ B).
+ Alle Teilnehmer werden durch eine Push-Benachrichtigung darüber informiert
+ (Priorität B).
+\end_layout
+
+\begin_layout Standard
+Frau Schäfer, die schnell von Push-Benachrichtigungen genervt ist, deaktiviert
+ diese in den Einstellungen der Go-App (Priorität B).
+\end_layout
+
+\begin_layout Standard
+Nun ist es so weit.
+ Die Veranstaltung beginnt in einer halben Stunde.
+ Die Lokalisierung der Personen wird aktiviert und alle Teilnehmer sehen
+ auf einer Karte die Standorte der anderen Teilnehmer.
+ So können sie nachschauen, ob die anderen noch in ihrem Hotel oder schon
+ unterwegs zum Restaurant sind.
+\end_layout
+
+\begin_layout Standard
+Herr Maier hat den kürzesten Weg bis zum Restaurant.
+ Da er nicht lange vor den anderen da sein möchte, schaut er, bevor er los
+ geht, in der Go-App nach, ob die anderen schon unterwegs sind.
+\end_layout
+
+\begin_layout Standard
+Der Standort von Frau Schmidt, die zwar zugesagt hat, aber jetzt doch schon
+ nach Hause fährt, wird nicht in der Karte angezeigt, weil sie sich außerhalb
+ eines bestimmten Radius um den Veranstaltungsort befindet.
+ 
+\end_layout
+
+\begin_layout Standard
+Da die Teilnehmer sich nach dem Lehrgang wahrscheinlich nicht mehr treffen
+ werden, löscht Herr Schneider die Gruppe am nächsten Tag.
+\end_layout
+
+\begin_layout Part*
+Szenario 3
+\end_layout
+
+\begin_layout Standard
+Eine Gruppe Studenten möchte am Unifest teilnehmen.
+ In den letzten Jahren ist es immer wieder passiert, dass einzelne Personen
+ die Gruppe verloren haben.
+ Stefan hat vor kurzem von der Go-App gehört, die in dieser Situation der
+ einzelnen Person helfen soll, die Gruppe wieder zu finden.
+ Er schlägt seiner Gruppe vor, die App beim Unifest auszuprobieren.
+ Seine Freunde sind sofort begeistert, installieren die Go-App und registrieren
+ sich mit ihrem Google-Account.
+\end_layout
+
+\begin_layout Standard
+Stefan gründet nun eine Gruppe mit dem Namen 
+\begin_inset Quotes eld
+\end_inset
+
+Party-Studenten
+\begin_inset Quotes erd
+\end_inset
+
+ und fügt seine Freunde hinzu.
+\end_layout
+
+\begin_layout Standard
+Dann erstellt er den Termin 
+\begin_inset Quotes eld
+\end_inset
+
+Unifest
+\begin_inset Quotes erd
+\end_inset
+
+, den er als Tour deklariert, da der Veranstaltungsort zwischen verschiedenen
+ Orten auf dem Campus wechselt.
+ Die Gruppe will sich um 14.00 Uhr am AKK treffen.
+ Von dort aus gehen sie über den gesamten Campus.
+\end_layout
+
+\begin_layout Standard
+Jetzt erhalten alle Gruppenmitglieder eine Benachrichtigung über die Veranstaltu
+ng und sagen zu.
+\end_layout
+
+\begin_layout Standard
+Doch leider verunglückt Christian wenige Tage vor dem Unifest tödlich.
+ Christians Beerdigung ist genau am gleichen Tag wie das Unifest.
+ Also beschließen die Studenten, nicht zum Unifest zu gehen, sondern zur
+ Beerdigung.
+ Stefan löscht die Veranstaltung 
+\begin_inset Quotes eld
+\end_inset
+
+Unifest
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Da das Smartphone von Christians Mutter schon ziemlich alt ist, übernimmt
+ sie Christians Android-Smartphone.
+ Sie entdeckt auf seinem Smartphone die Go-App und will sie auch ausprobieren.
+ Jedoch will sie sich dafür mit ihrem eigenen Google-Account registrieren.
+ Dazu meldet sie Christian mit seinem Google-Account von der App ab und
+ registriert sich mit ihrem eigenen (Priorität B).
+\end_layout
+
+\end_body
+\end_document
