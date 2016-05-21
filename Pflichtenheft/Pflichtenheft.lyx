@@ -472,7 +472,7 @@ Datum
 \end_layout
 
 \begin_layout Itemize
-Wahl zwischen Veranstaltung und Tour (Standardeinstellung)
+Wahl zwischen Veranstaltung und Tour (Standardeinstellung Veranstaltung)
 \end_layout
 
 \begin_layout Itemize
@@ -545,6 +545,10 @@ Priorität B
 \end_layout
 
 \begin_layout Itemize
+/F235/ Benachrichtigung, wenn Termin geändert wurde
+\end_layout
+
+\begin_layout Itemize
 /F240/ Benachrichtigung, wenn neuer Termin in einer Gruppe erstellt wurde
 \end_layout
 
@@ -594,8 +598,8 @@ Priorität A
 \end_layout
 
 \begin_layout Itemize
-/F330/ andere Benutzer nur anzeigen, wenn sie in derselben Gruppe sind und
- dem Termin zugestimmt haben 
+/F330/ andere Benutzer auf der Karte nur anzeigen, wenn sie in derselben
+ Gruppe sind und dem Termin zugestimmt haben 
 \end_layout
 
 \begin_layout Itemize
@@ -778,6 +782,87 @@ Gruppe bei einem Termin aufteilen: nicht nötig, da man einfach einen weiteren
 \lang ngerman
 Mitteln der Lokalisierung: gemittelter Wert zu ungenau --> man möchte wissen,
  wo sich Gruppe genau befindet.
+\end_layout
+
+\begin_layout Subsection
+
+\lang ngerman
+Topologie
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang ngerman
+Abhängigkeiten zwischen funktionalen Anforderungen der Gruppenverwaltung
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Abhängigkeiten/Gruppenverwaltung.jpg
+	scale 60
+	BoundingBox 50bp 150bp 960bp 685bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang ngerman
+Abhängigkeiten zwischen funktionalen Anforderungen der Terminverwaltung
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Abhängigkeiten/Terminverwaltung.jpg
+	scale 60
+	BoundingBox 100bp 150bp 1075bp 719bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang ngerman
+Abhängigkeiten zwischen funktionalen Anforderungen der Lokalisierung
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Abhängigkeiten/Lokalisierung.jpg
+	scale 60
+	BoundingBox 100bp 150bp 1076bp 676bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang ngerman
+Abhängigkeiten zwischen funktionalen Anforderungen der Benutzerverwaltung
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Abhängigkeiten/Benutzerverwaltung.jpg
+	scale 60
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1389,7 +1474,7 @@ Anwendungsfalldiagramm
 \begin_inset Graphics
 	filename Dateien aus der Gruppe/Anwendungsfalldiagramm.jpg
 	scale 70
-	BoundingBox 150bp 0bp 1068bp 747bp
+	BoundingBox 150bp 0bp 1068bp 600bp
 
 \end_inset
 
@@ -1500,7 +1585,7 @@ Gruppenverwaltung des Benutzers
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/GruppenverwaltungBenutzer.jpg
 	scale 60
-	BoundingBox 0bp 0bp 700bp 500bp
+	BoundingBox 0bp 0bp 700bp 700bp
 
 \end_inset
 
@@ -1534,7 +1619,7 @@ Sequenzdiagramm
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/Terminerstellen.jpg
 	scale 50
-	BoundingBox 0bp 0bp 500bp 500bp
+	BoundingBox 0bp 0bp 500bp 750bp
 
 \end_inset
 
@@ -1549,7 +1634,7 @@ An- und Abmeldung von Gruppenmitgliedern zu Terminen
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/ZustandsdiagrammAn-Abmeldung.jpg
 	scale 60
-	BoundingBox 50bp 500bp 500bp 500bp
+	BoundingBox 50bp 500bp 500bp 700bp
 
 \end_inset
 
