@@ -2,8 +2,9 @@
 \lyxformat 474
 \begin_document
 \begin_header
-\textclass article
+\textclass paper
 \use_default_options true
+\master Systemmodelle.lyx
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -25,6 +26,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false

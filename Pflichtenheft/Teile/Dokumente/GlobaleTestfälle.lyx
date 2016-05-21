@@ -2,8 +2,9 @@
 \lyxformat 474
 \begin_document
 \begin_header
-\textclass article
+\textclass paper
 \use_default_options true
+\master ../../Pflichtenheft.lyx
 \maintain_unincluded_children false
 \language ngerman
 \language_package none

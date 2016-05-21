@@ -2,9 +2,10 @@
 \lyxformat 474
 \begin_document
 \begin_header
-\textclass article
+\textclass paper
 \options \setcounter{section}{6}}
 \use_default_options true
+\master ../../Pflichtenheft.lyx
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -71,7 +72,7 @@
 \begin_body
 
 \begin_layout Section
-Productdaten
+Produktdaten
 \end_layout
 
 \begin_layout Subsection
