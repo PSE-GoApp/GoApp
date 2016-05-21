@@ -2,10 +2,10 @@
 \lyxformat 474
 \begin_document
 \begin_header
-\textclass paper
+\textclass article
 \use_default_options true
 \maintain_unincluded_children false
-\language ngerman
+\language english
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -28,8 +28,8 @@
 \spacing single
 \use_hyperref false
 \papersize default
-\use_geometry true
-\use_package amsmath 2
+\use_geometry false
+\use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
 \use_package esint 1
@@ -52,11 +52,11 @@
 \shortcut idx
 \color #008000
 \end_index
-\secnumdepth 2
-\tocdepth 2
+\secnumdepth 3
+\tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language german
+\quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -70,150 +70,21 @@
 \begin_body
 
 \begin_layout Title
-Go-App
-\end_layout
-
-\begin_layout SubTitle
-Pflichtenheft
-\end_layout
-
-\begin_layout Date
-11.05.2016
+Pflichtenheft Go-App
 \end_layout
 
 \begin_layout Author
-Rumen Donchev, Kansei Hara, Grischa Hauser, Paula Klein, Iris Landerer,
- Tanja Müller
+Grischa Hauser, Kansei Hara, Rumen Donchev, Tanja Müller, Paula Klein, Iris
+ Landerer
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Zielbestimmung
+\begin_layout Date
+22.05.2016
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "Teile/Zielbestimmung.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Produkteinsatz
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "Teile/Produkteinsatz.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Produktumgebung
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "Teile/Produktumgebung.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Funktionale Anforderungen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Produktdaten
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Nichtfunktionale Anforderungen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Globale Testfälle
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Systemmodelle
-\end_layout
+\begin_layout Paragraph*
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
 
 \end_inset
 
@@ -221,77 +92,1486 @@ Systemmodelle
 \end_layout
 
 \begin_layout Section
+Zielbestimmung
+\end_layout
+
+\begin_layout Paragraph*
+Benutzer dieser App sollen dazu in die Lage versetzt werden, sich in Gruppen
+ zu organisieren, um Treffen auszumachen und sich bei den jeweiligen Treffen
+ unterstützt durch GPS zu finden.
+\end_layout
+
+\begin_layout Subsection
+Musskriterien
+\end_layout
+
+\begin_layout Itemize
+Verwaltung der Gruppen
+\end_layout
+
+\begin_layout Itemize
+Verwaltung der Termine
+\end_layout
+
+\begin_layout Itemize
+Ortung der beteiligten Personen
+\end_layout
+
+\begin_layout Itemize
+Schnittstelle zu Benutzerverwaltung
+\end_layout
+
+\begin_layout Subsection
+Wunschkriterien
+\end_layout
+
+\begin_layout Itemize
+erweiterte Einstellungen beim Erstellen eines Termins
+\end_layout
+
+\begin_layout Itemize
+alternative Benutzerverwaltung, anstatt Google-Account 
+\end_layout
+
+\begin_layout Itemize
+Benachrichtigungen des Benutzers über Gruppeneinladungen und wichtige Termininfo
+rmationen (z.B.
+ neu erstellt, geändert, gelöscht etc.)
+\end_layout
+
+\begin_layout Itemize
+Einführung von Administratoren von einer Gruppe
+\end_layout
+
+\begin_layout Itemize
+Ändern von Terminen durch den Ersteller möglich
+\end_layout
+
+\begin_layout Itemize
+größere Freiheiten beim An- und Anmelden von Terminen
+\end_layout
+
+\begin_layout Itemize
+Angaben, wer sich bereits am Treffpunkt befindet
+\end_layout
+
+\begin_layout Itemize
+Warnungen des Benutzer bei Überschneidungen von Terminen
+\end_layout
+
+\begin_layout Subsection
+Abgrenzungskriterien
+\end_layout
+
+\begin_layout Itemize
+Termine ausmachen und Teilnehmer am Treffpunkt ausfindig machen stehen im
+ Vordergrund --> keine Funktion als Terminkalender 
+\end_layout
+
+\begin_layout Itemize
+keine App mit Chatfunktion
+\end_layout
+
+\begin_layout Itemize
+Entwicklung vorerst nur für Android 
+\end_layout
+
+\begin_layout Section
+Produkteinsatz
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Die GoApp dient zum Finden untereinander innerhalb einer Gruppe, die sich
+ zu einem bestimmten Termin an einem Ort verabredet hat.
+ Damit unterstützt sie die Organisation in Gruppen, das Erstellen von Terminen
+ und die Filterung der Standorte der Gruppenmitglieder, so dass unter Beachtung
+ der Privatssphäre einzelne Gruppenmitglieder den Rest der Gruppe finden
+ können.
+\end_layout
+
+\begin_layout Subsection
+
+\lang ngerman
+Anwendungsberreiche
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Treffen mit Freunden, Kollegen etc.
+\end_layout
+
+\begin_layout Subsection
+
+\lang ngerman
+Zielgruppen
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+jüngere, sozialaktive Menschen mit einem Android Smartphone
+\end_layout
+
+\begin_layout Subsection
+
+\lang ngerman
+Betriebsbedingungen
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+auf einem mobilen Gerät
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+unterwegs
+\end_layout
+
+\begin_layout Section
+
+\lang ngerman
+Produktumgebung
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Client-Server Architektur
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+App läuft Clientseitig parallel mit anderen Apps auf einem moblien Androidgerät
+\end_layout
+
+\begin_layout Subsection
+
+\lang ngerman
+Software
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Clientseite
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\lang ngerman
+Betriebsystem: Android 4.2 oder höher
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\lang ngerman
+Serverseite
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\lang ngerman
+Tomcat 8 mit HTTP
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+MySQL-Datenbank
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+
+\lang ngerman
+Hardware
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Clientseite
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\lang ngerman
+Standard Android Smartphone
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\lang ngerman
+Serverseite
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\lang ngerman
+Leistungsstarker Standardrechner
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+
+\lang ngerman
+Produktschnittstellen
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Google API
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Google Maps API
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+MySQL-Interface
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Schnittstelle zu GPS-Position des Android-Betriebssystems
+\end_layout
+
+\begin_layout Section
+Funktionale Anforderungen
+\end_layout
+
+\begin_layout Subsection
+Gruppenverwaltung
+\end_layout
+
+\begin_layout Subsubsection
+Priorität A
+\end_layout
+
+\begin_layout Itemize
+/F10/ Erstellen und Löschen von Gruppen
+\end_layout
+
+\begin_layout Itemize
+/F20/ Gruppe einen Namen beim Erstellen geben
+\end_layout
+
+\begin_layout Itemize
+/F30/ Hinzufügen und Löschen von Benutzern 
+\end_layout
+
+\begin_layout Itemize
+/F40/ Suchfunktion beim Erstellen, um andere Benutzer zu finden
+\end_layout
+
+\begin_layout Itemize
+/F50/ Abmeldung der Gruppenmitglieder aus Gruppen
+\end_layout
+
+\begin_layout Itemize
+/F60/ Übersicht über eigene Gruppen mit jeweiligen Gruppeninformationen
+ (Gruppenname, Gruppenmitglieder)
+\end_layout
+
+\begin_layout Subsubsection
+Priorität B
+\end_layout
+
+\begin_layout Itemize
+/F70/ Benachrichtigung über Einladung zu Gruppe
+\end_layout
+
+\begin_layout Itemize
+/F80/ Ersteller der Gruppe als Administrator, der Gruppe verwaltet:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Erstellen und Löschen von Gruppen
+\end_layout
+
+\begin_layout Itemize
+Hinzufügen und Löschen von Benutzern 
+\end_layout
+
+\begin_layout Itemize
+Administrator kann sich nur aus Gruppe abmelden, wenn es weitere Administratoren
+ gibt
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\lang ngerman
+/F90/ Anzeigen des Administrators in den Gruppeninformationen
+\end_layout
+
+\begin_layout Subsubsection
+Priorität C
+\end_layout
+
+\begin_layout Itemize
+/F100/ mehrere Gruppenmitglieder können Administratorrechte auf unterschiedliche
+n Zugriffsebenen haben 
+\end_layout
+
+\begin_layout Itemize
+/F110/Annehmen oder Absagen von Gruppeneinladungen
+\end_layout
+
+\begin_layout Subsection
+Terminverwaltung
+\end_layout
+
+\begin_layout Subsubsection
+Priorität A
+\end_layout
+
+\begin_layout Itemize
+/F120/ Erstellen eines Termins mittels Angabe von 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Terminname 
+\end_layout
+
+\begin_layout Itemize
+Gruppe 
+\end_layout
+
+\begin_layout Itemize
+Ort (Adresse in Textfeld eingeben)
+\end_layout
+
+\begin_layout Itemize
+Zeit
+\end_layout
+
+\begin_layout Itemize
+Datum 
+\end_layout
+
+\begin_layout Itemize
+Wahl zwischen Veranstaltung und Tour (Standardeinstellung)
+\end_layout
+
+\begin_layout Itemize
+Zeitraum, in dem Teilnehmer auf der Karte lokalisiert werden 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Standardwert Veranstaltung: eine Stunde nach Beginn des Termins
+\end_layout
+
+\begin_layout Itemize
+Standardwert Tour: zwei Stunden nach Beginn des Termins
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Notiz (optional)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/F130/ Löschen von Terminen durch Ersteller
+\end_layout
+
+\begin_layout Itemize
+/F140/ dynamische Liste für Einladungen/Anmeldungen zu Terminen für jedes
+ Gruppenmitglied 
+\end_layout
+
+\begin_layout Itemize
+/F150/ Zugriff auf Termine (Teilnehmerliste, Ort, Zeit, Datum, Dauer, Notiz)
+ nur für Gruppenmitglieder 
+\end_layout
+
+\begin_layout Itemize
+/F160/ An- und Abmeldung der Gruppenmitglieder zu Terminen
+\end_layout
+
+\begin_layout Itemize
+/F170/ Zugriff auf Karte nur nach Anmeldung für Termine
+\end_layout
+
+\begin_layout Subsubsection
+Priorität B
+\end_layout
+
+\begin_layout Itemize
+/F180/ Benachrichtigung, wenn das erste Gruppenmitglied den Treffpunkt erreicht
+\end_layout
+
+\begin_layout Itemize
+/F190/ Warnung bei Anmeldung bei zwei Terminen, die gleichzeitig stattfinden
+\end_layout
+
+\begin_layout Itemize
+/F200/ Hinzufügen einer Notiz bei Terminen 
+\end_layout
+
+\begin_layout Itemize
+/F210/ Anmeldung zu bereits abgemeldeten Terminen möglich
+\end_layout
+
+\begin_layout Itemize
+/F220/ Abmeldung zu bereits angemeldeten Terminen möglich 
+\end_layout
+
+\begin_layout Itemize
+/F230/ Ändern von Terminen durch den Ersteller
+\end_layout
+
+\begin_layout Itemize
+/F240/ Benachrichtigung, wenn neuer Termin in einer Gruppe erstellt wurde
+\end_layout
+
+\begin_layout Itemize
+/F250/ Benachrichtigung über anstehende Termine am Tag des Termins
+\end_layout
+
+\begin_layout Itemize
+/F260/ Liste für abgemeldete Termine für jedes Gruppenmitglied
+\end_layout
+
+\begin_layout Itemize
+/F270/ Benachrichtigung über gelöschte Termine
+\end_layout
+
+\begin_layout Itemize
+/F280/ Automatisches Löschen von abgelaufenen Terminen 
+\end_layout
+
+\begin_layout Itemize
+/F290/ Ort beim Erstellen eines Termins auf Karte suchen
+\end_layout
+
+\begin_layout Subsubsection
+Priorität C
+\end_layout
+
+\begin_layout Itemize
+/F300/ mehrere verschiedene Gruppen können sich für einen Termin zusammen
+ verabreden
+\end_layout
+
+\begin_layout Subsection
+Lokalisierung
+\end_layout
+
+\begin_layout Subsubsection
+Priorität A
+\end_layout
+
+\begin_layout Itemize
+/F310/ Lokalisierung der Teilnehmer per GPS
+\end_layout
+
+\begin_layout Itemize
+/F320/ andere Teilnehmer durch GPS-Lokalisierung auf Karte finden
+\end_layout
+
+\begin_layout Itemize
+/F330/ andere Benutzer nur anzeigen, wenn sie in derselben Gruppe sind und
+ dem Termin zugestimmt haben 
+\end_layout
+
+\begin_layout Itemize
+/F340/ GPS-Daten nur in bestimmtem Zeitraum sichtbar: ab 30 Minuten vor
+ Beginn des Termins bis 60 Minuten (Standardeinstellung Veranstaltung) bzw.
+ 120 min (Standardeinstellung Tour) nach Beginn des Termins
+\end_layout
+
+\begin_layout Itemize
+/F350/ Karte anzeigen mithilfe von Google Maps
+\end_layout
+
+\begin_layout Itemize
+/F360/ GPS-Lokalisierung ausschalten
+\end_layout
+
+\begin_layout Itemize
+bei Veranstaltungen: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+/F370/ Treffpunkt als fester Ort dargestellt 
+\end_layout
+
+\begin_layout Itemize
+/F380/ Teilnehmer individuell als Marker auf der Karte dargestellt
+\end_layout
+
+\begin_layout Itemize
+/F390/ GPS-Daten nur in bestimmten Umkreis des Treffpunkts sichtbar
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+bei Touren: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+/F400/ kein fester Ort, sondern variabel, abhängig davon, wo sich Gruppe
+ befindet
+\end_layout
+
+\begin_layout Itemize
+/F410/ größte Ansammlung an Teilnehmern an demselben Ort werden anonymisiert
+ als Zentrum zu einem Punkt auf der Karte zusammengefasst mit dem ersten
+ vor Ort beginnend
+\end_layout
+
+\begin_layout Itemize
+/F420/ GPS-Daten nur in bestimmten Umkreis um das Zentrum sichtbar
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Priorität B
+\end_layout
+
+\begin_layout Itemize
+/F430/ Warnung des Teilnehmers, wenn GPS aus ist 
+\end_layout
+
+\begin_layout Itemize
+/F440/ Angeben einer Liste von Teilnehmer, die sich bereits am Treffpunkt/im
+ Zentrum befinden
+\end_layout
+
+\begin_layout Subsubsection
+Priorität C
+\end_layout
+
+\begin_layout Itemize
+/F450/ Navigation zum Treffpunkt 
+\end_layout
+
+\begin_layout Subsection
+Schnittstelle zu Benutzerverwaltung
+\end_layout
+
+\begin_layout Subsubsection
+Priorität A
+\end_layout
+
+\begin_layout Itemize
+/F460/ Registrierung des Benutzers durch Google-Account 
+\end_layout
+
+\begin_layout Itemize
+/F470/ Anmeldung des Benutzers 
+\end_layout
+
+\begin_layout Itemize
+/F480/ Speicherung der Benutzer auf dem Server 
+\end_layout
+
+\begin_layout Itemize
+/F490/ globales Benutzerverzeichnis auf dem Server
+\end_layout
+
+\begin_layout Subsubsection
+Priorität B
+\end_layout
+
+\begin_layout Itemize
+/F500/ Abmeldung des Benutzers aus der App
+\end_layout
+
+\begin_layout Subsubsection
+Priorität C
+\end_layout
+
+\begin_layout Itemize
+/F510/ Implementierung eigener Benutzerverwaltung ohne Google-Account 
+\end_layout
+
+\begin_layout Itemize
+/F520/ Abmeldung des Benutzers aus dem kompletten System 
+\end_layout
+
+\begin_layout Subsection
+Sonstiges 
+\end_layout
+
+\begin_layout Subsubsection
+Priorität A
+\end_layout
+
+\begin_layout Itemize
+/F530/ Datenschutzbestimmungen für Benutzer einsehbar
+\end_layout
+
+\begin_layout Itemize
+/F540/ Kommunikation App <-> Server 
+\end_layout
+
+\begin_layout Subsubsection
+Priorität B
+\end_layout
+
+\begin_layout Itemize
+/F550/ Benachrichtigen deaktivieren und aktivieren durch Benutzer
+\end_layout
+
+\begin_layout Subsubsection
+Priorität C
+\end_layout
+
+\begin_layout Itemize
+/F560/ Kommunikation zwischen Client und Server durch SSL-Verschlüsselung
+\end_layout
+
+\begin_layout Subsection
+Verworfene funktionale Anforderungen
+\end_layout
+
+\begin_layout Itemize
+Chat: Erfolgreiche Apps konzentrieren sich nur auf wenige Funktionen und
+ nicht auf alle möglichen Funktionen gleichzeitig.
+ Außerdem gibt es schon genügend Messenger-Apps.
+\end_layout
+
+\begin_layout Itemize
+Anzeigen, wenn jemand der Teilnehmer im Zeitraum eines Termins keine Internetver
+bindung hat: Verstoß gegen Datenschutzrechte.
+\end_layout
+
+\begin_layout Itemize
+Freundeskreis, um einfacher neue Gruppen zu erstellen: App ist nicht für
+ Kommunikation und Freundefinden zuständig.
+\end_layout
+
+\begin_layout Itemize
+Gruppe bei einem Termin aufteilen: nicht nötig, da man einfach einen weiteren
+ Termin in der Gruppe erstellen kann.
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Mitteln der Lokalisierung: gemittelter Wert zu ungenau --> man möchte wissen,
+ wo sich Gruppe genau befindet.
+\end_layout
+
+\begin_layout Section
+Produktdaten
+\end_layout
+
+\begin_layout Subsection
+Personendaten
+\end_layout
+
+\begin_layout Itemize
+/D10/ Über eine Person sind folgende Daten für die Authentifizierung zu
+ speichern: Name (Username von Google), PersonID (von Google)
+\end_layout
+
+\begin_layout Itemize
+/D20/ Wenn eine Person Mitglied einer Gruppe ist, ist die GruppenID zu speichern.
+\end_layout
+
+\begin_layout Itemize
+/D30/ Wenn eine Person einverstanden ist, seinen Standort zu teilen , sind
+ seine letzten GPS-Koordinaten zu speichern.
+\end_layout
+
+\begin_layout Itemize
+/D40/ Wenn man zu einem Termin eingeladen ist, ist dieser Termin zu speichern.
+\end_layout
+
+\begin_layout Itemize
+/D50/ Wenn man an einem Termin teilnimmt, ist dieser Termin zu speichern.
+\end_layout
+
+\begin_layout Itemize
+/D60/ Wenn man einen Termin absagt, ist dieser Termin zu speichern.
+\end_layout
+
+\begin_layout Subsection
+Gruppendaten
+\end_layout
+
+\begin_layout Itemize
+/D70/ Für jede Gruppe ist die Liste aller Teilnehmer zu speichern.
+\end_layout
+
+\begin_layout Subsection
+Termindaten 
+\end_layout
+
+\begin_layout Itemize
+/D80/ Für jeden Termin ist eine Liste mit allen Teilnehmern zu speichern.
+\end_layout
+
+\begin_layout Section
+Nichtfunktionale Anforderungen
+\end_layout
+
+\begin_layout Itemize
+/NF10/ Die Reaktionszeiten des Systems müssen unter 1 Sekunde liegen
+\end_layout
+
+\begin_layout Itemize
+/NF20/ Maximal 5000 Benutzer können das System gleichzeitig benutzen
+\end_layout
+
+\begin_layout Itemize
+/NF30/ Zuverlässigkeit: Nicht mehr als sechs Ausfälle pro Jahr 
+\end_layout
+
+\begin_layout Itemize
+/NF40/ Das System sollte in 99% der Fälle verfügbar sein 
+\end_layout
+
+\begin_layout Section
+Globale Testfälle
+\end_layout
+
+\begin_layout Subsection
+Folgende Funktionssequenzen sind zu überprüfen:
+\end_layout
+
+\begin_layout Section
 Systemmodelle
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-1.
- Szenarien
+\begin_layout Subsection
+Szenarien
 \end_layout
+
+\begin_layout Subsubsection
+Szenario 1
+\end_layout
+
+\begin_layout Standard
+Eine Gruppe Studenten möchte am Abend eine Kneipentour durchführen.
+ Sie möchte dabei nacheinander mehrere Kneipen in der Stadt besuchen.
+ Leider können Tobias und Lisa erst später dazu kommen.
+ Da die beiden nicht wissen, in welcher Kneipe sich die Gruppe inzwischen
+ befindet, wenn sie dazu stoßen, beschließt die Gruppe, die Go-App zu benutzen.
+ Sie soll Tobias und Lisa helfen, ihre Gruppe schneller zu finden.
+\end_layout
+
+\begin_layout Standard
+Da die Gruppe die Go-App schon öfter eingesetzt hat, haben die Studenten
+ die Go-App bereits auf ihrem Android-Smartphone installiert.
+ Die Studenten sind alle Mitglieder der Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Info-Studenten
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Karl erstellt einen Termin für die Kneipentour in der Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Info-Studenten
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Es öffnet sich ein Fenster, in dem Karl verschiedene Angaben zu seiner
+ Veranstaltung machen muss.
+ Zuerst gibt er als Terminnamen 
+\begin_inset Quotes eld
+\end_inset
+
+Kneipentour
+\begin_inset Quotes erd
+\end_inset
+
+ an.
+ Nun legt er Datum, Uhrzeit und die voraussichtliche Dauer der Kneipentour
+ fest.
+ Gibt Alex keine Veranstaltungsdauer an, so wird die Dauer auf den Standartwert
+ zwei Stunden gesetzt.
+ Danach wird die Lokalisierung der Teilnehmer beendet.
+ Falls Lisa und Tobias aber mehr als zwei Stunden später kommen, können
+ sie nicht mehr sehen, wo sich die Gruppe aktuell befindet.
+ Daher gibt Karl manuell eine andere Veranstaltungsdauer an.
+ Er wählt den Button 
+\begin_inset Quotes eld
+\end_inset
+
+Tour
+\begin_inset Quotes erd
+\end_inset
+
+ aus, da der Veranstaltungsort der Kneipentour sich immer wieder ändert.
+ Als Veranstaltungsort gibt Karl in einem Textfeld die Adresse der ersten
+ Kneipe ein, in der sich die Gruppe am Freitag Abend um 20.00 Uhr trifft.
+ Alle weiteren Kneipen, die die Gruppe an diesem Abend besuchen will, zählt
+ er im Feld 
+\begin_inset Quotes eld
+\end_inset
+
+Notiz
+\begin_inset Quotes erd
+\end_inset
+
+ auf (Priorität B).
+\end_layout
+
+\begin_layout Standard
+Alle Gruppenmitglieder bekommen nun eine Benachrichtigung über die Kneipentour
+ (Priorität B).
+ Zusätzlich wird die Kneipentour in der chronologischen Liste der eigenen
+ bevorstehenden Termine mit Veranstaltungsnamen und Uhrzeit angezeigt.
+\end_layout
+
+\begin_layout Standard
+Als Max sich anmelden will, meldet die Go-App ihm jedoch sofort, dass er
+ zur gleichen Zeit schon an einer anderen Veranstaltung teilnimmt (Priorität
+ B).
+ Max entscheidet sich für die andere Veranstaltung und sagt die Kneipentour
+ ab.
+ Dafür drückt er auf den Button mit 
+\begin_inset Quotes eld
+\end_inset
+
+X
+\begin_inset Quotes erd
+\end_inset
+
+, der sich rechts neben dem Veranstaltungsnamen befindet.
+ Damit verschwindet die Kneipentour aus seiner Terminliste.
+\end_layout
+
+\begin_layout Standard
+Alle anderen Gruppenmitglieder sagen der Veranstaltung zu, indem sie in
+ der Terminliste auf den Haken rechts neben der Veranstaltung drücken.
+ Dann verschwinden die beiden Symbole zum Zu- oder Absagen und es erscheinen
+ an dieser Stelle zwei Symbole, über die man die Google-Maps-Karte mit dem
+ Veranstaltungsort sowie eine Liste mit den Teilnehmern direkt erreichen
+ kann.
+\end_layout
+
+\begin_layout Standard
+Nun ist es Freitag.
+ Die Go-App erinnert alle Teilnehmer vor Beginn der Kneipentour mit einer
+ Push-Benachrichtigung an den Termin (Priorität B).
+ Da fällt Martin plötzlich ein, dass er an diesem Abend arbeiten muss und
+ leider doch nicht teilnehmen kann.
+ Obwohl er sich schon angemeldet hatte, meldet er sich nun wieder von der
+ Kneipentour ab (Priorität B).
+ Dazu drückt er auf die Veranstaltung und lässt sich die Veranstaltungsdetails
+ anzeigen.
+ Dort findet er dann einen Button, um eine bereits zugesagte Veranstaltung
+ wieder abzusagen.
+\end_layout
+
+\begin_layout Standard
+Eine halbe Stunde vor Veranstaltungsbeginn wird nun die Lokalisierung der
+ Gruppenmitglieder aktiviert.
+ Sobald sich mehrere Teilnehmer am gleichen Ort befinden, werden sie zu
+ einem Zentrum zusammengefügt und als ein Punkt auf der Karte dargestellt.
+ Jeder Teilnehmer kann nun abfragen, wer sich schon im Zentrum, also am
+ Treffpunkt, befindet.
+ Die Standorte der anderen Teilnehmer werden nicht angezeigt.
+\end_layout
+
+\begin_layout Standard
+Als Tobias und Lisa mit einer Stunde Verspätung in die Stadt kommen, sehen
+ sie genau, dass die Gruppe sich inzwischen in der zweiten Kneipe befindet
+ und sie kommen sofort dort hin.
+\end_layout
+
+\begin_layout Standard
+Nachdem die voraussichtliche Dauer der Veranstaltung abgelaufen ist, wird
+ die Lokalisierung der Teilnehmer beendet und der Termin gelöscht.
+\end_layout
+
+\begin_layout Subsubsection
+Szenario 2
+\end_layout
+
+\begin_layout Standard
+Am Ende eines mehrtägigen Lehrgangs möchten die Teilnehmer gemeinsam essen
+ gehen.
+ Zur Organisation des gemeinsamen Essens benutzen sie die Go-App.
+\end_layout
+
+\begin_layout Standard
+Zunächst installieren alle Teilnehmer die Go-App auf ihrem Android-Smartphone
+ und registrieren sich mit ihrem Google-Account.
+\end_layout
+
+\begin_layout Standard
+Dann gründet Herr Schneider, der Leiter des Lehrgangs die Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Lehrgang
+\begin_inset Quotes erd
+\end_inset
+
+ in der Go-App.
+ Dabei fügt er sofort über eine Suchfunktion alle Mitglieder des Lehrgangs
+ zu der Gruppe hinzu.
+\end_layout
+
+\begin_layout Standard
+Er erstellt für die Lehrgangsteilnehmer eine Veranstaltung, die er 
+\begin_inset Quotes eld
+\end_inset
+
+Essen gehen
+\begin_inset Quotes erd
+\end_inset
+
+ nennt.
+ Dafür gibt er als Datum Freitag Abend ein und wählt den Button 
+\begin_inset Quotes eld
+\end_inset
+
+Veranstaltung
+\begin_inset Quotes erd
+\end_inset
+
+ aus, da die Veranstaltung an einem festen, sich nicht verändernden Ort
+ stattfindet.
+ Danach gibt er über ein Textfeld die Adresse des Restaurants ein.
+\end_layout
+
+\begin_layout Standard
+Alle Gruppenmitglieder der Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Lehrgang
+\begin_inset Quotes erd
+\end_inset
+
+ werden jetzt per Push-Benachrichtigung über die Kneipentour informiert
+ (Priorität B) und die Veranstaltung erscheint in der eigenen Terminliste.
+ Mit einem Klick auf die Veranstaltung werden den Teilnehmern Veranstaltungsdeta
+ils angezeigt.
+\end_layout
+
+\begin_layout Standard
+Nun haben die Teilnehmer des Lehrgangs die Möglichkeit, den Termin zu- oder
+ abzusagen, indem sie in der Terminliste rechts neben der Veranstaltung
+ ein Kreuz oder einen Haken auswählen.
+ Herr Maier sagt zunächst ab, da er am Freitag Abend schon zurück in seine
+ Heimat fahren will.
+ Die Veranstaltung ist aus seiner Terminliste verschwunden.
+\end_layout
+
+\begin_layout Standard
+Am nächsten Tag überlegt er sich, doch erst am Samstag wieder nach Hause
+ zu fahren und doch an dem Essen teilzunehmen.
+ Er ruft in der App eine Liste mit den abgesagten Terminen auf.
+ Dort kann er sich doch wieder zum Essen anmelden (Priorität B).
+\end_layout
+
+\begin_layout Standard
+Da Herr Fischer nicht am gemeinsamen Essen teilnehmen möchte, meldet er
+ sich aus der Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Lehrgang
+\begin_inset Quotes erd
+\end_inset
+
+ sofort wieder ab.
+\end_layout
+
+\begin_layout Standard
+Frau Schmidt, die erst am zweiten Tag zum Lehrgang hinzustößt, erfährt durch
+ die anderen Teilnehmer von dem geplanten Essen am letzten Abend.
+ Sie wendet sich an den Lehrgangsleiter, der gleichzeitig Gruppenadministrator
+ der Gruppe 
+\begin_inset Quotes eld
+\end_inset
+
+Lehrgang
+\begin_inset Quotes erd
+\end_inset
+
+ ist, um in die Go-App-Gruppe aufgenommen zu werden, denn nur der Administrator
+ kann Personen zu einer Gruppe hinzufügen oder aus einer Gruppe entfernen
+ (Priorität B).
+\end_layout
+
+\begin_layout Standard
+Da inzwischen alle Personen zu- oder abgesagt haben, ruft Herr Schneider
+ nun in dem Restaurant an, um einen Tisch zu reservieren.
+ Doch leider ist das Restaurant am Freitag Abend schon sehr ausgebucht und
+ er kann keinen ausreichend großen Tisch mehr bekommen.
+ Also reserviert er einen Tisch in einem anderen Restaurant.
+ Dann ändert er in der Go-App-Veranstaltung den Veranstaltungsort (Priorität
+ B).
+ Alle Teilnehmer werden durch eine Push-Benachrichtigung darüber informiert
+ (Priorität B).
+\end_layout
+
+\begin_layout Standard
+Frau Schäfer, die schnell von Push-Benachrichtigungen genervt ist, deaktiviert
+ diese in den Einstellungen der Go-App (Priorität B).
+\end_layout
+
+\begin_layout Standard
+Nun ist es so weit.
+ Die Veranstaltung beginnt in einer halben Stunde.
+ Die Lokalisierung der Personen wird aktiviert und alle Teilnehmer sehen
+ auf einer Karte die Standorte der anderen Teilnehmer.
+ So können sie nachschauen, ob die anderen noch in ihrem Hotel oder schon
+ unterwegs zum Restaurant sind.
+\end_layout
+
+\begin_layout Standard
+Herr Maier hat den kürzesten Weg bis zum Restaurant.
+ Da er nicht lange vor den anderen da sein möchte, schaut er, bevor er los
+ geht, in der Go-App nach, ob die anderen schon unterwegs sind.
+\end_layout
+
+\begin_layout Standard
+Der Standort von Frau Schmidt, die zwar zugesagt hat, aber jetzt doch schon
+ nach Hause fährt, wird nicht in der Karte angezeigt, weil sie sich außerhalb
+ eines bestimmten Radius um den Veranstaltungsort befindet.
+ 
+\end_layout
+
+\begin_layout Standard
+Da die Teilnehmer sich nach dem Lehrgang wahrscheinlich nicht mehr treffen
+ werden, löscht Herr Schneider die Gruppe am nächsten Tag.
+\end_layout
+
+\begin_layout Subsubsection
+Szenario 3
+\end_layout
+
+\begin_layout Standard
+Eine Gruppe Studenten möchte am Unifest teilnehmen.
+ In den letzten Jahren ist es immer wieder passiert, dass einzelne Personen
+ die Gruppe verloren haben.
+ Stefan hat vor kurzem von der Go-App gehört, die in dieser Situation der
+ einzelnen Person helfen soll, die Gruppe wieder zu finden.
+ Er schlägt seiner Gruppe vor, die App beim Unifest auszuprobieren.
+ Seine Freunde sind sofort begeistert, installieren die Go-App und registrieren
+ sich mit ihrem Google-Account.
+\end_layout
+
+\begin_layout Standard
+Stefan gründet nun eine Gruppe mit dem Namen 
+\begin_inset Quotes eld
+\end_inset
+
+Party-Studenten
+\begin_inset Quotes erd
+\end_inset
+
+ und fügt seine Freunde hinzu.
+\end_layout
+
+\begin_layout Standard
+Dann erstellt er den Termin 
+\begin_inset Quotes eld
+\end_inset
+
+Unifest
+\begin_inset Quotes erd
+\end_inset
+
+, den er als Tour deklariert, da der Veranstaltungsort zwischen verschiedenen
+ Orten auf dem Campus wechselt.
+ Die Gruppe will sich um 14.00 Uhr am AKK treffen.
+ Von dort aus gehen sie über den gesamten Campus.
+\end_layout
+
+\begin_layout Standard
+Jetzt erhalten alle Gruppenmitglieder eine Benachrichtigung über die Veranstaltu
+ng und sagen zu.
+\end_layout
+
+\begin_layout Standard
+Doch leider verunglückt Christian wenige Tage vor dem Unifest tödlich.
+ Christians Beerdigung ist genau am gleichen Tag wie das Unifest.
+ Also beschließen die Studenten, nicht zum Unifest zu gehen, sondern zur
+ Beerdigung.
+ Stefan löscht die Veranstaltung 
+\begin_inset Quotes eld
+\end_inset
+
+Unifest
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Da das Smartphone von Christians Mutter schon ziemlich alt ist, übernimmt
+ sie Christians Android-Smartphone.
+ Sie entdeckt auf seinem Smartphone die Go-App und will sie auch ausprobieren.
+ Jedoch will sie sich dafür mit ihrem eigenen Google-Account registrieren.
+ Dazu meldet sie Christian mit seinem Google-Account von der App ab und
+ registriert sich mit ihrem eigenen (Priorität B).
+\end_layout
+
+\begin_layout Subsection
+Anwendungsfälle
+\end_layout
+
+\begin_layout Subsubsection
+Anwendungsfall: Kneipentour
+\end_layout
+
+\begin_layout Paragraph*
+Name
+\end_layout
+
+\begin_layout Itemize
+Kneipentour
+\end_layout
+
+\begin_layout Paragraph*
+Teilnehmender Akteur
+\end_layout
+
+\begin_layout Itemize
+Gruppe von Studenten
+\end_layout
+
+\begin_layout Paragraph*
+Eingangsbedingung
+\end_layout
+
+\begin_layout Itemize
+Die Studenten entscheiden, eine Kneipentour durchzuführen
+\end_layout
+
+\begin_layout Itemize
+Sie beschließen, bei der Planung und Durchführung der Kneipentour die Go-App
+ zu verwenden
+\end_layout
+
+\begin_layout Itemize
+Da die Gruppe die Go-App schon öfter verwendet hat, haben alle Teilnehmer
+ die Go-App bereits auf ihrem Android-Smartphone installiert und haben schon
+ eine Gruppe erstellt
+\end_layout
+
+\begin_layout Paragraph*
+Ausgangsbedingung
+\end_layout
+
+\begin_layout Itemize
+Die Studenten haben den Abend genossen
+\end_layout
+
+\begin_layout Itemize
+Sie kommen betrunken nach Hause
+\end_layout
+
+\begin_layout Paragraph*
+Ereignisfluss
+\end_layout
+
+\begin_layout Itemize
+Einer der Studenten erstellt für seine Gruppe den Termin 
+\begin_inset Quotes eld
+\end_inset
+
+Kneipentour
+\begin_inset Quotes erd
+\end_inset
+
+ in der Go-App unter der Angabe von Ort, Datum, Uhrzeit, Dauer, Art der
+ Veranstaltung (Tour) und einer Liste der zu besuchenden Kneipen
+\end_layout
+
+\begin_layout Itemize
+Alle Gruppenmitglieder bekommen eine Benachrichtigung über den Termin (Priorität
+ B)
+\end_layout
+
+\begin_layout Itemize
+Der Termin wird in der eigenen Terminliste angezeigt
+\end_layout
+
+\begin_layout Itemize
+Die Studenten schauen sich die Veranstaltungsdetails an
+\end_layout
+
+\begin_layout Itemize
+Die Studenten sagen den Termin zu oder ab
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Bei einer Absage verschwindet die Kneipentour aus der Terminliste
+\end_layout
+
+\begin_layout Itemize
+Bei einer Zusage bekommt der Student Zugriff auf eine Teilnehmerliste
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Einzelne Studenten sagen der Kneipentour noch ab, obwohl sie anfangs zugesagt
+ hatten und umgekehrt
+\end_layout
+
+\begin_layout Itemize
+Am Veranstaltungstag erinnert die Go-App die Teilnehmer durch eine Benachrichtig
+ung an die bevorstehende Kneipentour (Priorität B)
+\end_layout
+
+\begin_layout Itemize
+Eine halbe Stunde vor Beginn der Kneipentour wird die Lokalisierung der
+ Kneipentour aktiviert
+\end_layout
+
+\begin_layout Itemize
+Sobald sich mehrere Personen in der ersten Kneipe befinden, wird ihr Standort
+ anonymisiert auf der Karte als Zentrum dargestellt
+\end_layout
+
+\begin_layout Itemize
+Personen, die zu spät kommen, können dadurch sehen, wo sich die Gruppe inzwische
+n befindet und direkt zur richtigen Kneipe gehen
+\end_layout
+
+\begin_layout Paragraph*
+Spezielle Anforderungen
+\end_layout
+
+\begin_layout Itemize
+Zugriff auf Karte mit Anzeige der Standorte bzw.
+ des Zentrums nur nach Zusage
+\end_layout
+
+\begin_layout Itemize
+Der Ort des Zentrums ist variabel, das heißt das Zentrum ist immer genau
+ dort, wo sich die größte Personengruppe befindet
+\end_layout
+
+\begin_layout Subsubsection
+Anwendungsfalldiagramm
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Dateien aus der Gruppe/Anwendungsfalldiagramm.jpg
+	scale 70
+	BoundingBox 150bp 0bp 1068bp 747bp
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-2.
- Anwendungsfälle
+\begin_layout Subsection
+Objektmodelle
 \end_layout
+
+\begin_layout Subsubsection
+Objektmodell
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/UMLKlassendiagram-Objekte.jpg
+	scale 60
+	BoundingBox 50bp 0bp 1025bp 720bp
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-3.
- Objektmodell
+\begin_layout Subsubsection
+Datenbankmodell
 \end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/dbModell_Source.jpg
+	scale 60
+	BoundingBox 50bp 0bp 1000bp 569bp
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-4.
- dynamische Modelle
+\begin_layout Subsubsection
+Servermodell
 \end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/UMLKlassendiagram-Server.jpg
+	scale 60
+	BoundingBox 50bp 0bp 1022bp 539bp
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-5.
- GUI
+\begin_layout Subsubsection
+Klassen, die das HTTP-Interface implementieren
 \end_layout
+
+\begin_layout Paragraph*
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/UMLKlassendiagram-Requests_1.jpg
+	scale 60
+	BoundingBox 100bp 0bp 1045bp 400bp
+	rotateOrigin center
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph*
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/UMLKlassendiagram-Requests_2.jpg
+	scale 60
+	BoundingBox 100bp 0bp 1043bp 333bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Dynamische Modelle
+\end_layout
+
+\begin_layout Subsubsection
+Erstellen von Gruppen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/SequenzdiagrammErstellenVonGruppen.jpg
+	scale 60
+	BoundingBox 0bp 0bp 500bp 577bp
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Gruppenverwaltung des Benutzers 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/GruppenverwaltungBenutzer.jpg
+	scale 60
+	BoundingBox 0bp 0bp 700bp 500bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Erstellen eines Termins
+\end_layout
+
+\begin_layout Subsubsection*
+Aktivitätsdiagramm
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/AktivitätsdiaTerminErstellen.jpg
+	scale 60
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Sequenzdiagramm
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/Terminerstellen.jpg
+	scale 50
+	BoundingBox 0bp 0bp 500bp 500bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+An- und Abmeldung von Gruppenmitgliedern zu Terminen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/ZustandsdiagrammAn-Abmeldung.jpg
+	scale 60
+	BoundingBox 50bp 500bp 500bp 500bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Ablauf eines Termins (Veranstaltung) aus Sicht eines Teilnehmers
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Dokumente/Studium KIT/4. Semester/PSE/Eigene Dateien/Dynamische Modelle/Terminablauf.jpg
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Glossar
 \end_layout
 
 \end_body
