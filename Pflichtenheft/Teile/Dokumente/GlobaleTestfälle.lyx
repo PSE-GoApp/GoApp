@@ -5,7 +5,7 @@
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
-\language english
+\language ngerman
 \language_package none
 \inputencoding default
 \fontencoding global
@@ -56,7 +56,7 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\quotes_language german
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -77,9 +77,505 @@ Globale Testfälle
 Folgende Funktionssequenzen sind zu überprüfen:
 \end_layout
 
-\begin_layout Itemize
-
+\begin_layout Subsubsection
+Gruppenverwaltung
 \end_layout
 
+\begin_layout Itemize
+/T10/
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Erstellen einer Gruppe mit Namen
+\end_layout
+
+\begin_layout Itemize
+Das Eingetragen werden als Administrator (Priorität B)
+\end_layout
+
+\begin_layout Itemize
+Das Hinzufügen von Benutzern, auch über die Suchfunktion
+\end_layout
+
+\begin_layout Itemize
+Die Anzeige der Gruppeninformationen (mit Name des Administrators, Priorität
+ B)
+\end_layout
+
+\begin_layout Itemize
+Das Löschen von einem Gruppenmitglied aus der Gruppe
+\end_layout
+
+\begin_layout Itemize
+Der Versuch sich aus der Gruppe abzumelden, die nur einen Administrator
+ hat, muss fehlschlagen (Priorität B)
+\end_layout
+
+\begin_layout Itemize
+Das Löschen der gesamten Gruppe
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/T20/
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Eingeladen werden zu einer Gruppe
+\end_layout
+
+\begin_layout Itemize
+Die Benachrichtigung über die Einladung (Priorität B)
+\end_layout
+
+\begin_layout Itemize
+Das Annehmen dieser Einladung (Priorität C)
+\end_layout
+
+\begin_layout Itemize
+Die Anzeige der Gruppeninformationen (mit Name des Administrators, Priorität
+ B)
+\end_layout
+
+\begin_layout Itemize
+Der Versuch von folgendem muss fehlschlagen (Priorität B):
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Hinzufügen und Löschen von Benutzern
+\end_layout
+
+\begin_layout Itemize
+Das Löschen der Gruppe
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Das Abmelden aus der Gruppe
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/T30/ (Priorität B)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Erstellen einer gruppe mit Namen und Mitgliedern (wie beschrieben in
+ /T10/)
+\end_layout
+
+\begin_layout Itemize
+Das Ernennen eines weiteren Admin (mit anderen Rechten, Priorität C)
+\end_layout
+
+\begin_layout Itemize
+Das Abmelden aus der Gruppe
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/T40/ (Priorität C)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Eingeladen werden zu einer Gruppe mit Benachrichtigung (wie beschrieben
+ in /T20/)
+\end_layout
+
+\begin_layout Itemize
+Die Ablehnung dieser Einladung
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Terminverwaltung
+\end_layout
+
+\begin_layout Itemize
+/T50/
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Erstellen eines Termins mit Angaben von:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Terminname, Gruppe, Ort, Zeit, Datum
+\end_layout
+
+\begin_layout Itemize
+Wahl von Veranstaltung
+\end_layout
+
+\begin_layout Itemize
+Ändern des Zeitraums der Lokalisierung von einer Stunde (Standartwert) auf
+ 30 Minuten
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Der Zugriff auf den Termin durch ein Gruppenmitglied
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Es sollen Angezeigt werden: Teilnehmerliste, Ort, Zeit, Datum, Dauer
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Die Zusage dieses Gruppenmitglieds
+\end_layout
+
+\begin_layout Itemize
+Der Zugriff auf die Teilnehmerliste mit geänderten Werten
+\end_layout
+
+\begin_layout Itemize
+Der Zugriff auf die Karte durch diese Gruppenmitglied
+\end_layout
+
+\begin_layout Itemize
+Das nachträgliche Hinzufügen einer Notiz (Priorität B)
+\end_layout
+
+\begin_layout Itemize
+Das Löschen des Termins durch den Ersteller
+\end_layout
+
+\begin_layout Itemize
+Die Benachrichtigung an alle Gruppenmitglieder über das Löschen dieses Termins
+ (Priorität B)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/T60/
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Erstellen eines Termins mit Angaben von:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Terminname, Gruppe, Ort, Zeit, Datum
+\end_layout
+
+\begin_layout Itemize
+Wahl von Tour
+\end_layout
+
+\begin_layout Itemize
+Notiz
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Der Zugriff auf den Termin durch ein Gruppenmitglied
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Es sollen Angezeigt werden: Teilnehmerliste, Ort, Zeit, Datum, Dauer, Notiz
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Die Absage dieses Gruppenmitglieds
+\end_layout
+
+\begin_layout Itemize
+Der Zugriff auf die Teilnehmerliste mit geänderten Werten
+\end_layout
+
+\begin_layout Itemize
+Der Zugriff auf die Karte durch diese Gruppenmitglied muss fehlschlagen
+\end_layout
+
+\begin_layout Itemize
+Der Zugriff auf die Liste der Abgemeldeten Termine dieses Gruppenmitglieds
+ (Priorität B)
+\end_layout
+
+\begin_layout Itemize
+Die nachträgliche Anmeldung des selben Gruppenmitglieds zum Termin (Priorität
+ B)
+\end_layout
+
+\begin_layout Itemize
+Das Löschen des Termins durch den Ersteller
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/T70/ (Priorität B)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Erstellen eines Termins (wie beschrieben in /T50/)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Vereinigen von zwei Gruppen für diesen Termin (Priorität C)
+\end_layout
+
+\begin_layout Itemize
+Die Wahl des Ortes über eine Karte
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Die Benachrichtigung an alle Gruppenmitglieder über diesen neuen Termin
+\end_layout
+
+\begin_layout Itemize
+Die Anmeldung zu diesem Termin (wie beschrieben in /T50/)
+\end_layout
+
+\begin_layout Itemize
+Die nachträgliche Änderung andem Termin durch den Ersteller
+\end_layout
+
+\begin_layout Itemize
+Die Benachrichtigung über diese Änderung an alle Gruppenmitglieder
+\end_layout
+
+\begin_layout Itemize
+Die Benachrichtigung an alle Gruppenmitglieder, wenn das erste Gruppenmitglied
+ den Treffpunkt erreicht
+\end_layout
+
+\begin_layout Itemize
+Das Automatische Löschen des Termins nachdem er vorüber ist
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/T80/ (Priorität B)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Eingeladen werden zu einem erstellten Termin
+\end_layout
+
+\begin_layout Itemize
+Die Zusage zu diesem Termin
+\end_layout
+
+\begin_layout Itemize
+Die Eingeladen werden zu einem weitern Termin, der zur gleichen Zeit stattfindet
+\end_layout
+
+\begin_layout Itemize
+Die Warnung beim Versuch sich zu diesem Termin anzumelden
+\end_layout
+
+\begin_layout Itemize
+Die Anmeldung beim zweiten Termin
+\end_layout
+
+\begin_layout Itemize
+Die Nachträgliche Abmeldung des ersten Termins
+\end_layout
+
+\begin_layout Itemize
+Am Tag des Termins die Benachrichtigung, dass dieser Termin ansteht
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Lokalisierung
+\end_layout
+
+\begin_layout Itemize
+/T90/ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Die Lokalisierung aller Teilnehmer einer Standardveranstaltung (d.h.
+ Dauer ist eine Stunde) eine halbe Stunde vor Beginn des Termins
+\end_layout
+
+\begin_layout Itemize
+Die Warnung an Teilnehmer mit ausgeschaltetem GPS (Priorität B)
+\end_layout
+
+\begin_layout Itemize
+Die Anzeige selbiger Teilnehmer als individuelle Marker auf der Karte ist
+ nur für Gruppenmitglieder, die am Termin teilnehmen, sichtbar sobald sich
+ sich in einem bestimmten Umkreis um den fest markierten Treffpunkt befinden
+\end_layout
+
+\begin_layout Itemize
+Die Angabe einer Liste der Teilnehmer die sich am Treffpunkt befinden (Priorität
+ B)
+\end_layout
+
+\begin_layout Itemize
+Das Ausschalten der GPS-Lokalisation eines Teilnehmers führt zum sofortigen
+ Verschwinden desselben von der Karte
+\end_layout
+
+\begin_layout Itemize
+Das Ende der GPS-Lokalisation nach einer Stunde
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/T100/
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Die Lokalisierung aller Teilnehmer einer Standardtour (d.h.
+ Dauer sind zwei Stunden) eine halbe Stunde vor Beginn des Termins
+\end_layout
+
+\begin_layout Itemize
+Die Anzeige selbiger Teilnehmer als anonymisiertes Zentrum als auch als
+ individuelle Marker in einem bestimmten Umkreis um das Zentrum auf der
+ Karte ist nur für Gruppenmitglieder, die am Termin teilnehmen, sichtbar
+ sobald der erste Teilnehmer vor Ort am Treffpunkt ist
+\end_layout
+
+\begin_layout Itemize
+Die Angabe einer Liste der Teilnehmer die sich im Zentrum befinden (Priorität
+ B)
+\end_layout
+
+\begin_layout Itemize
+Das Ausschalten der GPS-Lokalisation eines Teilnehmers führt zum sofortigen
+ Verschwinden desselben von der Karte
+\end_layout
+
+\begin_layout Itemize
+Die Bewegung des Zentrums mit der größten Ansammlung von Teilnehmern
+\end_layout
+
+\begin_layout Itemize
+Die Navigation zum Zentrum (Priorität C)
+\end_layout
+
+\begin_layout Itemize
+Das Ende der GPS-Lokalisation nach zwei Stunden
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Schnittstelle zur Benutzerverwaltung
+\end_layout
+
+\begin_layout Itemize
+/T110/
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Die Registrierung eines Benutzers über den Google-Account
+\end_layout
+
+\begin_layout Itemize
+Das Anmelden des Benutzers in der App
+\end_layout
+
+\begin_layout Itemize
+Die Speicherung des Benutzers auf dem Server
+\end_layout
+
+\begin_layout Itemize
+Das Finden dieses Benutzers im globalen Benutzerverzeichnis
+\end_layout
+
+\begin_layout Itemize
+Das Abmelden des Benutzers aus der App (Priorität B)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/T120/ (Priorität C)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Registrieren des Benutzers über eine eigene Benutzerverwaltung
+\end_layout
+
+\begin_layout Itemize
+Das Anmelden, Speichern, Finden und Abmelden Des Benutzers (wie beschrieben
+ in /T110/)
+\end_layout
+
+\begin_layout Itemize
+Das Löschen des Benutzers aus dem System
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Sonstiges
+\end_layout
+
+\begin_layout Itemize
+/T120/
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Die Anzeige der Datenschutzbestimmung in der App
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/T130/
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Die Kommunikation zwischen Clienten und Server
+\end_layout
+
+\begin_layout Itemize
+Die Verschlusselung dieser Kommunikation mit SSH (Priorität C)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+/T140/ (Priorität B)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Das Erhalten sämtlicher Benachrichtigungen
+\end_layout
+
+\begin_layout Itemize
+Das Deaktivieren der Benachrichtigungen durch den Benutzer
+\end_layout
+
+\begin_layout Itemize
+Das Nicht-Erhalten der Benahrichtigungen
+\end_layout
+
+\begin_layout Itemize
+Das wieder Aktivieren der Benachrichtigungen durch den Benutzer
+\end_layout
+
+\begin_layout Itemize
+Das Erhalten sämtlicher Benachrichtigungen
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
