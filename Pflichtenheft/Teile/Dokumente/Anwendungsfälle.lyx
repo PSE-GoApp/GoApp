@@ -68,15 +68,15 @@
 
 \begin_body
 
-\begin_layout Title
+\begin_layout Subsection
 Anwendungsfälle
 \end_layout
 
-\begin_layout Part*
+\begin_layout Subsubsection
 Anwendungsfall 1: Kneipentour
 \end_layout
 
-\begin_layout Section
+\begin_layout Subparagraph
 Name
 \end_layout
 
@@ -84,7 +84,7 @@ Name
 Kneipentour
 \end_layout
 
-\begin_layout Section
+\begin_layout Subparagraph
 Teilnehmender Akteur
 \end_layout
 
@@ -92,7 +92,7 @@ Teilnehmender Akteur
 Gruppe von Studenten
 \end_layout
 
-\begin_layout Section
+\begin_layout Subparagraph
 Eingangsbedingung
 \end_layout
 
@@ -111,7 +111,7 @@ Da die Gruppe die Go-App schon öfter verwendet hat, haben alle Teilnehmer
  eine Gruppe erstellt
 \end_layout
 
-\begin_layout Section
+\begin_layout Subparagraph
 Ausgangsbedingung
 \end_layout
 
@@ -123,7 +123,7 @@ Die Studenten haben den Abend genossen
 Sie kommen betrunken nach Hause
 \end_layout
 
-\begin_layout Section
+\begin_layout Subparagraph
 Ereignisfluss
 \end_layout
 
@@ -192,7 +192,7 @@ Personen, die zu spät kommen, können dadurch sehen, wo sich die Gruppe inzwisc
 n befindet und direkt zur richtigen Kneipe gehen
 \end_layout
 
-\begin_layout Section
+\begin_layout Subparagraph
 Spezielle Anforderungen
 \end_layout
 
@@ -204,6 +204,21 @@ Zugriff auf Karte mit Anzeige der Standorte bzw.
 \begin_layout Itemize
 Der Ort des Zentrums ist variabel, das heißt das Zentrum ist immer genau
  dort, wo sich die größte Personengruppe befindet
+\end_layout
+
+\begin_layout Subsubsection
+Anwendungsfalldiagramm
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ../Modelle/Anwendungsfalldiagramm.jpg
+	scale 70
+	BoundingBox 150bp 0bp 1068bp 600bp
+
+\end_inset
+
+
 \end_layout
 
 \end_body

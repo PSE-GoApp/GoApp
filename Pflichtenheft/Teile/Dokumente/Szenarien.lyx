@@ -68,11 +68,11 @@
 
 \begin_body
 
-\begin_layout Title
+\begin_layout Subsection
 Szenarien
 \end_layout
 
-\begin_layout Part*
+\begin_layout Subsubsection
 Szenario 1
 \end_layout
 
@@ -220,7 +220,7 @@ Nachdem die voraussichtliche Dauer der Veranstaltung abgelaufen ist, wird
  die Lokalisierung der Teilnehmer beendet und der Termin gelöscht.
 \end_layout
 
-\begin_layout Part*
+\begin_layout Subsubsection
 Szenario 2
 \end_layout
 
@@ -377,7 +377,7 @@ Da die Teilnehmer sich nach dem Lehrgang wahrscheinlich nicht mehr treffen
  werden, löscht Herr Schneider die Gruppe am nächsten Tag.
 \end_layout
 
-\begin_layout Part*
+\begin_layout Subsubsection
 Szenario 3
 \end_layout
 
