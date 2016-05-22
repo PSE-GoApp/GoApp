@@ -141,7 +141,8 @@ Die Anzeige der Gruppeninformationen (mit Name des Administrators, Priorität
 \end_layout
 
 \begin_layout Itemize
-Der Versuch von folgendem muss fehlschlagen (Priorität B):
+Der Versuch von folgendem muss fehlschlagen, da der entsprechende Benutzer
+ kein Administrator ist (Priorität B):
 \end_layout
 
 \begin_deeper
@@ -442,14 +443,21 @@ Das Ende der GPS-Lokalisation nach einer Stunde
 \begin_deeper
 \begin_layout Itemize
 Die Lokalisierung aller Teilnehmer einer Standardtour (d.h.
- Dauer sind zwei Stunden) eine halbe Stunde vor Beginn des Termins
+ Dauer ist zwei Stunden) eine halbe Stunde vor Beginn des Termins
 \end_layout
 
 \begin_layout Itemize
-Die Anzeige selbiger Teilnehmer als anonymisiertes Zentrum als auch als
- individuelle Marker in einem bestimmten Umkreis um das Zentrum auf der
- Karte ist nur für Gruppenmitglieder, die am Termin teilnehmen, sichtbar
- sobald der erste Teilnehmer vor Ort am Treffpunkt ist
+Die Anzeige auf der Karte beginnt sobald der erste Teilnehmer vor Ort ist
+\end_layout
+
+\begin_layout Itemize
+Die Anzeige des anonymisierten Zentrums und der individuellen Marker ist
+ nur für Teilnehmer des Termins sichtbar
+\end_layout
+
+\begin_layout Itemize
+Die individuellen Marker sind nur in einem bestimmten Umkreis um das Zentrum
+ sichtbar
 \end_layout
 
 \begin_layout Itemize
@@ -548,7 +556,7 @@ Die Kommunikation zwischen Clienten und Server
 \end_layout
 
 \begin_layout Itemize
-Die Verschlusselung dieser Kommunikation mit SSH (Priorität C)
+Die Verschlusselung dieser Kommunikation mit SSL (Priorität C)
 \end_layout
 
 \end_deeper
