@@ -1,0 +1,2400 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Part*
+Package kit.edu.pse.goapp.server.datamodels
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Abstract class Meeting
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die abstrakte Klasse Meeting stellt einen Termin einer Gruppe dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+Event(int ID, String name, GPS place, int timestamp, int duration, Participant
+ creator)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int ID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Termins
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+String name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name des Termins
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+GPS place
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Veranstaltungsort mit GPS-Koordinaten angegeben
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int timestamp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Veranstaltungsbeginn
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int duration
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Voraussichtliche Dauer des Termins
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+Participant creator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ersteller des Termins
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public int 
+\series bold
+getID()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt die ID des Termins zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+ID des Termins als Integer
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String 
+\series bold
+getName()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt den Terminnamen zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+String mit Terminnamen
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public GPS 
+\series bold
+getPlace()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt den Ort des Termins zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Ort des Termins mithilfe von GPS-Koordinaten
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public int 
+\series bold
+getTimestamp()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt die Uhrzeit zurück, wann der Termin beginnt.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Uhrzeit als Integer
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public int 
+\series bold
+getDuration()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt die voraussichtliche Dauer des Termins zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Dauer des Termins als Integer
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public Participant 
+\series bold
+getCreator()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt den Ersteller des Termins zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Ersteller des Termins als Participant
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<Participant> 
+\series bold
+getParticipants()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt eine Liste mit allen Teilnehmern zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste mit Teilnehmern (Participants)
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addParticipants(Participant participant)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Fügt einen Teilnehmer zu dem Termin hinzu.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+Participant participant
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hinzuzufügender Teilnehmer
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class Event
+\family default
+ extends 
+\family typewriter
+Meeting
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse Event erweitert die abstrakte Klasse Meeting.
+ Sie beschreibt ein Treffen mit festem Ort (Veranstaltung).
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+Event()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse Event enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse Meeting und überschreibt keine
+ Methode.
+ Neben den Methoden der Klasse Meeting werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class Tour
+\family default
+ extends 
+\family typewriter
+Meeting
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+Tour
+\family default
+ erweitert die abstrakte Klasse 
+\family typewriter
+Meeting
+\family default
+.
+ Sie beschreibt ein Treffen mit wechselndem Veranstaltungsort.
+\end_layout
+
+\begin_layout Subsection*
+Parameter
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public static double 
+\series bold
+maxCenterDistance
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+Tour()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+Tour
+\family default
+ übernimmt alle Methoden aus der Klasse 
+\family typewriter
+Meeting
+\family default
+ und überschreibt keine Methode.
+ Sie fügt folgende Methode hinzu:
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public MeetingCenter
+\series bold
+ getCenter()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt die Koordinaten der Ansammlung der meisten Teilnehmer (Zentrum) an.
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class MeetingCenter
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+MeetingCenter
+\family default
+ stellt den Ort dar, an dem sich während einer Tour die meisten Teilnehmer
+ befinden (Zentrum).
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addParticipantToCenter(Participant participant)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Fügt einen Teilnehmer zum Zentrum hinzu, sobald er sich am Zentrum befindet.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+Participant participant
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Teilnehmer, der zum Zentrum hinzugefügt werden soll
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+removeParticipantFromCenter(Participant participant)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Entfernt einen Teilnehmer aus dem Zentrum, sobald er sich vom Zentrum entfernt.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+Participant participant
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Teilnehmer, der aus dem Zentrum entfernt werden soll
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<Participant> 
+\series bold
+getParticipants()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt Teilnehmer zurück, die sich im Zentrum befinden.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste mit Teilnehmern (Participants) im Zentrum
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public GPS 
+\series bold
+getPlace()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt Ort des Zentrums zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+GPS-Koordinaten des Zentrums
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class Participant
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+Participant
+\family default
+ stellt einen Teilnehmer eines Termins dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+Participant(int participantID, User user, MeetingConfirmation confirmation)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int participantID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Teilnehmers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+User user
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Benutzer der Go-App
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+MeetingConfirmation confirmation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu- oder Absage des Termins
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public int 
+\series bold
+getParticipant_ID()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt die Teilnehmer-ID zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Teilnehmer-ID als Integer
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public User 
+\series bold
+getUser()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt den teilnehmenden Benutzer zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Teilnehmenden Benutzer (
+\family typewriter
+User
+\family default
+)
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public MeetingConfirmation 
+\series bold
+getConfirmation()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt zurück, ob der Benutzer den Termin zu- oder abgesagt hat.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewerte:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+CONFIRMED
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Die Person hat zugesagt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+PENDING
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Die Person hat bis jetzt weder zu- noch abgesagt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+REJECTED
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Die Person hat abgesagt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Enumeration MeetingConfirmation
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Enumeration 
+\family typewriter
+MeetingConfirmation
+\family default
+ beschreibt, ob eine Person eine Veranstaltung schon zu- oder abgesagt hat.
+\end_layout
+
+\begin_layout Subsection*
+Parameter
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+CONFIRMED
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Die Person hat zugesagt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+PENDING
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Die Person hat bis jetzt weder zu- noch abgesagt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+REJECTED
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Die Person hat abgesagt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class User
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+User
+\family default
+ stellt einen Benutzer der Go-App dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+User(int userID, String name)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int userID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Benutzers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+String name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name des Benutzers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public int 
+\series bold
+getID()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt die ID des Benutzers zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewerte:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+ID des Benutzers als Integer
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String 
+\series bold
+getName()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt den Namen des Benutzers zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewerte:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Name des Benutzers als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+setGPS(GPS gps)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Setzt die GPS-Position des Benutzers
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+GPS gps
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPS-Position des Benutzers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public GPS 
+\series bold
+getGPS()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt den Standort des Benutzers zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+GPS-Koordinaten des Benutzers
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addGroup(Group group)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Erstellt eine neue Gruppe
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+Group group
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Neue Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addMeeting(Meeting meeting)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Erstellt einen neuen Termin für eine Gruppe
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+Meeting meeting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Neuer Termin
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<Group> 
+\series bold
+getAllGroups()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt alle Gruppen des Benutzers zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste mit allen Gruppen
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<Meeting> 
+\series bold
+getAllMeetings()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt alle Termine des Benutzers zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste mit allen Terminen
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class Group
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+Group
+\family default
+ stellt eine Gruppe von Benutzern dar, die sich in der Go-App zusammenschließen.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public
+\series bold
+ Group(int groupID, String name)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int groupID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID der Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+String name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name der Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public int 
+\series bold
+getID()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt die ID der Gruppe zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+ID der Gruppe als Integer
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String 
+\series bold
+getName()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt den Namen der Gruppe zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gruppenname als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+setName(String name)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Setzt den Namen der Gruppe.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+String name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name der Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addAdmin(User user)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Fügt einen Administrator hinzu.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+User user
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Benutzer, der zum Administrator ernannt werden soll
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<User> 
+\series bold
+getAdmins()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt alle Administratoren der Gruppe zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste mit allen Gruppenadministratoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addGroupMember(User user)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Fügt ein Gruppenmitglied zu der Gruppe hinzu.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+User user
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Benutzer, der zur Gruppe hinzugefügt werden soll
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<User>
+\series bold
+ getGroupMembers()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt alle Gruppenmitglieder zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste mit allen Gruppenmitgliedern
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class GPS
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GPS
+\family default
+ stellt den Standort mithilfe von GPS-Koordinaten dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+GPS(double x, double y, double z)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+double x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPS x-Koordinate
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+double y
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPS y-Koordinate
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+double z
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPS z-Koordinate
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Parameter
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public static double 
+\series bold
+radius
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public static double 
+\series bold
+distance(GPS first, GPS second)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Berechnet die Distanz zwischen den beiden ermittelten Standorten.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Distanz als Integer
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public boolean 
+\series bold
+isClose(GPS first, GPS second, double radius)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\family typewriter
+true
+\family default
+, falls sonst 
+\family typewriter
+false
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public double 
+\series bold
+getX()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt die x-Koordinate zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+GPS x-Koordinate
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public double 
+\series bold
+getY()
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Gibt die y-Koordinate zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+GPS y-Koordinate
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public double 
+\series bold
+getZ()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt die z-Koordinate zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+GPS z-Koordinate
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class Notification
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+Notification
+\family default
+ benachrichtigt den Benutzer über seine Termine.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+Notification(String text)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+String text
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Benachrichtigungstext
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String
+\series bold
+ getText()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt den Benachrichtigungstext zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Benachrichtigungstext als String
+\end_layout
+
+\end_body
+\end_document

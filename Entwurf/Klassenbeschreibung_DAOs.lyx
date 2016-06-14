@@ -1,0 +1,1829 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Part*
+Package kit.edu.pse.goapp.server.DAOs
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Interface GroupDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Dieses Interface stellt eine Gruppe von Benutzern der Go-App dar.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addGroup()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Eine neue Gruppe wird erstellt.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<Group> 
+\series bold
+getAll Groups()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt alle Gruppen der Go-App zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Liefert
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste mit allen Gruppen
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+updateGroup()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Aktualisiert die Gruppendaten.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+deleteGroup()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Löscht die Gruppe.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public Group 
+\series bold
+getGroupByID()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt Gruppe anhand Gruppen-ID zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gruppe anhand ihrer ID
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class GroupDAOImpl
+\family default
+ implements 
+\family typewriter
+GroupDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse implementiert das Interface 
+\family typewriter
+GroupDAO
+\family default
+.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+GroupDAOImpl
+\series default
+(int ID, String name)
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+\series bold
+ID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID der Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Interface GroupMemeberDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Dieses Interface stellt die Mitglieder einer Gruppe dar.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addMember()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Fügt ein Mitglied zur Gruppe hinzu.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+deleteMember()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Entfernt ein Mitglied aus der Gruppe.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+updateMember()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Aktualisiert die Gruppenmitglieder der Gruppe.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<User> 
+\series bold
+getAllMembers()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt eine Liste aller Gruppenmitglieder zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+eine Liste mit allen Gruppenmitgliedern
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<Group> 
+\series bold
+getAllUserGroups()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt eine Liste mit allen Gruppen zurück, in denen eine Person Mitglied
+ ist.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste mit Gruppen
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+setAdmin()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Ernennt ein Gruppenmitglied als Gruppenadministrator.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<Group> 
+\series bold
+getAllAdminGroups()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+Gibt eine Liste mit allen Gruppen zurück, in denen der Benutzer Gruppedministrat
+or ist.
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class GroupMemberDAOImpl
+\family default
+ implements 
+\family typewriter
+GroupMemberDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse implementiert das Interface 
+\family typewriter
+GroupMember
+\family default
+DAO.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+GroupMemberDAOImpl
+\series default
+(int userID, int groupID, boolean isAdmin)
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+userID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Gruppenmitgliedes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+groupID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID der Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+isAdmin
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+true
+\family default
+, wenn das Gruppenmitglied Gruppenadministrator ist, sonst 
+\family typewriter
+false
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Interface MeetingDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Dieses Interface stellt ein Treffen einer Gruppe dar.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addMeeting()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Erstellt einen neuen Termin für die Gruppe.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<Meeting> 
+\series bold
+getAllMeetings()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt eine Liste aller Termine aus.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste mit Terminen
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+updateMeeting()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Aktualisiert die Daten eines Termins.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+deleteMeeting()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Löscht einen Termin.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public Meeting 
+\series bold
+getMeetingByID()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt den Termin anhand seiner ID zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Termin anhand seiner ID
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class MeetingDAOImpl 
+\family default
+implements
+\family typewriter
+ MeetingDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse implementiert das Interface 
+\family typewriter
+MeetingDAO
+\family default
+.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+MeetingDAOImpl
+\series default
+(int meetingID, int name, GPS place, long timestamp, int duration, String
+ type, int creatorID
+\family default
+)
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int meetingID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Meetings
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name des Termins
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+GPS place
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPS-Koordinaten des Veranstaltungsortes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+long timestamp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Uhrzeit des Veranstaltungsbeginns
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int duration
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+voraussichtliche Dauer des Termins
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+String type
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+Veranstaltung
+\begin_inset Quotes erd
+\end_inset
+
+ (bei festem Veranstaltungsort) oder 
+\begin_inset Quotes eld
+\end_inset
+
+Tour
+\begin_inset Quotes erd
+\end_inset
+
+ (bei sich veränderndem Veranstaltungsort)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int creatorID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Gruppenmitgliedes, das den Termin erstellt hat
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Interface ParticipantDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Dieses Interface stellt einen Teilnehmer eines Termins dar.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addParticipant()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Fügt ein Gruppenmitglied in die Liste der teilnehmenden Personen hinzu.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+deleteParticipant()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Löscht Teilnehmer aus der Liste der teilnehmenden Personen.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<Participant> 
+\series bold
+getAllParticipants()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt eine Liste aller Teilnehmer zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste aller Teilnehmer
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public Participant 
+\series bold
+getParticipantByID()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt einen Teilnehmer mit einer bestimmten Teilnehmer-ID zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Teilnehmer anhand seiner Teilnehmer-ID
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+updateParticipant()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Aktualisiert die Teilnehmer des Termins.
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class ParticipantDAOImpl 
+\family default
+implements
+\family typewriter
+ ParticipantDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse implementiert das Interface ParticipantDAO.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+ParticipantDAOImpl(int participantID, int userID, int meetingID, MeetingConfirma
+tion status)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int participantID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Teilnehmers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int userID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Benutzer-ID des teilnehmenden Benutzers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int meetingID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Termins
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+MeetingConfirmation status
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Teilnahme oder Absage zu einem Termin
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Interface UserDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Dieses Interface stellt einen Benutzer der Go-App dar.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+addUser()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Erstellt einen neuen Benutzer der Go-App.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+deleteUser()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Löscht einen Benutzer aus der Go-App.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+updateUser()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Aktualisiert einen Benutzer
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<User> 
+\series bold
+getAllUsers()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt eine Liste aller Benutzer der Go-App zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste aller Benutzer der Go-App
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public User 
+\series bold
+getUserByID()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt einen Benutzer anhand seiner ID zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Benutzer anhand seiner ID
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String 
+\series bold
+GoogleID()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt die Google-ID eines Benutzers zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+String mit Google-ID
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public boolean 
+\series bold
+getNotificationStatus()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt an, ob der Benutzer Benachrichtigungen über Termine erhalten möchte.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\family typewriter
+true
+\family default
+, wenn der Benutzer Benachrichtigungen erhalten möchte, sonst 
+\family typewriter
+false
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public User 
+\series bold
+getUserByGoogleID()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt Benutzer anhand seiner Google-ID zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Benutzer anhand seiner Google-ID
+\end_layout
+
+\begin_layout Section*
+Class UserDAOImpl implements UserDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse implementiert das Interface UserDAO.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+UserDAOImpl(int userID, String name, String googleID, boolean notificationStatus
+)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int userID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Benutzers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+String name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Benutzername
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+String googleID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Google-ID des Benutzers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+boolean notificationStatus
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+true, falls Benutzer Benachrichtigungen erhalten möchte, sonst false
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Interface GPS_DAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Dieses Interface stellt den Standort eines Benutzers mithilfe von GPS-Koordinate
+n dar.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+userSetGPS()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Setzt den Standort eines Benutzers
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public GPS 
+\series bold
+userGetGPS()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt den Standort eines Benutzers.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+GPS-Daten des Benutzers
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class GPS_DAO_Impl
+\family default
+ implements 
+\family typewriter
+GPS_DAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse implementiert das Interface GPS_DAO.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+GPS_DAO_Impl(int userID, double x, double y, double z)
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int userID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Benutzer, dessen GPS-Daten dargestellt werden
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+double x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPS x-Koordinate
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+double y
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPS y-Koordinate
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+double z
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPS z-Koordinate
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Interface NotificationDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Dieses Interface stellt die Benachrichtigungen für einen Benutzer dar.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public List<Notification> 
+\series bold
+userGetNotification()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gibt alle Benachrichtigungen eines Benutzers zurück.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liste mit Benachrichtigungen
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class NotificationDAOImpl
+\family default
+ implements 
+\family typewriter
+NotificationDAO
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse implementiert das Interface 
+\family typewriter
+NotificationDAO
+\family default
+.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+NotificationDAOImpl(int userID)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+
+\family typewriter
+int userID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ID des Benutzers, dessen Benachrichtigungen zurückgegeben werden sollen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
