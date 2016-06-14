@@ -125,7 +125,7 @@ Parameter
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
-\begin_layout Itemize
+\begin_layout Plain Layout
 
 \family typewriter
 String jsonString
@@ -199,7 +199,7 @@ Parameter:
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
-\begin_layout Itemize
+\begin_layout Plain Layout
 
 \family typewriter
 T dao
@@ -292,7 +292,162 @@ Die Klasse
 \family typewriter
 NotificationConverter 
 \family default
-hat keine eigenen Methoden.
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public T 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String der Benachrichtigung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String der Benachrichtigung als 
+\family typewriter
+T
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(T notificationDao)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus der Notification-DAO im Format 
+\family typewriter
+T
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T notificationDao
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Notification-DAO im Format 
+\family typewriter
+T
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Notification-DAO als String
 \end_layout
 
 \begin_layout Section*
@@ -349,7 +504,164 @@ Methoden
 \begin_layout Standard
 Die Klasse
 \family typewriter
- GroupMemberCOnverter hat keine eigenen Methoden.
+ GroupMemberCOnverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public T 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String eines Gruppenmitgliedes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String des Gruppenmitgliedes als 
+\family typewriter
+T
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(T groupMemberDao)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus der Group-Member-DAO im Format 
+\family typewriter
+T
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T groupMemberDao
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Group-Member-DAO im Format 
+\family typewriter
+T
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Group-Member-DAO als String
 \end_layout
 
 \begin_layout Section*
@@ -406,7 +718,164 @@ Methoden
 \begin_layout Standard
 Die Klasse
 \family typewriter
- GroupCOnverter hat keine eigenen Methoden.
+ GroupCOnverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public T 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String der Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String der Gruppe als 
+\family typewriter
+T
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(T groupDao)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus der Group-DAO im Format 
+\family typewriter
+T
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T groupDao
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Group-DAO im Format 
+\family typewriter
+T
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Group-DAO als String
 \end_layout
 
 \begin_layout Section*
@@ -463,7 +932,164 @@ Methoden
 \begin_layout Standard
 Die Klasse
 \family typewriter
- GPS_COnverter hat keine eigenen Methoden.
+ GPS_COnverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public T 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String Klasse GPS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String der Gruppe als 
+\family typewriter
+T
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(T gpsDao)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus der GPS-DAO im Format 
+\family typewriter
+T
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T gpsDao
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPS-DAO im Format 
+\family typewriter
+T
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+GPS-DAO als String
 \end_layout
 
 \begin_layout Section*
@@ -520,7 +1146,164 @@ Methoden
 \begin_layout Standard
 Die Klasse
 \family typewriter
- UserCOnverter hat keine eigenen Methoden.
+ UserCOnverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public T 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String eines Benutzers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String des Benutzers als 
+\family typewriter
+T
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(T userDao)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus der User-DAO im Format 
+\family typewriter
+T
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T userDao
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+User-DAO im Format 
+\family typewriter
+T
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+User-DAO als String
 \end_layout
 
 \begin_layout Section*
@@ -577,7 +1360,164 @@ Methoden
 \begin_layout Standard
 Die Klasse
 \family typewriter
- ParticipantCOnverter hat keine eigenen Methoden.
+ ParticipantCOnverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public T 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String eines Teilnehmers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String des Teilnehmers als 
+\family typewriter
+T
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(T participantDao)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus der Participant-DAO im Format 
+\family typewriter
+T
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T participantDao
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Participant-DAO im Format 
+\family typewriter
+T
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Participant-DAO als String
 \end_layout
 
 \begin_layout Section*
@@ -634,7 +1574,164 @@ Methoden
 \begin_layout Standard
 Die Klasse
 \family typewriter
- MeetingCOnverter hat keine eigenen Methoden.
+ MeetingCOnverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public T 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String des Treffens
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String des Treffens als 
+\family typewriter
+T
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(T meetingDao)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus der Meeting-DAO im Format 
+\family typewriter
+T
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T meetingDao
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Meeting-DAO im Format 
+\family typewriter
+T
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Meeting-DAO als String
 \end_layout
 
 \end_body
