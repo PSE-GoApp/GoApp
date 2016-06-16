@@ -71,74 +71,13 @@
 
 \begin_body
 
-\begin_layout Title
-Entwurf
-\end_layout
-
-\begin_layout SubTitle
-Go-App
-\end_layout
-
-\begin_layout Author
-Grischa Hauser, Kansei Hara, Rumen Donchev, Tanja Müller, Paula Klein, Iris
- Landerer
-\end_layout
-
-\begin_layout Date
-19.06.2016
-\end_layout
-
 \begin_layout Standard
-\begin_inset CommandInset toc
-LatexCommand tableofcontents
+\begin_inset Graphics
+	filename Modelle/Klassendiagramm.jpg
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section
-Komponentendiagramm
-\end_layout
-
-\begin_layout Section
-Diagramme
-\end_layout
-
-\begin_layout Subsection
-Client
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\begin_layout Subsection
-Server
-\end_layout
-
-\begin_layout Section
-Detaillierte Beschreiung aller Klassen
-\end_layout
-
-\begin_layout Subsection
-Client
-\end_layout
-
-\begin_layout Subsection
-Server
-\end_layout
-
-\begin_layout Section
-Sequenzdiagramm
-\end_layout
-
-\begin_layout Section
-Änderung zum Pflichtenheft
-\end_layout
-
-\begin_layout Section
-Klassendiagramm
 \end_layout
 
 \end_body
