@@ -1,0 +1,346 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Part*
+
+\family typewriter
+Package kit.edu.pse.goapp.server.convert
+\end_layout
+
+\begin_layout Standard
+Die Converter sind im Server gespeichert.
+ Sie wandeln die Objekte aus der Datenbank in Parameter um, bevor sie zu
+ den Servlets weitergeleitet werden.
+ Umgekehrt wandeln sie auch die Parameter aus den Servlets in Objekte um,
+ bevor sie der Datenbank zurückgegeben werden.
+\end_layout
+
+\begin_layout Standard
+Das 
+\family typewriter
+Interface Converter <T>
+\family default
+ hat die beiden Methoden 
+\family typewriter
+public T parse(String jsonString)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+Die Methode 
+\family typewriter
+public T parse(String)
+\family default
+ konvertiert den 
+\family typewriter
+String
+\family default
+, den sie von den Servlets bekommt, in ein Objekt 
+\family typewriter
+T
+\family default
+ und gibt es an die Datenbank zurück.
+\end_layout
+
+\begin_layout Standard
+Die Methode 
+\family typewriter
+public String serialize(T dao)
+\family default
+ konvertiert ein 
+\family typewriter
+Objekt T
+\family default
+, das sie von der Datenbank erhält, in einen 
+\family typewriter
+String
+\family default
+ und gibt ihn an die Servlets weiter.
+\end_layout
+
+\begin_layout Standard
+Es gibt jeweils einen Converter für die Klassen 
+\family typewriter
+User
+\family default
+, 
+\family typewriter
+Participant
+\family default
+, 
+\family typewriter
+Meeting
+\family default
+, 
+\family typewriter
+GPS
+\family default
+, 
+\family typewriter
+Group
+\family default
+, 
+\family typewriter
+GroupMember
+\family default
+ und 
+\family typewriter
+Notification
+\family default
+.
+ Diese Converter implementieren das 
+\family typewriter
+Interface Converter<T>
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+NotificationConverter
+\family default
+ konvertiert Benachrichtigungen in Strings und umgekehrt.
+ Sie implementiert die beiden Methoden 
+\family typewriter
+public T parse(String)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+ so, dass die Objekte 
+\family typewriter
+T
+\family default
+ vom Typ 
+\family typewriter
+Notification
+\family default
+ sind.
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GroupMemberConverter
+\family default
+ konvertiert Gruppenmitglieder in Strings und umgekehrt.
+ Sie implementiert die beiden Methoden 
+\family typewriter
+public T parse(String)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+ so, dass die Objekte 
+\family typewriter
+T
+\family default
+ vom Typ 
+\family typewriter
+GroupMember
+\family default
+ sind.
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GroupConverter
+\family default
+ konvertiert Gruppen in Strings und umgekehrt.
+ Sie implementiert die beiden Methoden 
+\family typewriter
+public T parse(String)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+ so, dass die Objekte 
+\family typewriter
+T
+\family default
+ vom Typ 
+\family typewriter
+Goup
+\family default
+ sind.
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GPSConverter
+\family default
+ konvertiert GPS-Koordinaten in Strings und umgekehrt.
+ Sie implementiert die beiden Methoden 
+\family typewriter
+public T parse(String)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+ so, dass die Objekte 
+\family typewriter
+T
+\family default
+ vom Typ 
+\family typewriter
+GPS
+\family default
+ sind.
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+MeetingConverter
+\family default
+ konvertiert Termine in Strings und umgekehrt.
+ Sie implementiert die beiden Methoden 
+\family typewriter
+public T parse(String)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+ so, dass die Objekte 
+\family typewriter
+T
+\family default
+ vom Typ 
+\family typewriter
+Meeting
+\family default
+ sind.
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+ParticipantConverter
+\family default
+ konvertiert Teilnehmer eines Termins in Strings und umgekehrt.
+ Sie implementiert die beiden Methoden 
+\family typewriter
+public T parse(String)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+ so, dass die Objekte 
+\family typewriter
+T
+\family default
+ vom Typ 
+\family typewriter
+Participant
+\family default
+ sind.
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+UserConverter
+\family default
+ konvertiert Benutzer der Go-App in Strings und umgekehrt.
+ Sie implementiert die beiden Methoden 
+\family typewriter
+public T parse(String)
+\family default
+ und 
+\family typewriter
+public String serialize(T dao)
+\family default
+ so, dass die Objekte 
+\family typewriter
+T
+\family default
+ vom Typ 
+\family typewriter
+User
+\family default
+ sind.
+\end_layout
+
+\end_body
+\end_document
