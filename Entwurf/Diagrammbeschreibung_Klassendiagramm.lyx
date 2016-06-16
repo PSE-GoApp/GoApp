@@ -298,7 +298,22 @@ Im Folgenden wird noch einiges anhand eines Beispiels ausgeführt, dass in
 \end_layout
 
 \begin_layout Standard
+\begin_inset Graphics
+	filename Modelle/Objektdiagramm.jpg
+	lyxscale 65
+	scale 35
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der 
+\family typewriter
+User 
+\emph on
+user
 \end_layout
 
 \end_body
