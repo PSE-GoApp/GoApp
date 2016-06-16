@@ -71,12 +71,233 @@
 
 \begin_body
 
+\begin_layout Section
+Klassendiagramm
+\end_layout
+
+\begin_layout Standard
+Die folgende Abbildung beschreibt die Klassen und ihre Beziehungen im Datenmodel
+ls des Servers.
+ Hier werden die Sachverhalte aus der Realität abgebildet, genauso wie ihre
+ Beziehungen untereinander
+\family typewriter
+.
+ 
+\family default
+Genaue Beschreibungen der Klassen entnehme man ...
+ .
+ Der Server ist prinzipiell auf alle geplanten Funktionalitäten vorbereitet,
+ je nachdem welche Anfragen vom Client implementiert werden, stehen diese
+ auch zur Verfügung.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Graphics
 	filename Modelle/Klassendiagramm.jpg
+	scale 45
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ein Nutzer der App kann, je nach Umfeld als 
+\family typewriter
+User 
+\family default
+oder 
+\family typewriter
+Participant 
+\family default
+beschrieben werden.
+ Jeder Nutzer existiert als 
+\family typewriter
+User 
+\family default
+im Datenmodell.
+ Sobald er an einem oder mehreren Terminen teilnimmt (im Modell 
+\family typewriter
+Meeting
+\family default
+) ist er dort als 
+\family typewriter
+Participant 
+\family default
+zugehörig.
+ Da ein Nutzer an mehreren Terminen teilnehmen kann, können zu jedem 
+\family typewriter
+User
+\family default
+ mehrere 
+\family typewriter
+Participant
+\family default
+s gehören.
+ Zu einem 
+\family typewriter
+Participant
+\family default
+ allerdings nur ein 
+\family typewriter
+User.
+ 
+\end_layout
+
+\begin_layout Standard
+Nutzer der App
+\family typewriter
+ 
+\family default
+können zu keiner, einer oder mehreren Gruppen (im Modell 
+\family typewriter
+Group
+\family default
+) gehören.
+ In diesen Gruppen allerdings muss immer mindestens ein Nutzer sein und
+ niemals Nutzer doppelt, dass heißt ein 
+\family typewriter
+User
+\family default
+ kann zu keiner bis mehreren 
+\family typewriter
+Group
+\family default
+s gehören und zu einer 
+\family typewriter
+Group 
+\family default
+einer bis mehrere einzigartige 
+\family typewriter
+User
+\family default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Zu jedem 
+\family typewriter
+User
+\family default
+ gehört sein Standort (im Modell 
+\family typewriter
+GPS
+\family default
+), dies ist eine eins zu eins Beziehung.
+\end_layout
+
+\begin_layout Standard
+Ein Nutzer kann an keinem bis mehreren Terminen teilnehmen, das heißt er
+ ist Teilnehmer (im Modell 
+\family typewriter
+Participant
+\family default
+) an diesem Termin.
+ Dieser Termin hat auch einen Ort, dass heißt es existiert für jedes 
+\family typewriter
+Meeting
+\family default
+ eine eins zu eins Beziehung zu einem 
+\family typewriter
+GPS.
+ 
+\family default
+Zu jedem 
+\family typewriter
+Participant
+\family default
+ gehört ein 
+\family typewriter
+Meeting;
+\family default
+ zu jedem 
+\family typewriter
+Meeting
+\family default
+ gehört mindestens ein 
+\family typewriter
+Participant
+\family default
+ oder eben mehrere.
+ Jeder 
+\family typewriter
+Participant
+\family default
+ hat einen Teilnahmestatus (im Modell 
+\family typewriter
+MeetingConfirmation
+\family default
+) als 
+\family typewriter
+enumeration.
+ 
+\end_layout
+
+\begin_layout Standard
+Die abstrakte Klasse 
+\family typewriter
+Meeting
+\family default
+ kann entweder die Ausprägung 
+\family typewriter
+Event 
+\family default
+oder 
+\family typewriter
+Tour 
+\family default
+haben.
+ Jede 
+\family typewriter
+Tour
+\family default
+ hat einen Ort an dem sich das Zentrum der Teilnehmer befindet (im Modell
+ 
+\family typewriter
+MeetingCenter
+\family default
+), jedes 
+\family typewriter
+MeetingCenter
+\family default
+ gehört zu nur einem 
+\family typewriter
+Meeting.
+\end_layout
+
+\begin_layout Standard
+Es gibt auch Benachrichtigung an die 
+\family typewriter
+User
+\family default
+ (im Modell 
+\family typewriter
+Notifiaction
+\family default
+).
+\end_layout
+
+\begin_layout Standard
+Im Folgenden wird noch einiges anhand eines Beispiels ausgeführt, dass in
+ der folgenden Abbildung zu sehen ist.
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
