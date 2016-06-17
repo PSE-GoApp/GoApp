@@ -146,7 +146,7 @@ s angibt und außerdem die Parameter, die der Server bekommen soll, n sich
 Nun schickt der Service einen HTTP PUT Request mithilfe einer Instanz von
  
 \family typewriter
-AppHTTPClient
+HttpAppClient
 \family default
  mit der Methode 
 \family typewriter
