@@ -1,0 +1,247 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass paper
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Sequenzdiagramm zu Login
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Login.jpg
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Methode 
+\family typewriter
+login(String token)
+\family default
+ logt enen Nutzer in der App ein.
+ Diese Methode wir in der 
+\family typewriter
+LoginActivity
+\family default
+ des Clients ausgefürt.
+ 
+\end_layout
+
+\begin_layout Standard
+Als erstes erstellt die 
+\family typewriter
+LoginActivity
+\family default
+ den zugehörigen 
+\family typewriter
+LoginService
+\family default
+, der im Hintergrund weiterläuft, damit die 
+\family typewriter
+LoginAcivity
+\family default
+ nicht vollständig blockiert wird.
+ Der 
+\family typewriter
+LoginService
+\family default
+ erstellt einen zugehörigen 
+\family typewriter
+URI_LoginBuilder
+\family default
+, von den man eine Instanz 
+\emph on
+uri
+\emph default
+ zurückgegeben bekommt, wenn man auf ihm die Methode 
+\family typewriter
+getURI()
+\family default
+ aufruft, dabei wird noch über 
+\family typewriter
+addParameter(
+\begin_inset Quotes gld
+\end_inset
+
+token
+\begin_inset Quotes grd
+\end_inset
+
+, token)
+\family default
+ der gegebene Parameter hinzugefügt.
+ Der 
+\family typewriter
+URI_LoginBuilder
+\family default
+ stellt eine URI dar, welche die URL des 
+\family typewriter
+LoginServlets
+\family default
+ angibt und außerdem die Parameter, die der Server bekommen soll, in sich
+ gespeichert hat, der wie oben beschrieben hinzugefügt wurde.
+\end_layout
+
+\begin_layout Standard
+Nun schickt der Service einen HTTP PUT Request mithilfe einer Instanz von
+ 
+\family typewriter
+AppHttpClient
+\family default
+ mit der Methode 
+\family typewriter
+sendPut(uri)
+\family default
+ an den Server, genauer gesagt an das zugehörige 
+\family typewriter
+LoginServlet
+\family default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Im 
+\family typewriter
+LoginServlet
+\family default
+ wird die 
+\family typewriter
+doPost(HttpRequest request, HttpResponse response)
+\family default
+ aufgerufen, die den Request entgegen nimmt und ihn an den zugehörigen 
+\family typewriter
+UserConverter
+\family default
+ übergibt, der den JSON String, der sich im HTTP PUT Request befindet, parst
+ und eine Instanz dao des zugehörigen 
+\family typewriter
+UserDAO
+\family default
+s erstellt und zurückgibt.
+ Das DAO agiert als Schnittstelle zwischen dem Server und der Datenbank.
+ 
+\end_layout
+
+\begin_layout Standard
+Auf der Instanz des 
+\family typewriter
+UserDAO
+\family default
+s wird die Methode 
+\family typewriter
+getUserByGoogleID()
+\family default
+ ausgeführt und daraufhin wird durch einen 
+\family typewriter
+select
+\family default
+ Befehl der Nutzer aus 
+\family typewriter
+DatabaseUser
+\family default
+ geholt.
+ Dieser wird an das 
+\family typewriter
+LoginServlet
+\family default
+ übergeben, also war der login erfolgreich.
+\end_layout
+
+\begin_layout Standard
+Nun muus der Client noch erfahren, ob sein Request erfolgreich war, also
+ gibt die Methode 
+\family typewriter
+doPost(HttpRequest request, HttpResponse response)
+\family default
+, die auf dem 
+\family typewriter
+UserServlet
+\family default
+ ausgefürt wurde, den HTTP Response zusammen mit einem Statuscode, der angibt,
+ ob alles fehlerfrei verlaufen ist, mithilfe des 
+\family typewriter
+HttpAppClients
+\family default
+ an den 
+\family typewriter
+LoginService
+\family default
+ zurück.
+ 
+\end_layout
+
+\end_body
+\end_document
