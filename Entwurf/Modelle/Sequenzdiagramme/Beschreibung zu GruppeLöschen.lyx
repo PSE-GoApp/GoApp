@@ -69,20 +69,18 @@
 \begin_body
 
 \begin_layout Part*
-AddAdminError
+GruppeLöschen
 \end_layout
 
 \begin_layout Standard
 Die Methode 
 \family typewriter
-addAdmin(int groupId, int UserId, boolean adminStatus)
+deleteGroup(int groupId)
 \family default
- versucht einer Gruppe einen neuen Administrator hinzuzufügen und liefert
- einen 404-Error (not found) zurück, da in der ersten Version der App noch
- keine weiteren Administratoren hinzugefügt werden können.
+ löscht eine Gruppe von Benutzern in der App.
  Diese Methode wird in der 
 \family typewriter
-GroupMemberActivity
+GroupActivity
 \family default
  des Clients ausgeführt.
 \end_layout
@@ -90,24 +88,24 @@ GroupMemberActivity
 \begin_layout Standard
 Als erstes erstellt die 
 \family typewriter
-GroupMemberActivity
+GroupActivity
 \family default
  den zugehörigen 
 \family typewriter
-GroupManagementService
+GroupService
 \family default
 , der im Hintergrund weiterläuft, damit die 
 \family typewriter
-GroupMemberActivity
+GroupActivity
 \family default
  nicht vollständig blockiert wird.
  Der 
 \family typewriter
-GroupManagementService
+GroupService
 \family default
  erstellt einen zugehörigen 
 \family typewriter
-URI_GroupUserManagementBuilder
+URI_GroupBuilder
 \family default
 , von dem man eine Instanz 
 \emph on
@@ -132,29 +130,29 @@ groupId
  der gegebene Parameter hinzugefügt.
  Der 
 \family typewriter
-URI_GroupUserManagementBuilder
+URI_GroupBuilder
 \family default
  stellt eine URI dar, welche die URL des 
 \family typewriter
-GroupUserManagementServlet
+GroupServlet
 \family default
 s angibt und außerdem die Parameter, die der Server bekommen soll, in sich
  gespeichert hat, der wie oben beschrieben hinzugefügt wurde.
 \end_layout
 
 \begin_layout Standard
-Nun schickt der Service einen HTTP PUT Request mithilfe einer Instanz von
- 
+Nun schickt der Service einen HTTP DELETE Request mithilfe einer Instanz
+ von 
 \family typewriter
 HttpAppClient
 \family default
  mit der Methode 
 \family typewriter
-sendPut(uri)
+sendDelete(uri)
 \family default
  an den Server, genauer gesagt an das zugehörige 
 \family typewriter
-GroupUserManagementServlet
+GroupServlet
 \family default
 .
 \end_layout
@@ -162,23 +160,43 @@ GroupUserManagementServlet
 \begin_layout Standard
 Im 
 \family typewriter
-GroupUserManagementServlet
+GroupServlet
 \family default
  wird die Methode 
 \family typewriter
-doPut(HttpServletRequest request, HttpServletResponse response)
+doDelete(HttpServletRequest request, HttpServletResponse response)
 \family default
  aufgerufen, die den Request entgegen nimmt und ihn an den zugehörigen 
 \family typewriter
-GroupUserManagementConverter
+GroupConverter
 \family default
- übergibt, die den JSON String, der sich im HTTP PUT Request befindet, parst
- und eine Instanz dao des zugehörigen 
+ übergibt, die den JSON String, der sich im HTTP DELETE Request befindet,
+ parst und eine Instanz dao des zugehörigen 
 \family typewriter
-GroupUserManagementDAO
+GroupDAO
 \family default
  erstellt und zurückgibt.
  Das DAO agiert als Schnittstelle zwischen dem Server und der Datenbank.
+\end_layout
+
+\begin_layout Standard
+Auf der Instanz des 
+\family typewriter
+GroupDAO
+\family default
+s wird die Methode 
+\family typewriter
+deleteGroup()
+\family default
+ ausgeführt und daraufhin wird durch einen 
+\family typewriter
+delete
+\family default
+ Befehl die Gruppe aus der 
+\family typewriter
+DatabaseGroup
+\family default
+ gelöscht.
 \end_layout
 
 \begin_layout Standard
@@ -205,46 +223,25 @@ GroupManagementService
 \end_layout
 
 \begin_layout Standard
-Nun muss der Client noch erfahren, ob sein Request erfolgreich war.
- Da zunächst keine weiteren Administratoren hinzugefügt werden können sollen,
+Nun muss der Client noch erfahren, ob sein Request erfolgreich war, also
  gibt die Methode 
 \family typewriter
-doPut(HttpServletRequest request HttpServletResponse response)
+doDelete(HttpServletRequest request HttpServletResponse response)
 \family default
 , die auf dem 
 \family typewriter
 GroupUserManagementServlet
 \family default
- ausgeführt wurde, den HTTP Response mit dem Statuscode 
-\family typewriter
-404
-\family default
- zurück,der angibt, dass die angegebene Ressource nicht gefunden wurde,
- mithilfe des 
+ ausgeführt wurde, den HTTP Response zusammen mit einem Statuscode zurück,
+ der angibt, ob alles fehlerfrei verlaufen ist, mithilfe des 
 \family typewriter
 AppHttpClients
 \family default
  an den 
 \family typewriter
-GroupManagementService
+GroupService
 \family default
  zurück.
-\end_layout
-
-\begin_layout Standard
-Schließlich sendet der
-\family typewriter
-GroupManagementService
-\family default
- die Fehlermeldung mit 
-\family typewriter
-showErrorPopup(statuscode)
-\family default
- an die 
-\family typewriter
-GroupManagementView
-\family default
-, wo die Fehlermeldung ausgegeben wird.
 \end_layout
 
 \end_body
