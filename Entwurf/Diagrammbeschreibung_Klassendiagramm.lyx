@@ -275,9 +275,9 @@ MeetingCenter
 \family typewriter
 MeetingCenter
 \family default
- gehört zu nur einem 
+ gehört zu nur einer 
 \family typewriter
-Meeting.
+Tour.
 \end_layout
 
 \begin_layout Standard
@@ -298,6 +298,13 @@ Im Folgenden wird noch einiges anhand eines Beispiels ausgeführt, dass in
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename Modelle/Objektdiagramm.jpg
 	lyxscale 65
@@ -309,11 +316,114 @@ Im Folgenden wird noch einiges anhand eines Beispiels ausgeführt, dass in
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Der 
 \family typewriter
-User 
+User
+\family default
+ 
 \emph on
 user
+\emph default
+ ist Mitglied in zwei Gruppen: 
+\emph on
+pse 
+\emph default
+und 
+\emph on
+party.
+ 
+\emph default
+Er hat auch ein 
+\family typewriter
+GPS
+\family default
+ 
+\emph on
+userGPS.
+ 
+\emph default
+Er ist eingeladen zu drei Terminen und ist 
+\family typewriter
+Participant
+\family default
+ dieser Termine.
+ 
+\emph on
+lernen
+\emph default
+ ist ein 
+\family typewriter
+Event 
+\family default
+und 
+\emph on
+lernenParticipant
+\emph default
+s 
+\family typewriter
+MeetingConfirmation
+\family default
+ ist 
+\emph on
+CONFIRMED.
+ 
+\emph default
+Das 
+\family typewriter
+Event
+\family default
+ 
+\emph on
+lernen
+\family typewriter
+ 
+\family default
+\emph default
+hat auch einen Ort: Das 
+\family typewriter
+GPS
+\family default
+ 
+\emph on
+bibliothek.
+ 
+\emph default
+Die beiden anderen 
+\family typewriter
+Meeting
+\family default
+s sehen sehr ähnlich aus, nur das 
+\emph on
+kneipentour
+\emph default
+ eine 
+\family typewriter
+Tour
+\family default
+ ist, die allerdings noch nicht angefangen hat und somit noch kein 
+\family typewriter
+MeetingCenter
+\family default
+ besitzt, und sich bei den zu 
+\emph on
+user
+\emph default
+ gehörenden 
+\family typewriter
+Particicpant
+\family default
+s jeweils die 
+\family typewriter
+MeetingConfirmation
+\family default
+s ändern.
 \end_layout
 
 \end_body
