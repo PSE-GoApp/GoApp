@@ -1,0 +1,139 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass paper
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Aktivitätsdiagramm
+\end_layout
+
+\begin_layout Standard
+Im Folgenden wird der Ablauf eines Requests beschrieben.
+ Dies kann man auch auf dem Aktivitätsdiagramm nachvollziehen.
+\end_layout
+
+\begin_layout Standard
+Zunächst wir eine Operation auf dem Client ausgeführt, diese braucht Daten
+ vom Server oder will sie dort ablegen, also wird ein HTTP Request mit den
+ entsprechenden Parametern gestellt.
+ 
+\end_layout
+
+\begin_layout Standard
+Dieser wird von den Servlets im Server entgegengenommen und an den Converter
+ übergeben, der sie gegebenen Parameter zu einem Objekt konvertiert.
+ Nun wird der Request ausgeführt.
+ 
+\end_layout
+
+\begin_layout Standard
+Dies erzeugt ein DataAccesObject im Bereich der DAOs.
+ Nun wird entweder die Konsistenz der Daten überprüft und in der Datenbank
+ gespeichert oder die gefragten Daten dort abgerufen.
+ Die Datenbank sicher diese auf der Festplatte.
+ 
+\end_layout
+
+\begin_layout Standard
+Sollten Objekte zurückgeliefert werden, wird bei den DAOs das entsprechende
+ DAO mit Daten gefüllt und an den Converter übergeben der dieses wieder
+ zu Parametern konvertiert, dann antworten die Servlets mit einem HTTP Response.
+ Sollte kein Objekt zurückgeliefert werden, geschieht dies sofort.
+ 
+\end_layout
+
+\begin_layout Standard
+Der HTTP Response besitzt einen HTTP Statuscode und die entsprechenden Parameter.
+ Dieser wird zum Client geschickt.
+ 
+\end_layout
+
+\begin_layout Standard
+Dort wird der HTTP Response verarbeitet und die Benutzerschnittstelle aktualisie
+rt.
+ Werden weitere Operationen auf dem Client ausgeführt startet der Kreis
+ wieder von vorne, ist dies nicht der Fall sind wir fertig.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Modelle/Aktivitätsdiagramm.jpg
+	lyxscale 70
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
