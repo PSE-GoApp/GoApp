@@ -75,6 +75,10 @@
 Klassendiagramm
 \end_layout
 
+\begin_layout Subsection
+Allgemein
+\end_layout
+
 \begin_layout Standard
 Die folgende Abbildung beschreibt die Klassen und ihre Beziehungen im Datenmodel
 ls des Servers.
@@ -292,9 +296,13 @@ Notifiaction
 ).
 \end_layout
 
+\begin_layout Subsection
+Beispiel
+\end_layout
+
 \begin_layout Standard
-Im Folgenden wird noch einiges anhand eines Beispiels ausgeführt, dass in
- der folgenden Abbildung zu sehen ist.
+Im Folgenden wird noch ein Beispiel beschrieben, dass in der folgenden Abbildung
+ zu sehen ist.
 \end_layout
 
 \begin_layout Standard
