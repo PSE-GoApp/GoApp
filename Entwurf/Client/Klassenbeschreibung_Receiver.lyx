@@ -220,9 +220,16 @@ Die Klasse
 AlarmReceiver
 \family default
  enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse Meeting und überschreibt keine
- Methode.
- Neben den Methoden der Klasse Meeting werden keine weiteren Methoden benötigt.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+BroadcastReceiver
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+BroadcastReceiver
+\family default
+ werden keine weiteren Methoden benötigt.
 \end_layout
 
 \begin_layout Section*
@@ -273,9 +280,16 @@ Die Klasse
 DeviceBootReceiver
 \family default
  enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse Meeting und überschreibt keine
- Methode.
- Neben den Methoden der Klasse Meeting werden keine weiteren Methoden benötigt.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+BroadcastReceiver
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+BroadcastReceiver
+\family default
+ werden keine weiteren Methoden benötigt.
 \end_layout
 
 \end_body
