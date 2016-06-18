@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
@@ -9,16 +11,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman default
-\font_sans default
-\font_typewriter default
-\font_math auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -115,7 +117,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -179,7 +181,7 @@ showPopUp(View v)
 \begin_inset Newline newline
 \end_inset
 
-Zeigt einPopUp-Fenster an
+Zeigt ein PopUp-Fenster an
 \begin_inset Newline newline
 \end_inset
 
@@ -192,7 +194,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -269,7 +271,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -290,7 +292,11 @@ item
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung einfügen)
+(Das 
+\family typewriter
+MenuItem
+\family default
+ auf das gehört weden soll)
 \end_layout
 
 \end_inset
@@ -369,7 +375,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -459,7 +465,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -549,7 +555,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -606,7 +612,7 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-Diese Klasse startet eineActivity, um eine neue Gruppe zu erstellen.
+Diese Klasse startet eine Activity, um eine neue Gruppe zu erstellen.
 \end_layout
 
 \begin_layout Subsection*
@@ -639,7 +645,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -729,7 +735,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -786,7 +792,8 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-(Beschreibung hinzufügen)
+Dies ist die Activity, in der Informationen über die App, ihre Ersteller
+ und Rechtliches angezeigt werden.
 \end_layout
 
 \begin_layout Subsection*
@@ -806,7 +813,7 @@ start(Activity activity)
 
 
 \family default
-(Beschreibung hinzufügen)
+Startet eine Activity zum Anzeigen der About-Informationen
 \begin_inset Newline newline
 \end_inset
 
@@ -819,7 +826,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -840,7 +847,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung hinzufügen)
+Die Activity, die gestartet weden soll
 \end_layout
 
 \end_inset
@@ -910,7 +917,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -1000,7 +1007,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -1091,7 +1098,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -1181,7 +1188,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -1255,7 +1262,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -1265,6 +1272,8 @@ Parameter
 \begin_layout Plain Layout
 
 \family typewriter
+Handler 
+\series bold
 handler
 \end_layout
 
@@ -1316,7 +1325,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -1326,6 +1335,8 @@ Parameter
 \begin_layout Plain Layout
 
 \family typewriter
+Integer 
+\series bold
 resultCode
 \end_layout
 
@@ -1348,6 +1359,8 @@ resultCode
 \begin_layout Plain Layout
 
 \family typewriter
+Bundle 
+\series bold
 resultData
 \end_layout
 
@@ -1413,7 +1426,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -1423,6 +1436,8 @@ Parameter
 \begin_layout Plain Layout
 
 \family typewriter
+Integer 
+\series bold
 resultCode
 \end_layout
 
@@ -1445,6 +1460,8 @@ resultCode
 \begin_layout Plain Layout
 
 \family typewriter
+Bundle 
+\series bold
 resultData
 \end_layout
 
@@ -1526,7 +1543,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -1536,6 +1553,8 @@ Parameter
 \begin_layout Plain Layout
 
 \family typewriter
+Receiver 
+\series bold
 receiver
 \end_layout
 
