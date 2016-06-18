@@ -215,7 +215,11 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse Event enthält keine eigenen Methoden.
+Die Klasse 
+\family typewriter
+AlarmReceiver
+\family default
+ enthält keine eigenen Methoden.
  Sie übernimmt alle Methoden aus der Klasse Meeting und überschreibt keine
  Methode.
  Neben den Methoden der Klasse Meeting werden keine weiteren Methoden benötigt.
@@ -264,7 +268,11 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse Event enthält keine eigenen Methoden.
+Die Klasse 
+\family typewriter
+DeviceBootReceiver
+\family default
+ enthält keine eigenen Methoden.
  Sie übernimmt alle Methoden aus der Klasse Meeting und überschreibt keine
  Methode.
  Neben den Methoden der Klasse Meeting werden keine weiteren Methoden benötigt.
