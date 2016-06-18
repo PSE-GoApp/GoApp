@@ -177,6 +177,10 @@ intent
 
 \family typewriter
 Class AlarmReceiver
+\family default
+ extends
+\family typewriter
+ BroadcastReceiver
 \end_layout
 
 \begin_layout Subsection*
@@ -221,6 +225,10 @@ Die Klasse Event enthält keine eigenen Methoden.
 
 \family typewriter
 Class DeviceBootReceiver
+\family default
+ extends 
+\family typewriter
+BroadcastReceiver
 \end_layout
 
 \begin_layout Subsection*
