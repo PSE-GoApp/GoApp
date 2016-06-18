@@ -85,7 +85,7 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-(Beschreibung der Klasse einfügen)
+Basisklasse für Activities, die die Support Libary Action Bar Features nutzen.
 \end_layout
 
 \begin_layout Subsection*
@@ -104,7 +104,7 @@ onCreate(Bundle savedInstanceState)
 \begin_inset Newline newline
 \end_inset
 
-(Beschreibung einfügen)
+Hier wird das Layout der Activity erstellt
 \begin_inset Newline newline
 \end_inset
 
@@ -138,7 +138,8 @@ savedInstanceState
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung einfügen)
+Die zuvor gespeicherte Instanz der Activity, die wieder hergestellt wird,
+ sonst ist es NULL
 \end_layout
 
 \end_inset
