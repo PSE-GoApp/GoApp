@@ -86,6 +86,16 @@ Sequenzdiagramm zum GPS
 \end_layout
 
 \begin_layout Standard
+Über 
+\family typewriter
+awakeFromAndroidOS
+\family default
+ wird der AlarmReceiver aufgeweckt und zwar 30 Minuten vor Beginn des nächsten
+ Termins, da dann damit begonnen werden soll, die GPS-Daten an den Server
+ zu schicken.
+\end_layout
+
+\begin_layout Standard
 Der AlarmReceiver started über 
 \family typewriter
 startService(intent) 
@@ -103,11 +113,20 @@ von
 \family typewriter
 URI_MeetingBuilder
 \family default
- und erhält diese über 
+, dort wird über 
+\family typewriter
+addParameter(meeting)
+\family default
+ das genaue 
+\family typewriter
+Meeting
+\family default
+ spezifiziert, und erhält diese über 
 \family typewriter
 getURI()
 \family default
-, dann sendet er diese an einen 
+.
+ Dann sendet er diese an einen 
 \family typewriter
 HttpAppClient
 \family default
