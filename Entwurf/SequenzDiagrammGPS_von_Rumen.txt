@@ -1,4 +1,4 @@
-Der AlarmReceiver erstellt einen GpsService und der Receiver wird anschließend zerstört. 
+Der AlarmReceiver started über einen GpsService und der Receiver wird anschließend zerstört. 
 Der Service erstellt eine Uri-Instanz für Meeting und gibt diese an den httpClient:HttpAppClient 
 mit der Methode sendGet(uri) weiter. Die Information, die der HttpAppClient zurückliefert 
 ist, ist eine Liste von Meeting mit nur eine Meeting enthalten.
