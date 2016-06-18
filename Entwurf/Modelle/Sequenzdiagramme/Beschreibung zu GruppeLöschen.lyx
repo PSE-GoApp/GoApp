@@ -1,0 +1,248 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Part*
+GruppeLöschen
+\end_layout
+
+\begin_layout Standard
+Die Methode 
+\family typewriter
+deleteGroup(int groupId)
+\family default
+ löscht eine Gruppe von Benutzern in der App.
+ Diese Methode wird in der 
+\family typewriter
+GroupActivity
+\family default
+ des Clients ausgeführt.
+\end_layout
+
+\begin_layout Standard
+Als erstes erstellt die 
+\family typewriter
+GroupActivity
+\family default
+ den zugehörigen 
+\family typewriter
+GroupService
+\family default
+, der im Hintergrund weiterläuft, damit die 
+\family typewriter
+GroupActivity
+\family default
+ nicht vollständig blockiert wird.
+ Der 
+\family typewriter
+GroupService
+\family default
+ erstellt einen zugehörigen 
+\family typewriter
+URI_GroupBuilder
+\family default
+, von dem man eine Instanz 
+\emph on
+uri
+\emph default
+ zurückgegeben bekommt, wenn man auf ihm die Methode 
+\family typewriter
+getUri()
+\family default
+ aufruft, dabei wird noch über 
+\family typewriter
+addParameter(
+\begin_inset Quotes eld
+\end_inset
+
+groupId
+\begin_inset Quotes erd
+\end_inset
+
+, groupId.toString())
+\family default
+ der gegebene Parameter hinzugefügt.
+ Der 
+\family typewriter
+URI_GroupBuilder
+\family default
+ stellt eine URI dar, welche die URL des 
+\family typewriter
+GroupServlet
+\family default
+s angibt und außerdem die Parameter, die der Server bekommen soll, in sich
+ gespeichert hat, der wie oben beschrieben hinzugefügt wurde.
+\end_layout
+
+\begin_layout Standard
+Nun schickt der Service einen HTTP DELETE Request mithilfe einer Instanz
+ von 
+\family typewriter
+HttpAppClient
+\family default
+ mit der Methode 
+\family typewriter
+sendDelete(uri)
+\family default
+ an den Server, genauer gesagt an das zugehörige 
+\family typewriter
+GroupServlet
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+Im 
+\family typewriter
+GroupServlet
+\family default
+ wird die Methode 
+\family typewriter
+doDelete(HttpServletRequest request, HttpServletResponse response)
+\family default
+ aufgerufen, die den Request entgegen nimmt und ihn an den zugehörigen 
+\family typewriter
+GroupConverter
+\family default
+ übergibt, die den JSON String, der sich im HTTP DELETE Request befindet,
+ parst und eine Instanz dao des zugehörigen 
+\family typewriter
+GroupDAO
+\family default
+ erstellt und zurückgibt.
+ Das DAO agiert als Schnittstelle zwischen dem Server und der Datenbank.
+\end_layout
+
+\begin_layout Standard
+Auf der Instanz des 
+\family typewriter
+GroupDAO
+\family default
+s wird die Methode 
+\family typewriter
+deleteGroup()
+\family default
+ ausgeführt und daraufhin wird durch einen 
+\family typewriter
+delete
+\family default
+ Befehl die Gruppe aus der 
+\family typewriter
+DatabaseGroup
+\family default
+ gelöscht.
+\end_layout
+
+\begin_layout Standard
+Nun muss der Client noch erfahren, ob sein Request erfolgreich war, also
+ gibt die Methode 
+\family typewriter
+doPut(HttpServletRequest request, HttpServletResponse response)
+\family default
+, die auf dem 
+\family typewriter
+UserServlet
+\family default
+ ausgeführt wurde, den HTTP Response zusammen mit einem Statuscode, der
+ angibt, ob alles fehlerfrei verlaufen ist, mithilfe des 
+\family typewriter
+AppHttpClient
+\family default
+s an den 
+\family typewriter
+GroupManagementService
+\family default
+ zurück.
+ 
+\end_layout
+
+\begin_layout Standard
+Nun muss der Client noch erfahren, ob sein Request erfolgreich war, also
+ gibt die Methode 
+\family typewriter
+doDelete(HttpServletRequest request HttpServletResponse response)
+\family default
+, die auf dem 
+\family typewriter
+GroupUserManagementServlet
+\family default
+ ausgeführt wurde, den HTTP Response zusammen mit einem Statuscode zurück,
+ der angibt, ob alles fehlerfrei verlaufen ist, mithilfe des 
+\family typewriter
+AppHttpClients
+\family default
+ an den 
+\family typewriter
+GroupService
+\family default
+ zurück.
+\end_layout
+
+\end_body
+\end_document

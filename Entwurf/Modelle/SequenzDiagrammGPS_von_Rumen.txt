@@ -1,0 +1,7 @@
+Der AlarmReceiver erstellt einen GpsService und der Receiver wird anschließend zerstört. 
+Der Service erstellt ein URI_MeetingBuilder und gibt diese an den httpClient:HttpAppClient 
+mit der Methode sendGet(uri) weiter. Die Information, die der HttpAppClient zurückliefert 
+ist, ist eine Liste von Meeting mit nur eine Meeting enthalten.
+Vom Meeting wird die Termininformationen gelesen und wenn die Zeiten 
+übereinstimmt, wird eine URI_GPS_Builder erstellt und danach eine sendPut(uri) HttpRequest geschickt.
+Dann kriegen wir eine Antwort und es hat alles geklappt.

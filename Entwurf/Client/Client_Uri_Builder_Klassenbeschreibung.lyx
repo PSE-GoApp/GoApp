@@ -1,0 +1,1942 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Part*
+Package kit.edu.pse.goapp.client.clienturi_builder
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public abstract class ClientURI_Builder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final string serverAdd, welcher die Serveradresse
+ beinhaltet und ein privates Feld URI, in dem er die URI zwischenspeichert.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void addParameter(String key, String value)
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Fügt über die gleichnamige Methode Parameter zum privaten URI hinzu.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+String key
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color red
+was tut 
+\lang ngerman
+der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+String value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color red
+was tut 
+\lang ngerman
+der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String getURI()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Liefert das lokale URI Objekt zuück
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\series bold
+Rückgabewert:
+\end_layout
+
+\begin_layout Standard
+URI in String
+\end_layout
+
+\end_deeper
+\begin_layout Section*
+
+\family typewriter
+public class URI_LoginBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum LoginServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_LoginBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_LogoutBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum LogoutServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_LogoutBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_LoginFilterBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum LoginFilterServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_LoginFilterBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_GroupBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum GroupServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_GroupBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Erstellt das private Uri-Objekt und als Adresse wird serverAdd mit servletAdd
+ konkateniert.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_GroupsBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum GroupsServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_GroupsBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_GroupUserManagementBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum GroupUserManagementServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_GroupUserManagementBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_MeetingBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum MeetingServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_MeetingBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_MeetingsBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum MeetingsServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_MeetingsBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_MeetingParticipantManagementBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum MeetingParticipantManagementServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_MeetingParticipantManagementBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_UserBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum UserServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_UserBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_UsersBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum UsersServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_UsersBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_GPS_Builder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum GPS_Server beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_GPS_Builder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class URI_NotificationsBuilder
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Beinhaltet einen privat static final String servletAdd, welcher die Adresse
+ zum NotificationsServer beinhaltet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public URI_NotificationsBuilder
+\series bold
+()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public return s()
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Was tut sie
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+was tut der
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+was er tut als 
+\family typewriter
+Typ
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Tabellen bekommt ihr auch über Einfügen
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+Tabelle...
+ , der Rest ist dann durch die Grafische oberfläche geregelt
+\end_layout
+
+\begin_layout Plain Layout
+Die gezwungenen Enters bekommt ihr über strg+Enter
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+Diese Schrift über Strg+Shift+P
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+Das hier über Rechtsklick
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+Textstil
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+Benutzerdefiniert...
+ und dann bei Strichstärke Fett auswählen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
