@@ -85,7 +85,7 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-(Hier noch Beschreibung der Klasse einfügen)
+Eine Hilfsklasse um Datenbank zu erstellen und ihre Versionen zu managen.
 \end_layout
 
 \begin_layout Subsection*
@@ -156,7 +156,7 @@ intent
 \begin_layout Section*
 
 \family typewriter
-Class DataBaseHandler
+Class DataBaseHandler extends SQLiteOpenHelper
 \end_layout
 
 \begin_layout Subsection*
@@ -164,7 +164,15 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-(Hier noch Beschreibung der Klasse einfügen)
+Hilft bei dem Erstellen und Managen der Datenbank, in der die 
+\family typewriter
+MeetingID
+\family default
+s und 
+\family typewriter
+MeetingTime
+\family default
+s gespeichert werden.
 \end_layout
 
 \begin_layout Subsection*
@@ -215,7 +223,7 @@ context
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung einfügen)
+Der Kontext der Datenbank
 \end_layout
 
 \end_inset
@@ -278,7 +286,7 @@ SQLiteDatabase db
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung des Parameters einfügen)
+Die Datenbank
 \end_layout
 
 \end_inset
@@ -339,7 +347,7 @@ db
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung des Parameters einfügen)
+Die Datenbank
 \end_layout
 
 \end_inset
