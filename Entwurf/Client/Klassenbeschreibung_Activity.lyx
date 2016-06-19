@@ -322,7 +322,7 @@ True, wenn das Interaktion abgearbeitet wurde, andernfalls false.
 \begin_layout Section*
 
 \family typewriter
-Class GroupsActivity
+public class GroupsActivity
 \family default
  extends
 \family typewriter
@@ -342,7 +342,8 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-Diese Klasse stellt die Client-Seite einer Gruppe dar.
+Diese Klasse zeigt eine Liste von Gruppen an und nimmt die Interaktion entgegen,
+ wenn man eine Gruppe löschen möchte.
 \end_layout
 
 \begin_layout Subsection*
@@ -362,7 +363,7 @@ start(Activity activity)
 
 
 \family default
-Startet eine Activity für eine Gruppe
+Startet diese Activity
 \series bold
 
 \begin_inset Newline newline
@@ -396,7 +397,8 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Activity der Gruppe
+Die Activity, der dies aufruft (wichtig für zB.: wenn man die Zurücktaste
+ drückt.)
 \end_layout
 
 \end_inset
@@ -412,7 +414,7 @@ Activity der Gruppe
 \begin_layout Section*
 
 \family typewriter
-Class GroupMemberActivity
+public class GroupMemberActivity
 \family default
  extends
 \family typewriter
@@ -432,7 +434,9 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-Diese Klasse stellt die Client-Seite eines Gruppenmitgliedes dar.
+Diese Klasse zeigt alle Gruppenmitglieder an, man kann die Gruppe verlassen
+ und Administratoren können nach Mitglieder suchen und hinzufügen, oder
+ sie entfernen.
 \end_layout
 
 \begin_layout Subsection*
@@ -452,7 +456,7 @@ start(Activity activity)
 
 
 \family default
-Startet eine Activity für ein Gruppenmitglied
+Startet diese Activity
 \series bold
 
 \begin_inset Newline newline
@@ -486,7 +490,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Activity des Gruppenmitgliedes
+Activity, der dies aufruft (wichtig für zB.: wenn man die Zurücktaste drückt.)
 \end_layout
 
 \end_inset
@@ -502,7 +506,7 @@ Activity des Gruppenmitgliedes
 \begin_layout Section*
 
 \family typewriter
-Class SettingsActivity
+public class SettingsActivity
 \family default
  extends
 \family typewriter
@@ -522,7 +526,7 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-Diese Klasse stellt die Client-Seite der App-Einstellungen dar.
+Diese Klasse zeigt die Benutzereinstellung an und man kann diese Verändern.
 \end_layout
 
 \begin_layout Subsection*
@@ -542,7 +546,7 @@ start(Activity activity)
 
 
 \family default
-Startet eine Activity für die Einstellungen der App
+Startet diese Activity
 \begin_inset Newline newline
 \end_inset
 
@@ -576,7 +580,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Activity der Einstellungen
+Activity, der dies aufruft (wichtig für zB.: wenn man die Zurücktaste drückt.)
 \end_layout
 
 \end_inset
@@ -592,7 +596,7 @@ Activity der Einstellungen
 \begin_layout Section*
 
 \family typewriter
-Class CreateNewGroupActivity
+public class CreateNewGroupActivity
 \family default
  extends
 \family typewriter
@@ -612,7 +616,9 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-Diese Klasse startet eine Activity, um eine neue Gruppe zu erstellen.
+Diese Klasse kann man eine neue Gruppe erstellen und Benutzer in diese Gruppe
+ hinzufügen.
+ 
 \end_layout
 
 \begin_layout Subsection*
@@ -632,7 +638,7 @@ start(Activity activity)
 
 
 \family default
-Startet eine Activity zur Erstellung einer Gruppe
+Startet diese Activity
 \begin_inset Newline newline
 \end_inset
 
@@ -666,7 +672,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Activity zur Erstellung einer Gruppe
+Activity, der dies aufruft (wichtig für zB.: wenn man die Zurücktaste drückt.)
 \end_layout
 
 \end_inset
@@ -682,7 +688,7 @@ Activity zur Erstellung einer Gruppe
 \begin_layout Section*
 
 \family typewriter
-Class MeetingParticipantActivity
+public class MeetingParticipantActivity
 \family default
  extends
 \family typewriter
@@ -702,7 +708,8 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-Diese Klasse stellt die Client-Seite eines Teilnehmers eines Termins dar.
+Diese Klasse zeigt eine Liste von zugesagten Teilnehmern, eines Termins
+ an
 \end_layout
 
 \begin_layout Subsection*
@@ -722,7 +729,7 @@ start(Activity activity)
 
 
 \family default
-Startet eine Activity für einen Teilnehmer
+Startet diese Activity
 \series bold
 
 \begin_inset Newline newline
@@ -756,7 +763,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Activity des Teilnehmers
+Activity, der dies aufruft (wichtig für zB.: wenn man die Zurücktaste drückt.)
 \end_layout
 
 \end_inset
@@ -772,7 +779,7 @@ Activity des Teilnehmers
 \begin_layout Section*
 
 \family typewriter
-Class AboutActivity
+public class AboutActivity
 \family default
  extends
 \family typewriter
@@ -813,7 +820,7 @@ start(Activity activity)
 
 
 \family default
-Startet eine Activity zum Anzeigen der About-Informationen
+Startet diese Activity
 \begin_inset Newline newline
 \end_inset
 
@@ -847,7 +854,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Die Activity, die gestartet weden soll
+Activity, der dies aufruft (wichtig für zB.: wenn man die Zurücktaste drückt.)
 \end_layout
 
 \end_inset
@@ -863,7 +870,7 @@ Die Activity, die gestartet weden soll
 \begin_layout Section*
 
 \family typewriter
-Class MapActivity
+public class MapActivity
 \family default
  extends
 \family typewriter
@@ -883,8 +890,17 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-Diese Klasse stellt eine Activity zur Darstellung der GPS-Positionen auf
- der Karte dar.
+Diese Klasse zeigt den Treffenpunk auf der Karte an:
+\end_layout
+
+\begin_layout Standard
+Bei einer Tour, werden die größte Teilnehmeransammlung auf der Karte anzeigt,
+ mit den Teilnehmern, die sich darin befinden.
+\end_layout
+
+\begin_layout Standard
+Bei einer Veranstalltung werden alle Teilnehmer in ein bestimmten Umkreis
+ angezeigt.
 \end_layout
 
 \begin_layout Subsection*
@@ -904,7 +920,7 @@ start(Activity activity)
 
 
 \family default
-Startet eine Activity zur Darstellung der Karte
+Startet diese Activity
 \begin_inset Newline newline
 \end_inset
 
@@ -938,7 +954,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Activity zur Darstellung der Karte
+Activity, der dies aufruft (wichtig für zB.: wenn man die Zurücktaste drückt.)
 \end_layout
 
 \end_inset
@@ -954,7 +970,7 @@ Activity zur Darstellung der Karte
 \begin_layout Section*
 
 \family typewriter
-Class LoginActivity
+public class LoginActivity
 \family default
  extends
 \family typewriter
@@ -994,7 +1010,7 @@ start(Activity activity)
 
 
 \family default
-Startet eine Activity zum Einloggen der Benutzer
+Startet diese Activity
 \begin_inset Newline newline
 \end_inset
 
@@ -1028,7 +1044,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Activity zum Einloggen der Benutzer
+Activity, der dies aufruft (wichtig für zB.: wenn man die Zurücktaste drückt.)
 \end_layout
 
 \end_inset
@@ -1044,7 +1060,7 @@ Activity zum Einloggen der Benutzer
 \begin_layout Section*
 
 \family typewriter
-Class MeetingListActivity
+public class MeetingListActivity
 \family default
  extends
 \family typewriter
@@ -1065,7 +1081,7 @@ Beschreibung
 
 \begin_layout Standard
 Diese Klasse stellt eine Activity dar, die eine Liste der Termine eines
- Benutzers zurückgibt.
+ Benutzers und die jeweiligen Termininformationen zurückgibt.
 \end_layout
 
 \begin_layout Subsection*
@@ -1085,7 +1101,7 @@ start(Activity activity)
 
 
 \family default
-Startet eine Activity, die eine Liste der Termine zurückgibt
+Startet diese Activity
 \begin_inset Newline newline
 \end_inset
 
@@ -1119,7 +1135,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Activity, die eine Liste der Termine zurückgibt
+Activity, der dies aufruft (wichtig für zB.: wenn man die Zurücktaste drückt.)
 \end_layout
 
 \end_inset
@@ -1135,7 +1151,7 @@ Activity, die eine Liste der Termine zurückgibt
 \begin_layout Section*
 
 \family typewriter
-Class NewMeetingActivity
+public class NewMeetingActivity
 \family default
  extends
 \family typewriter
@@ -1175,7 +1191,7 @@ start(Activity activity)
 
 
 \family default
-Startet eine Activity zur Erstellung eines neuen Termins
+Startet diese Activity
 \begin_inset Newline newline
 \end_inset
 
@@ -1209,7 +1225,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Activity zur Erstellung eines neuen Termins
+Activity, der dies aufruft (wichtig für zB.: wenn man die Zurücktaste drückt.)
 \end_layout
 
 \end_inset
@@ -1225,7 +1241,7 @@ Activity zur Erstellung eines neuen Termins
 \begin_layout Section*
 
 \family typewriter
-AbstractClass ResultReceiver
+abstract class ResultReceiver
 \end_layout
 
 \begin_layout Subsection*
@@ -1233,6 +1249,8 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
+
+\color red
 (Beschreibung hinzufügen)
 \end_layout
 
@@ -1386,7 +1404,7 @@ resultData
 \begin_layout Section*
 
 \family typewriter
-Interface Receiver
+interface Receiver
 \end_layout
 
 \begin_layout Subsection*
@@ -1487,7 +1505,7 @@ resultData
 \begin_layout Section*
 
 \family typewriter
-Class ServiceResultReceiver
+public class ServiceResultReceiver
 \family default
  extends
 \family typewriter
