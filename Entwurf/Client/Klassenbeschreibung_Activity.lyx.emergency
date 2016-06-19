@@ -182,7 +182,7 @@ onClick(View v)
 \begin_inset Newline newline
 \end_inset
 
-Aufruf bei einen Klick auf ein Element
+Aufruf bei einen Klick
 \begin_inset Newline newline
 \end_inset
 
@@ -216,7 +216,7 @@ v
 \begin_inset Text
 
 \begin_layout Plain Layout
-Das angeklickte Element in View-Objekt
+Das Layoutkomponent, was angeklickt wurde
 \end_layout
 
 \end_inset
@@ -259,8 +259,7 @@ onMenuItemClick(MenuItem item)
 \begin_inset Newline newline
 \end_inset
 
-Welche Interaktionen ausgeführt werden soll, bei einen Klick auf den Menü
- Auswahlen.
+Welche Interaktionen ausgeführt werden soll
 \begin_inset Newline newline
 \end_inset
 
@@ -296,7 +295,7 @@ item
 \begin_layout Plain Layout
 Das 
 \family typewriter
-Menu Element was angeklickt wurde, in MenuItem-Objekt.
+Menu Element was angeklickt wurde.
 \end_layout
 
 \end_inset
@@ -316,7 +315,7 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-True, wenn das Interaktion abgearbeitet wurde, andernfalls false.
+(Beschreibung einfügen)
 \end_layout
 
 \begin_layout Section*
