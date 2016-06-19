@@ -1435,14 +1435,6 @@ Ausloggen eines Benutzers
 \end_layout
 
 \begin_layout Subsubsection*
-LoginFilterService:
-\end_layout
-
-\begin_layout Itemize
-Überprüfen, ob ein Benutzer auf die angeforderten Ressourcen zugreifen darf
-\end_layout
-
-\begin_layout Subsubsection*
 GroupService: 
 \end_layout
 
@@ -1691,9 +1683,36 @@ kit.edu.pse.goapp.client.converter
 \end_layout
 
 \begin_layout Standard
-Klassendiagrammbeschreibung siehe Kapitel 2.2.5: 
-\family typewriter
-kit.edu.pse.goapp.server.converter
+Die Converter sind im Client gespeichert.
+ Sie wandeln die JSON Strings vom Server in Parameter um.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Das Interface Converter <T> hat die Methoden public T deserialize(String
+ jsonString) und public List<T> deserializeList(String jsonString)..
+\begin_inset Newline newline
+\end_inset
+
+Die Methode public T deserialize(String jsonString) konvertiert einen JSON
+ String aus der HTTP Response des Servers in ein Objekt T und gibt ihn an
+ den Service weiter.
+\begin_inset Newline newline
+\end_inset
+
+Die Methode public List<T> deserializeList(String jsonString) konvertiert
+ einen JSON String aus der HTTP Response des Servers in eine Liste von Objekten
+ T und gibt sie an den Service weiter.
+\begin_inset Newline newline
+\end_inset
+
+Es gibt jeweils einen Converter für die Klassen User, Participant, Meeting,
+ GPS, Group, GroupMember und Notification.
+ Diese Converter implementieren das Interface Converter<T>.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2247,6 +2266,27 @@ Gruppenmitglieder können für ihre Gruppe einen Termin (ein Meeting) erstellen.
 Client ↔ Server RESTful API
 \end_layout
 
+\begin_layout Subsection
+Authentifizierung mithilfe der GoogleAPI
+\end_layout
+
+\begin_layout Standard
+Die Authentifizierung wird mithilfe von Oauth2 (GoogleAPI) realisiert.
+ Dabei sendet der Client beim Login einen Token, welches er vom Googleserver
+ erhält, zu unserem Server.
+ Dort wird der Token an den Googleserver gesendet, dadurch erhält der Server
+ die Google-Client-ID.
+ Diese wird in der Session gespeichert.
+\begin_inset Newline newline
+\end_inset
+
+Zusätzlich besitzt der Server das LoginFilterServlet, welches über die Methode
+ doFilter() bei jedem Request prüft, ob der User entweder schon eingeloggt
+ ist oder ob seine Anfrage an das LoginServlet geht.
+ Ist beides nicht der Fall wird der Request abgelehnt und die Response mit
+ dem entsprechenden HTTP-Statuscode (401 Unauthorized) zurück gesendet.
+\end_layout
+
 \begin_layout Subsection*
 package kit.edu.goapp.server.servlets
 \end_layout
@@ -2340,7 +2380,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/create
+/group
 \end_layout
 
 \end_inset
@@ -2369,7 +2409,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/read
+/group
 \end_layout
 
 \end_inset
@@ -2398,7 +2438,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/update
+/group
 \end_layout
 
 \end_inset
@@ -2427,7 +2467,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/delete
+/group
 \end_layout
 
 \end_inset
@@ -2485,7 +2525,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/user/create
+/group/user
 \end_layout
 
 \end_inset
@@ -2514,7 +2554,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/user/read
+/group/user
 \end_layout
 
 \end_inset
@@ -2543,7 +2583,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/user/update
+/group/user
 \end_layout
 
 \end_inset
@@ -2572,7 +2612,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/user/delete
+/group/user
 \end_layout
 
 \end_inset
@@ -2630,7 +2670,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/groups/read
+/groups
 \end_layout
 
 \end_inset
@@ -2688,7 +2728,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/create
+/user
 \end_layout
 
 \end_inset
@@ -2717,7 +2757,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/read
+/user
 \end_layout
 
 \end_inset
@@ -2746,7 +2786,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/update
+/user
 \end_layout
 
 \end_inset
@@ -2804,7 +2844,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/delete
+/user
 \end_layout
 
 \end_inset
@@ -2862,7 +2902,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/read
+/user
 \end_layout
 
 \end_inset
@@ -2920,7 +2960,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/notifications/read
+/notifications
 \end_layout
 
 \end_inset
@@ -2949,7 +2989,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/notifications/update
+/notifications
 \end_layout
 
 \end_inset
@@ -3007,7 +3047,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/create
+/user
 \end_layout
 
 \end_inset
@@ -3036,7 +3076,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/read
+/user
 \end_layout
 
 \end_inset
@@ -3065,7 +3105,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/update
+/user
 \end_layout
 
 \end_inset
@@ -3094,7 +3134,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/delete
+/user
 \end_layout
 
 \end_inset
@@ -3152,7 +3192,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/users/read
+/users
 \end_layout
 
 \end_inset
@@ -3210,7 +3250,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/gps/meeting/update
+/user/gps/meeting
 \end_layout
 
 \end_inset
@@ -3268,7 +3308,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/create
+/meeting
 \end_layout
 
 \end_inset
@@ -3297,7 +3337,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/read
+/meeting
 \end_layout
 
 \end_inset
@@ -3326,7 +3366,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/put
+/meeting
 \end_layout
 
 \end_inset
@@ -3355,7 +3395,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/delete
+/meeting
 \end_layout
 
 \end_inset
@@ -3413,7 +3453,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meetings/read
+/meetings
 \end_layout
 
 \end_inset
@@ -3471,7 +3511,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/users/create
+/meeting/users
 \end_layout
 
 \end_inset
@@ -3500,7 +3540,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/participants/read
+/meeting/participants
 \end_layout
 
 \end_inset
@@ -3529,7 +3569,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/participant/update
+/meeting/participant
 \end_layout
 
 \end_inset
@@ -3558,7 +3598,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/participant/delete
+/meeting/participant
 \end_layout
 
 \end_inset
@@ -3851,7 +3891,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/create
+/group
 \end_layout
 
 \end_inset
@@ -4164,7 +4204,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/read
+/group
 \end_layout
 
 \end_inset
@@ -4501,7 +4541,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/update
+/group
 \end_layout
 
 \end_inset
@@ -4975,7 +5015,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/delete
+/group
 \end_layout
 
 \end_inset
@@ -5338,7 +5378,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/user/create
+/group/user
 \end_layout
 
 \end_inset
@@ -5824,7 +5864,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/user/read
+/group/user
 \end_layout
 
 \end_inset
@@ -6160,7 +6200,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/user/update
+/group/user
 \end_layout
 
 \end_inset
@@ -6672,7 +6712,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/group/user/delete
+/group/user
 \end_layout
 
 \end_inset
@@ -7095,7 +7135,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/groups/read
+/groups
 \end_layout
 
 \end_inset
@@ -7276,7 +7316,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/create
+/user
 \end_layout
 
 \end_inset
@@ -7644,7 +7684,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/read
+/user
 \end_layout
 
 \end_inset
@@ -7978,7 +8018,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/update
+/user
 \end_layout
 
 \end_inset
@@ -8316,7 +8356,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/delete
+/user
 \end_layout
 
 \end_inset
@@ -8497,7 +8537,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/read
+/user
 \end_layout
 
 \end_inset
@@ -8679,7 +8719,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/notifications/read
+/notifications
 \end_layout
 
 \end_inset
@@ -8854,7 +8894,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/notifications/update
+/notifications
 \end_layout
 
 \end_inset
@@ -9171,7 +9211,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/create
+/user
 \end_layout
 
 \end_inset
@@ -9563,7 +9603,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/read
+/user
 \end_layout
 
 \end_inset
@@ -9898,7 +9938,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/update
+/user
 \end_layout
 
 \end_inset
@@ -10295,7 +10335,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/delete
+/user
 \end_layout
 
 \end_inset
@@ -10635,7 +10675,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/users/read
+/users
 \end_layout
 
 \end_inset
@@ -10901,7 +10941,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/user/gps/meeting/update
+/user/gps/meeting
 \end_layout
 
 \end_inset
@@ -11337,7 +11377,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/create
+/meeting
 \end_layout
 
 \end_inset
@@ -12232,7 +12272,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/read
+/meeting
 \end_layout
 
 \end_inset
@@ -13126,7 +13166,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/update
+/meeting
 \end_layout
 
 \end_inset
@@ -14041,7 +14081,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/delete
+/meeting
 \end_layout
 
 \end_inset
@@ -14402,7 +14442,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meetings/read
+/meetings
 \end_layout
 
 \end_inset
@@ -14742,7 +14782,7 @@ POST
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/users/create
+/meeting/users
 \end_layout
 
 \end_inset
@@ -15175,7 +15215,7 @@ GET
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/participants/read
+/meeting/participants
 \end_layout
 
 \end_inset
@@ -15567,7 +15607,7 @@ PUT
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/participant/put
+/meeting/participant
 \end_layout
 
 \end_inset
@@ -15959,7 +15999,7 @@ DELETE
 \begin_inset Text
 
 \begin_layout Plain Layout
-/meeting/participant/delete
+/meeting/participant
 \end_layout
 
 \end_inset
@@ -18288,117 +18328,6 @@ Der Intent beinhaltet die Beschreibung einer Operation.
 \begin_layout Subsubsection
 
 \family typewriter
-public class LoginFilterService
-\family default
- extends
-\family typewriter
- IntentService
-\end_layout
-
-\begin_layout Subsection*
-Beschreibung
-\end_layout
-
-\begin_layout Standard
-Diese Klasse erweitert die abstrakte Klasse 
-\family typewriter
-IntentService
-\family default
- und fragt beim Server ab, ob ein Benutzer auf die angeforderten Ressourcen
- zugreifen darf.
-\end_layout
-
-\begin_layout Subsection*
-Konstruktoren
-\end_layout
-
-\begin_layout Standard
-
-\family typewriter
-public 
-\series bold
-LoginFilterService()
-\family default
-\series default
- (Default-Konstruktor)
-\end_layout
-
-\begin_layout Subsection*
-Methoden
-\end_layout
-
-\begin_layout Standard
-Die Methode wird überschrieben
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-protected void 
-\series bold
-onHandleIntent(Intent intent)
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Beim startService(intent) wird diese Methode ausgeführt.
- Je nach Intent führt es folgende Dinge durch:
-\begin_inset Newline newline
-\end_inset
-
-Das Überprüfen, ob ein Benutzer auf die angeforderten Ressourcen zugreifen
- darf.
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-Intent 
-\series bold
-intent
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Der Intent beinhaltet die Beschreibung einer Operation.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-
-\family typewriter
 public class UserService
 \family default
  extends
@@ -19709,49 +19638,6 @@ Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
 \begin_layout Subsubsection
 
 \family typewriter
-public class URI_LoginFilterBuilder
-\end_layout
-
-\begin_layout Subsection*
-Beschreibung
-\end_layout
-
-\begin_layout Standard
-Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum LoginFilterServlet beinhaltet.
-\end_layout
-
-\begin_layout Subsection*
-Konstruktoren
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public URI_LoginFilterBuilder
-\series bold
-()
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Default-Konstruktor
-\end_layout
-
-\begin_layout Subsection*
-Methoden
-\end_layout
-
-\begin_layout Standard
-Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
- der Oberklasse und überschreibt keine.
-\end_layout
-
-\begin_layout Subsubsection
-
-\family typewriter
 public class URI_GroupBuilder
 \end_layout
 
@@ -20669,8 +20555,8 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-Die Konverter, die JSON-Strings zu Objekten konvertieren und umgekehrt,
- müssen das Interface 
+Die Konverter, die JSON-Strings zu Objekten konvertieren, müssen das Interface
+ 
 \family typewriter
 Converter<T>
 \family default
@@ -20684,21 +20570,21 @@ Methoden
 \begin_layout Itemize
 
 \family typewriter
-public T parse(String jsonString)
-\family default
-
+public T deserialize(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
-Parst den JSON-String
+
+\family default
+Erstellt ein Objekt T aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
 
 \series bold
-Parameter
+Parameter:
 \series default
-:
+
 \begin_inset Newline newline
 \end_inset
 
@@ -20724,7 +20610,7 @@ String jsonString
 \begin_inset Text
 
 \begin_layout Plain Layout
-Zu überprüfender String
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -20746,25 +20632,19 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-JSON-String als 
-\family typewriter
-T
+String als Objekt T
 \end_layout
 
 \begin_layout Itemize
 
 \family typewriter
-public String serialize(T object)
+public List<T> deserializeList(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
 
 \family default
-Erstellt einen String aus dem eingegebenen Objekt im Format 
-\family typewriter
-T
-\family default
-
+Erstellt eine Liste aus Objekten T aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
@@ -20789,7 +20669,7 @@ Parameter:
 \begin_layout Plain Layout
 
 \family typewriter
-T object
+String jsonString
 \end_layout
 
 \end_inset
@@ -20798,9 +20678,7 @@ T object
 \begin_inset Text
 
 \begin_layout Plain Layout
-Objekt im Format 
-\family typewriter
-T
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -20822,75 +20700,9 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-object als String
-\end_layout
-
-\begin_layout Itemize
-
+String als List
 \family typewriter
-public String serialize(List <T> objects)
-\begin_inset Newline newline
-\end_inset
-
-
-\family default
-Erstellt einen String aus List<T>
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-List<T> objects
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Liste von Objekten
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-List<T> als String
+<T>
 \end_layout
 
 \begin_layout Subsubsection
@@ -20910,75 +20722,41 @@ Beschreibung
 \begin_layout Standard
 Die Klasse 
 \family typewriter
-NotificationConverter
+NotificationConverter 
 \family default
- implementiert das Interface 
+implementiert das Interface 
 \family typewriter
 Converter<T>
 \family default
- und konvertiert Benachrichtigungen von Parametern in Objekte und umgekehrt.
-\end_layout
-
-\begin_layout Subsection*
-Konstruktoren
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public 
-\series bold
-NotificationConverter()
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Default-Konstruktor
+ und konvertiert JSON-Strings zu Objekte.
 \end_layout
 
 \begin_layout Subsection*
 Methoden
 \end_layout
 
-\begin_layout Standard
-Die Klasse
-\family typewriter
- NotificationConverter 
-\family default
-implementiert und überschreibt die Methoden 
-\family typewriter
-public T parse(String jsonString), public String serialize(T object)
-\family default
- und 
-\family typewriter
-public String serialize(List<T> objects)
-\family default
-.
-\end_layout
-
 \begin_layout Itemize
 
 \family typewriter
-public Notification 
-\series bold
-parse(String jsonString)
+public Notification deserialize(String jsonString)
+\begin_inset Newline newline
+\end_inset
+
+
 \family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Parst einen Json-String
+Erstellt ein Objekt 
+\family typewriter
+Notification
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
 
 \series bold
-Parameter
+Parameter:
 \series default
-:
+
 \begin_inset Newline newline
 \end_inset
 
@@ -21004,7 +20782,7 @@ String jsonString
 \begin_inset Text
 
 \begin_layout Plain Layout
-Zu überprüfender String der Benachrichtigung
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -21026,7 +20804,7 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Json-String des Benachrichtigung als 
+String als Objekt 
 \family typewriter
 Notification
 \end_layout
@@ -21034,13 +20812,17 @@ Notification
 \begin_layout Itemize
 
 \family typewriter
-public String serialize(Notification notification)
+public List<Notification> deserializeList(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
 
 \family default
-Erstellt einen String aus der Benachrichtigung
+Erstellt eine Liste aus Objekten 
+\family typewriter
+Notification
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
@@ -21065,7 +20847,7 @@ Parameter:
 \begin_layout Plain Layout
 
 \family typewriter
-Notification notification
+String jsonString
 \end_layout
 
 \end_inset
@@ -21074,7 +20856,7 @@ Notification notification
 \begin_inset Text
 
 \begin_layout Plain Layout
-die Benachrichtigung
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -21096,83 +20878,9 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Benachrichtigung als String
-\end_layout
-
-\begin_layout Itemize
-
+String als List
 \family typewriter
-public String serialize(List <Notification> notifications)
-\begin_inset Newline newline
-\end_inset
-
-
-\family default
-Erstellt einen String aus List<
-\family typewriter
-Notification
-\family default
->
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-List<Notification> notifications
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Liste von Benachrichtigungen
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-List<
-\family typewriter
-Notification
-\family default
-> als String
+<Notification>
 \end_layout
 
 \begin_layout Subsubsection
@@ -21198,71 +20906,35 @@ implementiert das Interface
 \family typewriter
 Converter<T>
 \family default
- und konvertiert die Gruppenmitglieder von Parametern in Objekte und umgekehrt.
+ und konvertiert JSON-Strings zu Objekte.
 \end_layout
 
 \begin_layout Subsection*
-
-\series bold
-Konstruktoren
+Methoden
 \end_layout
 
 \begin_layout Itemize
 
 \family typewriter
-public 
-\series bold
-GroupMemberConverter()
-\family default
-\series default
-
+public User deserialize(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
-Default-Konstruktor
-\end_layout
 
-\begin_layout Subsection*
-Methode 
-\end_layout
-
-\begin_layout Standard
-Die Klasse
-\family typewriter
- GroupMemberConverter 
 \family default
-implementiert und überschreibt die Methoden 
+Erstellt ein Objekt 
 \family typewriter
-public T parse(String jsonString), public String serialize(T object)
+User
 \family default
- und 
-\family typewriter
-public String serialize(List<T> objects)
-\family default
-.
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public User 
-\series bold
-parse(String jsonString)
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Parst einen Json-String
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
 
 \series bold
-Parameter
+Parameter:
 \series default
-:
+
 \begin_inset Newline newline
 \end_inset
 
@@ -21288,7 +20960,7 @@ String jsonString
 \begin_inset Text
 
 \begin_layout Plain Layout
-Zu überprüfender String der Gruppe
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -21310,19 +20982,25 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Json-String des Gruppenmitglieds als User
+String als Objekt 
+\family typewriter
+User
 \end_layout
 
 \begin_layout Itemize
 
 \family typewriter
-public String serialize(Group group)
+public List<User> deserializeList(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
 
 \family default
-Erstellt einen String aus der Gruppe
+Erstellt eine Liste aus Objekten 
+\family typewriter
+User
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
@@ -21347,7 +21025,7 @@ Parameter:
 \begin_layout Plain Layout
 
 \family typewriter
-Group group
+String jsonString
 \end_layout
 
 \end_inset
@@ -21356,7 +21034,7 @@ Group group
 \begin_inset Text
 
 \begin_layout Plain Layout
-die Gruppe
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -21378,19 +21056,25 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Gruppe als String
+String als List
+\family typewriter
+<User>
 \end_layout
 
 \begin_layout Itemize
 
 \family typewriter
-public String serialize(List <Group> groups)
+public List<Group> deserializeList(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
 
 \family default
-Erstellt einen String aus List<Group>
+Erstellt eine Liste aus Objekten 
+\family typewriter
+Group
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
@@ -21415,7 +21099,7 @@ Parameter:
 \begin_layout Plain Layout
 
 \family typewriter
-List<Group> group
+String jsonString
 \end_layout
 
 \end_inset
@@ -21424,7 +21108,7 @@ List<Group> group
 \begin_inset Text
 
 \begin_layout Plain Layout
-Liste von Gruppen
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -21446,75 +21130,9 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-List<Group> als String
-\end_layout
-
-\begin_layout Itemize
-
+String als List
 \family typewriter
-public String serialize(List <User> users)
-\begin_inset Newline newline
-\end_inset
-
-
-\family default
-Erstellt einen String aus List<User>
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-List<User> users
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Liste von Benutzern
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-List<User> als String
+<Group>
 \end_layout
 
 \begin_layout Subsubsection
@@ -21540,71 +21158,35 @@ implementiert das Interface
 \family typewriter
 Converter<T>
 \family default
- und konvertiert eine Gruppe von Parametern in Objekte und umgekehrt.
-\end_layout
-
-\begin_layout Subsection*
-
-\series bold
-Konstruktoren
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public 
-\series bold
-GroupConverter()
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Default-Konstruktor
+ und konvertiert JSON-Strings zu Objekte.
 \end_layout
 
 \begin_layout Subsection*
 Methoden
 \end_layout
 
-\begin_layout Standard
-Die Klasse
-\family typewriter
- GroupConverter 
-\family default
-implementiert und überschreibt die Methoden 
-\family typewriter
-public T parse(String jsonString), public String serialize(T object)
-\family default
- und 
-\family typewriter
-public String serialize(List<T> objects)
-\family default
-.
-\end_layout
-
 \begin_layout Itemize
 
 \family typewriter
-public Group 
-\series bold
-parse(String jsonString)
+public Group deserialize(String jsonString)
+\begin_inset Newline newline
+\end_inset
+
+
 \family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Parst einen Json-String
+Erstellt ein Objekt 
+\family typewriter
+User
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
 
 \series bold
-Parameter
+Parameter:
 \series default
-:
+
 \begin_inset Newline newline
 \end_inset
 
@@ -21630,7 +21212,7 @@ String jsonString
 \begin_inset Text
 
 \begin_layout Plain Layout
-Zu überprüfender String der Gruppe
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -21652,19 +21234,25 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Json-String der Gruppe als Group
+String als Objekt 
+\family typewriter
+Group
 \end_layout
 
 \begin_layout Itemize
 
 \family typewriter
-public String serialize(Group group)
+public List<Group> deserializeList(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
 
 \family default
-Erstellt einen String aus der Gruppe
+Erstellt eine Liste aus Objekten 
+\family typewriter
+Group
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
@@ -21689,7 +21277,7 @@ Parameter:
 \begin_layout Plain Layout
 
 \family typewriter
-Group group
+String jsonString
 \end_layout
 
 \end_inset
@@ -21698,7 +21286,7 @@ Group group
 \begin_inset Text
 
 \begin_layout Plain Layout
-die Gruppe
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -21720,75 +21308,9 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Gruppe als String
-\end_layout
-
-\begin_layout Itemize
-
+String als List
 \family typewriter
-public String serialize(List <Group> groups)
-\begin_inset Newline newline
-\end_inset
-
-
-\family default
-Erstellt einen String aus List<Group>
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-List<Group> groups
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Liste von Gruppen
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-List<Group> als String
+<Group>
 \end_layout
 
 \begin_layout Subsubsection
@@ -21814,75 +21336,35 @@ implementiert das Interface
 \family typewriter
 Converter<T>
 \family default
- und konvertiert die GPS-Daten von Parametern in Objekte und umgekehrt.
-\end_layout
-
-\begin_layout Subsection*
-
-\series bold
-Konstruktoren
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public 
-\series bold
-GPS_Converter()
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Default-Konstruktor
+ und konvertiert JSON-Strings zu Objekte.
 \end_layout
 
 \begin_layout Subsection*
 Methoden
 \end_layout
 
-\begin_layout Subsection*
-Methoden
-\end_layout
-
-\begin_layout Standard
-Die Klasse
-\family typewriter
- GPS_Converter 
-\family default
-implementiert und überschreibt die Methoden 
-\family typewriter
-public T parse(String jsonString), public String serialize(T object)
-\family default
- und 
-\family typewriter
-public String serialize(List<T> objects)
-\family default
-.
-\end_layout
-
 \begin_layout Itemize
 
 \family typewriter
-public GPS 
-\series bold
-parse(String jsonString)
+public GPS deserialize(String jsonString)
+\begin_inset Newline newline
+\end_inset
+
+
 \family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Parst einen Json-String
+Erstellt ein Objekt 
+\family typewriter
+GPS
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
 
 \series bold
-Parameter
+Parameter:
 \series default
-:
+
 \begin_inset Newline newline
 \end_inset
 
@@ -21908,7 +21390,7 @@ String jsonString
 \begin_inset Text
 
 \begin_layout Plain Layout
-Zu überprüfender String des GPS
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -21930,19 +21412,25 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Json-String des GPS als GPS
+String als Objekt 
+\family typewriter
+GPS
 \end_layout
 
 \begin_layout Itemize
 
 \family typewriter
-public String serialize(GPS gps)
+public List<GPS> deserializeList(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
 
 \family default
-Erstellt einen String aus dem GPS
+Erstellt eine Liste aus Objekten 
+\family typewriter
+GPS
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
@@ -21967,7 +21455,7 @@ Parameter:
 \begin_layout Plain Layout
 
 \family typewriter
-GPS gps
+String jsonString
 \end_layout
 
 \end_inset
@@ -21976,7 +21464,7 @@ GPS gps
 \begin_inset Text
 
 \begin_layout Plain Layout
-das GPS
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -21998,75 +21486,9 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-GPS als String
-\end_layout
-
-\begin_layout Itemize
-
+String als List
 \family typewriter
-public String serialize(List <GPS> gps)
-\begin_inset Newline newline
-\end_inset
-
-
-\family default
-Erstellt einen String aus List<GPS>
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-List<GPS> gps
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Liste von GPS-Daten
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-List<GPS> als String
+<GPS>
 \end_layout
 
 \begin_layout Subsubsection
@@ -22092,71 +21514,35 @@ implementiert das Interface
 \family typewriter
 Converter<T>
 \family default
- und konvertiert die Benutzer von Parametern in Objekte und umgekehrt.
-\end_layout
-
-\begin_layout Subsection*
-
-\series bold
-Konstruktoren
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public 
-\series bold
-UserConverter()
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Default-Konstruktor
+ und konvertiert JSON-Strings zu Objekte.
 \end_layout
 
 \begin_layout Subsection*
 Methoden
 \end_layout
 
-\begin_layout Standard
-Die Klasse
-\family typewriter
- UserConverter 
-\family default
-implementiert und überschreibt die Methoden 
-\family typewriter
-public T parse(String jsonString), public String serialize(T object)
-\family default
- und 
-\family typewriter
-public String serialize(List<T> objects)
-\family default
-.
-\end_layout
-
 \begin_layout Itemize
 
 \family typewriter
-public User 
-\series bold
-parse(String jsonString)
+public User deserialize(String jsonString)
+\begin_inset Newline newline
+\end_inset
+
+
 \family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Parst einen Json-String
+Erstellt ein Objekt 
+\family typewriter
+User
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
 
 \series bold
-Parameter
+Parameter:
 \series default
-:
+
 \begin_inset Newline newline
 \end_inset
 
@@ -22182,7 +21568,7 @@ String jsonString
 \begin_inset Text
 
 \begin_layout Plain Layout
-Zu überprüfender String des Benutzers
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -22204,19 +21590,25 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Json-String des Benutzers als User
+String als Objekt 
+\family typewriter
+User
 \end_layout
 
 \begin_layout Itemize
 
 \family typewriter
-public String serialize(User user)
+public List<User> deserializeList(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
 
 \family default
-Erstellt einen String aus dem Benutzer
+Erstellt eine Liste aus Objekten 
+\family typewriter
+User
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
@@ -22241,7 +21633,7 @@ Parameter:
 \begin_layout Plain Layout
 
 \family typewriter
-User user
+String jsonString
 \end_layout
 
 \end_inset
@@ -22250,7 +21642,7 @@ User user
 \begin_inset Text
 
 \begin_layout Plain Layout
-der Benutzer
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -22272,75 +21664,9 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Benutzer als String
-\end_layout
-
-\begin_layout Itemize
-
+String als List
 \family typewriter
-public String serialize(List <User> users)
-\begin_inset Newline newline
-\end_inset
-
-
-\family default
-Erstellt einen String aus List<User>
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-List<User> users
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Liste von Benutzern
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-List<User> als String
+<User>
 \end_layout
 
 \begin_layout Subsubsection
@@ -22360,77 +21686,41 @@ Beschreibung
 \begin_layout Standard
 Die Klasse 
 \family typewriter
-ParticipantConverter 
+UserConverter 
 \family default
 implementiert das Interface 
 \family typewriter
 Converter<T>
 \family default
- und konvertiert einen Teilnehmer von Parametern in Objekte und umgekehrt.
-\end_layout
-
-\begin_layout Subsection*
-
-\series bold
-Konstruktoren
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public 
-\series bold
-ParticipantConverter()
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Default-Konstruktor
+ und konvertiert JSON-Strings zu Objekte.
 \end_layout
 
 \begin_layout Subsection*
 Methoden
 \end_layout
 
-\begin_layout Standard
-Die Klasse
-\family typewriter
- ParticipantConverter 
-\family default
-implementiert und überschreibt die Methoden 
-\family typewriter
-public T parse(String jsonString), public String serialize(T object)
-\family default
- und 
-\family typewriter
-public String serialize(List<T> objects)
-\family default
-.
-\end_layout
-
 \begin_layout Itemize
 
 \family typewriter
-public Participant 
-\series bold
-parse(String jsonString)
+public User deserialize(String jsonString)
+\begin_inset Newline newline
+\end_inset
+
+
 \family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Parst einen Json-String
+Erstellt ein Objekt 
+\family typewriter
+User
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
 
 \series bold
-Parameter
+Parameter:
 \series default
-:
+
 \begin_inset Newline newline
 \end_inset
 
@@ -22456,7 +21746,7 @@ String jsonString
 \begin_inset Text
 
 \begin_layout Plain Layout
-Zu überprüfender String des Participant
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -22478,19 +21768,25 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Json-String des Participant als Participant 
+String als Objekt 
+\family typewriter
+User
 \end_layout
 
 \begin_layout Itemize
 
 \family typewriter
-public String serialize(Participant participant)
+public List<User> deserializeList(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
 
 \family default
-Erstellt einen String aus demParticipant
+Erstellt eine Liste aus Objekten 
+\family typewriter
+User
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
@@ -22515,7 +21811,7 @@ Parameter:
 \begin_layout Plain Layout
 
 \family typewriter
-Participant participant
+String jsonString
 \end_layout
 
 \end_inset
@@ -22524,7 +21820,7 @@ Participant participant
 \begin_inset Text
 
 \begin_layout Plain Layout
-der Teilnehmer
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -22546,75 +21842,9 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Participant als String
-\end_layout
-
-\begin_layout Itemize
-
+String als List
 \family typewriter
-public String serialize(List <Participant> participants)
-\begin_inset Newline newline
-\end_inset
-
-
-\family default
-Erstellt einen String aus List<Participant>
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-List<Participant> participant
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Liste von Participants
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-List<Participant> als String
+<User>
 \end_layout
 
 \begin_layout Subsubsection
@@ -22640,71 +21870,35 @@ implementiert das Interface
 \family typewriter
 Converter<T>
 \family default
- und konvertiert einen Termin von Parametern in Objekte und umgekehrt.
-\end_layout
-
-\begin_layout Subsection*
-
-\series bold
-Konstruktoren
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public 
-\series bold
-MeetingConverter()
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Default-Konstruktor
+ und konvertiert JSON-Strings zu Objekte.
 \end_layout
 
 \begin_layout Subsection*
 Methoden
 \end_layout
 
-\begin_layout Standard
-Die Klasse
-\family typewriter
- MeetingConverter 
-\family default
-implementiert und überschreibt die Methoden 
-\family typewriter
-public T parse(String jsonString), public String serialize(T object)
-\family default
- und 
-\family typewriter
-public String serialize(List<T> objects)
-\family default
-.
-\end_layout
-
 \begin_layout Itemize
 
 \family typewriter
-public Meeting 
-\series bold
-parse(String jsonString)
+public Meeting deserialize(String jsonString)
+\begin_inset Newline newline
+\end_inset
+
+
 \family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-Parst einen Json-String
+Erstellt ein Objekt 
+\family typewriter
+Meeting
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
 
 \series bold
-Parameter
+Parameter:
 \series default
-:
+
 \begin_inset Newline newline
 \end_inset
 
@@ -22730,7 +21924,7 @@ String jsonString
 \begin_inset Text
 
 \begin_layout Plain Layout
-Zu überprüfender String des Treffens
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -22752,19 +21946,25 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Json-String des Treffens als Meeting
+String als Objekt 
+\family typewriter
+Meeting
 \end_layout
 
 \begin_layout Itemize
 
 \family typewriter
-public String serialize(Meeting meeting)
+public List<Meeting> deserializeList(String jsonString)
 \begin_inset Newline newline
 \end_inset
 
 
 \family default
-Erstellt einen String aus dem Meeting 
+Erstellt eine Liste aus Objekten 
+\family typewriter
+Meeting
+\family default
+ aus dem eingegebenen JSON-String 
 \begin_inset Newline newline
 \end_inset
 
@@ -22789,7 +21989,7 @@ Parameter:
 \begin_layout Plain Layout
 
 \family typewriter
-Meeting meeting
+String jsonString
 \end_layout
 
 \end_inset
@@ -22798,7 +21998,7 @@ Meeting meeting
 \begin_inset Text
 
 \begin_layout Plain Layout
-der Termin
+String im Format JSON-String
 \end_layout
 
 \end_inset
@@ -22820,75 +22020,9 @@ Rückgabewert:
 \begin_inset Newline newline
 \end_inset
 
-Meeting als String
-\end_layout
-
-\begin_layout Itemize
-
+String als List
 \family typewriter
-public String serialize(List <Meeting> meetings)
-\begin_inset Newline newline
-\end_inset
-
-
-\family default
-Erstellt einen String aus List<Meeting>
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-List<Meeting> meetings
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Liste von Terminen
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-List<Meeting> als String
+<Meeting>
 \end_layout
 
 \begin_layout Subsection
