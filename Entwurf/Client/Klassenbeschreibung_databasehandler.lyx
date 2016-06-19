@@ -77,7 +77,7 @@ Package kit.edu.pse.goapp.client.databasehandler
 \begin_layout Section*
 
 \family typewriter
-Abstract class SQLiteOpenHelper
+abstract class SQLiteOpenHelper
 \end_layout
 
 \begin_layout Subsection*
@@ -86,154 +86,6 @@ Beschreibung
 
 \begin_layout Standard
 Eine Hilfsklasse um Datenbank zu erstellen und ihre Versionen zu managen.
-\end_layout
-
-\begin_layout Subsection*
-Methoden
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public void 
-\series bold
-onHandleIntent(Intent intent)
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-(Hier noch Beschreibung der Methode einfügen)
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-Intent 
-\series bold
-intent
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-(Beschreibung des Parameters einfügen)
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section*
-
-\family typewriter
-Class DataBaseHandler extends SQLiteOpenHelper
-\end_layout
-
-\begin_layout Subsection*
-Beschreibung
-\end_layout
-
-\begin_layout Standard
-Hilft bei dem Erstellen und Managen der Datenbank, in der die 
-\family typewriter
-MeetingID
-\family default
-s und 
-\family typewriter
-MeetingTime
-\family default
-s gespeichert werden.
-\end_layout
-
-\begin_layout Subsection*
-Konstruktoren
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public 
-\series bold
-DataBaseHandler(Context context)
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-Context 
-\series bold
-context
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Der Kontext der Datenbank
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection*
@@ -396,6 +248,162 @@ newVersion
 
 \begin_layout Plain Layout
 Neue Versionsnummer
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+Class DataBaseHandler extends SQLiteOpenHelper
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Hilft bei dem Erstellen und Managen der Datenbank, in der die 
+\family typewriter
+MeetingID
+\family default
+s und 
+\family typewriter
+MeetingTime
+\family default
+s gespeichert werden.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+DataBaseHandler(Context context)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Context 
+\series bold
+context
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Der Kontext der Datenbank
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+onHandleIntent(Intent intent)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+(Hier noch 
+\color red
+Beschreibung der Methode
+\color inherit
+ einfügen)
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(Beschreib
+\color red
+ung des Paramete
+\color inherit
+rs einfügen)
 \end_layout
 
 \end_inset

@@ -77,7 +77,7 @@ Package kit.edu.pse.goapp.client.httpappclient
 \begin_layout Section*
 
 \family typewriter
-Class HttpAppClient
+public class HttpResponse
 \end_layout
 
 \begin_layout Subsection*
@@ -85,8 +85,149 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-Diese Klasse gibt einen Statuscode an den Client zurück, der angibt, ob
- die Anfrage fehlerfrei bearbeitet werden konnte.
+Diese Klasse ist der Rückgabeformat des HttpAppClient füe alle Methoden.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public int 
+\series bold
+getStatusCode()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liefert das Statuscode vom Server zurück 
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Int 
+\series bold
+statusCode
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+StatusCode vom Server
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public int 
+\series bold
+getJsonString()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Liefert das JsonString vom Server zurück 
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String 
+\series bold
+json
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rückgabe Objekt vom Server in String-Format
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\family typewriter
+public class HttpAppClient
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse gibt ein HttpResponse-Objekt zurück, was einen Statuscode,
+ der angibt, ob die Anfrage fehlerfrei bearbeitet werden konnte und falls
+ gefordert die angefragte Objekte als String beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -169,7 +310,7 @@ Rückgabewert:
 
 
 \series default
-HttpResponse
+HttpResponse-Objekt
 \family default
  mit Statuscode
 \end_layout
@@ -250,9 +391,9 @@ Rückgabewert:
 
 
 \series default
-HttpResponse
+HttpResponse-Objekt
 \family default
- mit Statuscode
+ mit Statuscode und JsonString
 \end_layout
 
 \begin_layout Itemize
@@ -331,7 +472,7 @@ Rückgabewert:
 
 
 \series default
-HttpResponse
+HttpResponse-Objekt
 \family default
  mit Statuscode
 \end_layout
@@ -412,7 +553,7 @@ Rückgabewert:
 
 
 \series default
-HttpResponse
+HttpResponse-Objekt
 \family default
  mit Statuscode
 \end_layout
