@@ -967,7 +967,9 @@ NotificationsService
 
 \begin_layout Standard
 Anzeigt die Benutzereinstellung und man kann diese Verändern.
- (Standort anzeigen und Benachrichtigung ein/ausschalten) 
+ (Standort anzeigen und Benachrichtigung ein/ausschalten).
+ Standort-anzeige-Status wird in einer public static Klasse SharedPreferences
+ Instanz gespeichert, die im Android SDK vorhanden ist.
 \begin_inset Newline newline
 \end_inset
 

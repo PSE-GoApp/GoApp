@@ -77,7 +77,7 @@ Package kit.edu.pse.goapp.client.service
 \begin_layout Section*
 
 \family typewriter
-Abstract class IntentService
+public abstract class IntentService
 \end_layout
 
 \begin_layout Subsection*
@@ -90,6 +90,11 @@ Der IntentService bearbeitet Anfragen und verläuft asynchron ab.
 ) an den IntentService (Worker).
  Bei gebrauch wird ein Service gestartet und beendet sich, am Ende des Prozesses
  von alleine.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection*
@@ -167,7 +172,7 @@ onHandleIntent(Intent intent)
 \begin_inset Newline newline
 \end_inset
 
-(Beschreibung einfügen)
+Beim startService wird diese Methode ausgeführt
 \begin_inset Newline newline
 \end_inset
 
@@ -201,7 +206,7 @@ intent
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung hinzufügen)
+Intent beinhaltet die Beschreibung einer Operation
 \end_layout
 
 \end_inset
@@ -260,7 +265,7 @@ intent
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung hinzufügen)
+Intent beinhaltet die beschreibt, welcher Service gestartet werden soll.
 \end_layout
 
 \end_inset
@@ -276,7 +281,7 @@ intent
 \begin_layout Section*
 
 \family typewriter
-Class LoginService
+public class LoginService
 \family default
  extends
 \family typewriter
@@ -292,7 +297,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt das Einloggen in die Go-App dar.
+ und ist für die Benutzer Autorisierungsanfragen zuständig.
 \end_layout
 
 \begin_layout Subsection*
@@ -315,27 +320,81 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-LoginService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch:
+\begin_inset Newline newline
+\end_inset
+
+Benutzer Registierung,
+\begin_inset Newline newline
+\end_inset
+
+und Login oder das Überprüfen, ob ein Benutzer registriert ist
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class LogoutService
+public class LogoutService
 \family default
  extends
 \family typewriter
@@ -351,7 +410,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt das Ausloggen aus der Go-App dar.
+ und ist fürs Anfragen beim Auslogg zuständig
 \end_layout
 
 \begin_layout Subsection*
@@ -374,27 +433,77 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-LogoutService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch: 
+\begin_inset Newline newline
+\end_inset
+
+Das Ausloggen eines Benutzers
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class LoginFilterService
+public class LoginFilterService
 \family default
  extends
 \family typewriter
@@ -408,9 +517,8 @@ Beschreibung
 \begin_layout Standard
 Diese Klasse erweitert die abstrakte Klasse 
 \family typewriter
-IntentService
-\family default
-.
+IntentService und fragt den Server ab, ob ein Benutzer auf die angeforderte
+ Ressourcen zugreifen darf.
 \end_layout
 
 \begin_layout Subsection*
@@ -433,27 +541,78 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-LoginFilterService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch:
+\begin_inset Newline newline
+\end_inset
+
+Das Überprüfen, ob ein Benutzer auf die angefortederten Ressourcen zugreifen
+ darf
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class UserService
+public class UserService
 \family default
  extends
 \family typewriter
@@ -469,7 +628,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt einen Benutzer der Go-App dar.
+ und ist für die Benutzerverwaltung zuständig.
 \end_layout
 
 \begin_layout Subsection*
@@ -492,27 +651,89 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-UserService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch:
+\begin_inset Newline newline
+\end_inset
+
+Das Erstellen eines Benutzers,
+\begin_inset Newline newline
+\end_inset
+
+Benutzerinformationsanfragen,
+\begin_inset Newline newline
+\end_inset
+
+Änderungen der Benutzerinformationen,
+\begin_inset Newline newline
+\end_inset
+
+und Löschen eines Benutzers
+\series bold
+
+\begin_inset Newline newline
+\end_inset
+
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class UsersService
+public class UsersService
 \family default
  extends
 \family typewriter
@@ -528,7 +749,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt alle Benutzer der Go-App dar.
+ und ist für Suchanfragen eines Users zuständig.
 \end_layout
 
 \begin_layout Subsection*
@@ -551,27 +772,77 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-UsersService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch: 
+\begin_inset Newline newline
+\end_inset
+
+Suchanfragen eines Users
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class GroupService
+public class GroupService
 \family default
  extends
 \family typewriter
@@ -587,7 +858,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt eine Gruppe von Benutzern der Go-App dar.
+ und ist für die Gruppenverwaltung zuständig.
 \end_layout
 
 \begin_layout Subsection*
@@ -610,27 +881,85 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-GroupService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch: 
+\begin_inset Newline newline
+\end_inset
+
+Erstellen einer Gruppe,
+\begin_inset Newline newline
+\end_inset
+
+Gruppeninformationsanfragen
+\begin_inset Newline newline
+\end_inset
+
+und Gruppenänderungen, das Löschen einer Gruppen
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class GroupsService
+public class GroupsService
 \family default
  extends
 \family typewriter
@@ -646,7 +975,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt alle Gruppen in der Go-App dar.
+ und ist für Anforderungen eines Gruppenliste zuständig.
 \end_layout
 
 \begin_layout Subsection*
@@ -669,27 +998,77 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-GroupsService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch: 
+\begin_inset Newline newline
+\end_inset
+
+Gruppenlisten Anforderungen
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class GroupUserManagementService
+public class GroupUserManagementService
 \family default
  extends
 \family typewriter
@@ -705,8 +1084,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt die Verwaltung der Gruppenmitglieder einer Gruppe in der Go-App
- dar.
+ und ist für Gruppenmitgliederverwaltung zuständig.
 \end_layout
 
 \begin_layout Subsection*
@@ -729,27 +1107,81 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-GroupUserManagementService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch: 
+\begin_inset Newline newline
+\end_inset
+
+Das Hinzufügen von Benutzern in Gruppen
+\begin_inset Newline newline
+\end_inset
+
+und Anforderung einer Liste der Gruppenmitgliedern, einer Gruppen
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class GPSService
+public class GPS_Service
 \family default
  extends
 \family typewriter
@@ -765,7 +1197,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt die GPS-Positionen der Benutzer dar.
+ und ist fürs GPS-Daten schicken zuständig
 \end_layout
 
 \begin_layout Subsection*
@@ -788,27 +1220,77 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-GPSService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch: 
+\begin_inset Newline newline
+\end_inset
+
+GPS daten schicken
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class MeetingService
+public class MeetingService
 \family default
  extends
 \family typewriter
@@ -824,7 +1306,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt einen Termin einer Gruppe dar.
+ und ist für Terminverwaltung zuständig.
 \end_layout
 
 \begin_layout Subsection*
@@ -847,27 +1329,89 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-MeetingService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch: 
+\begin_inset Newline newline
+\end_inset
+
+Das Erstellen eines Termins,
+\begin_inset Newline newline
+\end_inset
+
+Termininformationsanfragen,
+\begin_inset Newline newline
+\end_inset
+
+Termin Änderungen
+\begin_inset Newline newline
+\end_inset
+
+und das Löschen eines Termins
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class MeetingsService
+public class MeetingsService
 \family default
  extends
 \family typewriter
@@ -883,7 +1427,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt alle Termine dar.
+ und ist für Terminlisten Anforderungen zuständig.
 \end_layout
 
 \begin_layout Subsection*
@@ -906,27 +1450,77 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-MeetingsService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch: 
+\begin_inset Newline newline
+\end_inset
+
+Terminlisten Anforderungen
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class MeetingParticipantManagementService
+public class MeetingParticipantManagementService
 \family default
  extends
 \family typewriter
@@ -942,7 +1536,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt Teilnehmer an einem Termin dar.
+ und ist für Terminteilnehmerverwaltung zuständig.
 \end_layout
 
 \begin_layout Subsection*
@@ -965,27 +1559,83 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-MeetingParticipantManagementService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch:
+\begin_inset Newline newline
+\end_inset
+
+Anforderungen einer Liste von Teilnehmern, die für den Termin zugesagt haben
+ 
+\begin_inset Newline newline
+\end_inset
+
+und die Bestätigung bzw.
+ Absagen eines Termins
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 
 \family typewriter
-Class NotificationService
+public class NotificationService
 \family default
  extends
 \family typewriter
@@ -1001,7 +1651,7 @@ Diese Klasse erweitert die abstrakte Klasse
 \family typewriter
 IntentService
 \family default
- und stellt die Benachrichtigungen der Benutzer über ihre Termine dar.
+ und ist für die Einstellung der Benachrichtigungen zuständig.
 \end_layout
 
 \begin_layout Subsection*
@@ -1024,21 +1674,79 @@ Methoden
 \end_layout
 
 \begin_layout Standard
-Die Klasse 
+Die Methode wird überschrieben
+\end_layout
+
+\begin_layout Itemize
+
 \family typewriter
-NotificationService
+protected void 
+\series bold
+onHandleIntent(Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beim startService wird diese Methode ausgeführt.
+ Jenach Intent führt es folgende Dinge durch:
+\begin_inset Newline newline
+\end_inset
+
+Liste von Benachrichtigungen ausgeben (
+\color red
+Proität B
+\color inherit
+)
+\begin_inset Newline newline
+\end_inset
+
+und Benachrichtigungen an-/ausschalten
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-IntentService
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
-\family typewriter
-IntentService
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intent beinhaltet die Beschreibung einer Operation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \end_body

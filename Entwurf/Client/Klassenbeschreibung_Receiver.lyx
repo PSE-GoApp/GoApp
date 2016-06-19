@@ -85,7 +85,8 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-(Beschreibung der Klasse einfügen)
+Basisklasse zum Empfangen von Anfragen mit sendBroadcast().
+ Der BroadcastReceiver läuft im Hintergrund.
 \end_layout
 
 \begin_layout Subsection*
@@ -104,7 +105,7 @@ onReceive(Context context, Intent intent)
 \begin_inset Newline newline
 \end_inset
 
-(Beschreibung einfügen)
+Diese Methode wird aufgerufen, wenn diese Klasse ein Intent Broadcast empfängt
 \begin_inset Newline newline
 \end_inset
 
@@ -138,7 +139,7 @@ Context
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung einfügen)
+Der Kontext, in dem der Receiver läuft
 \end_layout
 
 \end_inset
@@ -162,7 +163,7 @@ intent
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung hinzufügen)
+Die Beschreibung einer Operation, die empfangen wurde
 \end_layout
 
 \end_inset
@@ -229,7 +230,7 @@ onReceive(Context context, Intent intent)
 \begin_inset Newline newline
 \end_inset
 
-Der GPS_Service wird gestartet
+Der GPS_Service wird gestartet, beim erhalt eines Broadcast
 \begin_inset Newline newline
 \end_inset
 
@@ -263,7 +264,7 @@ Context
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung einfügen)
+Der Kontext, in dem der Receiver läuft
 \end_layout
 
 \end_inset
@@ -287,7 +288,7 @@ intent
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung hinzufügen)
+Beinhaltet, dass man den GPS_Service starten soll.
 \end_layout
 
 \end_inset
@@ -342,22 +343,87 @@ DeviceBootReceiver()
 Methoden
 \end_layout
 
-\begin_layout Standard
-Die Klasse 
+\begin_layout Itemize
+
 \family typewriter
-DeviceBootReceiver
+public void 
+\series bold
+onReceive(Context context, Intent intent)
 \family default
- enthält keine eigenen Methoden.
- Sie übernimmt alle Methoden aus der Klasse 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Erhält ein Broadcast beim Neustart und erstellt die Alarme neu
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-BroadcastReceiver
-\family default
- und überschreibt keine Methode.
- Neben den Methoden der Klasse 
+Context
+\series bold
+ context
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Der Kontext, in dem der Receiver läuft
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family typewriter
-BroadcastReceiver
-\family default
- werden keine weiteren Methoden benötigt.
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Beinhaltet, dass man alle Alarme neustarten soll.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \end_body

@@ -1,0 +1,288 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Subsection*
+Service Klassendiagrammbeschreibung
+\end_layout
+
+\begin_layout Standard
+Unsere App hat 13 Services, die die Kommunikation zwischen der View und
+ den Server Koordiniert.
+ Der Vorteil von der Vererben von IntentService ist, dass der auf einen
+ eigenen Prozess läuft, der neben den MainUI läuft und ohne den zu Blockieren,
+ die Anfragen stellt.
+ Der Service wird sich am Ende des Prozesses von allein zerstören.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Beispielsweise kann man in einen Benutzersuchfeld nach den Benutzern, während
+ man den Namen eintippt, suchen
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Um ein Service zu starten, benötigt man einen Intent, mit darin enthaltende
+ Beschreibung eines Operations und wird wie folgt erzeugt:
+\end_layout
+
+\begin_layout Standard
+Intent intent = new Intent(Intent.ACTION_SYNC, null, this, Service.class);
+\end_layout
+
+\begin_layout Standard
+Intent (String action, Uri uri, Context packageContext, Class<?> cls)
+\end_layout
+
+\begin_layout Standard
+Dann wird der Service durch startService(Intent) gestartet.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Unsere Services sind für verschiedene Anfragen verantwortlich:
+\end_layout
+
+\begin_layout Subsubsection*
+LoginService: 
+\end_layout
+
+\begin_layout Itemize
+Benutzer Registierung 
+\end_layout
+
+\begin_layout Itemize
+Login 
+\end_layout
+
+\begin_layout Itemize
+Das Überprüfen, ob ein Benutzer registriert ist
+\end_layout
+
+\begin_layout Subsubsection*
+LogoutService:
+\end_layout
+
+\begin_layout Itemize
+Das Ausloggen eines Benutzers
+\end_layout
+
+\begin_layout Subsubsection*
+LoginFilterService:
+\end_layout
+
+\begin_layout Itemize
+Das Überprüfen, ob ein Benutzer auf die angefortederten Ressourcen zugreifen
+ darf
+\end_layout
+
+\begin_layout Subsection*
+GroupService: 
+\end_layout
+
+\begin_layout Itemize
+Erstellen einer Gruppe
+\end_layout
+
+\begin_layout Itemize
+Gruppeninformationsanfragen
+\end_layout
+
+\begin_layout Itemize
+Gruppenänderungen
+\end_layout
+
+\begin_layout Itemize
+Das Löschen einer Gruppen
+\end_layout
+
+\begin_layout Subsubsection*
+GroupsService:
+\end_layout
+
+\begin_layout Itemize
+Gruppenlisten Anforderungen
+\end_layout
+
+\begin_layout Subsubsection*
+GroupUserManagementService:
+\end_layout
+
+\begin_layout Itemize
+Das Hinzufügen von Benutzern in Gruppen
+\end_layout
+
+\begin_layout Itemize
+Anforderung einer Liste der Gruppenmitgliedern, einer Gruppen
+\end_layout
+
+\begin_layout Subsubsection*
+MeetingService:
+\end_layout
+
+\begin_layout Itemize
+Das Erstellen eines Termins
+\end_layout
+
+\begin_layout Itemize
+Termininformationsanfragen
+\end_layout
+
+\begin_layout Itemize
+Termin Änderungen
+\end_layout
+
+\begin_layout Itemize
+das Löschen eines Termins
+\end_layout
+
+\begin_layout Subsubsection*
+MeetingsService:
+\end_layout
+
+\begin_layout Itemize
+Terminlisten Anforderungen
+\end_layout
+
+\begin_layout Subsubsection*
+MeetingParticipantManagementService: 
+\end_layout
+
+\begin_layout Itemize
+Anforderungen einer Liste von Teilnehmern, die für den Termin zugesagt haben
+\end_layout
+
+\begin_layout Itemize
+Die Bestätigung bzw.
+ Absagen eines Termins
+\end_layout
+
+\begin_layout Subsubsection*
+UserService:
+\end_layout
+
+\begin_layout Itemize
+Das Erstellen eines Benutzers
+\end_layout
+
+\begin_layout Itemize
+Benutzerinformationsanfragen
+\end_layout
+
+\begin_layout Itemize
+Änderungen der Benutzerinformationen
+\end_layout
+
+\begin_layout Itemize
+Löschen eines Benutzers
+\end_layout
+
+\begin_layout Subsubsection*
+UsersService:
+\end_layout
+
+\begin_layout Itemize
+Suchanfragen eines Users
+\end_layout
+
+\begin_layout Subsubsection*
+GPS_Service:
+\end_layout
+
+\begin_layout Itemize
+GPS daten schicken
+\end_layout
+
+\begin_layout Subsubsection*
+NotificationsService:
+\end_layout
+
+\begin_layout Itemize
+Liste von Benachrichtigungen ausgeben (
+\color red
+Proität B
+\color inherit
+)
+\end_layout
+
+\begin_layout Itemize
+Benachrichtigungen an-/ausschalten
+\end_layout
+
+\end_body
+\end_document
