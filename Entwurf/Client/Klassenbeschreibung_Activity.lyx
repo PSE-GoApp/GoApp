@@ -1249,9 +1249,15 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
+Enthält die Implementierung um ein 
+\begin_inset Quotes eld
+\end_inset
 
-\color red
-(Beschreibung hinzufügen)
+callback result
+\begin_inset Quotes erd
+\end_inset
+
+ zu erhalten.
 \end_layout
 
 \begin_layout Subsection*
@@ -1301,7 +1307,7 @@ handler
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung hinzufügen)
+Schickt und bearbeitet Nachrichten- und Runnable-Objekte 
 \end_layout
 
 \end_inset
@@ -1330,7 +1336,7 @@ onReceiverResult(int resultCode, Bundle resultData)
 \begin_inset Newline newline
 \end_inset
 
-(Beschreibung hinzufügen)
+Ergebniss kriegen und bearbeiten.
 \begin_inset Newline newline
 \end_inset
 
@@ -1364,7 +1370,7 @@ resultCode
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung hinzufügen)
+Result-Code der von Sender definiert ist
 \end_layout
 
 \end_inset
@@ -1388,108 +1394,7 @@ resultData
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung hinzufügen)
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section*
-
-\family typewriter
-interface Receiver
-\end_layout
-
-\begin_layout Subsection*
-Beschreibung
-\end_layout
-
-\begin_layout Standard
-(Beschreibung hinzufügen)
-\end_layout
-
-\begin_layout Subsection*
-Methoden
-\end_layout
-
-\begin_layout Itemize
-
-\family typewriter
-public void 
-\series bold
-onReceiverResult(int resultCode, Bundle resultData)
-\family default
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-(Beschreibung hinzufügen)
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-Integer 
-\series bold
-resultCode
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-(Beschreibung hinzufügen)
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-Bundle 
-\series bold
-resultData
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-(Beschreibung hinzufügen)
+zusätzliches Daten von Sender
 \end_layout
 
 \end_inset
@@ -1548,7 +1453,7 @@ setReceiver(Receiver receiver)
 \begin_inset Newline newline
 \end_inset
 
-(Beschreibung hinzufügen)
+Receiver setzen.
 \begin_inset Newline newline
 \end_inset
 
@@ -1582,7 +1487,7 @@ receiver
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung hinzufügen)
+Broadcast receiver
 \end_layout
 
 \end_inset
@@ -1595,5 +1500,95 @@ receiver
 
 \end_layout
 
+\begin_layout Itemize
+
+\family typewriter
+public interface Receiver
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+\series bold
+onReceiverResult(int resultCode, Bundle resultData)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Ergebniss kriegen und bearbeiten.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Integer 
+\series bold
+resultCode
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Result-Code der von Sender definiert ist
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Bundle 
+\series bold
+resultData
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+zusätzliches Daten von Sender
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
