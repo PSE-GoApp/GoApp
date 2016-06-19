@@ -314,7 +314,7 @@ Zeigt den Treffenpunk auf der Karte an:
 \end_layout
 
 \begin_layout Standard
-Bei einer Tour wird die größte Teilnehmeransammlung auf der Karte anzeigt,
+Bei einer Tour werden die größte Teilnehmeransammlung auf der Karte anzeigt,
  mit den Teilnehmern, die sich darin befinden.
 \end_layout
 
@@ -501,7 +501,7 @@ MeetingParticipantManagemtService
 
 \end_inset
 
-Zeigt eine Liste von zugesagten Teilnehmern eines Termins an Kommunikation:
+Zeigt eine Liste von zugesagten Teilnehmern, eines Termins an Kommunikation:
  
 \end_layout
 
@@ -767,7 +767,8 @@ UsersService, GroupUserManagementService
 
 \begin_layout Standard
 Zeigt alle Gruppenmitglieder an, man kann die Gruppe verlassen.
- Administratoren können Mitglieder suchen und hinzufügen, oder sie entfernen.
+ Administratoren können nach Mitglieder suchen und hinzufügen, oder sie
+ entfernen.
  
 \begin_inset Newline newline
 \end_inset
@@ -965,8 +966,8 @@ NotificationsService
 \end_layout
 
 \begin_layout Standard
-Anzeigen und ändern der Einstellungen (Standort anzeigen und Benachrichtigung
- ein/ausschalten) 
+Anzeigt die Benutzereinstellung und man kann diese Verändern.
+ (Standort anzeigen und Benachrichtigung ein/ausschalten) 
 \begin_inset Newline newline
 \end_inset
 
