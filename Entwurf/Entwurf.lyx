@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
@@ -9,16 +11,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman default
-\font_sans default
-\font_typewriter default
-\font_math auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -201,6 +203,931 @@ Entwurfsentscheidungen
 Client
 \end_layout
 
+\begin_layout Subsection
+Model-View-Controller-Architektur
+\end_layout
+
+\begin_layout Standard
+Die Clientseite von unseren Projekt, wird einen Android-App sein, die im
+ Java implementiert ist.
+ Da die Clientseite keine Logik ausführen muss und nur als Schnittstelle
+ zwischen den Server und User benutzt ist, haben wir uns auf den Model-View-Cont
+roller Architekturmuster entschieden.
+ 
+\end_layout
+
+\begin_layout Description
+Model
+\end_layout
+
+\begin_layout Standard
+Die Objektmodell sind die vom DataModels und ist das gleiche wie beim Server,
+ da wir mit den gleichen Objekten arbeiten.
+\end_layout
+
+\begin_layout Description
+View
+\end_layout
+
+\begin_layout Standard
+Die View bestehen aus einen oder mehrere XML-Dateien für jede Activity und
+ die zugehörigen Activity-Klassen.
+ Die Activity's entnimmen die Benutzerinteraktionen entgegen und stellen
+ diese in den XML-Dateien dar.
+ Die Methode onClickListener() ist für die interaktion zuständig.
+ 
+\end_layout
+
+\begin_layout Description
+Controller
+\end_layout
+
+\begin_layout Standard
+Unsere Services sind für die Koordination der Kommunikation zwischen den
+ View und den Server zuständig.
+ Fast jedes Service schickt oder holt Information vom Server und übergibt
+ es an den Activitys weiter.
+ Eine Activity kann in eine oder mehrere Services 
+\color red
+im Bezug sein./eine Beziehung haben.
+\color inherit
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Folgende sind MVC´s:
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+LoginActivity
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+View
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Controller
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LoginActivity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+User
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LoginService
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Benutzer Login oder Registrierung 
+\begin_inset Newline newline
+\end_inset
+
+Kommunikation: 
+\end_layout
+
+\begin_layout Standard
+Beim Login vordert die Acitivity den Benutzername und Passwort vom Benutzer
+ und erzeugt dann einen LoginService.
+ Bei der Registierung vordert die Activity einen Benutzername, Passwort
+ und Google-Account und erzeugt ebenfalls einen LoginService.
+\end_layout
+
+\begin_layout Description
+MapActivity
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+View
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Controller
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MapActivity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Meeting, GPS, MeetingCenterParticipant(bei Touren)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MeetingParticipantManagementService
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Zeigt den Treffenpunk auf der Karte an:
+\end_layout
+
+\begin_layout Standard
+Bei einer Tour wird die größte Teilnehmeransammlung auf der Karte anzeigt,
+ mit den Teilnehmern, die sich darin befinden.
+\end_layout
+
+\begin_layout Standard
+Bei einer Veranstalltung werden alle Teilnehmer in ein bestimmten Umkreis
+ angezeigt.
+\end_layout
+
+\begin_layout Standard
+Kommunikation: 
+\end_layout
+
+\begin_layout Standard
+Erzeugt einen MeetingService und kriegen die Termininformationen zurück,
+ wo die GPS-Daten und die Teilnehmer die im Zentrum beinhalten.
+\end_layout
+
+\begin_layout Description
+MeetingListActivity
+\end_layout
+
+\begin_layout Description
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+View
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Controller
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MeetingListActivity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Meetings(Event und Tour)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MeetingsService
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Activity zeigt eine Liste von Terminen und die jeweiligen Termininformatio
+nen an.
+ In diese Activity kann man auch eine Terminanfrage ab oder zu sagen.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Kommunikation: 
+\end_layout
+
+\begin_layout Standard
+Um die Liste von Terminen anzuzeigen, wird einen MeetingsService erzeugt,
+ der eine Liste von Participant-Objekte zurückliefert.
+ Beim Zu- oder Absagen eines Termins wird dafür einen MeetingService erzeugt,
+ 
+\color red
+um es den Server weiter zugeben/leiten/benachrichtigen what ever??????
+\end_layout
+
+\begin_layout Description
+MeetingParticipantsActivity
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+View
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Controller
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MeetingParticipantsActivity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Participant
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MeetingParticipantManagemtService
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+Zeigt eine Liste von zugesagten Teilnehmern eines Termins an Kommunikation:
+ 
+\end_layout
+
+\begin_layout Standard
+Erstellt ein MeetingParticipantManagemtService, der eine Liste von Participant-O
+bjekte zurückliefert.
+\end_layout
+
+\begin_layout Description
+NewMeetingActivity
+\end_layout
+
+\begin_layout Description
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+View
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Controller
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NewMeetingActivity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Meetings(Event und Tour)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MeetingsService
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In diese Activity kann mein ein neuen Termin erstellen.
+\begin_inset Newline newline
+\end_inset
+
+Kommunikation: 
+\end_layout
+
+\begin_layout Standard
+Beim erstellen das Treffen wird einen MeetingService erzeugt.
+\end_layout
+
+\begin_layout Description
+GroupsActivity
+\end_layout
+
+\begin_layout Description
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+View
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Controller
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GroupsActivity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Group
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GroupsService
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zeigt eine Liste von Gruppen an und man kann eine Gruppe löschen.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Kommunikation: 
+\end_layout
+
+\begin_layout Standard
+Um die Liste von Gruppen anzuzeigen, wird einen GroupsService erstellt,
+ der eine Liste von Group-Objekte zurückliefert.
+ Für Gruppe löschen wird einen GroupService erzeugt.
+\end_layout
+
+\begin_layout Description
+GroupMembersActivity
+\end_layout
+
+\begin_layout Description
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+View
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Controller
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GroupMemberActivity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+User, GroupUserManagement
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+UsersService, GroupUserManagementService
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zeigt alle Gruppenmitglieder an, man kann die Gruppe verlassen.
+ Administratoren können Mitglieder suchen und hinzufügen, oder sie entfernen.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Kommunikation: 
+\end_layout
+
+\begin_layout Standard
+Für die Liste, erzeugt es einen GroupUserManagmentService und liefert eine
+ Liste von Teilnehmer zurück.
+ 
+\end_layout
+
+\begin_layout Standard
+Um eine Gruppe zu verlassen oder Mitglieder hinzufügen oder löschen wird
+ ein GroupUserManagementService erzeugt.
+ 
+\end_layout
+
+\begin_layout Standard
+Für das Suchen wird ein UsersService erzeugt, der eine Liste von User-Objekten
+ als Vorschläge zurück gibt.
+ 
+\end_layout
+
+\begin_layout Description
+CreateNewGroupActivity
+\end_layout
+
+\begin_layout Description
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+View
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Controller
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CreateNewGroupActivity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Group, User
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GroupService, UsersService
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hier kann man eine neue Gruppe erstellen und Benutzer in diese Gruppe hinzufügen.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Kommunikation: 
+\end_layout
+
+\begin_layout Standard
+Um eine neue Gruppe zu erstellen wird einen GroupService erstellt.
+ 
+\end_layout
+
+\begin_layout Standard
+Für die suche nach Benutzern wird ein UsersService erstellt, der eine Liste
+ von allen Suchtreffern als User-Objekte zurück gibt.
+\end_layout
+
+\begin_layout Description
+SettingsActivity
+\end_layout
+
+\begin_layout Description
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+View
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Controller
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SettingsActivity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Notification
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NotificationsService
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Anzeigen und ändern der Einstellungen (Standort anzeigen und Benachrichtigung
+ ein/ausschalten) 
+\begin_inset Newline newline
+\end_inset
+
+Kommunikation: 
+\end_layout
+
+\begin_layout Standard
+Erstellt eine NotificationService um die Benachrichten Einstellung an den
+ Server weiter zu geben.
+ 
+\color red
+(Prioität B)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/MVC_Diagramm.jpg
+	scale 80
+	BoundingBox 140bp 0bp 942bp 400bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Klassendiagramm
 \end_layout
@@ -214,14 +1141,14 @@ kit.edu.pse.goapp.client.datamodels
 \begin_layout Standard
 Bei dem Klassendiagramm handelt es sich um das gleiche wie beim Server benutzt
  wird.
- Die genaue Beschreibung entnimmt man Kapitel 2.2.1
+ Die genaue Beschreibung entnimmt man Kapitel 2.2.1.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/Klassendiagramm.jpg
-	scale 60
-	BoundingBox 400bp 0bp 1346bp 700bp
+	scale 55
+	BoundingBox 200bp 0bp 1346bp 800bp
 
 \end_inset
 
@@ -245,6 +1172,8 @@ kit.edu.pse.goapp.client.activity
 \begin_layout Standard
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/Activitys.jpg
+	scale 55
+	BoundingBox 200bp 0bp 1700bp 800bp
 
 \end_inset
 
@@ -264,7 +1193,16 @@ kit.edu.pse.goapp.client.service
 \begin_layout Standard
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/Service.jpg
+	scale 60
+	BoundingBox 200bp 0bp 1224bp 700bp
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
 \end_inset
 
 
@@ -288,6 +1226,8 @@ Allgemein: Die folgende Abbildung beschreibt die Klassen,welche dem Client
 \begin_layout Standard
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/Client_URI_Builder.jpg
+	scale 60
+	BoundingBox 125bp 0bp 1113bp 800bp
 
 \end_inset
 
@@ -334,6 +1274,13 @@ kit.edu.pse.goapp.client.httpappclient
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Converter
 \end_layout
@@ -345,8 +1292,16 @@ kit.edu.pse.goapp.client.converter
 \end_layout
 
 \begin_layout Standard
+Klassendiagrammbeschreibung siehe Kapitel 2.2.5: 
+\family typewriter
+kit.edu.pse.goapp.server.converter
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/Client_converter.jpg
+	scale 70
+	BoundingBox 200bp 0bp 1079bp 600bp
 
 \end_inset
 
@@ -366,6 +1321,8 @@ kit.edu.pse.goapp.client.receiver
 \begin_layout Standard
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/Receiver.jpg
+	scale 70
+	BoundingBox 100bp 0bp 961bp 445bp
 
 \end_inset
 
@@ -386,6 +1343,13 @@ kit.edu.pse.goapp.client.databasehandler
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/DataBaseHandler.jpg
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
 \end_inset
 
 
@@ -650,7 +1614,7 @@ Der jeweilige Converter erstellt die DAOs aus dem JSON String vom HTTP Request
 Converter
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsubsection*
 
 \family typewriter
 Package kit.edu.pse.goapp.server.converter
@@ -1024,7 +1988,7 @@ HTTP-Protokoll
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="45" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -2357,7 +3321,7 @@ Folgende Statuscodes können bei einer HTTP-Response auftreten:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="7" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -2600,7 +3564,7 @@ Neue Gruppe erstellen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -2642,7 +3606,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -2728,7 +3692,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -2826,7 +3790,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -2913,7 +3877,7 @@ Gruppeninformationen anzeigen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -2955,7 +3919,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -3041,7 +4005,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -3139,7 +4103,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -3250,7 +4214,7 @@ Gruppe bearbeiten
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -3292,7 +4256,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -3434,7 +4398,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -3598,7 +4562,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -3724,7 +4688,7 @@ Gruppe löschen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -3765,7 +4729,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -3851,7 +4815,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -3949,7 +4913,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -4087,7 +5051,7 @@ Benutzer zu einer Gruppe hinzufügen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -4130,7 +5094,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -4274,7 +5238,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -4444,7 +5408,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -4573,7 +5537,7 @@ Liste der Gruppenmitglieder ausgeben
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -4614,7 +5578,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -4700,7 +5664,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -4798,7 +5762,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -4909,7 +5873,7 @@ Gruppenmitglied zum Admin (ab)wählen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -4951,7 +5915,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -5095,7 +6059,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -5267,7 +6231,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -5421,7 +6385,7 @@ Gruppenmitglied löschen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -5462,7 +6426,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -5577,7 +6541,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -5708,7 +6672,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -5843,7 +6807,7 @@ Liste der Gruppen anzeigen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -5884,7 +6848,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -5957,7 +6921,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -6024,7 +6988,7 @@ Neuen Benutzer in der Go-App registrieren
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -6066,7 +7030,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -6181,7 +7145,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -6312,7 +7276,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -6393,7 +7357,7 @@ Die Parameter haben den falschen Datentyp
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -6434,7 +7398,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -6520,7 +7484,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -6618,7 +7582,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -6727,7 +7691,7 @@ In die Go-App einloggen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -6769,7 +7733,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -6855,7 +7819,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -6953,7 +7917,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7066,7 +8030,7 @@ Aus der Go-App ausloggen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7107,7 +8071,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7180,7 +8144,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7247,7 +8211,7 @@ Prüft, ob der Benutzer auf die angeforderte Ressource zugreifen darf
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7289,7 +8253,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7362,7 +8326,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7429,7 +8393,7 @@ Liste von Nachrichten ausgeben
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7470,7 +8434,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7543,7 +8507,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7604,7 +8568,7 @@ Nachrichtenanzeigen an-/ausschalten
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7646,7 +8610,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7732,7 +8696,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -7830,7 +8794,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7921,7 +8885,7 @@ Neuen Benutzer erstellen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -7962,7 +8926,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -8077,7 +9041,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -8208,7 +9172,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -8313,7 +9277,7 @@ Benutzerinformationen anzeigen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -8355,7 +9319,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -8441,7 +9405,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -8539,7 +9503,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -8648,7 +9612,7 @@ Benutzerinformationen ändern
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -8694,7 +9658,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -8809,7 +9773,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -8940,7 +9904,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -9045,7 +10009,7 @@ Benutzer löschen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -9086,7 +10050,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -9172,7 +10136,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -9270,7 +10234,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -9385,7 +10349,7 @@ Liste aller Benutzer ausgeben
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -9426,7 +10390,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -9490,7 +10454,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -9584,7 +10548,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -9651,7 +10615,7 @@ GPS-Daten updaten
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -9692,7 +10656,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -9834,7 +10798,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -9998,7 +10962,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -10085,7 +11049,7 @@ Termin erstellen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -10127,7 +11091,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="12" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -10474,7 +11438,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="11" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -10875,7 +11839,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -10980,7 +11944,7 @@ Termininfos
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -11021,7 +11985,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="12" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -11368,7 +12332,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="11" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -11769,7 +12733,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -11874,7 +12838,7 @@ Termin ändern
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -11915,7 +12879,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="12" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -12262,7 +13226,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="11" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -12663,7 +13627,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -12789,7 +13753,7 @@ Termin löschen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -12830,7 +13794,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -12916,7 +13880,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -13014,7 +13978,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -13150,7 +14114,7 @@ Liste mit allen Terminen ausgeben
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -13191,7 +14155,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -13277,7 +14241,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -13375,7 +14339,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -13490,7 +14454,7 @@ Liste von Teilnehmern hinzufügen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -13531,7 +14495,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -13646,7 +14610,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -13777,7 +14741,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -13923,7 +14887,7 @@ Teilnehmer anzeigen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -13964,7 +14928,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -14079,7 +15043,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -14210,7 +15174,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -14315,7 +15279,7 @@ Zusage ändern
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -14356,7 +15320,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -14471,7 +15435,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -14602,7 +15566,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -14707,7 +15671,7 @@ Teilnehmer aus dem Termin löschen
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -14748,7 +15712,7 @@ Anfrage
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -14863,7 +15827,7 @@ Dabei werden folgende Parameter verwendet:
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -14994,7 +15958,7 @@ Fehler
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -15149,6 +16113,14 @@ Klassen des Clients
 \end_layout
 
 \begin_layout Subsection
+Package kit.edu.pse.goapp.client.datamodels
+\end_layout
+
+\begin_layout Standard
+Klassenbeschreibung siehe 5.1 Package kit.edu.pse.goapp.server.datamodels
+\end_layout
+
+\begin_layout Subsection
 Package kit.edu.pse.goapp.client.activity
 \end_layout
 
@@ -15163,7 +16135,7 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-(Beschreibung der Klasse einfügen)
+Basisklasse für Activities, die die Support Libary Action Bar Features nutzen.
 \end_layout
 
 \begin_layout Subsection*
@@ -15182,7 +16154,7 @@ onCreate(Bundle savedInstanceState)
 \begin_inset Newline newline
 \end_inset
 
-(Beschreibung einfügen)
+Hier wird das Layout der Activity erstellt
 \begin_inset Newline newline
 \end_inset
 
@@ -15195,7 +16167,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -15216,7 +16188,8 @@ savedInstanceState
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung einfügen)
+Die zuvor gespeicherte Instanz der Activity, die wieder hergestellt wird,
+ sonst ist es NULL
 \end_layout
 
 \end_inset
@@ -15259,7 +16232,7 @@ showPopUp(View v)
 \begin_inset Newline newline
 \end_inset
 
-Zeigt einPopUp-Fenster an
+Zeigt ein PopUp-Fenster an
 \begin_inset Newline newline
 \end_inset
 
@@ -15272,7 +16245,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -15349,7 +16322,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -15370,7 +16343,11 @@ item
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung einfügen)
+(Das 
+\family typewriter
+MenuItem
+\family default
+ auf das gehört weden soll)
 \end_layout
 
 \end_inset
@@ -15449,7 +16426,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -15539,7 +16516,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -15629,7 +16606,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -15686,7 +16663,7 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-Diese Klasse startet eineActivity, um eine neue Gruppe zu erstellen.
+Diese Klasse startet eine Activity, um eine neue Gruppe zu erstellen.
 \end_layout
 
 \begin_layout Subsection*
@@ -15719,7 +16696,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -15809,7 +16786,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -15866,7 +16843,8 @@ Beschreibung
 \end_layout
 
 \begin_layout Standard
-(Beschreibung hinzufügen)
+Dies ist die Activity, in der Informationen über die App, ihre Ersteller
+ und Rechtliches angezeigt werden.
 \end_layout
 
 \begin_layout Subsection*
@@ -15886,7 +16864,7 @@ start(Activity activity)
 
 
 \family default
-(Beschreibung hinzufügen)
+Startet eine Activity zum Anzeigen der About-Informationen
 \begin_inset Newline newline
 \end_inset
 
@@ -15899,7 +16877,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -15920,7 +16898,7 @@ activity
 \begin_inset Text
 
 \begin_layout Plain Layout
-(Beschreibung hinzufügen)
+Die Activity, die gestartet weden soll
 \end_layout
 
 \end_inset
@@ -15990,7 +16968,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -16080,7 +17058,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -16171,7 +17149,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -16261,7 +17239,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -16335,7 +17313,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -16345,6 +17323,8 @@ Parameter
 \begin_layout Plain Layout
 
 \family typewriter
+Handler 
+\series bold
 handler
 \end_layout
 
@@ -16396,7 +17376,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -16406,6 +17386,8 @@ Parameter
 \begin_layout Plain Layout
 
 \family typewriter
+Integer 
+\series bold
 resultCode
 \end_layout
 
@@ -16428,6 +17410,8 @@ resultCode
 \begin_layout Plain Layout
 
 \family typewriter
+Bundle 
+\series bold
 resultData
 \end_layout
 
@@ -16493,7 +17477,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -16503,6 +17487,8 @@ Parameter
 \begin_layout Plain Layout
 
 \family typewriter
+Integer 
+\series bold
 resultCode
 \end_layout
 
@@ -16525,6 +17511,8 @@ resultCode
 \begin_layout Plain Layout
 
 \family typewriter
+Bundle 
+\series bold
 resultData
 \end_layout
 
@@ -16606,7 +17594,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -16616,6 +17604,8 @@ Parameter
 \begin_layout Plain Layout
 
 \family typewriter
+Receiver 
+\series bold
 receiver
 \end_layout
 
@@ -16626,6 +17616,4192 @@ receiver
 
 \begin_layout Plain Layout
 (Beschreibung hinzufügen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Package kit.edu.pse.goapp.client.service
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Abstract class IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Der IntentService bearbeitet Anfragen und verläuft asynchron ab.
+ Der Auftragsgeber (Master) sendet Anfragen durch den Aufruf startService(Intent
+) an den IntentService (Worker).
+ Bei gebrauch wird ein Service gestartet und beendet sich, am Ende des Prozesses
+ von alleine.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+IntentService(String name)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gibt den Worker-Thread einen Namen, die nur fürs Debuggin wichtig ist.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+protected void 
+\series bold
+onHandleIntent(Intent intent)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+(Beschreibung einfügen)
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(Beschreibung hinzufügen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+startService(Intent intent)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+(Beschreibung einfügen)
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(Beschreibung hinzufügen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class LoginService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt das Einloggen in die Go-App dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+LoginService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+LoginService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class LogoutService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt das Ausloggen aus der Go-App dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+LogoutService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+LogoutService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class LoginFilterService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+LoginFilterService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+LoginFilterService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class UserService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt einen Benutzer der Go-App dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+UserService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+UserService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class UsersService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt alle Benutzer der Go-App dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+UsersService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+UsersService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class GroupService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt eine Gruppe von Benutzern der Go-App dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+GroupService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GroupService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class GroupsService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt alle Gruppen in der Go-App dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+GroupsService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GroupsService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class GroupUserManagementService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt die Verwaltung der Gruppenmitglieder einer Gruppe in der Go-App
+ dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+GroupUserManagementService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GroupUserManagementService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class GPSService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt die GPS-Positionen der Benutzer dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public
+\series bold
+ GPSService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GPSService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class MeetingService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt einen Termin einer Gruppe dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+MeetingService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+MeetingService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class MeetingsService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt alle Termine dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+MeetingsService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+MeetingsService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class MeetingParticipantManagementService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt Teilnehmer an einem Termin dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+MeetingParticipantManagementService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+MeetingParticipantManagementService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class NotificationService
+\family default
+ extends
+\family typewriter
+ IntentService
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+IntentService
+\family default
+ und stellt die Benachrichtigungen der Benutzer über ihre Termine dar.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+NotificationService()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+NotificationService
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+IntentService
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+IntentService
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsection
+Package kit.edu.pse.goapp.client.uri_builder
+\end_layout
+
+\begin_layout Subsection
+Package kit.edu.pse.goapp.client.httpappclient
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class HttpAppClient
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse gibt einen Statuscode an den Client zurück, der angibt, ob
+ die Anfrage fehlerfrei bearbeitet werden konnte.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public HttpResponse 
+\series bold
+sendPost(URI uri)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Sendet einen HTTP POST Request mit der Methode 
+\family typewriter
+sendPost(URI uri)
+\family default
+ an den Server 
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Uri 
+\series bold
+uri
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gibt die URL des Servlets an und hält Parameter gespeichert
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\family typewriter
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+HttpResponse
+\family default
+ mit Statuscode
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public HttpResponse 
+\series bold
+sendGet(URI uri)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Sendet einen HTTP GET Request mit der Methode 
+\family typewriter
+sendGet(URI uri)
+\family default
+ an den Server 
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Uri 
+\series bold
+uri
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gibt die URL des Servlets an und hält Parameter gespeichert
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\family typewriter
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+HttpResponse
+\family default
+ mit Statuscode
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public HttpResponse 
+\series bold
+sendDelete(URI uri)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Sendet einen HTTP DELETE Request mit der Methode 
+\family typewriter
+sendDelete(URI uri)
+\family default
+ an den Server 
+\series bold
+
+\begin_inset Newline newline
+\end_inset
+
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Uri 
+\series bold
+uri
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gibt die URL des Servlets an und hält Parameter gespeichert
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\series bold
+
+\begin_inset Newline newline
+\end_inset
+
+Rückgabewert:
+\family typewriter
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+HttpResponse
+\family default
+ mit Statuscode
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public HttpResponse 
+\series bold
+sendPost(URI uri)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Sendet einen HTTP PUT Request mit der Methode 
+\family typewriter
+sendPut(URI uri)
+\family default
+ an den Server 
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Uri 
+\series bold
+uri
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gibt die URL des Servlets an und hält Parameter gespeichert
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\family typewriter
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+HttpResponse
+\family default
+ mit Statuscode
+\end_layout
+
+\begin_layout Subsection
+Package kit.edu.pse.goapp.client.converter
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Interface Converter<T>
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Das Interface 
+\family typewriter
+Converter<T>
+\family default
+ stellt die Konverter von Parametern zu Objekten und umgekehrt dar.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public T parse(String jsonString)
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst den Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String als 
+\family typewriter
+T
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(T object)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus dem eingegebenen Objekt im Format 
+\family typewriter
+T
+\family default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+T object
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Objekt im Format 
+\family typewriter
+T
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+object als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(List <T> objects)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus List<T>
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+List<T> objects
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Liste von Objekten
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+List<T> als String
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class NotificationConverter 
+\family default
+implements 
+\family typewriter
+Converter<T>
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+NotificationConverter
+\family default
+ implementiert das Interface 
+\family typewriter
+Converter<T>
+\family default
+ und konvertiert Benachrichtigungen von Parameterin in Objekte und umgekehrt.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+NotificationConverter()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse
+\family typewriter
+ NotificationConverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString), public String serialize(T object)
+\family default
+ und 
+\family typewriter
+public String serialize(List<T> objects)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public Notification 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String der Benachrichtigung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String des Benachrichtigung als 
+\family typewriter
+Notification
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(Notification notification)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus der Benachrichtigung
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Notification notification
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+die Benachrichtigung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Benachrichtigung als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(List <Notification> notifications)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus List<
+\family typewriter
+Notification
+\family default
+>
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+List<Notification> notifications
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Liste von Benachrichtigungen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+List<
+\family typewriter
+Notification
+\family default
+> als String
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class GroupMemberConverter 
+\family default
+implements 
+\family typewriter
+Converter<T>
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GroupMemberConverter 
+\family default
+implementiert das Interface 
+\family typewriter
+Converter<T>
+\family default
+ und konvertiert die Gruppenmitglieder von Parametern in Objekte und umgekehrt.
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+GroupMemberConverter()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methode 
+\end_layout
+
+\begin_layout Standard
+Die Klasse
+\family typewriter
+ GroupMemberConverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString), public String serialize(T object)
+\family default
+ und 
+\family typewriter
+public String serialize(List<T> objects)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public User 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String der Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String des Gruppenmitglieds als User
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(Group group)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus der Gruppe
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Group group
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+die Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gruppe als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(List <Group> groups)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus List<Group>
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+List<Group> group
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Liste von Gruppen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+List<Group> als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(List <User> users)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus List<User>
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+List<User> users
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Liste von Benutzern
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+List<User> als String
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class GroupConverter 
+\family default
+implements 
+\family typewriter
+Converter<T>
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GroupConverter 
+\family default
+implementiert das Interface 
+\family typewriter
+Converter<T>
+\family default
+ und konvertiert eine Gruppe von Parametern in Objekte und umgekehrt.
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+GroupConverter()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse
+\family typewriter
+ GroupConverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString), public String serialize(T object)
+\family default
+ und 
+\family typewriter
+public String serialize(List<T> objects)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public Group 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String der Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String der Gruppe als Group
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(Group group)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus der Gruppe
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Group group
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+die Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Gruppe als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(List <Group> groups)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus List<Group>
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+List<Group> groups
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Liste von Gruppen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+List<Group> als String
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class GPS_Converter 
+\family default
+implements 
+\family typewriter
+Converter<T>
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+GPS_Converter 
+\family default
+implementiert das Interface 
+\family typewriter
+Converter<T>
+\family default
+ und konvertiert die GPS-Daten von Parametern in Objekte und umgekehrt.
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+GPS_Converter()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse
+\family typewriter
+ GPS_Converter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString), public String serialize(T object)
+\family default
+ und 
+\family typewriter
+public String serialize(List<T> objects)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public GPS 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String des GPS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String des GPS als GPS
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(GPS gps)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus dem GPS
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+GPS gps
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+das GPS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+GPS als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(List <GPS> gps)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus List<GPS>
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+List<GPS> gps
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Liste von GPS-Daten
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+List<GPS> als String
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class UserConverter 
+\family default
+implements 
+\family typewriter
+Converter<T>
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+UserConverter 
+\family default
+implementiert das Interface 
+\family typewriter
+Converter<T>
+\family default
+ und konvertiert die Benutzer von Parametern in Objekte und umgekehrt.
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+UserConverter()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse
+\family typewriter
+ UserConverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString), public String serialize(T object)
+\family default
+ und 
+\family typewriter
+public String serialize(List<T> objects)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public User 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String des Benutzers
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String des Benutzers als User
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(User user)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus dem Benutzer
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+User user
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+der Benutzer
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Benutzer als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(List <User> users)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus List<User>
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+List<User> users
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Liste von Benutzern
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+List<User> als String
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class ParticipantConverter 
+\family default
+implements 
+\family typewriter
+Converter<T>
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+ParticipantConverter 
+\family default
+implementiert das Interface 
+\family typewriter
+Converter<T>
+\family default
+ und konvertiert einen Teilnehmer von Parametern in Objekte und umgekehrt.
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+ParticipantConverter()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse
+\family typewriter
+ ParticipantConverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString), public String serialize(T object)
+\family default
+ und 
+\family typewriter
+public String serialize(List<T> objects)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public Participant 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String des Participant
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String des Participant als Participant 
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(Participant participant)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus demParticipant
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Participant participant
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+der Teilnehmer
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Participant als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(List <Participant> participants)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus List<Participant>
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+List<Participant> participant
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Liste von Participants
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+List<Participant> als String
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class MeetingConverter 
+\family default
+implements 
+\family typewriter
+Converter<T>
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+MeetingConverter 
+\family default
+implementiert das Interface 
+\family typewriter
+Converter<T>
+\family default
+ und konvertiert einen Termin von Parametern in Objekte und umgekehrt.
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+MeetingConverter()
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Default-Konstruktor
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse
+\family typewriter
+ MeetingConverter 
+\family default
+implementiert und überschreibt die Methoden 
+\family typewriter
+public T parse(String jsonString), public String serialize(T object)
+\family default
+ und 
+\family typewriter
+public String serialize(List<T> objects)
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public Meeting 
+\series bold
+parse(String jsonString)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Parst einen Json-String
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+String jsonString
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zu überprüfender String des Treffens
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Json-String des Treffens als Meeting
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(Meeting meeting)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus dem Meeting 
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Meeting meeting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+der Termin
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Meeting als String
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public String serialize(List <Meeting> meetings)
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+Erstellt einen String aus List<Meeting>
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+List<Meeting> meetings
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Liste von Terminen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Rückgabewert:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+List<Meeting> als String
+\end_layout
+
+\begin_layout Subsection
+Package kit.edu.pse.goapp.client.receiver
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Abstract class BroadcastReceiver
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+(Beschreibung der Klasse einfügen)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+onReceive(Context context, Intent intent)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+(Beschreibung einfügen)
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Context
+\series bold
+ context
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(Beschreibung einfügen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(Beschreibung hinzufügen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class AlarmReceiver
+\family default
+ extends
+\family typewriter
+ BroadcastReceiver
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+BroadcastReceiver
+\family default
+.
+ Wenn dieser ein Broadcast erhält, wird der GPS_Service gestartet.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+AlarmReceiver()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+onReceive(Context context, Intent intent)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Der GPS_Service wird gestartet
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Context
+\series bold
+ context
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(Beschreibung einfügen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(Beschreibung hinzufügen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class DeviceBootReceiver
+\family default
+ extends 
+\family typewriter
+BroadcastReceiver
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Diese Klasse erweitert die abstrakte Klasse 
+\family typewriter
+BroadcastReceiver
+\family default
+.
+ Sie erstellt die Alarme neu bei einem Reboot.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+public 
+\series bold
+DeviceBootReceiver()
+\family default
+\series default
+ (Default-Konstruktor)
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\family typewriter
+DeviceBootReceiver
+\family default
+ enthält keine eigenen Methoden.
+ Sie übernimmt alle Methoden aus der Klasse 
+\family typewriter
+BroadcastReceiver
+\family default
+ und überschreibt keine Methode.
+ Neben den Methoden der Klasse 
+\family typewriter
+BroadcastReceiver
+\family default
+ werden keine weiteren Methoden benötigt.
+\end_layout
+
+\begin_layout Subsection
+Package kit.edu.pse.goapp.client.databasehandler
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Abstract class SQLiteOpenHelper
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Eine Hilfsklasse um Datenbank zu erstellen und ihre Versionen zu managen.
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+onHandleIntent(Intent intent)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+(Hier noch Beschreibung der Methode einfügen)
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Intent 
+\series bold
+intent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(Beschreibung des Parameters einfügen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\family typewriter
+Class DataBaseHandler extends SQLiteOpenHelper
+\end_layout
+
+\begin_layout Subsection*
+Beschreibung
+\end_layout
+
+\begin_layout Standard
+Hilft bei dem Erstellen und Managen der Datenbank, in der die 
+\family typewriter
+MeetingID
+\family default
+s und 
+\family typewriter
+MeetingTime
+\family default
+s gespeichert werden.
+\end_layout
+
+\begin_layout Subsection*
+Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public 
+\series bold
+DataBaseHandler(Context context)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter:
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+Context 
+\series bold
+context
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Der Kontext der Datenbank
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Methoden
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+onCreate(SQLiteDatabase db)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Erstellt eine SQLiteDatabase
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+SQLiteDatabase db
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Die Datenbank
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+public void 
+\series bold
+onUpgrate(SQLiteDatabase db, int oldVersion, int newVersion)
+\family default
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Aktualisiert die SQLiteDatabase
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Parameter
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+SQLiteDatabase 
+\series bold
+db
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Die Datenbank
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+int 
+\series bold
+oldVersion
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Alte Versionsnummer
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+int 
+\series bold
+newVersion
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Neue Versionsnummer
 \end_layout
 
 \end_inset
@@ -16695,7 +21871,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -17057,7 +22233,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -17270,7 +22446,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -17321,7 +22497,7 @@ Entfernt einen Teilnehmer aus dem Zentrum, sobald er sich vom Zentrum entfernt.
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -17452,7 +22628,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -17617,7 +22793,7 @@ Rückgabewerte:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -17718,7 +22894,7 @@ Parameter
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -17839,7 +23015,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -17978,7 +23154,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -18064,7 +23240,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -18123,7 +23299,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -18254,7 +23430,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -18393,7 +23569,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -18452,7 +23628,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -18538,7 +23714,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -18642,7 +23818,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -18914,7 +24090,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -19146,7 +24322,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -19377,7 +24553,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -19627,7 +24803,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="7" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -19969,7 +25145,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -20309,7 +25485,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -20510,7 +25686,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -20702,7 +25878,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -20784,7 +25960,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -20858,7 +26034,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -20928,7 +26104,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21064,7 +26240,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21134,7 +26310,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21206,7 +26382,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21348,7 +26524,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21416,7 +26592,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21484,7 +26660,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21552,7 +26728,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21690,7 +26866,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21758,7 +26934,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21826,7 +27002,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -21968,7 +27144,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22036,7 +27212,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22104,7 +27280,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22242,7 +27418,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22310,7 +27486,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22378,7 +27554,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22516,7 +27692,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22584,7 +27760,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22652,7 +27828,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22790,7 +27966,7 @@ Parameter
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22858,7 +28034,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22926,7 +28102,7 @@ Parameter:
 
 \begin_inset Tabular
 <lyxtabular version="3" rows="1" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
@@ -22995,7 +28171,7 @@ Primärschlüssel
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -23081,7 +28257,7 @@ Attribute
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -23181,7 +28357,7 @@ Attribute
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -23347,7 +28523,7 @@ Primärschlüssel
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -23433,7 +28609,7 @@ Attribute
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -23599,7 +28775,7 @@ Primärschlüssel
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -23685,7 +28861,7 @@ Attribute
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="9" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -24022,7 +29198,7 @@ Primärschlüssel
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -24108,7 +29284,7 @@ Attribute
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="3">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -24849,6 +30025,146 @@ rter übergibt, der den JSON String, der sich im HTTP PUT Request befindet,
 	filename Sequenzdiagramme/Login.jpg
 	scale 50
 	BoundingBox 300bp 0bp 1639bp 800bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+GPS mithilfe des AlarmReceivers
+\end_layout
+
+\begin_layout Paragraph*
+
+\lang ngerman
+Über 
+\family typewriter
+awakeFromAndroidOS
+\family default
+ wird der AlarmReceiver aufgeweckt und zwar 30 Minuten vor Beginn des nächsten
+ Termins, da dann damit begonnen werden soll, die GPS-Daten an den Server
+ zu schicken.
+\end_layout
+
+\begin_layout Paragraph*
+
+\lang ngerman
+Der AlarmReceiver started über 
+\family typewriter
+startService(intent) 
+\family default
+einen GpsService und der Receiver wird anschließend zerstört.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+
+\lang ngerman
+Der Service erstellt eine Instanz 
+\emph on
+uri 
+\emph default
+von 
+\family typewriter
+URI_MeetingBuilder
+\family default
+, dort wird über 
+\family typewriter
+addParameter(meeting)
+\family default
+ das genaue 
+\family typewriter
+Meeting
+\family default
+ spezifiziert, und erhält diese über 
+\family typewriter
+getURI()
+\family default
+.
+ Dann sendet er diese an einen 
+\family typewriter
+HttpAppClient
+\family default
+ mit der Methode 
+\family typewriter
+sendGet(uri)
+\family default
+ weiter.
+ Dieser macht dann eine HTTP GET Request beim Server.
+\end_layout
+
+\begin_layout Paragraph*
+
+\lang ngerman
+Die Information, die der HttpAppClient zurückliefert, ist eine HTTP Responce
+ mit Statuscode und JSON-String, dieser wird über die Methode 
+\family typewriter
+parse(jsonString)
+\family default
+ beim 
+\family typewriter
+MeetingConverter
+\family default
+ in eine Liste von 
+\family typewriter
+Meeting
+\family default
+s umgewandelt, die aber nur ein 
+\family typewriter
+Meeting
+\family default
+ enthält.
+\end_layout
+
+\begin_layout Paragraph*
+
+\lang ngerman
+Vom Meeting wird die Termininformationen gelesen und wenn 
+\family typewriter
+TerminBeginnig
+\family default
+ mit 
+\family typewriter
+CurrentTime
+\family default
+ übereinstimmt, wird eine Instanz vom 
+\family typewriter
+URI_GPS_Builder
+\family default
+ erstellt, diesem der Aktuellestandort als Parameter mitgegeben und über
+ 
+\family typewriter
+getUri() 
+\family default
+die Uri abgefragt.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+
+\lang ngerman
+Anschließend wird über einen Aufruf von 
+\family typewriter
+sendPut(uri)
+\family default
+ beim 
+\family typewriter
+HttpAppClient 
+\family default
+HTTP PUT Request an den Server geschickt.
+ Der im 
+\family typewriter
+responce
+\family default
+ enthaltene Statuscode, teilt uns mit ob alles geklappt hat.
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Graphics
+	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/SequenceGps.jpg
 
 \end_inset
 
