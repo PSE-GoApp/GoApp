@@ -125,7 +125,7 @@ hitektur gelten.
  Dies führt zu Skalierbarkeit, Einfachheit und Transparenz.
  Außerdem ist das System mehrschichtig.
  Dadurch reicht es, dem Anwender lediglich eine Schnittstelle, was Einfachheit
- und gute Entwickelarbeit zur Folge hat, anzubieten.
+ und gute Entwickelbarkeit zur Folge hat, anzubieten.
  Dahinterliegende Ebenen können verborgen bleiben und somit die Architektur
  insgesamt vereinfacht werden.
  
@@ -146,6 +146,14 @@ Im Client wird zusätzlich die Model-View-Controller-Architektur verwendet,
  die Gesamtkomplexität reduziert.
  Bestehende Systeme können leicht erweitert werden, indem neue MVC-Module
  hinzugefügt werden.
+\begin_inset Newline newline
+\end_inset
+
+Auf der Serverseite verwenden wir eine MySQL-Datenbank, da diese uns eine
+ große Flexibilität bereitstellt und des weiteren zeichnet sich eine MySQL-Daten
+bank durch ihre Performance, Skalierbarkeit und ihrer Akzeptanz gegenüber
+ paralleler Zugriffe aus.
+ 
 \begin_inset Newline newline
 \end_inset
 
