@@ -135,11 +135,7 @@ String key
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\color red
-was tut 
-\lang ngerman
-der
+Schlüssel in String
 \end_layout
 
 \end_inset
@@ -159,11 +155,7 @@ String value
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\color red
-was tut 
-\lang ngerman
-der
+Value in String
 \end_layout
 
 \end_inset
@@ -189,7 +181,7 @@ public String getURI()
 \begin_inset Newline newline
 \end_inset
 
-Liefert das lokale URI Objekt zuück
+Liefert das lokale URI-Objekt zurück
 \end_layout
 
 \begin_deeper
@@ -216,7 +208,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum LoginServer beinhaltet.
+ zum LoginSerlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -242,96 +234,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -346,7 +251,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum LogoutServer beinhaltet.
+ zum LogoutServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -372,96 +277,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -476,7 +294,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum LoginFilterServer beinhaltet.
+ zum LoginFilterServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -502,96 +320,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -606,7 +337,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum GroupServer beinhaltet.
+ zum GroupServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -633,96 +364,9 @@ Erstellt das private Uri-Objekt und als Adresse wird serverAdd mit servletAdd
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -737,7 +381,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum GroupsServer beinhaltet.
+ zum GroupsServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -763,96 +407,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -867,7 +424,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum GroupUserManagementServer beinhaltet.
+ zum GroupUserManagementServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -893,96 +450,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -997,7 +467,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum MeetingServer beinhaltet.
+ zum MeetingServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -1023,96 +493,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -1127,7 +510,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum MeetingsServer beinhaltet.
+ zum MeetingsServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -1153,96 +536,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -1257,7 +553,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum MeetingParticipantManagementServer beinhaltet.
+ zum MeetingParticipantManagementServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -1283,96 +579,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -1387,7 +596,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum UserServer beinhaltet.
+ zum UserServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -1413,96 +622,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -1517,7 +639,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum UsersServer beinhaltet.
+ zum UsersServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -1543,96 +665,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -1647,7 +682,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum GPS_Server beinhaltet.
+ zum GPS_Servlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -1673,96 +708,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
+\begin_layout Standard
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \begin_layout Section*
@@ -1777,7 +725,7 @@ Beschreibung
 
 \begin_layout Standard
 Beinhaltet einen privat static final String servletAdd, welcher die Adresse
- zum NotificationsServer beinhaltet.
+ zum NotificationsServlet beinhaltet.
 \end_layout
 
 \begin_layout Subsection*
@@ -1803,139 +751,9 @@ Default-Konstruktor
 Methoden
 \end_layout
 
-\begin_layout Itemize
-
-\family typewriter
-public return s()
-\family default
-
-\begin_inset Newline newline
-\end_inset
-
-Was tut sie
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Parameter
-\series default
-:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-T P
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-was tut der
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Rückgabewert:
-\series default
-
-\begin_inset Newline newline
-\end_inset
-
-was er tut als 
-\family typewriter
-Typ
-\end_layout
-
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Tabellen bekommt ihr auch über Einfügen
-\begin_inset Formula $\rightarrow$
-\end_inset
-
-Tabelle...
- , der Rest ist dann durch die Grafische oberfläche geregelt
-\end_layout
-
-\begin_layout Plain Layout
-Die gezwungenen Enters bekommt ihr über strg+Enter
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-Diese Schrift über Strg+Shift+P
-\end_layout
-
-\begin_layout Plain Layout
-
-\series bold
-Das hier über Rechtsklick
-\begin_inset Formula $\rightarrow$
-\end_inset
-
-Textstil
-\begin_inset Formula $\rightarrow$
-\end_inset
-
-Benutzerdefiniert...
- und dann bei Strichstärke Fett auswählen
-\end_layout
-
-\end_inset
-
-
+Die URI_LoginBuilder hat keine eigenen Methoden, übernimmt alle Methoden
+ der Oberklasse und überschreibt keine.
 \end_layout
 
 \end_body
