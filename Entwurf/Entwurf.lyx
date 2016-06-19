@@ -104,16 +104,16 @@ LatexCommand tableofcontents
 Softwarearchitektur mit Systemkomponenten
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
 Dieser Abschnitt stellt einen Überblick über die einzelnen Komponenten der
  Software dar.
  Genaue Beschreibungen der dabei auftretenden Komponenten befinden sich
  bei den Entwurfsentscheidungen (Kapitel 2) und bei den Klassenbeschreibungen
  (Kapitel 3/4/5).
  
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Die App verwendet eine REST-Architektur.
  Es gilt generell die Anforderung, dass alle Eigenschaften der Client-Server-Arc
 hitektur gelten.
@@ -129,29 +129,29 @@ hitektur gelten.
  Dahinterliegende Ebenen können verborgen bleiben und somit die Architektur
  insgesamt vereinfacht werden.
  
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Zur Umsetzung der REST-Architektur verwedet die App das HTTP-Protokoll.
  Gründe dafür gibt es viele: Einerseits ist das Protokoll etabliert, dennoch
  vergleichsweise einfach aufgebaut und zu guter Letzt auch in so gut wie
  jeder Firewall offen.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Im Client wird zusätzlich die Model-View-Controller-Architektur verwendet,
  da die Architektur einen flexiblen Programmentwurf ermöglicht, welcher
  die Wiederverwendbarkeit der einzelnen MVC-Module gewährleistet und außerdem
  die Gesamtkomplexität reduziert.
  Bestehende Systeme können leicht erweitert werden, indem neue MVC-Module
  hinzugefügt werden.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Einen Überblick über den Ablauf des Entwurfs wird im Folgenden gegeben:
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Auf der Activity wird eine Methode ausgeführt und diese startet daraufhin
  den für die Methode zuständigen Service.
  Der Service erstellt eine Instanz von URI_Builder und fragt daraufhin die
@@ -1312,8 +1312,8 @@ Alle außer About werden in Model-View-Controller-Diagramm beschrieben (siehe
 \begin_layout Standard
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/Activitys.jpg
-	scale 55
-	BoundingBox 200bp 0bp 1700bp 800bp
+	scale 50
+	BoundingBox 300bp 0bp 1700bp 800bp
 
 \end_inset
 
@@ -1407,7 +1407,7 @@ Das Überprüfen, ob ein Benutzer auf die angefortederten Ressourcen zugreifen
  darf
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsubsection*
 GroupService: 
 \end_layout
 
@@ -1568,7 +1568,7 @@ URI_Builder
 kit.edu.pse.goapp.client.clienturi_builder
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Standard
 Allgemein: Die folgende Abbildung beschreibt die Klassen,welche dem Client
  dabei unterstützen einen Request an den Server zu senden.
 \end_layout
@@ -1584,7 +1584,7 @@ Allgemein: Die folgende Abbildung beschreibt die Klassen,welche dem Client
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Standard
 Grundlage hierfür ist die abstrakte Klasse UriBuilder, welche von den darunter
  sichtbaren Klassen erweitert wird.
  Die Klassen stellen eine simple möglichkeit für andere Klassen dar, um
@@ -1595,9 +1595,9 @@ Grundlage hierfür ist die abstrakte Klasse UriBuilder, welche von den darunter
  Die Abstrakte klasse beinhaltet die Serveradresse.
  Die Struktur ähnelt sehr dem der Servlets, da für jedes Servlet eine UriBuilder
 -Klasse existiert.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
 Beispiel: Der Client möchte getAllUsers() aufrufen.
  Dazu erzeugt er eine Instanz des GroupBuilders und da dieser Request keine
  Parameter benötigt, muss die Methode addParameter() nicht aufgerufen werden.
@@ -1616,8 +1616,18 @@ kit.edu.pse.goapp.client.httpappclient
 \end_layout
 
 \begin_layout Standard
+Der HttpAppClient implementiert die HTTP-Anfragsmethoden: GET, POST, PUT
+ und DELETE.
+ Der HttpResponse kümmert sich darum die Antwort von dem Server auszupacken.
+ GetStatusCode() liest den Status Code von dem Server.
+ GetJsonString() packt die JSON-Datei aus.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/Http_Web_Client.jpg
+	BoundingBox 50bp 0bp 579bp 390bp
 
 \end_inset
 
@@ -1658,6 +1668,15 @@ kit.edu.pse.goapp.server.converter
 
 \end_layout
 
+\begin_layout Standard
+\SpecialChar softhyphen
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Receiver
 \end_layout
@@ -1666,6 +1685,17 @@ Receiver
 
 \family typewriter
 kit.edu.pse.goapp.client.receiver
+\end_layout
+
+\begin_layout Standard
+Wenn ein Alarm erstellt wird, kümmern sich die System Alarm Services darum,
+ dass ein Broadcast geschickt wird und zu einer bestimmten Periode ausgeführt
+ wird.
+ Wenn der Alarm den Broadcast bekommt, wird die Methode onReceive() aufgerufen.
+ Beim AlarmReceiver wird der GPS_Service gestartet.
+ Beim DeviceBootReceiver werden alle Alarme noch einmal erstellt, weil sie
+ nach einem Reboot verloren gehen.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1679,6 +1709,13 @@ kit.edu.pse.goapp.client.receiver
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Database-Handler
 \end_layout
@@ -1687,6 +1724,17 @@ Database-Handler
 
 \family typewriter
 kit.edu.pse.goapp.client.databasehandler
+\end_layout
+
+\begin_layout Standard
+Der DataBaseHandler kümmert sich um die Datenbank.
+ Die onCreate() Methode erstellt eine Datenbank mit zwei Spalten: eine für
+ die MeetingId und eine für die Uhrzeit.
+ Auf diese Weise hat jeder Alarm eine ID und kann leicht ausgeschaltet werden
+ und beim Neustart des Gerätes wieder erstellt.
+ Die onUpgrage() Methode wird benutzt, wenn die Tabellle erweitert werden
+ muss.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1719,7 +1767,7 @@ Klassendiagramm
 kit.edu.pse.goapp.server.datamodels
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
 Die folgende Abbildung beschreibt die Klassen und ihre Beziehungen im Datenmodel
 ls des Servers.
  Hier werden die Sachverhalte aus der Realität abgebildet, genauso wie ihre
@@ -1728,13 +1776,13 @@ ls des Servers.
  Der Server ist prinzipiell auf alle geplanten Funktionalitäten vorbereitet,
  je nachdem welche Anfragen vom Client implementiert werden, stehen diese
  auch zur Verfügung.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Hier ist die Grafik Klassendiagramm
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Ein Nutzer der App kann, je nach Umfeld als User oder Participant beschrieben
  werden.
  Jeder Nutzer existiert als User im Datenmodell.
@@ -1788,16 +1836,16 @@ Ein Nutzer der App kann, je nach Umfeld als User oder Participant beschrieben
 Objektdiagramm
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
 Im Folgenden wird noch ein Beispiel beschrieben, dass in der folgenden Objektdia
 gramm zu sehen ist.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Hier ist die Grafik Objektdiagramm
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Der User user ist Mitglied in zwei Gruppen: pse und party.
  Er hat auch ein GPS userGPS.
  Er ist eingeladen zu drei Terminen und ist Participant dieser Termine.
@@ -1814,7 +1862,7 @@ Der User user ist Mitglied in zwei Gruppen: pse und party.
 \begin_inset Graphics
 	filename Modelle/Objektdiagramm.jpg
 	scale 50
-	BoundingBox 500bp 0bp 1797bp 950bp
+	BoundingBox 200bp 0bp 1797bp 950bp
 
 \end_inset
 
@@ -1838,7 +1886,7 @@ Servlets
 kit.edu.pse.goapp.server.servlets
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
 Die Servlets nehmen innerhalb des Servers Anfragen vom Client an und beantworten
  sie.
  Es gibt in unserem System folgende Arten von Servlets: Servlets, die etwas
@@ -1876,7 +1924,7 @@ doDelete(HttpServletRequest request, HttpServletResponse response): Ressourcen
  werden gelöscht.
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
 Die Servlets bekommen einen POST-, GET-, PUT- oder DELETE-Request vom Client
  zugeschickt und verarbeiten diesen in der jeweiligen Methode.
  Außerdem schicken sie den JSON String aus dem Request an den zugehörigen
@@ -1889,7 +1937,7 @@ Die Servlets bekommen einen POST-, GET-, PUT- oder DELETE-Request vom Client
 	filename Modelle/Servlets.jpg
 	lyxscale 80
 	scale 50
-	BoundingBox 600bp 0bp 1267bp 800bp
+	BoundingBox 200bp 0bp 1267bp 800bp
 
 \end_inset
 
@@ -1913,15 +1961,15 @@ DataAccessObjects
 kit.edu.pse.goapp.server.daos
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
 Wir verwenden an diser Stelle das Entwurfsmuster Data Access Object (DAO),
  das den Zugriff auf die Datenbank so kapselt, dass die Datenbank verändert
  oder ausgetauscht werden kann, ohne dass der aufrufende Code geändert werden
  muss.
  
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Für jede Klasse der Datenbank gibt es ein DAO Interface und eine dazugehörige
  konkrete Klasse, die das Interface implementiert und dafür zuständig ist,
  Daten von der Datenbank zu bekommen.
@@ -1931,9 +1979,9 @@ Für jede Klasse der Datenbank gibt es ein DAO Interface und eine dazugehörige
  (siehe Kapitel 2.2.1), welche getter und setter Methoden beinhaltet, um die
  Daten zu speichern, die man durch das DAO empfangen hat.
  
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Der jeweilige Converter erstellt die DAOs aus dem JSON String vom HTTP Request
  und das zugehörige Servlet verwaltet dann das DAO.
  Es greift auf die Datenbank zu, um Daten zu speichern oder zu lesen, und
@@ -1946,7 +1994,7 @@ Der jeweilige Converter erstellt die DAOs aus dem JSON String vom HTTP Request
 \begin_inset Graphics
 	filename Modelle/DAOs.jpg
 	scale 60
-	BoundingBox 500bp 0bp 1099bp 700bp
+	BoundingBox 200bp 0bp 1099bp 700bp
 
 \end_inset
 
@@ -1970,31 +2018,35 @@ Converter
 Package kit.edu.pse.goapp.server.converter
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Standard
 Die Converter sind im Server gespeichert.
  Sie wandeln die Objekte aus der Datenbank in Parameter um, bevor sie zu
  den Servlets weitergeleitet werden.
  Umgekehrt wandeln sie auch die Parameter aus den Servlets in Objekte um,
  bevor sie der Datenbank zurückgegeben werden.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
 Das 
 \family typewriter
 Interface Converter <T>
 \family default
- hat die beiden Methoden 
+ hat die Methoden 
 \family typewriter
 public T parse(String jsonString)
 \family default
- und 
+, 
 \family typewriter
 public String serialize(T object)
 \family default
+ und 
+\family typewriter
+public String serialize(List <T> objects)
+\family default
 .
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
 Die Methode 
 \family typewriter
 public T parse(String)
@@ -2008,9 +2060,9 @@ String
 T
 \family default
  und gibt es an die Datenbank zurück.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
 Die Methode 
 \family typewriter
 public String serialize(T object)
@@ -2024,9 +2076,18 @@ Objekt T
 String
 \family default
  und gibt ihn an die Servlets weiter.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
+Die Methode 
+\family typewriter
+public String serialize(List <T> objects)
+\family default
+ konvertiert eine Liste von Objekten T, die sie von der Datenbank erhält,
+ in einen String und gibt ihn an die Servlets weiter.
+\begin_inset Newline newline
+\end_inset
+
 Es gibt jeweils einen Converter für die Klassen 
 \family typewriter
 User
@@ -2061,9 +2122,9 @@ Notification
 Interface Converter<T>
 \family default
 .
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
 Die Klasse 
 \family typewriter
 NotificationConverter
@@ -2077,9 +2138,11 @@ public Notification parse(String)
 \family typewriter
 public String serialize(Notification object)und public String serialize(List
  <Notification> notifications).
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
+
+\family default
 Die Klasse 
 \family typewriter
 GroupMemberConverter
@@ -2093,9 +2156,11 @@ public User parse(String)
 \family typewriter
 public String serialize(Group group), public String serialize(List <Group>
  groups) und public String serialize(List <User> users).
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
+
+\family default
 Die Klasse 
 \family typewriter
 GroupConverter
@@ -2109,9 +2174,11 @@ public Group parse(String)
 \family typewriter
 public String serialize(Group group) und public String serialize(List <Group>
  groups).
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
+
+\family default
 Die Klasse 
 \family typewriter
 GPSConverter
@@ -2125,9 +2192,11 @@ public GPS parse(String)
 \family typewriter
 public String serialize(GPS gps) und public String serialize(List <GPS>
  gps).
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
+
+\family default
 Die Klasse 
 \family typewriter
 MeetingConverter
@@ -2141,9 +2210,11 @@ public Meeting parse(String)
 \family typewriter
 public String serialize(Meeting meeting) und public String serialize(List
  <Meeting> meetings).
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
+
+\family default
 Die Klasse 
 \family typewriter
 ParticipantConverter
@@ -2157,9 +2228,11 @@ public Participant parse(String)
 \family typewriter
 public String serialize(Participant participant) und public String serialize(Lis
 t <Participant> participants).
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph
+
+\family default
 Die Klasse 
 \family typewriter
 UserConverter
@@ -2179,7 +2252,7 @@ public String serialize(User user) und public String serialize(List <User>
 \begin_inset Graphics
 	filename Modelle/Converter.jpg
 	scale 60
-	BoundingBox 250bp 0bp 1058bp 700bp
+	BoundingBox 200bp 0bp 1058bp 700bp
 
 \end_inset
 
@@ -2211,7 +2284,14 @@ Die verschiedenen Elemente und Objekte der Go-App sowie ihre Eigenschaften
 \end_layout
 
 \begin_layout Standard
-(Hier soll das Diagramm hin)
+\begin_inset Graphics
+	filename Modelle/Datenbank.jpg
+	scale 70
+	BoundingBox 200bp 0bp 1067bp 600bp
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2224,9 +2304,9 @@ User
 User_ID
 \family default
 , anhand der er identifiziert werden kann.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Standard
 Ein Benutzer hat die Möglichkeit, eine Gruppe (
 \family typewriter
 Group
@@ -2252,9 +2332,9 @@ User_ID
 \family default
  beschrieben.
  
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Standard
 Gruppenmitglieder können für ihre Gruppe einen Termin (ein 
 \family typewriter
 Meeting
@@ -2303,17 +2383,6 @@ Meeting
 Creator_ID
 \family default
  hinterlegt.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename Modelle/Datenbank.jpg
-	scale 70
-	BoundingBox 175bp 0bp 1067bp 500bp
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -31321,11 +31390,18 @@ rter übergibt, der den JSON String, der sich im HTTP PUT Request befindet,
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 GPS mithilfe des AlarmReceivers
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
 
 \lang ngerman
 Über 
@@ -31335,23 +31411,18 @@ awakeFromAndroidOS
  wird der AlarmReceiver aufgeweckt und zwar 30 Minuten vor Beginn des nächsten
  Termins, da dann damit begonnen werden soll, die GPS-Daten an den Server
  zu schicken.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
-
-\lang ngerman
 Der AlarmReceiver started über 
 \family typewriter
 startService(intent) 
 \family default
 einen GpsService und der Receiver wird anschließend zerstört.
- 
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
-
-\lang ngerman
-Der Service erstellt eine Instanz 
+ Der Service erstellt eine Instanz 
 \emph on
 uri 
 \emph default
@@ -31382,11 +31453,9 @@ sendGet(uri)
 \family default
  weiter.
  Dieser macht dann eine HTTP GET Request beim Server.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
-
-\lang ngerman
 Die Information, die der HttpAppClient zurückliefert, ist eine HTTP Responce
  mit Statuscode und JSON-String, dieser wird über die Methode 
 \family typewriter
@@ -31405,11 +31474,9 @@ s umgewandelt, die aber nur ein
 Meeting
 \family default
  enthält.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
-
-\lang ngerman
 Vom Meeting wird die Termininformationen gelesen und wenn 
 \family typewriter
 TerminBeginnig
@@ -31429,11 +31496,9 @@ getUri()
 \family default
 die Uri abgefragt.
  
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
-
-\lang ngerman
 Anschließend wird über einen Aufruf von 
 \family typewriter
 sendPut(uri)
@@ -31455,6 +31520,8 @@ responce
 \lang ngerman
 \begin_inset Graphics
 	filename C:/Users/Iris/Documents/Studium KIT/4. Semester/PSE/Dateien aus der Gruppe/2. Entwurf/Client/SequenceGps.jpg
+	scale 60
+	BoundingBox 200bp 0bp 1177bp 800bp
 
 \end_inset
 
@@ -31476,14 +31543,14 @@ responce
 Gruppeneinladungen
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
 In den funktionalen Anforderungen /F70/ und /F110/ werden beschrieben, dass
  der Benutzer eine Benachrichtugung erhält, wenn er zu einer Gruppe eingeladen
  wurde (/F70/), und dass der Benutzer darüber entscheiden kann, ob er einer
  Gruppe beitreten möchte oder nicht (/F110/).
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Paragraph*
 Diese funktionalen Anforderungen mit Priorität B (/F70/) und C (/F110/)
  werden verworfen, da es zu Problemen kommen kann, wenn eine Gruppe erstellt
  wird mit einem zeitnahen Termin und keiner von den eingeladenen Benutzern
@@ -31495,7 +31562,7 @@ Diese funktionalen Anforderungen mit Priorität B (/F70/) und C (/F110/)
 Änderung der Prioritäten der funktionalen Anfoderungen
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
 Die funktionalen Anforderungen mit Priorität B wurden nochmals überarbeitet
  und dabei festgelegt, welche größere Priorität haben und damit ihre Priorität
  B behalten, und welche nicht so wichtig sind und damit zu Priorität C abgestuft
