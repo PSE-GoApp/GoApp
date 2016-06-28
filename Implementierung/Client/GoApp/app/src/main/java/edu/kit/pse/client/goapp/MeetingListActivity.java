@@ -87,7 +87,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 //TerminActivity.start(this);
                 return true;
             case R.id.groups_main:
-                //GroupsActivity.start(this);
+                GroupsActivity.start(this);
                 return true;
             case R.id.settings_main:
                 //SettingsActivity.start(this);

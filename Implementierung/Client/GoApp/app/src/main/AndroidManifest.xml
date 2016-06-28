@@ -7,14 +7,18 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MeetingListActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name="edu.kit.pse.client.goapp.MeetingListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="edu.kit.pse.client.goapp.GroupsActivity"></activity>
+        <service
+            android:name="edu.kit.pse.client.goapp.service.GroupsService"
+            android:exported="false"/>
     </application>
 
 </manifest>
