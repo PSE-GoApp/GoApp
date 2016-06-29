@@ -10,7 +10,7 @@ import main.java.edu.kit.pse.client.goapp.datamodels.Group;
 import main.java.edu.kit.pse.client.goapp.datamodels.Participant;
 
 /**
- * Implements the Inetrface Converter<Group> and converts JSON-Strings to Groups
+ * Implements the Inetrface Converter<Participant> and converts JSON-Strings to Participants
  * Created by paula on 29.06.16.
  */
 public class ParticipantConverter implements Converter<Participant> {
