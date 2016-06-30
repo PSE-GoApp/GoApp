@@ -1,6 +1,9 @@
 
 package edu.kit.pse.client.goapp.datamodels;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.*;
 
 public class Group {
@@ -9,7 +12,19 @@ public class Group {
 	private List<User> admins;
 	private List<User> members;
 
-	public Group(int groupId, String name) {
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public void setAdmins(List<User> admins) {
+        this.admins = admins;
+    }
+
+    public void setMembers(List<User> members) {
+        this.members = members;
+    }
+
+    public Group(int groupId, String name) {
 		this.groupId = groupId;
 		this.name = name;
 		admins = new ArrayList<User>();
@@ -43,5 +58,6 @@ public class Group {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 }

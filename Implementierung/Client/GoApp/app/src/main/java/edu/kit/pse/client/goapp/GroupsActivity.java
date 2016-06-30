@@ -2,6 +2,7 @@ package edu.kit.pse.client.goapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,9 @@ import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.service.GroupsService;
 import edu.kit.pse.goapp.client.goapp.R;
 
-public class GroupsActivity extends AppCompatActivity  implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
+public class GroupsActivity extends AppCompatActivity  implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
+    public ServiceResultReceiver mReceiver;
     private List<Group> groups = new ArrayList<Group>();
     ImageButton menu_button;
     ImageButton buttonCreateGroup;
@@ -58,10 +61,16 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
     private void populateListView() {
 // Create list of items
         Intent i = new Intent(this, GroupsService.class);
+        mReceiver = new ServiceResultReceiver(new Handler());
+        mReceiver.setReceiver(this);
+
+        //final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, QueryService.class);
+      //  intent.putExtra("receiver", mReceiver);
+       // intent.putExtra("command", "query");
+        i.putExtra("receiver", mReceiver);
+        i.putExtra("command", "query");
+        //startService(intent);
         startService(i);
-        ArrayAdapter<Group> adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.groupsList);
-        list.setAdapter(adapter);
     }
 
     @Override
@@ -106,6 +115,22 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                // GroupSetActivity.start(GroupsActivity.this, message);
             }
         });
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        ArrayList<ParcelableGroup> parcelableGroups = resultData.getParcelableArrayList("group");
+        for(ParcelableGroup g: parcelableGroups) {
+            groups.add(g.getGroup());
+        }
+        int list1 = groups.size();
+        Group g1 = groups.get(0);
+        String n = g1.getName();
+        ArrayAdapter<Group> adapter = new MyListAdapter();
+        ListView list = (ListView) findViewById(R.id.groupsList);
+        list.setAdapter(adapter);
+
+        Toast.makeText(this, "made it back " + list1 + " " + n, Toast.LENGTH_LONG).show();
     }
 
     private class MyListAdapter extends ArrayAdapter<Group> {
