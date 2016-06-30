@@ -1,5 +1,5 @@
 
-package main.java.edu.kit.pse.client.goapp.datamodels;
+package edu.kit.pse.client.goapp.datamodels;
 
 import android.os.Parcel;
 import android.os.Parcelable;

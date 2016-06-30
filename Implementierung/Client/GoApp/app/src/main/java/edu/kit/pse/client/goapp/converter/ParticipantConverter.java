@@ -1,4 +1,4 @@
-package main.java.edu.kit.pse.client.goapp.converter;
+package edu.kit.pse.client.goapp.converter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -6,8 +6,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
-import main.java.edu.kit.pse.client.goapp.datamodels.Group;
-import main.java.edu.kit.pse.client.goapp.datamodels.Participant;
+import edu.kit.pse.client.goapp.datamodels.Group;
+import edu.kit.pse.client.goapp.datamodels.Participant;
 
 /**
  * Implements the Inetrface Converter<Participant> and converts JSON-Strings to Participants

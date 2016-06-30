@@ -1,9 +1,9 @@
-package main.java.edu.kit.pse.client.goapp.converter;
+package edu.kit.pse.client.goapp.converter;
 
 import java.util.List;
 
-import main.java.edu.kit.pse.client.goapp.datamodels.Group;
-import main.java.edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.datamodels.Group;
+import edu.kit.pse.client.goapp.datamodels.User;
 
 /**
  * Implements the Inetrface Converter<User> and converts JSON-Strings to Notifications

@@ -1,4 +1,4 @@
-package main.java.edu.kit.pse.client.goapp.converter;
+package edu.kit.pse.client.goapp.converter;
 
 import java.util.List;
 

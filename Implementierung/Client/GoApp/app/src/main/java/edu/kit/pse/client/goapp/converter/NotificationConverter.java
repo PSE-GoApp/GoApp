@@ -1,7 +1,7 @@
-package main.java.edu.kit.pse.client.goapp.converter;
+package edu.kit.pse.client.goapp.converter;
 
 import java.util.List;
-import main.java.edu.kit.pse.client.goapp.datamodels.Notification;
+import edu.kit.pse.client.goapp.datamodels.Notification;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
