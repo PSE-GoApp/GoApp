@@ -1,4 +1,4 @@
-package edu.kit.pse.client.goapp.datamodels;
+package main.java.edu.kit.pse.client.goapp.datamodels;
 
 import java.util.ArrayList;
 import java.util.List;

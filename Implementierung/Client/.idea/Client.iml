@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="GEN_FOLDER_RELATIVE_PATH_APT" value="/../../Client/gen" />
+        <option name="GEN_FOLDER_RELATIVE_PATH_AIDL" value="/../../Client/gen" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/../../Client/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/../../Client/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/../../Client/assets" />
+        <option name="LIBS_FOLDER_RELATIVE_PATH" value="/../../Client/libs" />
+        <option name="PROGUARD_LOGS_FOLDER_RELATIVE_PATH" value="/../../Client/proguard_logs" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file:///production/Client" />
+    <output-test url="file:///test/Client" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/GoApp/app/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="gson-2.3" level="project" />
+    <orderEntry type="library" name="httpclient-4.5.2" level="project" />
+  </component>
+</module>

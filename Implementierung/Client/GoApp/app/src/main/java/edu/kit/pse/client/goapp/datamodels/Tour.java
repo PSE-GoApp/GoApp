@@ -1,4 +1,4 @@
-package edu.kit.pse.client.goapp.datamodels;
+package main.java.edu.kit.pse.client.goapp.datamodels;
 
 public class Tour extends Meeting {
 	public static double MAX_CENTER_DISTANCE = 10.00;
