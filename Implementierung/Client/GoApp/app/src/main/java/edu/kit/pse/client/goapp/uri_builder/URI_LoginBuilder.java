@@ -20,13 +20,11 @@ public class URI_LoginBuilder extends ClientURI_Builder {
         } catch(java.net.URISyntaxException syntaxException){
             //handle it somehow
         }
-
     }
 
     @Override
     public void addParameter(String key, String value) {
         uribuilder.addParameter(key, value);
-
     }
 
     @Override
