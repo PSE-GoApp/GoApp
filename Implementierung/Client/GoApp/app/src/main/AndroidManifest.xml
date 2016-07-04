@@ -15,10 +15,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="edu.kit.pse.client.goapp.GroupsActivity"></activity>
+        <activity android:name="edu.kit.pse.client.goapp.GroupsActivity" />
+
         <service
             android:name="edu.kit.pse.client.goapp.service.GroupsService"
-            android:exported="false"/>
+            android:exported="false" />
+
+        <service
+            android:name="edu.kit.pse.client.goapp.service.GroupService"
+            android:exported="false" />
+
+        <service
+            android:name="edu.kit.pse.client.goapp.service.GroupUserManagmentService"
+            android:exported="false" />
+
+        <activity android:name="edu.kit.pse.client.goapp.GroupMemberActivity"></activity>
     </application>
 
 </manifest>

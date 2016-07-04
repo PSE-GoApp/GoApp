@@ -1,4 +1,4 @@
-package edu.kit.pse.client.goapp;
+package edu.kit.pse.client.goapp.parcelableAdapters;
 
 import android.os.Parcel;
 import android.os.Parcelable;

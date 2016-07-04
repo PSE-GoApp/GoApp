@@ -5,6 +5,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setGps(GPS gps) {
+		this.gps = gps;
+	}
+
+	public void setMeetings(List<Meeting> meetings) {
+		this.meetings = meetings;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
+
 	private int userId;
 	private String name;
 	

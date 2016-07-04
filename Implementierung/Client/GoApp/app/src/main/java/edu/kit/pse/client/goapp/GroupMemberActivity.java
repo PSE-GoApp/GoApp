@@ -22,66 +22,36 @@ import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
-import edu.kit.pse.client.goapp.datamodels.Group;
-import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
+import edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableUser;
 import edu.kit.pse.client.goapp.service.GroupService;
-import edu.kit.pse.client.goapp.service.GroupsService;
+import edu.kit.pse.client.goapp.service.GroupUserManagmentService;
 import edu.kit.pse.goapp.client.goapp.R;
 
-public class GroupsActivity extends AppCompatActivity  implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
+public class GroupMemberActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
-    public ServiceResultReceiver mReceiver;
-    private List<Group> groups = new ArrayList<Group>();
+    private List<User> users = new ArrayList<User>();
     private ImageButton menu_button;
-    private ImageButton buttonCreateGroup;
+    private ServiceResultReceiver mReceiver;
     private int positionClicked;
     private ProgressDialog progressDialog;
-    //private ListView list;
-    ArrayAdapter<Group> adapter;
+    private ArrayAdapter<User> adapter;
 
-    /**
-     * creates the activity and sets up the listeners
-     * @param savedInstanceState: If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_groups);
-        //list = (ListView) findViewById(R.id.groupsList);
-        menu_button = (ImageButton) findViewById(R.id.menu_termine_groups);
+        setContentView(R.layout.activity_group_member);
+        menu_button = (ImageButton) findViewById(R.id.menu_group_members);
         menu_button.setOnClickListener(this);
-        buttonCreateGroup = (ImageButton) findViewById(R.id.createGroup);
-        buttonCreateGroup.setOnClickListener(this);
         populateListView();
         registerClickCallback();
-    }
-
-    /**
-     * Starts the Activity
-     * @param activity: the activity that is calling it
-     */
-    public static void start(Activity activity) {
-        Intent intent = new Intent(activity, GroupsActivity.class);
-        activity.startActivity(intent);
-    }
-
-    /**
-     * method that shows up the popUpMenu
-     * @param v the view
-     */
-    public void showPopUp(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
-        popup.setOnMenuItemClickListener(GroupsActivity.this);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_groups, popup.getMenu());
-        popup.show();
     }
 
     /**
      * creates the listView
      */
     private void populateListView() {
-        Intent i = new Intent(this, GroupsService.class);
+        Intent i = new Intent(this, GroupUserManagmentService.class);
         mReceiver = new ServiceResultReceiver(new Handler());
         mReceiver.setReceiver(this);
         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
@@ -90,92 +60,44 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
     }
 
     /**
-     * onClick listener for the buttons
-     * @param v the view
-     */
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.menu_termine_groups) {
-            showPopUp(v);
-        }
-        if (v.getId() == R.id.createGroup) {
-           // CreateNewGroupActivity.start(this);
-        }
-       /* if (v.getId() == R.id.delete_group) {
-            Intent i = new Intent(this, GroupService.class);
-            mReceiver1 = new ServiceResultReceiver(new Handler());
-            mReceiver1.setReceiver(this);
-            i.putExtra(CommunicationKeys.RECEICER, mReceiver1);
-            i.putExtra(CommunicationKeys.COMMAND, "DELETE");
-            //i.putExtra("group", new ParcelableGroup(groups.get(positionClicked)));
-            startService(i);
-            //progressDialog = ProgressDialog.show(GroupsActivity.this, "", "Sending");
-        }*/
-    }
-
-    /**
-     * onClick listeners for the items in the menu
-     * @param item item clicked
-     * @return a boolean value
-     */
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.home_groups:
-                MeetingListActivity.start(this);
-                return true;
-            case R.id.neuer_termin_groups:
-               // TerminActivity.start(this);
-                return true;
-            case R.id.settings_groups:
-               // SettingsActivity.start(this);
-                return true;
-            case R.id.about_groups:
-               // AboutActivity.start(this);
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    /**
      * onClick listener for the list
      */
     private void registerClickCallback() {
-        ListView list = (ListView) findViewById(R.id.groupsList);
+        ListView list = (ListView) findViewById(R.id.groupMemberList);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked,
                                     int position, long id) {
 
-                Group clickedGroup = groups.get(position);
-                String message = clickedGroup.getName();
-                GroupMemberActivity.start(GroupsActivity.this);
+                User clickedUser = users.get(position);
+                String message = clickedUser.getName();
+                GroupMemberActivity.start(GroupMemberActivity.this);
             }
         });
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
+                Log.e("got","in");
                 // TODO Auto-generated method stub
                 positionClicked = pos;
-                LayoutInflater layoutInflater = LayoutInflater.from(GroupsActivity.this);
+                LayoutInflater layoutInflater = LayoutInflater.from(GroupMemberActivity.this);
                 View promptView = layoutInflater.inflate(R.layout.groups_pop_up, null);
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GroupsActivity.this);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GroupMemberActivity.this);
                 alertDialogBuilder.setView(promptView);
 
                 alertDialogBuilder.setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Intent i = new Intent(GroupsActivity.this, GroupService.class);
+                                        Intent i = new Intent(GroupMemberActivity.this, GroupUserManagmentService.class);
                                         mReceiver = new ServiceResultReceiver(new Handler());
-                                        mReceiver.setReceiver(GroupsActivity.this);
+                                        mReceiver.setReceiver(GroupMemberActivity.this);
                                         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
                                         i.putExtra(CommunicationKeys.COMMAND, "DELETE");
-                                        i.putExtra("groupId", groups.get(positionClicked).getId());
+                                        i.putExtra("groupId", users.get(positionClicked).getId());
                                         startService(i);
-                                        progressDialog = ProgressDialog.show(GroupsActivity.this, "", "Sending");
+                                        progressDialog = ProgressDialog.show(GroupMemberActivity.this, "", "Sending");
                                     }
                                 }
                         )
@@ -206,7 +128,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                 setListResult(resultData);
             } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupService"){
                 progressDialog.dismiss();
-                groups.remove(positionClicked);
+                users.remove(positionClicked);
                 adapter.notifyDataSetChanged();
             }
         } else {
@@ -219,9 +141,9 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
      * @param resultCode the result code and specific error
      */
     private void showError(int resultCode){
-        LayoutInflater layoutInflater = LayoutInflater.from(GroupsActivity.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(GroupMemberActivity.this);
         View promptView = layoutInflater.inflate(R.layout.error, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GroupsActivity.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GroupMemberActivity.this);
         alertDialogBuilder.setView(promptView);
 
         alertDialogBuilder.setCancelable(false)
@@ -242,23 +164,79 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
      * @param resultData all the data from the service
      */
     private void setListResult(Bundle resultData){
-        ArrayList<ParcelableGroup> parcelableGroups = resultData.getParcelableArrayList(CommunicationKeys.GROUPS);
-        if (parcelableGroups != null) {
-            for (ParcelableGroup g : parcelableGroups) {
-                groups.add(g.getGroup());
+        ArrayList<ParcelableUser> parcelableUsers = resultData.getParcelableArrayList(CommunicationKeys.GROUPS);
+        if (parcelableUsers != null) {
+            for (ParcelableUser g : parcelableUsers) {
+                users.add(g.getUser());
             }
             adapter = new MyListAdapter();
-            ListView list = (ListView) findViewById(R.id.groupsList);
+            ListView list = (ListView) findViewById(R.id.groupMemberList);
             list.setAdapter(adapter);
+        }
+    }
+
+    /**
+     * method that shows up the popUpMenu
+     * @param v the view
+     */
+    public void showPopUp(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(GroupMemberActivity.this);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_group_members, popup.getMenu());
+        popup.show();
+    }
+
+    /**
+     * Starts the Activity
+     * @param activity: the activity that is calling it
+     */
+    public static void start(Activity activity) {
+        Intent intent = new Intent(activity, GroupMemberActivity.class);
+        activity.startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.menu_group_members) {
+            showPopUp(v);
+        }
+    }
+
+    /**
+     * onClick listeners for the items in the menu
+     * @param item item clicked
+     * @return a boolean value
+     */
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home_teilnehmer:
+                MeetingListActivity.start(this);
+                return true;
+            case R.id.neuer_termin_teilnehmer:
+                //TerminActivity.start(this);
+                return true;
+            case R.id.groups_teilnehmer:
+                GroupsActivity.start(this);
+                return true;
+            case R.id.settings_teilnehmer:
+                //SettingsActivity.start(this);
+                return true;
+            case R.id.about_teilnehmer:
+               // AboutActivity.start(this);
+                return true;
+            default:
+                return false;
         }
     }
 
     /**
      * it a private class that sets up an adapter for the listView
      */
-    private class MyListAdapter extends ArrayAdapter<Group> {
+    private class MyListAdapter extends ArrayAdapter<User> {
         public MyListAdapter() {
-            super(GroupsActivity.this, R.layout.groups_item, groups);
+            super(GroupMemberActivity.this, R.layout.groups_item, users);
         }
 
         @Override
@@ -269,12 +247,14 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                 itemView = getLayoutInflater().inflate(R.layout.groups_item, parent, false);
             }
 
-            Group currentGroup = groups.get(position);
+            User currentUser = users.get(position);
 
             TextView makeText = (TextView) itemView.findViewById(R.id.item_textView);
-            makeText.setText(currentGroup.getName());
+            makeText.setText(currentUser.getName());
 
             return itemView;
         }
     }
+
+
 }

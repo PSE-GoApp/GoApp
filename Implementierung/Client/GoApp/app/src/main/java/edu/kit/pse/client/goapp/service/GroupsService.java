@@ -3,16 +3,15 @@ package edu.kit.pse.client.goapp.service;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.os.ResultReceiver;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.GroupsActivity;
-import edu.kit.pse.client.goapp.ParcelableGroup;
-import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
 import edu.kit.pse.client.goapp.datamodels.Group;
 
 /**
@@ -35,17 +34,17 @@ public class GroupsService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.e("Still counting", "something");
         List<Group> list = listMe();
         ArrayList<ParcelableGroup> parcelableGroups = new ArrayList<ParcelableGroup>();
         for (Group group: list) {
             parcelableGroups.add(new ParcelableGroup(group));
         }
-        final ResultReceiver receiver = intent.getParcelableExtra("receiver");
+        final ResultReceiver receiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
         Bundle b = new Bundle();
-        b.putParcelableArrayList("group",parcelableGroups);
-        receiver.send(0, b);
-        Log.e("Stop counting", "nothing");
+        b.putParcelableArrayList(CommunicationKeys.GROUPS,parcelableGroups);
+        b.putString(CommunicationKeys.ACTION, "GET");
+        b.putString(CommunicationKeys.SERVICE, "GroupsService");
+        receiver.send(202, b);
     }
 
     private List<Group> listMe() {
