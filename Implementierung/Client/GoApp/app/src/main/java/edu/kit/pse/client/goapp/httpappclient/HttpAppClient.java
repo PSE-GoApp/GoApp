@@ -1,4 +1,4 @@
-package main.java.edu.kit.pse.client.goapp.httpappclient;
+package edu.kit.pse.client.goapp.httpappclient;
 
 
 
