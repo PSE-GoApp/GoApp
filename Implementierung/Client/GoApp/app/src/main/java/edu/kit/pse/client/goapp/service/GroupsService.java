@@ -4,13 +4,11 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
-import edu.kit.pse.client.goapp.GroupsActivity;
 import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
 import edu.kit.pse.client.goapp.datamodels.Group;
 

@@ -1,4 +1,4 @@
-package edu.kit.pse.client.goapp;
+package edu.kit.pse.client.goapp.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +21,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.kit.pse.client.goapp.CommunicationKeys;
+import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
 import edu.kit.pse.client.goapp.service.GroupService;

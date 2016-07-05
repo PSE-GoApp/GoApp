@@ -3,7 +3,7 @@ package edu.kit.pse.client.goapp.datamodels;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Meeting {
+public class Meeting {
 
 	public static double RADIUS = 200.00;
 
@@ -22,6 +22,8 @@ public abstract class Meeting {
 		this.timespamp = timestamp;
 		this.duration = duration;
 		this.creator = creator;
+
+		// Todo: ???
 		this.participants = new ArrayList<Participant>();
 
 	}
@@ -42,7 +44,7 @@ public abstract class Meeting {
 		return participants;
 	}
 
-	public int getMeetingId() {
+	public int getId() {
 		return meetingId;
 	}
 

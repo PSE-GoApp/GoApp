@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="TAG_IMAGE_DIRECTION" type="id"></item>
+    <item name="TAG_MEETING" type="id"></item>
+</resources>

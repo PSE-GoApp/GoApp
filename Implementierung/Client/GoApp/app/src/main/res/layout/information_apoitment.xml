@@ -26,38 +26,53 @@
     >
 
     <TextView
+        android:id="@+id/meeting_info_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Heute 22 Uhr"
+        android:text="Meeting Time"
         android:paddingBottom="8dp"
         android:paddingLeft="10dp"
-        android:id="@+id/textView8" />
+        />
 
     <TextView
+        android:id="@+id/meeting_info_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Agostea"
+        android:text="Meeting Name"
         android:paddingLeft="10dp"
         android:paddingBottom="8dp"
-        android:id="@+id/textView9" />
+        />
 
     <TextView
+        android:id="@+id/meeting_info_adress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Rüppurrer Str. 1"
+        android:text="Meeting Adress"
         android:paddingBottom="8dp"
         android:paddingLeft="10dp"
-        android:id="@+id/textView10" />
+        />
 
     <TextView
+        android:id="@+id/info_Meeting_creator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Notiz: Halloween Kostüm"
+        android:text="Meeting Creator"
         android:paddingLeft="10dp"
-        android:id="@+id/textView11" />
+        android:paddingBottom="8dp"
+        />
+
+    <TextView
+        android:id="@+id/meeting_info_memo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Meeting Memo"
+        android:paddingLeft="10dp"
+        android:paddingBottom="8dp"
+        />
 
 </LinearLayout>

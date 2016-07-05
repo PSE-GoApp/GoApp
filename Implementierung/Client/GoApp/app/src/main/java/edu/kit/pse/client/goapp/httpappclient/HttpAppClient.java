@@ -34,6 +34,8 @@ public class HttpAppClient {
     public HttpResponse sendPost(URI uri) throws IOException {
         CloseableHttpResponse response;
         HttpPost request = new HttpPost(uri);
+
+        // Todo Error by trying to start this App: Fix it pls ;) Kansei
         response = client.execute(request);
         return new HttpResponse(response);
     }

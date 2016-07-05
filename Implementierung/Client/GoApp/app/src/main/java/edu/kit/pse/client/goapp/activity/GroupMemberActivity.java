@@ -1,4 +1,4 @@
-package edu.kit.pse.client.goapp;
+package edu.kit.pse.client.goapp.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,9 +22,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.kit.pse.client.goapp.CommunicationKeys;
+import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableUser;
-import edu.kit.pse.client.goapp.service.GroupService;
 import edu.kit.pse.client.goapp.service.GroupUserManagmentService;
 import edu.kit.pse.goapp.client.goapp.R;
 

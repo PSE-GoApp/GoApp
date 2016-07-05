@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/new_meeting_meetingList"
+        android:title="Neuer Termin"
+        />
+
+    <item
+        android:id="@+id/groups_meetingList"
+        android:title="Gruppen"
+        />
+
+    <item
+        android:id="@+id/settings_MeetingList"
+        android:title="Einstellungen"
+        />
+
+    <item
+        android:id="@+id/about_MeetingList"
+        android:title="Über Uns"
+        />
+</menu>
