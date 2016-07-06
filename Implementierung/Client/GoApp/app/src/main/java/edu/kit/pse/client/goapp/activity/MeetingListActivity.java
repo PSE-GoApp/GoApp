@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -302,7 +303,8 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             case R.id.neuer_termin_main:
                 //TerminActivity.start(this);
                 return true;
-            case R.id.groups_main:
+            case R.id.groups_meetingList:
+                Log.e("start"," groups");
                 GroupsActivity.start(this);
                 return true;
             case R.id.settings_main:
