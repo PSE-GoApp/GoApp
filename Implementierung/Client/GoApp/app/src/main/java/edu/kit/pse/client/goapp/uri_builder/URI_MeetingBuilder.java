@@ -27,12 +27,12 @@ public class URI_MeetingBuilder extends ClientURI_Builder {
     }
 
     @Override
-    public URI getURI() {
+    public String getURI() {
         try {
             uri = uribuilder.build();
         } catch (java.net.URISyntaxException syntaxException){
             //handle it somehow
         }
-        return uri;
+        return uri.toString();
     }
 }

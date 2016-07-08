@@ -27,12 +27,12 @@ public class URI_GroupBuilder extends ClientURI_Builder {
     }
 
     @Override
-    public URI getURI() {
+    public String getURI() {
         try {
             uri = uribuilder.build();
         } catch (java.net.URISyntaxException syntaxException) {
             //habdle it somehow
         }
-        return uri;
+        return uri.toString();
     }
 }

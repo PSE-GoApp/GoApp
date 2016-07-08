@@ -32,35 +32,19 @@ public class GroupsService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String command = intent.getStringExtra(CommunicationKeys.COMMAND);
-        switch (command) {
-            case "GET":
-                //this sends the group list
-                List<Group> list = listMe();
-                ArrayList<ParcelableGroup> parcelableGroups = new ArrayList<ParcelableGroup>();
-                for (Group group: list) {
-                    parcelableGroups.add(new ParcelableGroup(group));
-                }
-                final ResultReceiver receiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
-                Bundle b = new Bundle();
-                b.putParcelableArrayList(CommunicationKeys.GROUPS,parcelableGroups);
-                b.putString(CommunicationKeys.COMMAND, "GET");
-                b.putString(CommunicationKeys.SERVICE, "GroupsService");
-                receiver.send(202, b);
-                break;
-            case "DELETE":
-                break;
-            case "PUT":
-                break;
-            case "POST":
-                break;
-            default:
-                break;
+        List<Group> list = listMe();
+        ArrayList<ParcelableGroup> parcelableGroups = new ArrayList<ParcelableGroup>();
+        for (Group group: list) {
+            parcelableGroups.add(new ParcelableGroup(group));
         }
-
+        final ResultReceiver receiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+        Bundle b = new Bundle();
+        b.putParcelableArrayList(CommunicationKeys.GROUPS,parcelableGroups);
+        b.putString(CommunicationKeys.ACTION, "GET");
+        b.putString(CommunicationKeys.SERVICE, "GroupsService");
+        receiver.send(202, b);
     }
 
-    // creates a list for testing
     private List<Group> listMe() {
         List<Group> list = new ArrayList<>();
         list.add(new Group(1,"fucker"));

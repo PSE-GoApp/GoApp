@@ -21,5 +21,5 @@ public abstract class ClientURI_Builder {
      * Returns the local URI_Object
      * @return
      */
-    public abstract URI getURI();
+    public abstract String getURI();
 }

@@ -85,8 +85,6 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
                 positionClicked = pos;
                 LayoutInflater layoutInflater = LayoutInflater.from(GroupMemberActivity.this);
                 View promptView = layoutInflater.inflate(R.layout.groups_pop_up, null);
-                TextView myAwesomeTextView = (TextView)promptView.findViewById(R.id.delete_group);
-                myAwesomeTextView.setText("Delete " + users.get(positionClicked).getName());
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GroupMemberActivity.this);
                 alertDialogBuilder.setView(promptView);
 
@@ -99,7 +97,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
                                         mReceiver.setReceiver(GroupMemberActivity.this);
                                         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
                                         i.putExtra(CommunicationKeys.COMMAND, "DELETE");
-                                        i.putExtra(CommunicationKeys.GROUPID, users.get(positionClicked).getId());
+                                        i.putExtra("groupId", users.get(positionClicked).getId());
                                         startService(i);
                                         progressDialog = ProgressDialog.show(GroupMemberActivity.this, "", "Sending");
                                     }
@@ -130,8 +128,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
         if (resultCode == 202) {
             if (resultData.getString(CommunicationKeys.SERVICE) == "GroupsService"){
                 setListResult(resultData);
-            } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupUserManagmentService"){
-                Log.e("returned","groupService");
+            } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupService"){
                 progressDialog.dismiss();
                 users.remove(positionClicked);
                 adapter.notifyDataSetChanged();
@@ -169,7 +166,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
      * @param resultData all the data from the service
      */
     private void setListResult(Bundle resultData){
-        ArrayList<ParcelableUser> parcelableUsers = resultData.getParcelableArrayList(CommunicationKeys.USERS);
+        ArrayList<ParcelableUser> parcelableUsers = resultData.getParcelableArrayList(CommunicationKeys.GROUPS);
         if (parcelableUsers != null) {
             for (ParcelableUser g : parcelableUsers) {
                 users.add(g.getUser());

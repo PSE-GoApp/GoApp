@@ -6,11 +6,7 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.kit.pse.client.goapp.CommunicationKeys;
-import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
 
 /**
@@ -33,24 +29,12 @@ public class GroupService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String command = intent.getStringExtra(CommunicationKeys.COMMAND);
-        switch (command) {
-            case "GET":
-                break;
-            case "DELETE":
-                final ResultReceiver receiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
-                Bundle b = new Bundle();
-                b.putString(CommunicationKeys.COMMAND, "DELETE");
-                b.putString(CommunicationKeys.SERVICE, "GroupService");
-                receiver.send(202, b);
-                break;
-            case "PUT":
-                break;
-            case "POST":
-                break;
-            default:
-                break;
-        }
-
+        ParcelableGroup group = intent.getParcelableExtra("group");
+        final ResultReceiver receiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+        Bundle b = new Bundle();
+        b.putString(CommunicationKeys.ACTION, "Delete");
+        b.putString(CommunicationKeys.SERVICE, "GroupService");
+        Log.e("something", "is here");
+        receiver.send(202, b);
     }
 }

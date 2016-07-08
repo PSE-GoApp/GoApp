@@ -7,12 +7,7 @@ public class CommunicationKeys {
 
     public static final String RECEICER = "receiver";
     public static final String COMMAND = "command";
-    public static final String SERVICE = "service";
-
-    //Group
     public static final String GROUPS = "groups";
-    public static final String GROUPID = "groupId";
-
-    //Users
-    public static final String USERS = "users";
+    public static final String ACTION = "action";
+    public static final String SERVICE = "service";
 }
