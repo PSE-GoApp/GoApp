@@ -10,7 +10,7 @@ public abstract class HttpAppClient {
     protected static CloseableHttpClient client;
     public HttpAppClient() {
         if (client == null){
-            client = HttpClientBuilder.create().build();
+             client = HttpClientBuilder.create().build();
         }
     }
     
