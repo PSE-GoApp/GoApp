@@ -18,11 +18,23 @@ public class MeetingConverter implements Converter<Meeting> {
 
     @Override
     public Meeting deserialize(String jsonString) {
-        return gson.fromJson(jsonString, Meeting.class);
+		  RuntimeTypeAdapterFactory<Meeting> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
+		    	    .of(Meeting.class, "type")
+		    	    .registerSubtype(Event.class, "event")
+		    	    .registerSubtype(Tour.class, "tour");
+		    	     Gson gson = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory).create(); 
+					 Type listType = new TypeToken<Meeting>(){}.getType();
+        return gson.fromJson(jsonString, listType);
     }
 
     @Override
     public List<Meeting> deserializeList(String jsonString) {
-        return gson.fromJson(jsonString,new TypeToken<List<Meeting>>(){}.getType());
+			    RuntimeTypeAdapterFactory<Meeting> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
+		    	    .of(Meeting.class, "type")
+		    	    .registerSubtype(Event.class, "event")
+		    	    .registerSubtype(Tour.class, "tour");
+		    	     Gson gson = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory).create(); 
+					 Type listType = new TypeToken<List<Meeting>>(){}.getType();
+        return  gson.fromJson(jsonString, listType);
     }
 }
