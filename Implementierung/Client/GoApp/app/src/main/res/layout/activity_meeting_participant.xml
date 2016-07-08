@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ededed"
+    tools:context="edu.kit.pse.client.goapp.activity.MeetingParticipantActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ededed"
+        android:fontFamily="sans-serif-light"
+        android:padding="10dp"
+        android:text="Teilnehmer"
+        android:textColor="#387D1A"
+        android:textSize="25sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/title_meeting_participant" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#387D1A"
+        android:layout_below="@+id/title_meeting_participant"
+        android:layout_alignEnd="@+id/title_meeting_participant"
+        android:id="@+id/meeting_participant_line" />
+    >
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/menu_meeting_participant"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/menu_button"
+        android:background="@null"/>
+
+    <ListView
+        android:id="@+id/participant_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meeting_participant_line"
+        android:layout_marginTop="20dp"
+        android:layout_above="@+id/meeting_participant_cancel"
+        android:layout_marginBottom="20dp"
+        >
+
+    </ListView>
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Termin absagen"
+        android:textColor="#ededed"
+        android:id="@+id/meeting_participant_cancel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/holo_red_light" />
+
+</RelativeLayout>

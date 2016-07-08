@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home_termin"
+        android:id="@+id/meetingList_new_new_meeting"
         android:title="Home"
         />
 
     <item
-        android:id="@+id/groups_termin"
+        android:id="@+id/groups_new_meeting"
         android:title="Gruppen"
         />
 
     <item
-        android:id="@+id/settings_termin"
+        android:id="@+id/settings_new_meeting"
         android:title="Einstellungen"
         />
 
     <item
-        android:id="@+id/about_termin"
+        android:id="@+id/about_new_meeting"
         android:title="Über Uns"
         />
 

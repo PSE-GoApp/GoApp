@@ -127,7 +127,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                 MeetingListActivity.start(this);
                 return true;
             case R.id.neuer_termin_groups:
-               // TerminActivity.start(this);
+                NewMeetingActivity.start(this);
                 return true;
             case R.id.settings_groups:
                // SettingsActivity.start(this);

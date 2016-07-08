@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ededed"
+    tools:context="edu.kit.pse.client.goapp.activity.NewMeetingActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ededed"
+        android:fontFamily="sans-serif-light"
+        android:padding="10dp"
+        android:text="Neuer Termin"
+        android:textColor="#387D1A"
+        android:textSize="25sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/title_NewMeeting" />
+
+    <View
+        android:id="@+id/line_new_meeting"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#387D1A"
+        android:layout_below="@+id/title_NewMeeting"
+        android:layout_alignEnd="@+id/title_NewMeeting" />
+    >
+
+    <ImageButton
+        android:id="@+id/menu_new_meeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/menu_button"
+        android:background="@null"/>
+
+    <TextView
+        android:id="@+id/textGroup"
+        android:text="Gruppe:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_new_meeting"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="18dp"
+
+        />
+
+    <Spinner
+        android:id="@+id/spinnerGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textGroup"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="-5dp"
+        android:layout_marginLeft="1dp"
+        android:layout_alignEnd="@+id/tipMeetingName"
+        android:layout_toEndOf="@+id/textMeetingTime"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        android:popupBackground="#ffff"
+        android:backgroundTint="#ffff"
+        >
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/textMeetingName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terminname:"
+        android:layout_below="@+id/textGroup"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="25dp"
+        android:textSize="18dp"
+        />
+
+
+
+    <AutoCompleteTextView
+        android:id="@+id/tipMeetingName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="15dp"
+        android:background="#ffff"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:layout_alignTop="@+id/textMeetingName"
+        android:layout_toEndOf="@+id/textMeetingTime" />
+
+    <TextView
+        android:id="@+id/textMeetingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textEvent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Datum \u0026 Uhrzeit:"
+        android:textSize="18dp"
+        />
+
+    <TextView
+        android:id="@+id/textDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dauer:"
+        android:textSize="18dp"
+        android:layout_below="@+id/textMeetingTime"
+        android:layout_alignStart="@+id/textGroup"
+        android:layout_marginTop="20dp"
+        />
+
+
+    <AutoCompleteTextView
+        android:id="@+id/tipDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="6"
+        android:minEms="1"
+        android:maxEms="12"
+        android:layout_alignBaseline="@+id/textDuration"
+        android:layout_alignStart="@+id/tipMeetingName"
+        android:background="#ffff"
+        android:text="1"
+        android:gravity="right"
+        android:textSize="18dp"
+        />
+
+    <TextView
+        android:id="@+id/textTimeUnits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stunden"
+        android:layout_alignBaseline="@id/textDuration"
+        android:layout_toEndOf="@+id/tipDuration"
+        android:layout_marginLeft="3dp"
+        android:textSize="18dp"
+        />
+
+
+    <Button
+        android:id="@+id/buttonDatePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:background="#ffff"
+        android:layout_alignStart="@+id/tipMeetingName"
+        android:layout_alignTop="@+id/textMeetingTime"
+        android:layout_alignBottom="@+id/textMeetingTime"
+        android:layout_alignEnd="@+id/tipMeetingName"
+        />
+
+
+    <TextView
+        android:id="@+id/textEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Veranstaltung"
+        android:textSize="18dp"
+        android:layout_below="@+id/textMeetingName"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textMeetingName"
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/buttonDatePicker"
+        android:layout_toStartOf="@+id/menu_new_meeting"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/buttonEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#387D1A"
+            android:checked="true"
+            />
+
+        <RadioButton
+            android:id="@+id/buttonTour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#387D1A"
+            android:layout_marginLeft="70dp"
+            android:layout_gravity="right"
+            />
+
+    </RadioGroup>
+
+
+
+    <TextView
+        android:id="@+id/textTour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tour"
+        android:textSize="18dp"
+        android:layout_toRightOf="@+id/textEvent"
+        android:layout_marginLeft="90dp"
+        android:layout_alignTop="@+id/textEvent"
+        android:layout_alignBottom="@+id/textEvent"
+        />
+
+
+
+    <TextView
+        android:id="@+id/textPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ort:"
+        android:textSize="18dp"
+        android:layout_alignStart="@+id/textDuration"
+        android:layout_below="@+id/textDuration"
+        android:layout_marginTop="20dp"
+        />
+
+
+    <TextView
+        android:id="@+id/textMemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notiz:"
+        android:textSize="18dp"
+        android:layout_alignTop="@+id/tipMemo"
+        android:layout_alignStart="@+id/textGroup"
+        />
+
+    <AutoCompleteTextView
+        android:id="@+id/tipMemo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tipMeetingName"
+        android:layout_alignEnd="@+id/tipMeetingName"
+        android:background="#ffff"
+        android:layout_below="@+id/tipPlace"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="60dp"
+        android:gravity="start"
+        />
+
+    <Button
+        android:id="@+id/buttonCreate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Erstellen"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="8dp"
+        />
+
+    <AutoCompleteTextView
+        android:id="@+id/tipPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:background="#ffffff"
+        android:layout_centerVertical="true"
+        android:layout_alignBaseline="@+id/textPlace"
+        android:layout_alignStart="@+id/tipMeetingName"
+        android:layout_alignEnd="@+id/tipMeetingName" />
+
+
+</RelativeLayout>
