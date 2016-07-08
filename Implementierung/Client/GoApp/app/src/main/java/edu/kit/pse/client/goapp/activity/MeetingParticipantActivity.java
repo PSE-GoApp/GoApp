@@ -88,7 +88,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
                 MeetingListActivity.start(this);
                 return true;
             case R.id.new_meeting_participant:
-                NewMeetingActivity.start(this);
+                CreateNewMeetingActivity.start(this);
                 return true;
             case R.id.groups_participant:
                 GroupsActivity.start(this);

@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import edu.kit.pse.client.goapp.datamodels.Meeting;
@@ -41,10 +42,12 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 // Todo: open ParticipantList Popup/Activity
 
     // Example ---------------------------------------------------------------------------------------------------------------------------------------------
-    // Todo delete it after Testing
-    private long timestampExample = 2000;
 
+    // Todo delete it after Testing
     User me = new User(42, "GO-App Admin");
+    Meeting meetingInfo = new Meeting(42, "Ich bin ein meeting Name", null, 1475953024000L, 3, new Participant(12,me,MeetingConfirmation.CONFIRMED));
+
+    private long timestampExample = 1475953024000L;
     Participant itsMeConfirmed = new Participant(0, me,MeetingConfirmation.CONFIRMED);
     Participant itsMePending = new Participant(0, me,MeetingConfirmation.PENDING);
     Participant imParticipant = new Participant(0, me,MeetingConfirmation.REJECTED);
@@ -258,42 +261,53 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
 
     public void showMeetingInfo(View v) {
+
+
         // Todo Test this!
 
         RelativeLayout meetingRow = (RelativeLayout) v.getParent();
 
-        // Todo: do it as a MeetingService
-        final Meeting meeting = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
-        // final Meeting meeting = MeetingService.blablabla
-
-
-        // set the Meeting information in information_apoitment xml
-        TextView time = (TextView) findViewById(R.id.meeting_info_time);
-        // Todo TimeStamp!
-        time.setText(Long.toString(meeting.getTimespamp()));
-
-
-        TextView name = (TextView) findViewById(R.id.meeting_info_name);
-        name.setText(meeting.getName());
-        TextView place = (TextView) findViewById(R.id.meeting_info_adress);
-
-        //Todo  GPS getPlace as String!
-        place.setText( "EXAMPLE PLACE TODO THIS !!!" );
-
-        TextView creator = (TextView) findViewById(R.id.info_Meeting_creator);
-        creator.setText("Ersteller: " + meeting.getCreator().getUser().getName());
-
-       /*   (Priority B)
-        TextView memo = (TextView) findViewById(R.id.info_MeetingMemo);
-        memo.setText(meeting.getMemo);
+// Todo: do it as a MeetingService
+        Meeting m = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
+        /*
+        Meeting meeting = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
+        int meeetingId = meeting.getId();
+                // make a MeetingServe, that pulls the Meeting info
+                // Block the Activity until we got the information
         */
 
 
+        Toast.makeText(this,"TODO create a MeetingService and put the Id: " + m.getId(),Toast.LENGTH_LONG );
+
         // get information_apoitment.xml as Java view
-        LayoutInflater layoutInflater = LayoutInflater.from(MeetingListActivity.this);
-        View information_apoitment = layoutInflater.inflate(R.layout.information_apoitment, null);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View infoApoitment = inflater.inflate(R.layout.information_apoitment,null , false);
+
+        // set the Meeting information in information_apoitment xml
+        TextView time = (TextView) infoApoitment.findViewById(R.id.meeting_info_time);
+        TextView name = (TextView) infoApoitment.findViewById(R.id.meeting_info_name);
+        TextView place = (TextView) infoApoitment.findViewById(R.id.meeting_info_adress);
+        TextView creator = (TextView) infoApoitment.findViewById(R.id.info_Meeting_creator);
+
+        // Convert TimeStampt with a Calendar
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(meetingInfo.getTimespamp());
+
+        time.setText("Am " + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH) + "."
+                + calendar.get(Calendar.YEAR) + " um " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
+
+        name.setText(meetingInfo.getName());
+        //Todo  GPS getPlace as String!
+        place.setText( "TODO Set place here !!!" );
+        creator.setText("Ersteller: " + meetingInfo.getCreator().getUser().getName());
+
+       /*   (Priority B)
+        TextView memo = (TextView) infoApoitment.findViewById(R.id.info_MeetingMemo);
+        memo.setText(meeting.getMemo);
+        */
+
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MeetingListActivity.this);
-        alertDialogBuilder.setView(information_apoitment);
+        alertDialogBuilder.setView(infoApoitment);
 
         alertDialogBuilder.setCancelable(false)
                 .setNegativeButton("Ok",
@@ -303,7 +317,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                             }
                         });
 
-        // create an alert dialog
+        // create an alert dialog and show it
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
@@ -312,7 +326,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_meeting_meetingList:
-                NewMeetingActivity.start(this);
+                CreateNewMeetingActivity.start(this);
                 return true;
             case R.id.groups_meetingList:
                 GroupsActivity.start(this);
@@ -371,7 +385,13 @@ class MeetingListAdapter extends ArrayAdapter<Meeting> {
 
 
         name.setText(m.getName());
-        time.setText(Long.toString(m.getTimespamp()));
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(m.getTimespamp());
+        time.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
+
+        // TODO the date------------------------------------------------------------------------------------------------------------------
+
 
         //set the images from the Buttons for each Meeting Confirmation
         Participant participant = m.getParticipants().get(0);

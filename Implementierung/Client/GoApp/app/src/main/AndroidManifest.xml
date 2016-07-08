@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name="edu.kit.pse.client.goapp.activity.MeetingParticipantActivity"/>
-        <activity android:name="edu.kit.pse.client.goapp.activity.NewMeetingActivity"/>
+        <activity android:name="edu.kit.pse.client.goapp.activity.CreateNewMeetingActivity"/>
         <activity android:name="edu.kit.pse.client.goapp.activity.GroupsActivity" />
 
         <service
