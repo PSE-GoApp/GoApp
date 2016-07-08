@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,7 +38,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     private Context context = this;
     private ListView list;
     // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
-// Todo: open ParticipantList Popup/Activity
+
 
     // Example ---------------------------------------------------------------------------------------------------------------------------------------------
     // Todo delete it after Testing
@@ -148,28 +147,18 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         if (imageDirection == R.drawable.checked) {
 
             //Todo: create a MeetingService, that send a meeting conformation change (Accepted)
-            //Todo        if the Request was successful change the Buttons
-            //Todo        or change the ArrayList confirmation and go list.invalidateViews();
-            //TOdo        or make a new MeetingsService.
 
             // change buttons to a accepted Meeting.
             firstButton.setImageResource(R.drawable.somemap);
-            firstButton.setTag(R.id.TAG_IMAGE_DIRECTION,R.drawable.somemap);
 
             secondButton = (ImageButton) meetingRow.getChildAt(3);
             secondButton.setImageResource(R.drawable.participant);
-            secondButton.setTag(R.id.TAG_IMAGE_DIRECTION,R.drawable.participant);
 
         } else {
             if (imageDirection == R.drawable.somemap) {
 
-                // Todo: open MapActivity from Meeting with startActivity with a Intent that has a Extra Integer with the key word MEETING_ID form Meeting class
-                /*
-                Intent mapIntent = new Intent(this, MapActivity.class);
-                mapIntent.putExtra(Meeting.MEETING_ID_KEY, meeting.getId());
-                startActivity(mapIntent);
-                */
-
+                // Todo: open MapActivity from Meeting
+                //     Toast.makeText(getApplicationContext(), meetings.get(meetingID).getMeetingName() + " map starten", Toast.LENGTH_SHORT).show();
             } else {
                 // should not be Called
                 Toast.makeText(getApplicationContext(), "Error: Something unexpected happened", Toast.LENGTH_SHORT).show();
@@ -202,11 +191,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
         } else {
             if (imageDirection == R.drawable.participant) {
+                // Todo: open ParticipantList Popup/Activity
+                Toast.makeText(getApplicationContext(), "TODO: show ParticipantList", Toast.LENGTH_SHORT).show();
 
-                // Start MeetingParticipant with a extra (Meeting ID)
-                Intent mParticipantIntent = new Intent(view.getContext(), MeetingParticipantActivity.class);
-                mParticipantIntent.putExtra(Meeting.MEETING_ID_KEY, meeting.getId());
-                startActivity(mParticipantIntent);
             }
             else {
                 // should not be Called
@@ -312,17 +299,16 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.new_meeting_meetingList:
-                NewMeetingActivity.start(this);
+            case R.id.neuer_termin_main:
+                //TerminActivity.start(this);
                 return true;
-            case R.id.groups_meetingList:
-                Log.e("start"," groups");
+            case R.id.groups_main:
                 GroupsActivity.start(this);
                 return true;
-            case R.id.settings_MeetingList:
+            case R.id.settings_main:
                 //SettingsActivity.start(this);
                 return true;
-            case R.id.about_MeetingList:
+            case R.id.about_main:
                 //AboutActivity.start(this);
                 return true;
             default:
@@ -346,7 +332,7 @@ class MeetingListAdapter extends ArrayAdapter<Meeting> {
 
 
     MeetingListAdapter(Context c, List<Meeting> meetings) {
-        super(c, R.layout.meeting_row, R.id.meetingName,meetings);
+        super(c, R.layout.meeting_row, R.id.meetingName, meetings);
 
         this.context = c;
 

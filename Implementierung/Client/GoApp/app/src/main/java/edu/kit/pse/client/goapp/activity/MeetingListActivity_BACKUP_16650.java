@@ -316,7 +316,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 NewMeetingActivity.start(this);
                 return true;
             case R.id.groups_meetingList:
+<<<<<<< HEAD
+=======
                 Log.e("start"," groups");
+>>>>>>> f22b63cdcd15e45615aef391371ad4f10b8433a1
                 GroupsActivity.start(this);
                 return true;
             case R.id.settings_MeetingList:

@@ -33,24 +33,32 @@ public class GroupUserManagmentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        if (intent.getStringExtra(CommunicationKeys.COMMAND) == "DELETE") {
-            Log.e("delete","in");
-            final ResultReceiver receiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
-            Bundle b = new Bundle();
-            b.putString(CommunicationKeys.SERVICE, "GroupsService");
-            receiver.send(202,b);
-        } else {
-            List<User> list = listMe();
-            ArrayList<ParcelableUser> parcelableUsers = new ArrayList<ParcelableUser>();
-            for (User users : list) {
-                parcelableUsers.add(new ParcelableUser(users));
-            }
-            final ResultReceiver receiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
-            Bundle b = new Bundle();
-            b.putParcelableArrayList(CommunicationKeys.GROUPS, parcelableUsers);
-            b.putString(CommunicationKeys.ACTION, "GET");
-            b.putString(CommunicationKeys.SERVICE, "GroupsService");
-            receiver.send(202, b);
+        String command = intent.getStringExtra(CommunicationKeys.COMMAND);
+        final ResultReceiver receiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+        Bundle b = new Bundle();
+        switch (command) {
+            case "GET":
+                List<User> list = listMe();
+                ArrayList<ParcelableUser> parcelableUsers = new ArrayList<ParcelableUser>();
+                for (User users : list) {
+                    parcelableUsers.add(new ParcelableUser(users));
+                }
+                b.putParcelableArrayList(CommunicationKeys.USERS, parcelableUsers);
+                b.putString(CommunicationKeys.COMMAND, "GET");
+                b.putString(CommunicationKeys.SERVICE, "GroupsService");
+                receiver.send(202, b);
+                break;
+            case "DELETE":
+                Log.e("delete","in");
+                b.putString(CommunicationKeys.SERVICE, "GroupUserManagmentService");
+                receiver.send(202,b);
+                break;
+            case "PUT":
+                break;
+            case "POST":
+                break;
+            default:
+                break;
         }
     }
 
