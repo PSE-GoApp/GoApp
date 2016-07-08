@@ -19,6 +19,8 @@ import edu.kit.pse.goapp.client.goapp.R;
 
 public class NewMeetingActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
 
+
+
     ImageButton menu_button;
     RadioButton radioButtonEvent;
     RadioButton radioButtonTour;

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.goapp.client.goapp.R;
@@ -29,8 +28,7 @@ import edu.kit.pse.goapp.client.goapp.R;
  */
 public class MeetingParticipantActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
 
-    // public static final String MEETING_ID_KEY = "MEETING_ID";
-
+    public static final String MEETING_ID_KEY = "MEETING_ID";
     ImageButton menu_button;
 
     Bundle extra;
@@ -61,7 +59,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         }
 
         extra = getIntent().getExtras();
-        Toast.makeText(MeetingParticipantActivity.this, "Meeting ID is: " + Integer.toString(extra.getInt(Meeting.MEETING_ID_KEY)) , Toast.LENGTH_SHORT).show();
+        Toast.makeText(MeetingParticipantActivity.this, "Meeting ID is: " + Integer.toString(extra.getInt(MEETING_ID_KEY)) , Toast.LENGTH_SHORT).show();
 
         // Todo create a service
     }
