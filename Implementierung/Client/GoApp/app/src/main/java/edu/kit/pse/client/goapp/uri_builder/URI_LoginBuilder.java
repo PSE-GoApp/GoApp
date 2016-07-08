@@ -1,5 +1,4 @@
-package main.java.edu.kit.pse.client.goapp.uri_builder;
-
+package edu.kit.pse.client.goapp.uri_builder;
 import org.apache.http.client.utils.URIBuilder;
 
 import java.lang.ref.SoftReference;
@@ -28,12 +27,12 @@ public class URI_LoginBuilder extends ClientURI_Builder {
     }
 
     @Override
-    public String getURI() {
+    public URI getURI() {
         try {
             uri = uribuilder.build();
         } catch (java.net.URISyntaxException syntaxException){
             //handle it somehow
         }
-        return uri.toString();
+        return uri;
     }
 }

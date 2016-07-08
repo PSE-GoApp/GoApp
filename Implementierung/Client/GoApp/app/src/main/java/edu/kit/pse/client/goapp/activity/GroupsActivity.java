@@ -127,7 +127,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                 MeetingListActivity.start(this);
                 return true;
             case R.id.neuer_termin_groups:
-                NewMeetingActivity.start(this);
+               // TerminActivity.start(this);
                 return true;
             case R.id.settings_groups:
                // SettingsActivity.start(this);
@@ -163,8 +163,14 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                 positionClicked = pos;
                 LayoutInflater layoutInflater = LayoutInflater.from(GroupsActivity.this);
                 View promptView = layoutInflater.inflate(R.layout.groups_pop_up, null);
+
+                TextView myAwesomeTextView = (TextView)promptView.findViewById(R.id.delete_group);
+                myAwesomeTextView.setText("Delete " + groups.get(positionClicked).getName());
+
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GroupsActivity.this);
                 alertDialogBuilder.setView(promptView);
+
+
 
                 alertDialogBuilder.setCancelable(false)
                         .setPositiveButton("OK",
@@ -175,7 +181,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                                         mReceiver.setReceiver(GroupsActivity.this);
                                         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
                                         i.putExtra(CommunicationKeys.COMMAND, "DELETE");
-                                        i.putExtra("groupId", groups.get(positionClicked).getId());
+                                        i.putExtra(CommunicationKeys.GROUPID, groups.get(positionClicked).getId());
                                         startService(i);
                                         progressDialog = ProgressDialog.show(GroupsActivity.this, "", "Sending");
                                     }
@@ -191,6 +197,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                 // create an alert dialog
                 AlertDialog alert = alertDialogBuilder.create();
                 alert.show();
+
                 return true;
             }
         });

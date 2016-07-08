@@ -1,4 +1,4 @@
-package main.java.edu.kit.pse.client.goapp.uri_builder;
+package edu.kit.pse.client.goapp.uri_builder;
 
 import org.apache.http.client.utils.URIBuilder;
 
@@ -9,7 +9,7 @@ import java.net.URI;
  */
 public class URI_MeetingParticipantManagementBuilder extends ClientURI_Builder {
 
-    private static final String servletAdd = "bla"; //we don't know it yet
+    private static final String servletAdd = "MeetingParticipantManagement"; //we don't know it yet
     private URIBuilder uribuilder;
     private URI uri;
 
@@ -27,12 +27,12 @@ public class URI_MeetingParticipantManagementBuilder extends ClientURI_Builder {
     }
 
     @Override
-    public String getURI() {
+    public URI getURI() {
         try {
             uri = uribuilder.build();
         } catch (java.net.URISyntaxException syntaxException){
             //handle it somehow
         }
-        return uri.toString();
+        return uri;
     }
 }

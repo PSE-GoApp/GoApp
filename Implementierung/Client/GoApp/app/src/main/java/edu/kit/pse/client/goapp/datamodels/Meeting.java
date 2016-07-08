@@ -7,8 +7,6 @@ public class Meeting {
 
 	public static double RADIUS = 200.00;
 
-	public final static String MEETING_ID_KEY = "MEETING_ID";
-
 	private int meetingId;
 	private String name;
 	private GPS place;

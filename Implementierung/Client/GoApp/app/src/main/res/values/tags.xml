@@ -2,5 +2,4 @@
 <resources>
     <item name="TAG_IMAGE_DIRECTION" type="id"></item>
     <item name="TAG_MEETING" type="id"></item>
-    <item name="TAG_PARTICIPANT_ID" type="id"></item>
 </resources>

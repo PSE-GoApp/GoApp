@@ -21,5 +21,8 @@ public interface Converter<T> {
      * @return String as List<T>
      */
     public List<T> deserializeList(String jsonString);
+    
+    
+
 
 }

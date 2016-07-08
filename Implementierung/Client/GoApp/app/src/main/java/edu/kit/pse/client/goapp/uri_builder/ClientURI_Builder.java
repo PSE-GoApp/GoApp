@@ -1,4 +1,4 @@
-package main.java.edu.kit.pse.client.goapp.uri_builder;
+package edu.kit.pse.client.goapp.uri_builder;
 
 import java.net.URI;
 
@@ -8,7 +8,7 @@ import java.net.URI;
 public abstract class ClientURI_Builder {
 
     //The serveradress
-    protected static final String serverAdd = "bla"; //still unknown
+    protected static final String serverAdd = "http://localhost:8080/GoAppServer/"; //still unknown
 
     /**
      * Adds Parameters to the private URI
@@ -21,5 +21,5 @@ public abstract class ClientURI_Builder {
      * Returns the local URI_Object
      * @return
      */
-    public abstract String getURI();
+    public abstract URI getURI();
 }

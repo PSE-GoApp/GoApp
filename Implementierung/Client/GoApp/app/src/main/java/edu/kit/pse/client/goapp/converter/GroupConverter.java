@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
+import edu.kit.pse.client.goapp.datamodels.GPS;
 import edu.kit.pse.client.goapp.datamodels.Group;
 
 /**
@@ -25,4 +26,6 @@ public class GroupConverter implements Converter<Group> {
     public List<Group> deserializeList(String jsonString) {
         return gson.fromJson(jsonString,new TypeToken<List<Group>>(){}.getType());
     }
+    
+
 }

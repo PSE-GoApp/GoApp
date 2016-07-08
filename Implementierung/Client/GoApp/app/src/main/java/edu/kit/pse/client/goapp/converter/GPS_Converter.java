@@ -24,4 +24,6 @@ public class GPS_Converter implements Converter<GPS> {
     public List<GPS> deserializeList(String jsonString) {
         return gson.fromJson(jsonString,new TypeToken<List<GPS>>(){}.getType());
     }
+    
+
 }
