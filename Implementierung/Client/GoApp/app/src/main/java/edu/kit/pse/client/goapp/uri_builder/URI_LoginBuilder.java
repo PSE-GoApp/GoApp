@@ -1,7 +1,6 @@
 package edu.kit.pse.client.goapp.uri_builder;
 import org.apache.http.client.utils.URIBuilder;
 
-import java.lang.ref.SoftReference;
 import java.net.URI;
 
 /**
@@ -9,7 +8,7 @@ import java.net.URI;
  */
 public class URI_LoginBuilder extends ClientURI_Builder {
 
-    private static final String servletAdd = "bla"; //we don't know it yet
+    private static final String servletAdd = "Login"; //we don't know it yet
     private URIBuilder uribuilder;
     private URI uri;
 

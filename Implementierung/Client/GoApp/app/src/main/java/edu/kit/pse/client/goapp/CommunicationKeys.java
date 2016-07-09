@@ -15,4 +15,7 @@ public class CommunicationKeys {
 
     //Users
     public static final String USERS = "users";
+
+    //Meeting
+    public static final String MEETING_ID = "meeting_id";
 }

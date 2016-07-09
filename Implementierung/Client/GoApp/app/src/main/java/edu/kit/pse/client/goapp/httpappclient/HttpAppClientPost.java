@@ -1,13 +1,13 @@
 package edu.kit.pse.client.goapp.httpappclient;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
 
 public class HttpAppClientPost extends HttpAppClient{
 

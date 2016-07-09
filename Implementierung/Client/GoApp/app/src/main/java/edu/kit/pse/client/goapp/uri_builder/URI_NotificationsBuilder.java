@@ -9,7 +9,7 @@ import java.net.URI;
  */
 public class URI_NotificationsBuilder extends ClientURI_Builder {
 
-    private static final String servletAdd = "bla"; //we don't know it yet
+    private static final String servletAdd = "Notifications"; //we don't know it yet
     private URIBuilder uribuilder;
     private URI uri;
 
