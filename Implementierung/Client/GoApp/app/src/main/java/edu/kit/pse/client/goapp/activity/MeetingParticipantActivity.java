@@ -37,8 +37,6 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
 
     // Todo Delete it after Testing
 
-
-
     ArrayList<Participant> participants = new ArrayList<Participant>(Arrays.asList(new Participant[] {
             new Participant(0, new User(42, "ICH BIN DAS"), null),
             new Participant(0, new User(0, "Super Heroooo Ohhh"), null),

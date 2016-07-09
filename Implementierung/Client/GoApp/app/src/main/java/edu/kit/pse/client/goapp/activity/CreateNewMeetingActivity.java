@@ -75,6 +75,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         radioButtonTour = (RadioButton) findViewById(R.id.buttonTour);
         durationText = (AutoCompleteTextView) findViewById(R.id.tipDuration);
         spinnerGroup = (Spinner) findViewById(R.id.spinnerGroup);
+        createButton = (Button) findViewById(R.id.buttonCreate);
 
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(System.currentTimeMillis());
@@ -129,22 +130,23 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         }
         if (v.getId() == R.id.buttonCreate) {
             if (setNewMeeting()) {
-                // TODO create an MeetinService---------------------------------------------------------------------------------
+                // TODO create an MeetinService and block Everything---------------------------------------------------------------------------------
                 // newMeeting;
                 Toast.makeText(this,"Todo: Servcie erstellt\n"+ newMeeting.getName() +
                         "\n" + newMeeting.getTimespamp() + "\n" + newMeeting.getDuration(),
                         Toast.LENGTH_LONG).show();
+                MeetingListActivity.start(this);
             }
         }
     }
 
     // if successfull set the New Meeting in meeting returns true, otherwise false
     private Boolean setNewMeeting() {
-        int timeDay = Integer.getInteger(day.getText().toString());
-        int timeMonth = Integer.getInteger(month.getText().toString());
-        int timeYear = Integer.getInteger(year.getText().toString());
-        int timeHour = Integer.getInteger(hour.getText().toString());
-        int timeMinute = Integer.getInteger(minute.getText().toString());
+        int timeDay = Integer.parseInt(day.getText().toString()); //Fehler
+        int timeMonth = Integer.parseInt(month.getText().toString());
+        int timeYear = Integer.parseInt(year.getText().toString());
+        int timeHour = Integer.parseInt(hour.getText().toString());
+        int timeMinute = Integer.parseInt(minute.getText().toString());
 
 
         String name = meetingNameText.getText().toString();
@@ -165,7 +167,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 && calendar.get(Calendar.HOUR_OF_DAY) == timeHour
                 && calendar.get(Calendar.MINUTE) ==timeMinute) {
 
-        int duration = Integer.getInteger(durationText.getText().toString());
+        int duration = Integer.parseInt(durationText.getText().toString());
 
             // TODO his null-----------------------------------------------------------------------------------------------
         Participant creator = null;
@@ -175,12 +177,12 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         } else {
             newMeeting = new Tour(-1, name, place, calendar.getTimeInMillis(), duration, creator);
         }
-
         return true;
         }
         // out of Calender
         return false;
     }
+
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
@@ -202,28 +204,6 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
     }
 
     // TODO: methode terminType schreiben. Man darf nur Veranstaltung oder Tour "checken" (ausgewählt sein)
-
-    private void meetingType (View view) {
-
-        if (view.getId() == radioButtonEvent.getId()) {
-
-            if (radioButtonTour.isChecked()) {
-
-            }
-            // checked von TourButton entfernen und buttonVeranstaltung Zustand als checked setzen.
-            // radioButtonEvent.setClickDIngs
-            // radioButtonTour.removeClickdings
-
-        }
-        else {
-            if (view.getId() == radioButtonTour.getId()) {
-                // checked von buttonVeranstaltung entfernen und TourButton Zustand als checked  setzen
-                // radioButtonTour.setClickdings
-                // radioButtonEvent.removeClickDIngs
-
-            }
-        }
-    }
 
     class GroupSpinnerAdapter extends ArrayAdapter<Group> {
         Context context;

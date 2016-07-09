@@ -39,7 +39,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     private Context context = this;
     private ListView list;
     // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
-// Todo: open ParticipantList Popup/Activity
 
     // Example ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -261,9 +260,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
 
     public void showMeetingInfo(View v) {
-
-
-        // Todo Test this!
 
         RelativeLayout meetingRow = (RelativeLayout) v.getParent();
 
