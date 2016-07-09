@@ -32,6 +32,8 @@
             android:exported="false" />
 
         <activity android:name="edu.kit.pse.client.goapp.activity.GroupMemberActivity"></activity>
+
+        <receiver android:name="edu.kit.pse.client.goapp.Receiver.AlarmReceiver"></receiver>
     </application>
 
 </manifest>
