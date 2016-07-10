@@ -37,10 +37,13 @@ public class CommunicationKeys {
     public static final String USER_ID = "userId";
 
     //Meeting
-
     public static final String FROM_MEETING_SERVICES = "MeetingService";
     public static final String MEETING = "meeting";
     // In additional URI_Builder Keys
     public static final String MEETING_ID = "meetingId";
+
+    //Meetings
+    public static final String FROM_MEETINGS_SERVICES = "MeetingsService";
+    public static final String MEETINGS = "meetings";
 
 }
