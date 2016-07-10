@@ -46,7 +46,7 @@ public class MeetingService  extends IntentService {
                 doGet(intent);
                 break;
             case "DELETE":
-                doDelet(intent);
+                doDelete(intent);
                 break;
             case "PUT":
                 doPut(intent);
@@ -108,7 +108,7 @@ public class MeetingService  extends IntentService {
     }
 
 
-    private void doDelet(Intent intent) {
+    private void doDelete(Intent intent) {
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
