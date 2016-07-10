@@ -23,7 +23,7 @@ public class CommunicationKeys {
 
     //Groups
     public static final String FROM_GROUPS_SERVICES = "GroupsService";
-    public static final String GROUP_USER_MANAGMENT = "groupUserManagement";
+    public static final String GROUP_USER_MANAGEMENT = "groupUserManagement";
     public static final String GROUPS = "groups";
 
     //Users

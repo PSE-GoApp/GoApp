@@ -69,11 +69,11 @@ public class GroupUserManagmentService extends IntentService {
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.GROUP_USER_MANAGEMENT);
 
         // if there no GroupId in the Extra returns -1
-        int groupId = intent.getIntExtra(CommunicationKeys.GROUPID, -1);
+        int groupId = intent.getIntExtra(CommunicationKeys.GROUP_ID, -1);
 
         if (groupId != -1) {
             URI_GroupUserManagementBuilder uri_groupUserManagementBuilder = new URI_GroupUserManagementBuilder();
-            uri_groupUserManagementBuilder.addParameter(CommunicationKeys.GROUPID, Integer.toString(groupId));
+            uri_groupUserManagementBuilder.addParameter(CommunicationKeys.GROUP_ID, Integer.toString(groupId));
 
             HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
             httpAppClientGet.setUri(uri_groupUserManagementBuilder.getURI());
