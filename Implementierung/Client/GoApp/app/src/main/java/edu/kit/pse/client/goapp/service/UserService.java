@@ -46,7 +46,7 @@ public class UserService extends IntentService{
                 doGet(intent);
                 break;
             case "DELETE":
-                doDelet(intent);
+                doDelete(intent);
                 break;
             case "PUT":
                 doPut(intent);
@@ -59,7 +59,6 @@ public class UserService extends IntentService{
         }
     }
 
-    //Das Erstellen eines benutzers, Änderungen der Benutzerinformationen, Löschen eines Benutzers
 
     private void doGet (Intent intent) //throws  IOException
     {
@@ -108,7 +107,7 @@ public class UserService extends IntentService{
         }
     }
 
-    private void doDelet(Intent intent) {
+    private void doDelete(Intent intent) {
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
