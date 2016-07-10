@@ -53,5 +53,9 @@ public class CommunicationKeys {
     //GPS
     public static final String GPS = "GPS";
 
+    //Notification
+    public static final String NOTIFICATION = "Notification";
+    public static final String NOTIFICATION_ID  = "NotificationID";
+
 
 }
