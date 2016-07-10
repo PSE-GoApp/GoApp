@@ -10,19 +10,7 @@ public class Group {
 	private List<User> admins;
 	private List<User> members;
 
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
-    public void setAdmins(List<User> admins) {
-        this.admins = admins;
-    }
-
-    public void setMembers(List<User> members) {
-        this.members = members;
-    }
-
-    public Group(int groupId, String name) {
+	public Group(int groupId, String name) {
 		this.groupId = groupId;
 		this.name = name;
 		admins = new ArrayList<User>();
@@ -57,5 +45,15 @@ public class Group {
 		this.name = name;
 	}
 
+	public List<User> getMembers() {
+		return members;
+	}
 
+	public void setMembers(List<User> members) {
+		this.members = members;
+	}
+
+	public void setAdmins(List<User> admins) {
+		this.admins = admins;
+	}
 }

@@ -5,74 +5,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setGps(GPS gps) {
-		this.gps = gps;
-	}
-
-	public void setMeetings(List<Meeting> meetings) {
-		this.meetings = meetings;
-	}
-
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
-	}
-
 	private int userId;
 	private String name;
-	
+
 	private GPS gps;
-	
+	private boolean notificationEnabled;
+
 	private List<Meeting> meetings;
 	private List<Group> groups;
-	
-	public User(int userId, String name)
-	{
+
+	public User(int userId, String name) {
 		this.userId = userId;
 		this.name = name;
 		meetings = new ArrayList<Meeting>();
 		groups = new ArrayList<Group>();
 	}
-	public int getId()
-	{
+
+	public int getId() {
 		return userId;
 	}
-	
-	public String getName()
-	{
+
+	public String getName() {
 		return name;
 	}
+
+	public void setGPS(GPS gps) {
+		this.gps = gps;
+	}
+
+	public void addGroup(Group group) {
+		groups.add(group);
+	}
+
+	public void addMeeting(Meeting meeting) {
+		meetings.add(meeting);
+	}
+
+	public List<Meeting> getAllMeetigns() {
+		return meetings;
+	}
+
+	public List<Group> getAllGroups() {
+		return groups;
+	}
+
+	public boolean isNotificationEnabled() {
+		return notificationEnabled;
+	}
+
+	public void setNotificationEnabled(boolean notificationEnabled) {
+		this.notificationEnabled = notificationEnabled;
+	}
 	
-    public void setGPS(GPS gps)
-    {
-    	this.gps = gps;
-    }
-    
-    public void addGroup(Group group)
-    {
-    	groups.add(group);
-    }
-    
-    public void addMeeting(Meeting meeting)
-    {
-    	meetings.add(meeting);
-    }
-    
-    public  List<Meeting> getAllMeetigns()
-    {
-    	return meetings;
-    }
-    public  List<Group> getAllGroups()
-    {
-    	return groups;
-    }
-    
-    
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (this.getClass() != obj.getClass())
+			return false;
+		// Class name is Employ & have lastname
+		User u = (User) obj;
+		 if((u.getId() == userId)  &&( u.getName() == name)) {
+			return true;
+		}
+
+		return false;
+	}
+
 }
