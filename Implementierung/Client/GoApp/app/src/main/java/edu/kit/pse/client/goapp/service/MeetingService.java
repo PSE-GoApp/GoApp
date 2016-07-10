@@ -5,21 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
-import edu.kit.pse.client.goapp.converter.MeetingConverter;
-import edu.kit.pse.client.goapp.datamodels.Group;
-import edu.kit.pse.client.goapp.datamodels.Meeting;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientDelete;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
-import edu.kit.pse.client.goapp.httpappclient.HttpResponse;
-import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 
 /**
@@ -42,6 +37,7 @@ public class MeetingService  extends IntentService {
         super(name);
     }
 
+    // MeetingService's Logik Intent enthält alle Informationen CommunicationKeys sind String Key werte
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -67,104 +63,152 @@ public class MeetingService  extends IntentService {
     private void doGet (Intent intent) //throws  IOException
     {
         String jasonString = null;
-        HttpResponse httpResponse;
-        HttpEntity httpEntity = null;
         CloseableHttpResponse closeableHttpResponse = null;
+
+        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+
         // if there no Meeting Id in the Extra returns -1
         int meetingId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
-        URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
 
-        //TODO ich weiß nicht was als key rein kommt!
-        uri_meetingBuilder.addParameter("MEETING ID KEY HERE!" , Integer.toString(meetingId));
+        if (meetingId != -1) {
+            URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
+            uri_meetingBuilder.addParameter(CommunicationKeys.MEETING_ID, Integer.toString(meetingId));
 
-        HttpAppClientGet httpAppClientGet = new  HttpAppClientGet();
-        httpAppClientGet.setUri(uri_meetingBuilder.getURI());
-
-        try {
-
-            closeableHttpResponse = httpAppClientGet.executeRequest();
-        } catch (IOException e) {
-            // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
-        }
-
-        httpResponse = new HttpResponse(closeableHttpResponse);
-
-        if (httpResponse.getStatusCode() == 202) {
-
-            // TODO auskommentieren!! wenn die methode getEntitiy fertig ist!
-            //httpEntity = httpResponse.getEntity;
+            HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
+            httpAppClientGet.setUri(uri_meetingBuilder.getURI());
 
             try {
-                jasonString = EntityUtils.toString(httpEntity);
+                // TODO catch 404 (No Internet and Request Time out)
+                closeableHttpResponse = httpAppClientGet.executeRequest();
+            } catch (IOException e) {
+                // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            }
+
+            // accepted
+            try {
+                jasonString = EntityUtils.toString(closeableHttpResponse.getEntity());
             } catch (Throwable e) {
                 // TODO handle Exception "can not Convert EntitlyUtils to String"
             }
 
-            MeetingConverter meetingConverter = new MeetingConverter();
-            Meeting meeting = meetingConverter.deserialize(jasonString);
+            bundle.putString(CommunicationKeys.MEETING, jasonString);
 
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            // Send a empty result with 500 as StatusCode
 
-
-
-            // TODO ResultReceiver
-
-            //this sends the group list VON RUMEN
-            List<Group> list = listMe();
-            ArrayList<ParcelableGroup> parcelableGroups = new ArrayList<ParcelableGroup>();
-            for (Group group: list) {
-                parcelableGroups.add(new ParcelableGroup(group));
-            }
-            final ResultReceiver receiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
-            Bundle b = new Bundle();
-            b.putParcelableArrayList(CommunicationKeys.GROUPS,parcelableGroups);
-            b.putString(CommunicationKeys.COMMAND, "GET");
-            b.putString(CommunicationKeys.SERVICE, "GroupsService");
-            receiver.send(202, b);
+            // StatusCode 500 is an unexpected Error. Here no Meeting ID in Intent
+            resultReceiver.send(500, bundle);
         }
-        else {
-            switch (httpResponse.getStatusCode()) {
-                case 400:
-                    // bad request
-                    break;
-
-                case 403:
-                    // forbitten
-                    break;
-
-                case 404:
-                    // not found
-                    break;
-
-                case 408:
-                    // request Time out
-                    break;
-
-                case 500:
-                    // interna Server error
-                    break;
-            }
-        }
-
-
     }
 
+
     private void doDelet(Intent intent) {
+        CloseableHttpResponse closeableHttpResponse = null;
+
+        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+
+        // if there no Meeting Id in the Extra returns -1
+        int meetingId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
+
+        if (meetingId != -1) {
+            URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
+            uri_meetingBuilder.addParameter(CommunicationKeys.MEETING_ID, Integer.toString(meetingId));
+
+            HttpAppClientDelete httpAppClientDelete = new HttpAppClientDelete();
+            httpAppClientDelete.setUri(uri_meetingBuilder.getURI());
+
+            try {
+                // TODO catch 404 (No Internet and Request Time out)
+                closeableHttpResponse = httpAppClientDelete.executeRequest();
+            } catch (IOException e) {
+                // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            }
+
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            // Send a empty result with 500 as StatusCode
+
+            // StatusCode 500 is an unexpected Error. Here no Meeting ID in Intent
+            resultReceiver.send(500, bundle);
+        }
 
     }
 
     private void doPut(Intent intent) {
+        String meetingAsJsonString = null;
+        CloseableHttpResponse closeableHttpResponse = null;
 
+        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+
+        meetingAsJsonString = intent.getStringExtra(CommunicationKeys.MEETING);
+
+            URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
+
+            HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
+            httpAppClientPut.setUri(uri_meetingBuilder.getURI());
+        try {
+            httpAppClientPut.setBody(meetingAsJsonString);
+        } catch (IOException e) {
+            //Todo Handle Exception. Maybe the String Extra was null
+        }
+
+        try {
+            // TODO catch 404 (No Internet and Request Time out)
+            closeableHttpResponse = httpAppClientPut.executeRequest();
+        } catch (IOException e) {
+            // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+        }
+
+        // send the Bundle and the Status Code from Response
+        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
 
     private void doPost(Intent intent) {
+        String meetingAsJsonString = null;
+        CloseableHttpResponse closeableHttpResponse = null;
 
+        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+
+        meetingAsJsonString = intent.getStringExtra(CommunicationKeys.MEETING);
+
+        URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
+
+        HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
+        httpAppClientPost.setUri(uri_meetingBuilder.getURI());
+        try {
+            httpAppClientPost.setBody(meetingAsJsonString);
+        } catch (IOException e) {
+            //Todo Handle Exception. Maybe the String Extra was null
+        }
+
+        try {
+            // TODO catch 404 (No Internet and Request Time out)
+            closeableHttpResponse = httpAppClientPost.executeRequest();
+        } catch (IOException e) {
+            // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+        }
+
+        // send the Bundle and the Status Code from Response
+        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
 
-    // creates a list for testing
-    private List<Group> listMe() {
-        List<Group> list = new ArrayList<>();
-        list.add(new Group(1,"fucker"));
-        list.add(new Group(2, "sucker"));
-        return list;
-    }
 }

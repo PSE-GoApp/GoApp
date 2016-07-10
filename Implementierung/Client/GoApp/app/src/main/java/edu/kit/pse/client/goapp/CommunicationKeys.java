@@ -5,17 +5,35 @@ package edu.kit.pse.client.goapp;
  */
 public class CommunicationKeys {
 
+    //User
+    public static final String USERID = "userId";
+
+
+
     public static final String RECEICER = "receiver";
     public static final String COMMAND = "command";
+    public static final String GET = "GET";
+    public static final String PUT = "PUT";
+    public static final String DELETE = "DELETE";
+    public static final String  POST= "POST";
+
+
     public static final String SERVICE = "service";
 
     //Group
     public static final String GROUPS = "groups";
+    // In additional URI_Builder Keys
     public static final String GROUPID = "groupId";
 
     //Users
     public static final String USERS = "users";
 
     //Meeting
-    public static final String MEETING_ID = "meeting_id";
+
+    public static final String FROM_MEETING_SERVICES = "MeetingService";
+    public static final String MEETING = "meeting";
+    // In additional URI_Builder Keys
+    public static final String MEETING_ID = "meetingId";
+
+
 }
