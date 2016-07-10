@@ -16,9 +16,12 @@ public class CommunicationKeys {
     public static final String SERVICE = "service";
 
     //Group
+    public static final String GROUP = "group";
+    //Groups
     public static final String GROUPS = "groups";
     // In additional URI_Builder Keys
     public static final String GROUPID = "groupId";
+    public static final String GROUP_USER_MANAGEMENT = "groupUserManagement";
 
     //Users
     public static final String FROM_USERS_SERVICES = "UsersService";
@@ -36,8 +39,5 @@ public class CommunicationKeys {
     public static final String MEETING = "meeting";
     // In additional URI_Builder Keys
     public static final String MEETING_ID = "meetingId";
-
-
-
 
 }
