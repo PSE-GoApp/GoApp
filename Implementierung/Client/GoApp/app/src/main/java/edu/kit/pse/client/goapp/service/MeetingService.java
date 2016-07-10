@@ -42,16 +42,16 @@ public class MeetingService  extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
         switch (command) {
-            case "GET":
+            case CommunicationKeys.GET:
                 doGet(intent);
                 break;
-            case "DELETE":
+            case CommunicationKeys.DELETE:
                 doDelet(intent);
                 break;
-            case "PUT":
+            case CommunicationKeys.PUT:
                 doPut(intent);
                 break;
-            case "POST":
+            case CommunicationKeys.POST:
                 doPost(intent);
                 break;
             default:

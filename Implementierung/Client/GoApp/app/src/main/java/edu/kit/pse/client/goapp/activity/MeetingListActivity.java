@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -25,44 +26,63 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import edu.kit.pse.client.goapp.CommunicationKeys;
+import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.service.MeetingService;
 import edu.kit.pse.goapp.client.goapp.R;
 
-public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
+public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
-    //something
+    private ServiceResultReceiver meetingListReceiver;
+    private ObjectConverter<Meeting> meetingConverter;
     ImageButton menu_button;
-    public static final String MEETING_ID_KEY = "MEETING_ID";
     private Context context = this;
     private ListView list;
-    // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
 
     // Example ---------------------------------------------------------------------------------------------------------------------------------------------
-
     // Todo delete it after Testing
     User me = new User(42, "GO-App Admin");
-    Meeting meetingInfo = new Meeting(42, "Ich bin ein meeting Name", null, 1475953024000L, 3, new Participant(12,me,MeetingConfirmation.CONFIRMED));
+    private Meeting meetingInfo = new Meeting(42, "Ich bin ein meeting Name", null, 1475953024000L, 3, new Participant(12, me, MeetingConfirmation.CONFIRMED));
+
+    // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
 
     private long timestampExample = 1475953024000L;
-    Participant itsMeConfirmed = new Participant(0, me,MeetingConfirmation.CONFIRMED);
-    Participant itsMePending = new Participant(0, me,MeetingConfirmation.PENDING);
-    Participant imParticipant = new Participant(0, me,MeetingConfirmation.REJECTED);
+    Participant itsMeConfirmed = new Participant(0, me, MeetingConfirmation.CONFIRMED);
+    Participant itsMePending = new Participant(0, me, MeetingConfirmation.PENDING);
+    Participant imParticipant = new Participant(0, me, MeetingConfirmation.REJECTED);
 
-    private ArrayList<Meeting> meetings = new ArrayList<Meeting>(Arrays.asList(new Meeting[]{
-            new Meeting(0, "Mensa", null, timestampExample,  2 , imParticipant) {{addParticipant(itsMeConfirmed);}},
-            new Meeting(1, "Ago", null, timestampExample,  2 , imParticipant) {{addParticipant(itsMePending);}},
-            new Meeting(2, "PSE Treffen", null, timestampExample,  2 , imParticipant) {{addParticipant(itsMePending);}},
-            new Meeting(3, "Iris Füttern", null, timestampExample,  2 , imParticipant) {{addParticipant(itsMePending);}},
-            new Meeting(4, "Schloss Park", null, timestampExample,  2 , imParticipant) {{addParticipant(itsMeConfirmed);}},
-            new Meeting(5, "Klettern", null, timestampExample,  2 , imParticipant) {{addParticipant(itsMePending);}},
-            new Meeting(6, "Bar Tour", null, timestampExample,  2 , imParticipant) {{addParticipant(itsMeConfirmed);}}
-    }));
+    private List<Meeting> meetings = new ArrayList<Meeting>() {
+        {
+            new Meeting(0, "Mensa", null, timestampExample, 2, imParticipant) {{
+                addParticipant(itsMeConfirmed);
+            }};
+            add(new Meeting(1, "Ago", null, timestampExample, 2, imParticipant) {{
+                addParticipant(itsMePending);
+            }});
+            add(new Meeting(2, "PSE Treffen", null, timestampExample, 2, imParticipant) {{
+                addParticipant(itsMePending);
+            }});
+            add(new Meeting(3, "Iris Füttern", null, timestampExample, 2, imParticipant) {{
+                addParticipant(itsMePending);
+            }});
+            add(new Meeting(4, "Schloss Park", null, timestampExample, 2, imParticipant) {{
+                addParticipant(itsMeConfirmed);
+            }});
+            add(new Meeting(5, "Klettern", null, timestampExample, 2, imParticipant) {{
+                addParticipant(itsMePending);
+            }});
+            add(new Meeting(6, "Bar Tour", null, timestampExample, 2, imParticipant) {{
+                addParticipant(itsMeConfirmed);
+            }});
+        }
+    };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 
     @Override
@@ -71,6 +91,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_meeting_list);
         menu_button = (ImageButton) findViewById(R.id.menu_termine);
         menu_button.setOnClickListener(this);
+        meetingConverter = new ObjectConverter<>();
 
         // Only For the Test Todo delete this after Testing
         if (meetings != null) {
@@ -80,7 +101,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             list.setAdapter(adapter);
         }
     }
-
 
 
     public static void start(Activity activity) {
@@ -155,11 +175,11 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
             // change buttons to a accepted Meeting.
             firstButton.setImageResource(R.drawable.somemap);
-            firstButton.setTag(R.id.TAG_IMAGE_DIRECTION,R.drawable.somemap);
+            firstButton.setTag(R.id.TAG_IMAGE_DIRECTION, R.drawable.somemap);
 
             secondButton = (ImageButton) meetingRow.getChildAt(3);
             secondButton.setImageResource(R.drawable.participant);
-            secondButton.setTag(R.id.TAG_IMAGE_DIRECTION,R.drawable.participant);
+            secondButton.setTag(R.id.TAG_IMAGE_DIRECTION, R.drawable.participant);
 
         } else {
             if (imageDirection == R.drawable.somemap) {
@@ -206,10 +226,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
                 // Start MeetingParticipant with a extra (Meeting ID)
                 Intent mParticipantIntent = new Intent(view.getContext(), MeetingParticipantActivity.class);
-                mParticipantIntent.putExtra(MEETING_ID_KEY, meeting.getId());
+                mParticipantIntent.putExtra(CommunicationKeys.MEETING_ID, meeting.getId());
                 startActivity(mParticipantIntent);
-            }
-            else {
+            } else {
                 // should not be Called
                 Toast.makeText(getApplicationContext(), "Something unexpected happened", Toast.LENGTH_SHORT).show();
                 //Todo app schließen
@@ -245,12 +264,12 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         int meetingId = meeting.getId();
 
         // Todo remove this Toast Test ----------------------------------------------------------------------------------------------------------------------------------------
-        Toast.makeText(getApplicationContext()," Service delete Meeting with ID: " + meeting.getId(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), " Service delete Meeting with ID: " + meeting.getId(), Toast.LENGTH_SHORT).show();
 
         // Todo Button click lock, untill the request is finished. Than remove it from the list.
         //Remove Item from the List
         if (!meetings.remove(meeting)) {
-            Toast.makeText(getApplicationContext(),"Error: Meeting are not existing.\nPlease restart the app", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Error: Meeting are not existing.\nPlease restart the app", Toast.LENGTH_SHORT).show();
         }
         list.invalidateViews();
 
@@ -260,24 +279,26 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
 
     public void showMeetingInfo(View v) {
-
         RelativeLayout meetingRow = (RelativeLayout) v.getParent();
-
-// Todo: do it as a MeetingService
         Meeting m = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
-        /*
-        Meeting meeting = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
-        int meeetingId = meeting.getId();
-                // make a MeetingServe, that pulls the Meeting info
-                // Block the Activity until we got the information
-        */
 
 
-        Toast.makeText(this,"TODO create a MeetingService and put the Id: " + m.getId(),Toast.LENGTH_LONG );
+        Intent i = new Intent(this, MeetingService.class);
+        meetingListReceiver = new ServiceResultReceiver(new Handler());
+        meetingListReceiver.setReceiver(this);
+        i.putExtra(CommunicationKeys.RECEICER, meetingListReceiver);
+        i.putExtra(CommunicationKeys.COMMAND, "GET");
+        i.putExtra(CommunicationKeys.MEETING_ID, m.getId());
+        startService(i);
+
+        // TODO block Activity until the The information are there
+
+
+        Toast.makeText(this, "TODO create a MeetingService and put the Id: " + m.getId(), Toast.LENGTH_LONG);
 
         // get information_apoitment.xml as Java view
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View infoApoitment = inflater.inflate(R.layout.information_apoitment,null , false);
+        View infoApoitment = inflater.inflate(R.layout.information_apoitment, null, false);
 
         // set the Meeting information in information_apoitment xml
         TextView time = (TextView) infoApoitment.findViewById(R.id.meeting_info_time);
@@ -287,14 +308,14 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
         // Convert TimeStampt with a Calendar
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(meetingInfo.getTimespamp());
+        calendar.setTimeInMillis(meetingInfo.getTimestamp());
 
         time.setText("Am " + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH) + "."
                 + calendar.get(Calendar.YEAR) + " um " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
 
         name.setText(meetingInfo.getName());
         //Todo  GPS getPlace as String!
-        place.setText( "TODO Set place here !!!" );
+        place.setText("TODO Set place here !!!");
         creator.setText("Ersteller: " + meetingInfo.getCreator().getUser().getName());
 
        /*   (Priority B)
@@ -337,8 +358,71 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 return false;
         }
     }
-}
 
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        // TODO i-eine schöne lösung finden für zwei Services oder String umwandeln
+
+        switch (resultCode) {
+            case 202:
+                switch (resultData.getString(CommunicationKeys.SERVICE)) {
+                    case CommunicationKeys.FROM_MEETINGS_SERVICES:
+                        meetingsResultReceiverHandler(resultData);
+                        break;
+
+                    case CommunicationKeys.FROM_MEETING_SERVICES:
+                        meetingResultReceiverHandler(resultData);
+                        break;
+                    default:
+                        // TODO wrong Service
+                }
+                break;
+            case 400:
+                Toast.makeText(this, "Error 400: Missing Informations", Toast.LENGTH_LONG).show();
+                break;
+            case 403:
+                Toast.makeText(this, "Error 403: Missing Informations", Toast.LENGTH_LONG).show();
+                break;
+            case 408:
+                Toast.makeText(this, "Error 408: Missing Informations", Toast.LENGTH_LONG).show();
+                break;
+            case 500:
+                Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
+                break;
+        }
+    }
+
+    private void meetingResultReceiverHandler(Bundle resultData) {
+        switch (resultData.getString(CommunicationKeys.COMMAND)) {
+            case CommunicationKeys.GET:
+                break;
+            case CommunicationKeys.DELETE:
+                break;
+            case CommunicationKeys.PUT:
+                break;
+            case CommunicationKeys.POST:
+                break;
+
+            default:
+                // TODO ERROR wrong Command from Service
+
+        }
+    }
+
+    private void meetingsResultReceiverHandler(Bundle resultData) {
+        switch (resultData.getString(CommunicationKeys.COMMAND)) {
+            case CommunicationKeys.GET:
+                String jsonString = resultData.getString(CommunicationKeys.MEETINGS);
+                meetingConverter.deserialize(jsonString, Meeting.class);
+                break;
+            default:
+                // TODO ERROR wrong Command from Service
+
+        }
+    }
+
+
+}
 
 
 
@@ -383,7 +467,7 @@ class MeetingListAdapter extends ArrayAdapter<Meeting> {
         name.setText(m.getName());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(m.getTimespamp());
+        calendar.setTimeInMillis(m.getTimestamp());
         time.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
 
         // TODO the date------------------------------------------------------------------------------------------------------------------
@@ -419,3 +503,4 @@ Todo                             delete alle Rejected Meetings bevor calling the
         return meetingRow;
     }
 }
+

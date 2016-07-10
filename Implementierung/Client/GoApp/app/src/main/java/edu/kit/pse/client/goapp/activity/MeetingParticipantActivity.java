@@ -1,7 +1,9 @@
 package edu.kit.pse.client.goapp.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,25 +22,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.kit.pse.client.goapp.CommunicationKeys;
+import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
+import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.service.MeetingService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 /**
  * Created by kansei on 07.07.16.
  */
-public class MeetingParticipantActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
+public class MeetingParticipantActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
-    public static final String MEETING_ID_KEY = "MEETING_ID";
+    public ServiceResultReceiver meetingParticipantReceiver;
     ImageButton menu_button;
+    Button cancelButton;
+    ObjectConverter<Meeting> meetingConverter;
 
-    Bundle extra;
+    Bundle bundleMeetingId;
+    Meeting meeting;
 
     ListView list;
 
     // Todo Delete it after Testing
 
-    ArrayList<Participant> participants = new ArrayList<Participant>(Arrays.asList(new Participant[] {
+    List<Participant> participants = new ArrayList<Participant>(Arrays.asList(new Participant[] {
             new Participant(0, new User(42, "ICH BIN DAS"), null),
             new Participant(0, new User(0, "Super Heroooo Ohhh"), null),
             new Participant(0, new User(1, "Niemand"), null)} ));
@@ -48,16 +59,22 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         setContentView(R.layout.activity_meeting_participant);
         menu_button = (ImageButton) findViewById(R.id.menu_meeting_participant);
         menu_button.setOnClickListener(this);
+        cancelButton = (Button) findViewById(R.id.meeting_participant_cancel);
+        meetingConverter = new ObjectConverter<>();
 
-        if (participants != null) {
-            list = (ListView) findViewById(R.id.participant_listview);
 
-            ParticipantListAdapter adapter = new ParticipantListAdapter(this, participants);
-            list.setAdapter(adapter);
-        }
+        // Start MeetingServices for the Meeting Information
+        Intent i = new Intent(this, MeetingService.class);
+        meetingParticipantReceiver = new ServiceResultReceiver(new Handler());
+        meetingParticipantReceiver.setReceiver(this);
+        i.putExtra(CommunicationKeys.RECEICER, meetingParticipantReceiver);
+        i.putExtra(CommunicationKeys.COMMAND, "GET");
+        i.putExtra(CommunicationKeys.MEETING_ID, bundleMeetingId.getInt(CommunicationKeys.MEETING_ID));
+        startService(i);
 
-        extra = getIntent().getExtras();
-        Toast.makeText(MeetingParticipantActivity.this, "Meeting ID is: " + Integer.toString(extra.getInt(MEETING_ID_KEY)) , Toast.LENGTH_SHORT).show();
+
+        bundleMeetingId = getIntent().getExtras();
+        Toast.makeText(MeetingParticipantActivity.this, "Meeting ID is: " + Integer.toString(bundleMeetingId.getInt(CommunicationKeys.MEETING_ID)) , Toast.LENGTH_SHORT).show();
 
         // Todo create a service
     }
@@ -76,6 +93,20 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
     public void onClick(View v) {
         if (v.getId() == R.id.menu_meeting_participant) {
             showPopUp(v);
+        }
+        if (v.getId() == R.id.meeting_participant_cancel) {
+
+            // TODO warning if they are sure to leave the Meeting
+
+            // Todo Start MeetingManagementServices for leave the Meeting (delete)
+            Intent i = new Intent(this, MeetingService.class);
+            meetingParticipantReceiver = new ServiceResultReceiver(new Handler());
+            meetingParticipantReceiver.setReceiver(this);
+            i.putExtra(CommunicationKeys.RECEICER, meetingParticipantReceiver);
+            i.putExtra(CommunicationKeys.COMMAND, "GET");
+            i.putExtra(CommunicationKeys.MEETING_ID, bundleMeetingId.getInt(CommunicationKeys.MEETING_ID));
+            startService(i);
+
         }
     }
 
@@ -102,7 +133,44 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         }
     }
 
+    // TODO TEST THIS SHHHIEEEEEEEEEEEAAAAAAAAT
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode) {
+            case 202:
+                Toast.makeText(this,"202", Toast.LENGTH_SHORT);
+                String jsonString = resultData.getString(CommunicationKeys.MEETING);
+                meeting = meetingConverter.deserialize(jsonString,Meeting.class);
+                participants = meeting.getParticipants();
+                if (participants != null) {
+                    list = (ListView) findViewById(R.id.participant_listview);
 
+                    ParticipantListAdapter adapter = new ParticipantListAdapter(this, participants);
+                    list.setAdapter(adapter);
+                    if (meeting.getTimestamp() >= System.currentTimeMillis()) {
+                        cancelButton.setTag("Termin verlassen");
+                    }
+                } else {
+                    Toast.makeText(this, "Error 500: Missing Informations", Toast.LENGTH_LONG).show();
+                }
+                break;
+            case 400:
+                Toast.makeText(this, "Error 400: Missing Informations", Toast.LENGTH_LONG).show();
+                break;
+            case 403:
+                Toast.makeText(this, "Error 403: Missing Informations", Toast.LENGTH_LONG).show();
+                break;
+            case 408:
+                Toast.makeText(this, "Error 408: Missing Informations", Toast.LENGTH_LONG).show();
+                break;
+            case 500:
+                Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
+                break;
+        }
+
+
+
+    }
 }
 
 class ParticipantListAdapter extends ArrayAdapter<Participant> {
