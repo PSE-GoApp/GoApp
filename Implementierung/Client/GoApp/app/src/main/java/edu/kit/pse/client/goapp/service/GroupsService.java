@@ -5,17 +5,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
 import edu.kit.pse.client.goapp.datamodels.Group;
+import edu.kit.pse.client.goapp.uri_builder.URI_UsersBuilder;
 
 /**
  * Created by e6420 on 28.6.2016 г..
  */
 public class GroupsService extends IntentService {
+
+    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist
 
     public GroupsService() {
         super("GroupsService");
@@ -35,24 +43,7 @@ public class GroupsService extends IntentService {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
         switch (command) {
             case "GET":
-                //this sends the group list
-                List<Group> list = listMe();
-                ArrayList<ParcelableGroup> parcelableGroups = new ArrayList<ParcelableGroup>();
-                for (Group group: list) {
-                    parcelableGroups.add(new ParcelableGroup(group));
-                }
-                final ResultReceiver receiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
-                Bundle b = new Bundle();
-                b.putParcelableArrayList(CommunicationKeys.GROUPS,parcelableGroups);
-                b.putString(CommunicationKeys.COMMAND, "GET");
-                b.putString(CommunicationKeys.SERVICE, "GroupsService");
-                receiver.send(202, b);
-                break;
-            case "DELETE":
-                break;
-            case "PUT":
-                break;
-            case "POST":
+                doGet(intent);
                 break;
             default:
                 break;
@@ -60,11 +51,40 @@ public class GroupsService extends IntentService {
 
     }
 
-    // creates a list for testing
-    private List<Group> listMe() {
-        List<Group> list = new ArrayList<>();
-        list.add(new Group(1,"fucker"));
-        list.add(new Group(2, "sucker"));
-        return list;
+    private void doGet(Intent intent) //throws  IOException
+    {
+        String jasonString = null;
+        CloseableHttpResponse closeableHttpResponse = null;
+
+        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUPS_SERVICES);
+
+        URI_UsersBuilder uri_meetingBuilder = new URI_UsersBuilder();
+
+        HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
+        httpAppClientGet.setUri(uri_meetingBuilder.getURI());
+
+        try {
+            // TODO catch 404 (No Internet and Request Time out)
+            closeableHttpResponse = httpAppClientGet.executeRequest();
+        } catch (IOException e) {
+            // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+        }
+
+        // accepted
+        try {
+            jasonString = EntityUtils.toString(closeableHttpResponse.getEntity());
+        } catch (Throwable e) {
+            // TODO handle Exception "can not Convert EntitlyUtils to String"
+        }
+
+        bundle.putString(CommunicationKeys.USERS, jasonString);
+
+        // send the Bundle and the Status Code from Response
+        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
+
 }

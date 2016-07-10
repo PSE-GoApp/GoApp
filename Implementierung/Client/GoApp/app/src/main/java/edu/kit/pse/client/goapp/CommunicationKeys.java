@@ -14,14 +14,17 @@ public class CommunicationKeys {
 
 
     public static final String SERVICE = "service";
-
+    
     //Group
+    public static final String FROM_GROUP_SERVICES = "GroupService";
     public static final String GROUP = "group";
-    //Groups
-    public static final String GROUPS = "groups";
     // In additional URI_Builder Keys
-    public static final String GROUPID = "groupId";
-    public static final String GROUP_USER_MANAGEMENT = "groupUserManagement";
+    public static final String GROUP_ID = "groupId";
+
+    //Groups
+    public static final String FROM_GROUPS_SERVICES = "GroupsService";
+    public static final String GROUP_USER_MANAGMENT = "groupUserManagement";
+    public static final String GROUPS = "groups";
 
     //Users
     public static final String FROM_USERS_SERVICES = "UsersService";
