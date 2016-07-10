@@ -57,11 +57,11 @@ public class LogoutService extends IntentService {
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.USER);
 
         // if there no Meeting Id in the Extra returns -1
-        int userId = intent.getIntExtra(CommunicationKeys.USERID, -1);
+        int userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);
 
         if (userId != -1) {
             URI_LogoutBuilder uri_logoutBuilder = new URI_LogoutBuilder();
-            uri_logoutBuilder.addParameter(CommunicationKeys.USERID, Integer.toString(userId));
+            uri_logoutBuilder.addParameter(CommunicationKeys.USER_ID, Integer.toString(userId));
 
             HttpAppClientDelete httpAppClientDelete = new HttpAppClientDelete();
             httpAppClientDelete.setUri(uri_logoutBuilder.getURI());

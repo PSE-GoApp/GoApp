@@ -68,11 +68,11 @@ public class LoginService extends IntentService {
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.USER);
 
         // if there no Meeting Id in the Extra returns -1
-        int userId = intent.getIntExtra(CommunicationKeys.USERID, -1);
+        int userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);
 
         if (userId != -1) {
             URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
-            uri_loginBuilder.addParameter(CommunicationKeys.USERID, Integer.toString(userId));
+            uri_loginBuilder.addParameter(CommunicationKeys.USER_ID, Integer.toString(userId));
 
             HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
             httpAppClientGet.setUri(uri_loginBuilder.getURI());
