@@ -16,6 +16,7 @@ import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
 import edu.kit.pse.client.goapp.datamodels.Group;
+import edu.kit.pse.client.goapp.uri_builder.URI_GroupsBuilder;
 import edu.kit.pse.client.goapp.uri_builder.URI_UsersBuilder;
 
 /**
@@ -62,10 +63,10 @@ public class GroupsService extends IntentService {
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUPS_SERVICES);
 
-        URI_UsersBuilder uri_meetingBuilder = new URI_UsersBuilder();
+        URI_GroupsBuilder uri_groupsBuilder = new URI_GroupsBuilder();
 
         HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
-        httpAppClientGet.setUri(uri_meetingBuilder.getURI());
+        httpAppClientGet.setUri(uri_groupsBuilder.getURI());
 
         try {
             // TODO catch 404 (No Internet and Request Time out)
@@ -81,7 +82,7 @@ public class GroupsService extends IntentService {
             // TODO handle Exception "can not Convert EntitlyUtils to String"
         }
 
-        bundle.putString(CommunicationKeys.USERS, jasonString);
+        bundle.putString(CommunicationKeys.GROUPS, jasonString);
 
         // send the Bundle and the Status Code from Response
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
