@@ -66,7 +66,7 @@ public class GroupUserManagmentService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.GROUP_USER_MANAGEMENT);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
 
         // if there no GroupId in the Extra returns -1
         int groupId = intent.getIntExtra(CommunicationKeys.GROUP_ID, -1);
@@ -112,7 +112,7 @@ public class GroupUserManagmentService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.GROUP_USER_MANAGEMENT);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
 
         groupUserAsJsonString = intent.getStringExtra(CommunicationKeys.GROUP);
 

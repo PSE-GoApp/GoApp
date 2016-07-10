@@ -65,7 +65,7 @@ public class LoginService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.USER);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
 
         // if there no Meeting Id in the Extra returns -1
         int userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);
@@ -111,7 +111,7 @@ public class LoginService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.USER);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
 
         userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
 
@@ -146,7 +146,7 @@ public class LoginService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.USER);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
 
         userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
 

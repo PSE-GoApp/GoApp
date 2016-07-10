@@ -54,7 +54,7 @@ public class LogoutService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.USER);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
 
         // if there no Meeting Id in the Extra returns -1
         int userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);
