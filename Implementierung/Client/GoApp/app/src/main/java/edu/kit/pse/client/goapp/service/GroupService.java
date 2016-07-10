@@ -74,7 +74,7 @@ public class GroupService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_SERVICE);
 
         // if there no Group Id in the Extra returns -1
         int groupId = intent.getIntExtra(CommunicationKeys.GROUP_ID, -1);
@@ -120,7 +120,7 @@ public class GroupService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_SERVICE);
 
         // if there no Meeting Id in the Extra returns -1
         int groupId = intent.getIntExtra(CommunicationKeys.GROUP_ID, -1);
@@ -158,7 +158,7 @@ public class GroupService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_SERVICE);
 
         groupAsJsonString = intent.getStringExtra(CommunicationKeys.GROUP);
 
@@ -191,7 +191,7 @@ public class GroupService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_SERVICE);
 
         groupAsJsonString = intent.getStringExtra(CommunicationKeys.GROUP);
 
