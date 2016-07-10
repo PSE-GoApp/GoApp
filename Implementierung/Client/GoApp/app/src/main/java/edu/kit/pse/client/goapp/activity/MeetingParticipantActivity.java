@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
@@ -48,10 +47,11 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
 
     // Todo Delete it after Testing
 
-    List<Participant> participants = new ArrayList<Participant>(Arrays.asList(new Participant[] {
-            new Participant(0, new User(42, "ICH BIN DAS"), null),
-            new Participant(0, new User(0, "Super Heroooo Ohhh"), null),
-            new Participant(0, new User(1, "Niemand"), null)} ));
+    List<Participant> participants = new ArrayList<Participant>() {{
+            add(new Participant(0,2, new User(42, "ICH BIN DAS"), null));
+            add(new Participant(0,2, new User(0, "Super Heroooo Ohhh"), null));
+            add(new Participant(0,2, new User(1, "Niemand"), null));
+        }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

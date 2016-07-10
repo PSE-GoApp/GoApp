@@ -5,9 +5,9 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -19,13 +19,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.datamodels.Group;
-import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
 import edu.kit.pse.client.goapp.service.GroupService;
 import edu.kit.pse.client.goapp.service.GroupsService;
 import edu.kit.pse.goapp.client.goapp.R;
@@ -212,7 +212,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
     public void onReceiveResult(int resultCode, Bundle resultData) {
         if (resultCode == 202) {
             if (resultData.getString(CommunicationKeys.SERVICE) == "GroupsService"){
-                setListResult(resultData);
+                //setListResult(resultData);
             } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupService"){
                 progressDialog.dismiss();
                 groups.remove(positionClicked);
@@ -250,6 +250,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
      * sets the list of groups
      * @param resultData all the data from the service
      */
+    /*
     private void setListResult(Bundle resultData){
         ArrayList<ParcelableGroup> parcelableGroups = resultData.getParcelableArrayList(CommunicationKeys.GROUPS);
         if (parcelableGroups != null) {
@@ -261,6 +262,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
             list.setAdapter(adapter);
         }
     }
+    */
 
     /**
      * it a private class that sets up an adapter for the listView

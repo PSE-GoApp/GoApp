@@ -42,7 +42,7 @@ public class Meeting {
 		return participants;
 	}
 
-	public int getMeetingId() {
+	public int getId() {
 		return meetingId;
 	}
 

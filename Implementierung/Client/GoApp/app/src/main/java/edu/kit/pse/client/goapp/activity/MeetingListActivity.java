@@ -46,9 +46,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     User me = new User(42, "GO-App Admin");
     // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
 
-    Participant itsMeConfirmed = new Participant(0, me, MeetingConfirmation.CONFIRMED);
-    Participant itsMePending = new Participant(0, me, MeetingConfirmation.PENDING);
-    Participant imParticipant = new Participant(0, me, MeetingConfirmation.REJECTED);
+    Participant itsMeConfirmed = new Participant(0,2,  me, MeetingConfirmation.CONFIRMED);
+    Participant itsMePending = new Participant(0,3, me, MeetingConfirmation.PENDING);
+    Participant imParticipant = new Participant(0,3, me, MeetingConfirmation.REJECTED);
 
     private List<Meeting> meetings = new ArrayList<Meeting>() {
         {

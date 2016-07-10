@@ -5,9 +5,9 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,13 +20,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.datamodels.User;
-import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableUser;
 import edu.kit.pse.client.goapp.service.GroupUserManagmentService;
 import edu.kit.pse.goapp.client.goapp.R;
 
@@ -129,7 +129,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
     public void onReceiveResult(int resultCode, Bundle resultData) {
         if (resultCode == 202) {
             if (resultData.getString(CommunicationKeys.SERVICE) == "GroupsService"){
-                setListResult(resultData);
+                // TODO setListResult(resultData);
             } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupUserManagmentService"){
                 Log.e("returned","groupService");
                 progressDialog.dismiss();
@@ -168,6 +168,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
      * sets the list of groups
      * @param resultData all the data from the service
      */
+    /* TODO-----------------------------------------------------------
     private void setListResult(Bundle resultData){
         ArrayList<ParcelableUser> parcelableUsers = resultData.getParcelableArrayList(CommunicationKeys.USERS);
         if (parcelableUsers != null) {
@@ -179,6 +180,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
             list.setAdapter(adapter);
         }
     }
+    */
 
     /**
      * method that shows up the popUpMenu

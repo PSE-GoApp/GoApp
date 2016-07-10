@@ -4,22 +4,16 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import android.util.Log;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
-import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
-import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableUser;
 import edu.kit.pse.client.goapp.uri_builder.URI_GroupUserManagementBuilder;
-import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 
 /**
  * Created by e6420 on 4.7.2016 г..
