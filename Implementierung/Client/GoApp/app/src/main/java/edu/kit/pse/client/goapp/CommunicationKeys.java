@@ -21,6 +21,7 @@ public class CommunicationKeys {
     public static final String GROUPID = "groupId";
 
     //Users
+    public static final String FROM_USERS_SERVICES = "UsersService";
     public static final String USERS = "users";
 
     //User
