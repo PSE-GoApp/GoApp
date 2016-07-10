@@ -15,17 +15,17 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientDelete;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
-import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
+import edu.kit.pse.client.goapp.uri_builder.URI_UserBuilder;
 
 /**
- * Created by kansei on 09.07.16.
+ * Created by paula on 10.07.16.
  */
-public class MeetingService  extends IntentService {
+public class UserService extends IntentService{
 
     //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
 
-    public MeetingService() {
-        super("MeetingService");
+    public UserService() {
+        super("UserService");
     }
 
     /**
@@ -33,30 +33,25 @@ public class MeetingService  extends IntentService {
      *
      * @param name Used to name the worker thread, important only for debugging.
      */
-    public MeetingService(String name) {
+    public UserService(String name) {
         super(name);
     }
 
-    // MeetingService's Logik Intent enthält alle Informationen CommunicationKeys sind String Key werte
+
     @Override
     protected void onHandleIntent(Intent intent) {
-        String command = intent.getStringExtra(CommunicationKeys.COMMAND);
+        String command = intent.getStringExtra(edu.kit.pse.client.goapp.CommunicationKeys.COMMAND);
         switch (command) {
-            case CommunicationKeys.GET:
+            case "GET":
                 doGet(intent);
                 break;
-<<<<<<< HEAD
-            case CommunicationKeys.DELETE:
-                doDelet(intent);
-=======
             case "DELETE":
                 doDelete(intent);
->>>>>>> 755778a38c0a0eef3d01ba81585df732bb4d756a
                 break;
-            case CommunicationKeys.PUT:
+            case "PUT":
                 doPut(intent);
                 break;
-            case CommunicationKeys.POST:
+            case "POST":
                 doPost(intent);
                 break;
             default:
@@ -74,17 +69,17 @@ public class MeetingService  extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICES);
 
-        // if there no Meeting Id in the Extra returns -1
-        int meetingId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
+        // if there no User Id in the Extra returns -1
+        int userId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
 
-        if (meetingId != -1) {
-            URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
-            uri_meetingBuilder.addParameter(CommunicationKeys.MEETING_ID, Integer.toString(meetingId));
+        if (userId != -1) {
+            URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
+            uri_userBuilder.addParameter(CommunicationKeys.USER_ID, Integer.toString(userId));
 
             HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
-            httpAppClientGet.setUri(uri_meetingBuilder.getURI());
+            httpAppClientGet.setUri(uri_userBuilder.getURI());
 
             try {
                 // TODO catch 404 (No Internet and Request Time out)
@@ -100,7 +95,7 @@ public class MeetingService  extends IntentService {
                 // TODO handle Exception "can not Convert EntitlyUtils to String"
             }
 
-            bundle.putString(CommunicationKeys.MEETING, jasonString);
+            bundle.putString(edu.kit.pse.client.goapp.CommunicationKeys.USER, jasonString);
 
             // send the Bundle and the Status Code from Response
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
@@ -112,7 +107,6 @@ public class MeetingService  extends IntentService {
         }
     }
 
-
     private void doDelete(Intent intent) {
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -120,17 +114,17 @@ public class MeetingService  extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICES);
 
-        // if there no Meeting Id in the Extra returns -1
-        int meetingId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
+        // if there no User Id in the Extra returns -1
+        int userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);
 
-        if (meetingId != -1) {
-            URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
-            uri_meetingBuilder.addParameter(CommunicationKeys.MEETING_ID, Integer.toString(meetingId));
+        if (userId != -1) {
+            URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
+            uri_userBuilder.addParameter(CommunicationKeys.USER_ID, Integer.toString(userId));
 
             HttpAppClientDelete httpAppClientDelete = new HttpAppClientDelete();
-            httpAppClientDelete.setUri(uri_meetingBuilder.getURI());
+            httpAppClientDelete.setUri(uri_userBuilder.getURI());
 
             try {
                 // TODO catch 404 (No Internet and Request Time out)
@@ -151,23 +145,23 @@ public class MeetingService  extends IntentService {
     }
 
     private void doPut(Intent intent) {
-        String meetingAsJsonString = null;
+        String userAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICES);
 
-        meetingAsJsonString = intent.getStringExtra(CommunicationKeys.MEETING);
+        userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
 
-            URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
+        URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
 
-            HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
-            httpAppClientPut.setUri(uri_meetingBuilder.getURI());
+        HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
+        httpAppClientPut.setUri(uri_userBuilder.getURI());
         try {
-            httpAppClientPut.setBody(meetingAsJsonString);
+            httpAppClientPut.setBody(userAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
         }
@@ -184,23 +178,23 @@ public class MeetingService  extends IntentService {
     }
 
     private void doPost(Intent intent) {
-        String meetingAsJsonString = null;
+        String userAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICES);
 
-        meetingAsJsonString = intent.getStringExtra(CommunicationKeys.MEETING);
+        userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
 
-        URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
+        URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
 
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
-        httpAppClientPost.setUri(uri_meetingBuilder.getURI());
+        httpAppClientPost.setUri(uri_userBuilder.getURI());
         try {
-            httpAppClientPost.setBody(meetingAsJsonString);
+            httpAppClientPost.setBody(userAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
         }
@@ -215,5 +209,4 @@ public class MeetingService  extends IntentService {
         // send the Bundle and the Status Code from Response
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
-
 }

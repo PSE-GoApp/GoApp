@@ -9,25 +9,21 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
-import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
-import edu.kit.pse.client.goapp.datamodels.Group;
-import edu.kit.pse.client.goapp.uri_builder.URI_GroupsBuilder;
+import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 import edu.kit.pse.client.goapp.uri_builder.URI_UsersBuilder;
 
 /**
- * Created by e6420 on 28.6.2016 г..
+ * Created by paula on 10.07.16.
  */
-public class GroupsService extends IntentService {
+public class UsersService extends IntentService {
 
-    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist
+    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
 
-    public GroupsService() {
-        super("GroupsService");
+    public UsersService() {
+        super("UsersService");
     }
 
     /**
@@ -35,9 +31,10 @@ public class GroupsService extends IntentService {
      *
      * @param name Used to name the worker thread, important only for debugging.
      */
-    public GroupsService(String name) {
+    public UsersService(String name) {
         super(name);
     }
+
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -49,10 +46,9 @@ public class GroupsService extends IntentService {
             default:
                 break;
         }
-
     }
 
-    private void doGet(Intent intent) //throws  IOException
+    private void doGet (Intent intent) //throws  IOException
     {
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
@@ -61,12 +57,12 @@ public class GroupsService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUPS_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICES);
 
-        URI_GroupsBuilder uri_groupsBuilder = new URI_GroupsBuilder();
+        URI_UsersBuilder uri_usersBuilder = new URI_UsersBuilder();
 
         HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
-        httpAppClientGet.setUri(uri_groupsBuilder.getURI());
+        httpAppClientGet.setUri(uri_usersBuilder.getURI());
 
         try {
             // TODO catch 404 (No Internet and Request Time out)
@@ -82,10 +78,9 @@ public class GroupsService extends IntentService {
             // TODO handle Exception "can not Convert EntitlyUtils to String"
         }
 
-        bundle.putString(CommunicationKeys.GROUPS, jasonString);
+        bundle.putString(CommunicationKeys.USERS, jasonString);
 
         // send the Bundle and the Status Code from Response
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
-
 }
