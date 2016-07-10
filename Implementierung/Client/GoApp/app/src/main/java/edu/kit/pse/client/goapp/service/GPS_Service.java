@@ -61,7 +61,7 @@ public class GPS_Service extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.GPS);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
 
         GPSAsJsonString = intent.getStringExtra(CommunicationKeys.GPS);
 

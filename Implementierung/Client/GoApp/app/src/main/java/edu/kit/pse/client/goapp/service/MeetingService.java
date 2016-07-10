@@ -47,8 +47,11 @@ public class MeetingService  extends IntentService {
                 break;
             case CommunicationKeys.DELETE:
                 doDelete(intent);
+<<<<<<< HEAD
 
                 break;
+=======
+>>>>>>> cab2a625483cf3ad0334af1401a6719eed581ab0
             case CommunicationKeys.PUT:
                 doPut(intent);
                 break;

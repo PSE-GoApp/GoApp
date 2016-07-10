@@ -1,6 +1,8 @@
 
 package edu.kit.pse.client.goapp.datamodels;
 
+import java.util.List;
+
 public class GPS {
 	private double x;
 	private double y;
@@ -20,7 +22,25 @@ public class GPS {
 		}
 		return false;
 	}
-
+    
+	public static GPS median(List<GPS> positions)
+	{
+		double x = 0.0;
+		double y = 0.0;
+		double z = 0.0;
+		for(GPS position : positions)
+		{
+			x+= position.getX();
+			y+=position.getY();
+			z+= position.getZ();
+		}
+		x/=positions.size();
+		y/= positions.size();
+		z/=positions.size();
+		
+		return new GPS(x, y, z);
+		
+	}
 	public GPS(double x, double y, double z) {
 		this.x = x;
 		this.y = y;

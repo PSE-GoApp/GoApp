@@ -22,8 +22,6 @@ public class Meeting {
 		this.timestamp = timestamp;
 		this.duration = duration;
 		this.creator = creator;
-
-		// Todo: ???
 		this.participants = new ArrayList<Participant>();
 
 	}
@@ -36,7 +34,7 @@ public class Meeting {
 		return place;
 	}
 
-	public long getTimestamp() {
+	public long getTimespamp() {
 		return timestamp;
 	}
 
@@ -44,7 +42,7 @@ public class Meeting {
 		return participants;
 	}
 
-	public int getId() {
+	public int getMeetingId() {
 		return meetingId;
 	}
 
@@ -60,19 +58,8 @@ public class Meeting {
 		return creator;
 	}
 
-	// set
-
-	public void setName(String name) { this.name = name; }
-
-	public void setPlace(GPS place) { this.place = place; }
-
-	public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
-
-	public void setDuration(int duration) { this.duration = duration; }
-
 	public void setParticipants(List<Participant> participants) {
 		this.participants = participants;
 	}
-
 
 }

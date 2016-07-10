@@ -18,7 +18,7 @@ public class MeetingCenter {
 	}
 	
 	public MeetingCenter calculateCenter() {
-		//TOD�
+		//TODò
 		return null;
 	}
 
@@ -30,7 +30,9 @@ public class MeetingCenter {
 		return place;
 	}
 	
-	
+	public void setParticipants(List<Participant> participants) {
+		this.participants = participants;
+	}
 	
 
 }
