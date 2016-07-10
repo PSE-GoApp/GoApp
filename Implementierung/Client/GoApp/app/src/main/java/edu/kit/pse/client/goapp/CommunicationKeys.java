@@ -46,4 +46,7 @@ public class CommunicationKeys {
     public static final String FROM_MEETINGS_SERVICES = "MeetingsService";
     public static final String MEETINGS = "meetings";
 
+    //GPS
+    public static final String GPS = "GPS";
+
 }
