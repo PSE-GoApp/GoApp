@@ -34,7 +34,7 @@ public class Meeting {
 		return place;
 	}
 
-	public long getTimespamp() {
+	public long getTimestamp() {
 		return timestamp;
 	}
 
