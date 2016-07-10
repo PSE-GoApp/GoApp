@@ -26,6 +26,7 @@ public class CommunicationKeys {
     public static final String GROUPID = "groupId";
 
     //Users
+    public static final String FROM_USERS_SERVICE = "UsersService";
     public static final String USERS = "users";
 
     //Meeting
@@ -37,6 +38,9 @@ public class CommunicationKeys {
 
     // Meetings
     public static final String FROM_MEETINGS_SERVICES = "MeetingsService";
+    public static final String MEETINGS = "meetings";
+    // MeetingManagementService
+    public static final String FROM_MEETING_MANAGEMENT_SERVICE = "MeetingManagementService";
 
 
 }

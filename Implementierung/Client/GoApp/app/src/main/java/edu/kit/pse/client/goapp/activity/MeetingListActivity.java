@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -33,13 +31,12 @@ import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.User;
-import edu.kit.pse.client.goapp.service.MeetingService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
     private ServiceResultReceiver meetingListReceiver;
-    private ObjectConverter<Meeting> meetingConverter;
+    private ObjectConverter<List<Meeting>> meetingListConverter;
     ImageButton menu_button;
     private Context context = this;
     private ListView list;
@@ -47,36 +44,33 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     // Example ---------------------------------------------------------------------------------------------------------------------------------------------
     // Todo delete it after Testing
     User me = new User(42, "GO-App Admin");
-    private Meeting meetingInfo = new Meeting(42, "Ich bin ein meeting Name", null, 1475953024000L, 3, new Participant(12, me, MeetingConfirmation.CONFIRMED));
-
     // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
 
-    private long timestampExample = 1475953024000L;
     Participant itsMeConfirmed = new Participant(0, me, MeetingConfirmation.CONFIRMED);
     Participant itsMePending = new Participant(0, me, MeetingConfirmation.PENDING);
     Participant imParticipant = new Participant(0, me, MeetingConfirmation.REJECTED);
 
     private List<Meeting> meetings = new ArrayList<Meeting>() {
         {
-            new Meeting(0, "Mensa", null, timestampExample, 2, imParticipant) {{
+            new Meeting(0, "Mensa", null, 1475953024180L, 2, imParticipant) {{
                 addParticipant(itsMeConfirmed);
             }};
-            add(new Meeting(1, "Ago", null, timestampExample, 2, imParticipant) {{
+            add(new Meeting(1, "Ago", null, 1475953024000L, 2, imParticipant) {{
                 addParticipant(itsMePending);
             }});
-            add(new Meeting(2, "PSE Treffen", null, timestampExample, 2, imParticipant) {{
+            add(new Meeting(2, "PSE Treffen", null, 1475953021200L, 2, imParticipant) {{
                 addParticipant(itsMePending);
             }});
-            add(new Meeting(3, "Iris Füttern", null, timestampExample, 2, imParticipant) {{
+            add(new Meeting(3, "Iris Füttern", null, 1476953024000L, 2, imParticipant) {{
                 addParticipant(itsMePending);
             }});
-            add(new Meeting(4, "Schloss Park", null, timestampExample, 2, imParticipant) {{
+            add(new Meeting(4, "Schloss Park", null, 1475953021200L, 2, imParticipant) {{
                 addParticipant(itsMeConfirmed);
             }});
-            add(new Meeting(5, "Klettern", null, timestampExample, 2, imParticipant) {{
+            add(new Meeting(5, "Klettern", null, 147595302489L, 2, imParticipant) {{
                 addParticipant(itsMePending);
             }});
-            add(new Meeting(6, "Bar Tour", null, timestampExample, 2, imParticipant) {{
+            add(new Meeting(6, "Bar Tour", null, 14759530243560L, 2, imParticipant) {{
                 addParticipant(itsMeConfirmed);
             }});
         }
@@ -91,7 +85,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_meeting_list);
         menu_button = (ImageButton) findViewById(R.id.menu_termine);
         menu_button.setOnClickListener(this);
-        meetingConverter = new ObjectConverter<>();
+        meetingListConverter = new ObjectConverter<>();
+
+        // TODO aus auklammern
 
         // Only For the Test Todo delete this after Testing
         if (meetings != null) {
@@ -280,9 +276,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     public void showMeetingInfo(View v) {
         RelativeLayout meetingRow = (RelativeLayout) v.getParent();
-        Meeting m = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
+        Meeting meeting = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
 
-
+        /* need't meeting list has already all information
         Intent i = new Intent(this, MeetingService.class);
         meetingListReceiver = new ServiceResultReceiver(new Handler());
         meetingListReceiver.setReceiver(this);
@@ -290,11 +286,12 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         i.putExtra(CommunicationKeys.COMMAND, "GET");
         i.putExtra(CommunicationKeys.MEETING_ID, m.getId());
         startService(i);
+        */
 
         // TODO block Activity until the The information are there
 
 
-        Toast.makeText(this, "TODO create a MeetingService and put the Id: " + m.getId(), Toast.LENGTH_LONG);
+        Toast.makeText(this, "TODO create a MeetingService and put the Id: " + meeting.getId(), Toast.LENGTH_LONG);
 
         // get information_apoitment.xml as Java view
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -308,15 +305,15 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
         // Convert TimeStampt with a Calendar
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(meetingInfo.getTimestamp());
+        calendar.setTimeInMillis(meeting.getTimestamp());
 
         time.setText("Am " + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH) + "."
                 + calendar.get(Calendar.YEAR) + " um " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
 
-        name.setText(meetingInfo.getName());
+        name.setText(meeting.getName());
         //Todo  GPS getPlace as String!
         place.setText("TODO Set place here !!!");
-        creator.setText("Ersteller: " + meetingInfo.getCreator().getUser().getName());
+        creator.setText("Ersteller: " + meeting.getCreator().getUser().getName());
 
        /*   (Priority B)
         TextView memo = (TextView) infoApoitment.findViewById(R.id.info_MeetingMemo);
@@ -369,7 +366,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                     case CommunicationKeys.FROM_MEETINGS_SERVICES:
                         meetingsResultReceiverHandler(resultData);
                         break;
-
+                    case CommunicationKeys.FROM_MEETING_MANAGEMENT_SERVICE:
+                        managementResultReceiverHandler(resultData);
+                        break;
                     case CommunicationKeys.FROM_MEETING_SERVICES:
                         meetingResultReceiverHandler(resultData);
                         break;
@@ -392,15 +391,44 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void managementResultReceiverHandler(Bundle resultData) {
+        switch (resultData.getString(CommunicationKeys.COMMAND)) {
+            case CommunicationKeys.GET:
+                // don't need it here (Get all Meeting Info from MeetingsService)
+                break;
+            case CommunicationKeys.DELETE:
+                // Delete a Participant (Prio B)
+                break;
+            case CommunicationKeys.PUT:
+                // Confirmation changed
+                // Todo create a Toast or AlertBuilder
+                Toast.makeText(this, "Zustimmung zum Termin geändert", Toast.LENGTH_LONG)
+                break;
+            case CommunicationKeys.POST:
+                // add a Listed Participants (Prio B)
+                break;
+
+            default:
+                // TODO ERROR wrong Command from Service
+
+        }
+    }
+
     private void meetingResultReceiverHandler(Bundle resultData) {
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.GET:
+                // don't need it here (Get Meeting Info)
                 break;
             case CommunicationKeys.DELETE:
+                // Delete Meeting
+                // Todo create a Toast or AlertBuilder
                 break;
             case CommunicationKeys.PUT:
+                // Meeting changed
+                // Todo create a Toast or AlertBuilder
                 break;
             case CommunicationKeys.POST:
+                // create a new meeting needn' that
                 break;
 
             default:
@@ -413,7 +441,18 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.GET:
                 String jsonString = resultData.getString(CommunicationKeys.MEETINGS);
-                meetingConverter.deserialize(jsonString, Meeting.class);
+
+                List<Meeting> mdump = new ArrayList<>();
+                //ArrayList<Meeting> mList = new ArrayList<>();
+                meetings = meetingListConverter.deserialize(jsonString, (Class<List<Meeting>>) mdump.getClass());
+                /*
+                for (int i = 0; i < meetings.size(); i++) {
+                    List<Participant> par = meetings.get(i).getParticipants()
+                    for (int i = 0; i < par.size(); i++) {
+
+                    }
+                }
+                */
                 break;
             default:
                 // TODO ERROR wrong Command from Service
@@ -497,6 +536,7 @@ class MeetingListAdapter extends ArrayAdapter<Meeting> {
                 /* Todo REJECTED Meeting should not be here or
 Todo                             delete alle Rejected Meetings bevor calling the adapteritsMeConfirmed
                 */
+                return null;
             }
         }
 

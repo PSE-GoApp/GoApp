@@ -18,6 +18,7 @@
         <activity android:name="edu.kit.pse.client.goapp.activity.MeetingParticipantActivity"/>
         <activity android:name="edu.kit.pse.client.goapp.activity.CreateNewMeetingActivity"/>
         <activity android:name="edu.kit.pse.client.goapp.activity.GroupsActivity" />
+        <activity android:name="edu.kit.pse.client.goapp.activity.LoginActivity"/>
 
         <service
             android:name="edu.kit.pse.client.goapp.service.GroupsService"
