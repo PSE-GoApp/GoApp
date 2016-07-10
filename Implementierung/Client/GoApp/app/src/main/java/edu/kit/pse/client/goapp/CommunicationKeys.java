@@ -28,12 +28,18 @@ public class CommunicationKeys {
     //Users
     public static final String USERS = "users";
 
+    //User
+    public static final String FROM_USER_SERVICES = "UserService";
+    public static final String USER = "user";
+
     //Meeting
 
     public static final String FROM_MEETING_SERVICES = "MeetingService";
     public static final String MEETING = "meeting";
     // In additional URI_Builder Keys
     public static final String MEETING_ID = "meetingId";
+    public static final String USER_ID = "userId";
+
 
 
 }
