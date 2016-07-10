@@ -7,7 +7,7 @@ public class CommunicationKeys {
 
     //User
     public static final String USERID = "userId";
-
+    public static final String USER = "user";
 
 
     public static final String RECEICER = "receiver";
