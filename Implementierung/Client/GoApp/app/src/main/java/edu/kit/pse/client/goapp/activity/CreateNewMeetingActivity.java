@@ -133,7 +133,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 // TODO create an MeetinService and block Everything---------------------------------------------------------------------------------
                 // newMeeting;
                 Toast.makeText(this,"Todo: Servcie erstellt\n"+ newMeeting.getName() +
-                        "\n" + newMeeting.getTimespamp() + "\n" + newMeeting.getDuration(),
+                        "\n" + newMeeting.getTimestamp() + "\n" + newMeeting.getDuration(),
                         Toast.LENGTH_LONG).show();
                 MeetingListActivity.start(this);
             }

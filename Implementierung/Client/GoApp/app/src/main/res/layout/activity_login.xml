@@ -1,6 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ededed"
+        android:fontFamily="sans-serif-light"
+        android:padding="10dp"
+        android:text="Go-App"
+        android:textColor="#387D1A"
+        android:textSize="25sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/title_login" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#387D1A"
+        android:layout_below="@+id/title_login"
+        android:id="@+id/login_line" />
+    >
+
+    <TextView
+        android:id="@+id/login_textUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="Google Konto:"
+        android:textSize="20dp"
+        android:layout_below="@+id/login_line"
+        android:layout_marginTop="40dp"
+        />
+
+    <TextView
+        android:id="@+id/login_Textname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="Benutzer Name:"
+        android:textSize="20dp"
+        android:layout_below="@+id/login_line"
+        android:layout_marginTop="300dp"
+        />
+
+    <EditText
+        android:id="@+id/login_tipUserName"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/login_line"
+
+        android:layout_marginTop="40dp"
+        android:background="@color/itemBackground"
+        android:layout_alignStart="@+id/login_tipUserPasswort"
+
+        />
+    <EditText
+        android:id="@+id/login_name"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/login_line"
+
+        android:layout_marginTop="300dp"
+        android:background="@color/itemBackground"
+        android:layout_alignStart="@+id/login_tipUserPasswort"
+
+        />
+
+    <TextView
+        android:id="@+id/login_textUserPasswort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Benutzer Passwort:"
+        android:textSize="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/login_textUserName"
+        android:layout_marginLeft="12dp"
+
+        />
+
+    <TextView
+        android:id="@+id/login_textUserPasswort2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Passwort wiederholen:"
+        android:textSize="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/login_textUserName"
+        android:layout_marginLeft="12dp"
+
+        />
+
+
+
+    <EditText
+        android:id="@+id/login_Passwort"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@color/itemBackground"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/login_line"
+        android:layout_marginTop="340dp"
+        android:layout_toRightOf="@id/login_textUserPasswort"
+        />
+
+    <EditText
+        android:id="@+id/login_tipUserPasswort"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@color/itemBackground"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/login_textUserName"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@id/login_textUserPasswort"
+        />
+
+    <EditText
+        android:id="@+id/login_registerPasswort2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@color/itemBackground"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/login_textUserName"
+        android:layout_marginTop="100dp"
+        android:layout_toRightOf="@id/login_textUserPasswort"
+        />
+
+    <TextView
+        android:id="@+id/login_textPasswort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Benutzer Passwort:"
+        android:textSize="20dp"
+        android:layout_marginTop="340dp"
+        android:layout_below="@+id/login_line"
+        android:layout_marginLeft="12dp"
+
+        />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Einloggen"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="45dp"
+        android:onClick="login"/>
+
+
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registieren"
+        android:layout_marginTop="80dp"
+        android:onClick="register"
+        android:layout_below="@+id/login_textUserPasswort"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

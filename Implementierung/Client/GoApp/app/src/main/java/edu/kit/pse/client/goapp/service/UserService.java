@@ -69,7 +69,7 @@ public class UserService extends IntentService{
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICE);
 
         // if there no User Id in the Extra returns -1
         int userId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
@@ -114,7 +114,7 @@ public class UserService extends IntentService{
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICE);
 
         // if there no User Id in the Extra returns -1
         int userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);
@@ -152,7 +152,7 @@ public class UserService extends IntentService{
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICE);
 
         userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
 
@@ -185,7 +185,7 @@ public class UserService extends IntentService{
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICE);
 
         userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
 

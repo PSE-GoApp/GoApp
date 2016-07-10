@@ -52,5 +52,8 @@ public class CommunicationKeys {
     //GPS
     public static final String GPS = "GPS";
 
+    //Login
+    public static final String FROM_LOGIN_SERVICE = "LoginService";
+
 
 }

@@ -181,7 +181,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                                         mReceiver.setReceiver(GroupsActivity.this);
                                         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
                                         i.putExtra(CommunicationKeys.COMMAND, "DELETE");
-                                        i.putExtra(CommunicationKeys.GROUPID, groups.get(positionClicked).getId());
+                                        i.putExtra(CommunicationKeys.GROUP_ID, groups.get(positionClicked).getId());
                                         startService(i);
                                         progressDialog = ProgressDialog.show(GroupsActivity.this, "", "Sending");
                                     }

@@ -99,7 +99,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
                                         mReceiver.setReceiver(GroupMemberActivity.this);
                                         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
                                         i.putExtra(CommunicationKeys.COMMAND, "DELETE");
-                                        i.putExtra(CommunicationKeys.GROUPID, users.get(positionClicked).getId());
+                                        i.putExtra(CommunicationKeys.GROUP_ID, users.get(positionClicked).getId());
                                         startService(i);
                                         progressDialog = ProgressDialog.show(GroupMemberActivity.this, "", "Sending");
                                     }

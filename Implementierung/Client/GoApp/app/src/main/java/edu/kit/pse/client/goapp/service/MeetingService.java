@@ -45,13 +45,9 @@ public class MeetingService  extends IntentService {
             case CommunicationKeys.GET:
                 doGet(intent);
                 break;
-<<<<<<< HEAD
             case CommunicationKeys.DELETE:
-                doDelet(intent);
-=======
-            case "DELETE":
                 doDelete(intent);
->>>>>>> 755778a38c0a0eef3d01ba81585df732bb4d756a
+
                 break;
             case CommunicationKeys.PUT:
                 doPut(intent);
@@ -74,7 +70,7 @@ public class MeetingService  extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
 
         // if there no Meeting Id in the Extra returns -1
         int meetingId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
@@ -120,7 +116,7 @@ public class MeetingService  extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
 
         // if there no Meeting Id in the Extra returns -1
         int meetingId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
@@ -158,7 +154,7 @@ public class MeetingService  extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
 
         meetingAsJsonString = intent.getStringExtra(CommunicationKeys.MEETING);
 
@@ -191,7 +187,7 @@ public class MeetingService  extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
 
         meetingAsJsonString = intent.getStringExtra(CommunicationKeys.MEETING);
 

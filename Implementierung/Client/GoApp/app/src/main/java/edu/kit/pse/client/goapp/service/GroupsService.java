@@ -9,15 +9,10 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
-import edu.kit.pse.client.goapp.parcelableAdapters.ParcelableGroup;
-import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.uri_builder.URI_GroupsBuilder;
-import edu.kit.pse.client.goapp.uri_builder.URI_UsersBuilder;
 
 /**
  * Created by e6420 on 28.6.2016 г..
@@ -61,7 +56,7 @@ public class GroupsService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUPS_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUPS_SERVICE);
 
         URI_GroupsBuilder uri_groupsBuilder = new URI_GroupsBuilder();
 

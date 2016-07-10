@@ -363,13 +363,13 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         switch (resultCode) {
             case 202:
                 switch (resultData.getString(CommunicationKeys.SERVICE)) {
-                    case CommunicationKeys.FROM_MEETINGS_SERVICES:
+                    case CommunicationKeys.FROM_MEETINGS_SERVICE:
                         meetingsResultReceiverHandler(resultData);
                         break;
                     case CommunicationKeys.FROM_MEETING_MANAGEMENT_SERVICE:
                         managementResultReceiverHandler(resultData);
                         break;
-                    case CommunicationKeys.FROM_MEETING_SERVICES:
+                    case CommunicationKeys.FROM_MEETING_SERVICE:
                         meetingResultReceiverHandler(resultData);
                         break;
                     default:
@@ -402,7 +402,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             case CommunicationKeys.PUT:
                 // Confirmation changed
                 // Todo create a Toast or AlertBuilder
-                Toast.makeText(this, "Zustimmung zum Termin geändert", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Zustimmung zum Termin geändert", Toast.LENGTH_LONG).show();
                 break;
             case CommunicationKeys.POST:
                 // add a Listed Participants (Prio B)

@@ -56,7 +56,7 @@ public class MeetingsService extends IntentService{
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETINGS_SERVICES);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETINGS_SERVICE);
 
         URI_MeetingsBuilder uri_meetingsBuilder = new URI_MeetingsBuilder();
 
