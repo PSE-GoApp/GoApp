@@ -59,10 +59,10 @@ public class UsersService extends IntentService {
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICES);
 
-        URI_UsersBuilder uri_meetingBuilder = new URI_UsersBuilder();
+        URI_UsersBuilder uri_usersBuilder = new URI_UsersBuilder();
 
         HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
-        httpAppClientGet.setUri(uri_meetingBuilder.getURI());
+        httpAppClientGet.setUri(uri_usersBuilder.getURI());
 
         try {
             // TODO catch 404 (No Internet and Request Time out)
