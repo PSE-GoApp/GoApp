@@ -129,7 +129,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
             showPopUp(v);
         }
         if (v.getId() == R.id.buttonEvent || v.getId() == R.id.buttonTour) {
-            // Todo change duration time 
+            // Todo change duration time
         }
 
         if (v.getId() == R.id.buttonCreate) {
@@ -137,7 +137,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 // TODO create an MeetinService and block Everything---------------------------------------------------------------------------------
                 // newMeeting;
                 Toast.makeText(this,"Todo: Servcie erstellt\n"+ newMeeting.getName() +
-                        "\n" + newMeeting.getTimestamp() + "\n" + newMeeting.getDuration(),
+                        "\n" + newMeeting.getTimeStamp() + "\n" + newMeeting.getDuration(),
                         Toast.LENGTH_LONG).show();
                 MeetingListActivity.start(this);
             }

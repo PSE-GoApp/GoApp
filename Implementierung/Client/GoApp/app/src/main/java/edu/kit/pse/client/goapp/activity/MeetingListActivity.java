@@ -323,7 +323,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
         // Convert TimeStampt with a Calendar
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(meeting.getTimestamp());
+        calendar.setTimeInMillis(meeting.getTimeStamp());
 
         time.setText("Am " + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH) + "."
                 + calendar.get(Calendar.YEAR) + " um " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
@@ -524,7 +524,7 @@ class MeetingListAdapter extends ArrayAdapter<Meeting> {
         name.setText(m.getName());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(m.getTimestamp());
+        calendar.setTimeInMillis(m.getTimeStamp());
         time.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
 
         // TODO the date------------------------------------------------------------------------------------------------------------------
