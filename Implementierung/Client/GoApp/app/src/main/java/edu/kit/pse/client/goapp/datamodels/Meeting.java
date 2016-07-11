@@ -34,7 +34,7 @@ public abstract class Meeting {
 		return place;
 	}
 
-	public long getTimeStamp() {
+	public long getTimestamp() {
 		return timestamp;
 	}
 
@@ -72,7 +72,7 @@ public abstract class Meeting {
 		// Class name is Employ & have lastname
 		Meeting m = (Meeting) obj;
 		 if(m.getId() == meetingId && m.getPlace().equals(place) && m.getCreator().equals(creator)  && m.getDuration() == duration && m.getName().equals(name) && m.getParticipants().equals(participants)
-				 &&equals(m.getTimeStamp() == timestamp) ) {
+				 &&equals(m.getTimestamp() == timestamp) ) {
 			return true;
 		}
 		return false;
