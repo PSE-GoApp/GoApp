@@ -18,10 +18,10 @@ import edu.kit.pse.client.goapp.uri_builder.URI_GroupUserManagementBuilder;
 /**
  * Created by e6420 on 4.7.2016 г..
  */
-public class GroupUserManagmentService extends IntentService {
+public class GroupUserManagementService extends IntentService {
 
-    public GroupUserManagmentService() {
-        super("GroupsService");
+    public GroupUserManagementService() {
+        super("GroupUserManagementService");
     }
 
     /**
@@ -29,7 +29,7 @@ public class GroupUserManagmentService extends IntentService {
      *
      * @param name Used to name the worker thread, important only for debugging.
      */
-    public GroupUserManagmentService(String name) {
+    public GroupUserManagementService(String name) {
         super(name);
     }
 
@@ -37,15 +37,18 @@ public class GroupUserManagmentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
         switch (command) {
-            case "GET":
-                doGet(intent);
+            case CommunicationKeys.GET:
+                doGet(intent); // wird eventuell nicht gebraucht @rumen
                 break;
-            case "DELETE":
+            case CommunicationKeys.DELETE:
+                // TODO PRIO B ?
                 break;
-            case "PUT":
+            case CommunicationKeys.PUT:
                 doPut(intent);
                 break;
-            case "POST": // creates a new user
+            case CommunicationKeys.POST: // Add a User in the Group
+                // TODO nicht löschen Grischa Fragen ob man da UserId und GroupId mitgibt, wenn ja wie und welche reinfolge
+                // TODO Benutzer zu einer Gruppe hinzufügen
                 break;
             default:
                 break;
@@ -60,7 +63,7 @@ public class GroupUserManagmentService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_USER_MANAGEMENT);
 
         // if there no GroupId in the Extra returns -1
         int groupId = intent.getIntExtra(CommunicationKeys.GROUP_ID, -1);
@@ -106,7 +109,7 @@ public class GroupUserManagmentService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_USER_MANAGEMENT);
 
         groupUserAsJsonString = intent.getStringExtra(CommunicationKeys.GROUP);
 

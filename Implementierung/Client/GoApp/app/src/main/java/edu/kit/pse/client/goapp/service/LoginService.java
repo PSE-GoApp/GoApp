@@ -9,17 +9,12 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
-import edu.kit.pse.client.goapp.datamodels.User;
-import edu.kit.pse.client.goapp.httpappclient.HttpAppClient;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_LoginBuilder;
-import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 
 /**
  * Created by Ta on 10.07.2016.
@@ -40,15 +35,16 @@ public class LoginService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
         switch (command) {
-            case "GET":
+            case CommunicationKeys.GET:
+                // TODO Server Leute fragen ob sie das Brauchen ? oder nur für sie ist
                 doGet(intent);
                 break;
-            case "DELETE":
+            case CommunicationKeys.DELETE:
                 break;
-            case "PUT":
+            case CommunicationKeys.PUT:
                 doPut(intent);
                 break;
-            case "POST": // creates a new user
+            case CommunicationKeys.POST: // creates a new user
                 doPost(intent);
                 break;
             default:
@@ -65,7 +61,7 @@ public class LoginService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_LOGIN_SERVICE);
 
         // if there no Meeting Id in the Extra returns -1
         int userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);
@@ -111,7 +107,7 @@ public class LoginService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_LOGIN_SERVICE);
 
         userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
 
@@ -146,7 +142,7 @@ public class LoginService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_LOGIN_SERVICE);
 
         userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
 

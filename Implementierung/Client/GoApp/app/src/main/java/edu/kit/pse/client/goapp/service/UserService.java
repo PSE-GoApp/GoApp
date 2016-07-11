@@ -72,7 +72,7 @@ public class UserService extends IntentService{
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICE);
 
         // if there no User Id in the Extra returns -1
-        int userId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
+        int userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);
 
         if (userId != -1) {
             URI_UserBuilder uri_userBuilder = new URI_UserBuilder();

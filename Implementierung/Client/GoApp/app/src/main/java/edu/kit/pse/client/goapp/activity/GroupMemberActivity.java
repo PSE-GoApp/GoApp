@@ -27,7 +27,7 @@ import java.util.List;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.datamodels.User;
-import edu.kit.pse.client.goapp.service.GroupUserManagmentService;
+import edu.kit.pse.client.goapp.service.GroupUserManagementService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 public class GroupMemberActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
@@ -53,7 +53,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
      * creates the listView
      */
     private void populateListView() {
-        Intent i = new Intent(this, GroupUserManagmentService.class);
+        Intent i = new Intent(this, GroupUserManagementService.class);
         mReceiver = new ServiceResultReceiver(new Handler());
         mReceiver.setReceiver(this);
         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
@@ -94,7 +94,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Intent i = new Intent(GroupMemberActivity.this, GroupUserManagmentService.class);
+                                        Intent i = new Intent(GroupMemberActivity.this, GroupUserManagementService.class);
                                         mReceiver = new ServiceResultReceiver(new Handler());
                                         mReceiver.setReceiver(GroupMemberActivity.this);
                                         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
@@ -130,7 +130,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
         if (resultCode == 202) {
             if (resultData.getString(CommunicationKeys.SERVICE) == "GroupsService"){
                 // TODO setListResult(resultData);
-            } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupUserManagmentService"){
+            } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupUserManagementService"){
                 Log.e("returned","groupService");
                 progressDialog.dismiss();
                 users.remove(positionClicked);

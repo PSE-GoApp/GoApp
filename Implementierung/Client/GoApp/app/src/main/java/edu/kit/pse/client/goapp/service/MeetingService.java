@@ -62,13 +62,17 @@ public class MeetingService  extends IntentService {
 
     private void doGet (Intent intent) //throws  IOException
     {
+
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
+        // den Bundle erhält die Acticity zum schluss und entält Information
         Bundle bundle = new Bundle();
+        // hier steht die information was für ein Befehl das war GET,PUT... etc
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
+        // hier weiß die activity von welchem Service das war. Bei UserService steht FROM_USER_SERVICE etc.
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
 
         // if there no Meeting Id in the Extra returns -1

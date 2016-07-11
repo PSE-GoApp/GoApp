@@ -27,7 +27,7 @@ import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.User;
-import edu.kit.pse.client.goapp.service.MeetingService;
+import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 /**
@@ -40,7 +40,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
     Button cancelButton;
     ObjectConverter<Meeting> meetingConverter;
 
-    Bundle bundleMeetingId;
+    Bundle bundleMeeting;
     Meeting meeting;
 
     ListView list;
@@ -62,7 +62,11 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         cancelButton = (Button) findViewById(R.id.meeting_participant_cancel);
         meetingConverter = new ObjectConverter<>();
 
+        bundleMeeting = getIntent().getExtras();
+        String json = bundleMeeting.getString(CommunicationKeys.MEETING);
+        meeting  = meetingConverter.deserialize(json, Meeting.class);
 
+        /*
         // Start MeetingServices for the Meeting Information
         Intent i = new Intent(this, MeetingService.class);
         meetingParticipantReceiver = new ServiceResultReceiver(new Handler());
@@ -71,12 +75,24 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         i.putExtra(CommunicationKeys.COMMAND, "GET");
         i.putExtra(CommunicationKeys.MEETING_ID, bundleMeetingId.getInt(CommunicationKeys.MEETING_ID));
         startService(i);
+        */
+
+        Toast.makeText(MeetingParticipantActivity.this, "Meeting ID is: "
+                + meeting.getId() , Toast.LENGTH_SHORT).show();
 
 
-        bundleMeetingId = getIntent().getExtras();
-        Toast.makeText(MeetingParticipantActivity.this, "Meeting ID is: " + Integer.toString(bundleMeetingId.getInt(CommunicationKeys.MEETING_ID)) , Toast.LENGTH_SHORT).show();
+        participants = meeting.getParticipants();
+        if (participants != null) {
+            list = (ListView) findViewById(R.id.participant_listview);
 
-        // Todo create a service
+            ParticipantListAdapter adapter = new ParticipantListAdapter(this, participants);
+            list.setAdapter(adapter);
+        }
+        if (meeting.getTimestamp() >= System.currentTimeMillis()) {
+            cancelButton.setTag("Termin verlassen");
+        }
+
+
     }
 
 
@@ -96,17 +112,17 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         }
         if (v.getId() == R.id.meeting_participant_cancel) {
 
-            // TODO warning if they are sure to leave the Meeting
 
             // Todo Start MeetingManagementServices for leave the Meeting (delete)
-            Intent i = new Intent(this, MeetingService.class);
+            Intent i = new Intent(this, MeetingParticipantManagementService.class);
             meetingParticipantReceiver = new ServiceResultReceiver(new Handler());
             meetingParticipantReceiver.setReceiver(this);
             i.putExtra(CommunicationKeys.RECEICER, meetingParticipantReceiver);
-            i.putExtra(CommunicationKeys.COMMAND, "GET");
-            i.putExtra(CommunicationKeys.MEETING_ID, bundleMeetingId.getInt(CommunicationKeys.MEETING_ID));
+            i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
+            i.putExtra(CommunicationKeys.MEETING_ID, meeting.getId());
             startService(i);
 
+            // TODO warning if they are sure to leave the Meeting (AlertDialog)
         }
     }
 
@@ -136,6 +152,20 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
     // TODO TEST THIS SHHHIEEEEEEEEEEEAAAAAAAAT
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultData.getString(CommunicationKeys.SERVICE)) {
+            case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
+                meetingParticipanManagemantResultHandler(resultCode, resultData);
+                break;
+            case CommunicationKeys.FROM_MEETING_SERVICE:
+                // not in use
+                break;
+            default:
+                Toast.makeText(this, "Error 500 wrong Service", Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+    private void meetingParticipanManagemantResultHandler(int resultCode, Bundle resultData) {
         switch (resultCode) {
             case 202:
                 Toast.makeText(this,"202", Toast.LENGTH_SHORT);
@@ -167,10 +197,9 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
                 Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
                 break;
         }
-
-
-
     }
+
+
 }
 
 class ParticipantListAdapter extends ArrayAdapter<Participant> {

@@ -41,17 +41,17 @@ public class GroupService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
         switch (command) {
-            case "GET":
-                doGet(intent);
+            case CommunicationKeys.GET:
+                doGet(intent); // get Group Info we dont neet it
                 break;
-            case "DELETE":
+            case CommunicationKeys.DELETE:
                 doDelete(intent);
                 break;
-            case "PUT":
+            case CommunicationKeys.PUT:
                 doPut(intent);
                 break;
-            case "POST":
-                doPost(intent);
+            case CommunicationKeys.POST:
+                doPost(intent); // Create a new Group
                 break;
             default:
                 break;

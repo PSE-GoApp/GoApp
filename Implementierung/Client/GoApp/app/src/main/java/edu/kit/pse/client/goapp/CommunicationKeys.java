@@ -14,7 +14,8 @@ public class CommunicationKeys {
 
 
     public static final String SERVICE = "service";
-    
+
+
     //Group
     public static final String FROM_GROUP_SERVICE = "GroupService";
     public static final String GROUP = "group";
@@ -25,6 +26,10 @@ public class CommunicationKeys {
     public static final String FROM_GROUPS_SERVICE = "GroupsService";
     public static final String GROUP_USER_MANAGEMENT = "groupUserManagement";
     public static final String GROUPS = "groups";
+
+    //GroupUserManagement
+    public static final String FROM_GROUP_USER_MANAGEMENT = "GroupUserManagementService";
+
 
     //Users
     public static final String FROM_USERS_SERVICE = "UsersService";
@@ -42,20 +47,26 @@ public class CommunicationKeys {
     public static final String MEETING = "meeting";
     // In additional URI_Builder Keys
     public static final String MEETING_ID = "meetingId";
-    public static final String MEETING_PARTICIPANT_ID = "meetingParticipantID";
-
     // Meetings
     public static final String FROM_MEETINGS_SERVICE = "MeetingsService";
+
     public static final String MEETINGS = "meetings";
     // MeetingManagementService
-    public static final String FROM_MEETING_MANAGEMENT_SERVICE = "MeetingManagementService";
+    public static final String FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE = "MeetingParticipantManagementService";
+    public static final String MEETING_PARTICIPANT = "meetingParticipant";
 
     //GPS
+    public static final String FROM_GPS_SERVICE = "GPS_Service";
     public static final String GPS = "GPS";
 
     //Login
     public static final String FROM_LOGIN_SERVICE = "LoginService";
+
+    //LOGOUT
+    public static final String FROM_LOGOUT_SERVICE = "LogoutService";
+
     //Notification
+    public static final String FROM_NOTIFICATION_SERVICE = "LoginService";
     public static final String NOTIFICATION = "Notification";
     public static final String NOTIFICATION_ID  = "NotificationID";
 

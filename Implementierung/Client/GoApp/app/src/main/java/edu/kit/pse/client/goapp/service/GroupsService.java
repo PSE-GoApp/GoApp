@@ -38,7 +38,7 @@ public class GroupsService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
         switch (command) {
-            case "GET":
+            case CommunicationKeys.GET:
                 doGet(intent);
                 break;
             default:

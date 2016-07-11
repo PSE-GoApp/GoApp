@@ -128,6 +128,10 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         if (v.getId() == R.id.menu_new_meeting) {
             showPopUp(v);
         }
+        if (v.getId() == R.id.buttonEvent || v.getId() == R.id.buttonTour) {
+            // Todo change duration time 
+        }
+
         if (v.getId() == R.id.buttonCreate) {
             if (setNewMeeting()) {
                 // TODO create an MeetinService and block Everything---------------------------------------------------------------------------------
@@ -203,7 +207,6 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         }
     }
 
-    // TODO: methode terminType schreiben. Man darf nur Veranstaltung oder Tour "checken" (ausgewählt sein)
 
     class GroupSpinnerAdapter extends ArrayAdapter<Group> {
         Context context;

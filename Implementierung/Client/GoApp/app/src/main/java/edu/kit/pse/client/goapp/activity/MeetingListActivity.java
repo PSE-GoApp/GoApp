@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -31,12 +32,14 @@ import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
     private ServiceResultReceiver meetingListReceiver;
     private ObjectConverter<List<Meeting>> meetingListConverter;
+    private ObjectConverter<Meeting> meetingConverter;
     ImageButton menu_button;
     private Context context = this;
     private ListView list;
@@ -165,6 +168,15 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         if (imageDirection == R.drawable.checked) {
 
             //Todo: create a MeetingService, that send a meeting conformation change (Accepted)
+            Intent i = new Intent(this, MeetingParticipantManagementService.class);
+            meetingListReceiver = new ServiceResultReceiver(new Handler());
+            meetingListReceiver.setReceiver(this);
+            i.putExtra(CommunicationKeys.RECEICER, meetingListReceiver);
+            // TODO Klären was mitgegeben wird-------------------------------------------------------------------------------------------------------
+            i.putExtra(CommunicationKeys.COMMAND, "");
+            i.putExtra(CommunicationKeys.MEETING_ID, "");
+            startService(i);
+
             //Todo        if the Request was successful change the Buttons
             //Todo        or change the ArrayList confirmation and go list.invalidateViews();
             //TOdo        or make a new MeetingsService.
@@ -222,7 +234,16 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
                 // Start MeetingParticipant with a extra (Meeting ID)
                 Intent mParticipantIntent = new Intent(view.getContext(), MeetingParticipantActivity.class);
-                mParticipantIntent.putExtra(CommunicationKeys.MEETING_ID, meeting.getId());
+
+                Bundle bundle = new Bundle();
+
+                // TODO ERROR ! Exception !
+                String meetingJson = meetingConverter.serialize(meeting,Meeting.class);
+                bundle.putInt(CommunicationKeys.MEETING_ID, meeting.getId());
+                bundle.putString(CommunicationKeys.MEETING, meetingJson);
+
+                mParticipantIntent.putExtras(bundle);
+
                 startActivity(mParticipantIntent);
             } else {
                 // should not be Called
@@ -256,8 +277,18 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void cancelMeeting(Meeting meeting) {
+
         //Todo: create a MeetingService, that send a meeting conformation change (Cancel)
         int meetingId = meeting.getId();
+
+        Intent i = new Intent(this, MeetingParticipantManagementService.class);
+        meetingListReceiver = new ServiceResultReceiver(new Handler());
+        meetingListReceiver.setReceiver(this);
+        i.putExtra(CommunicationKeys.RECEICER, meetingListReceiver);
+        // TODO Klären was mitgegeben wird-------------------------------------------------------------------------------------------------------
+        i.putExtra(CommunicationKeys.COMMAND, "GET");
+        // i.putExtra(CommunicationKeys.MEETING_ID, meetingId);
+        startService(i);
 
         // Todo remove this Toast Test ----------------------------------------------------------------------------------------------------------------------------------------
         Toast.makeText(getApplicationContext(), " Service delete Meeting with ID: " + meeting.getId(), Toast.LENGTH_SHORT).show();
@@ -277,19 +308,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     public void showMeetingInfo(View v) {
         RelativeLayout meetingRow = (RelativeLayout) v.getParent();
         Meeting meeting = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
-
-        /* need't meeting list has already all information
-        Intent i = new Intent(this, MeetingService.class);
-        meetingListReceiver = new ServiceResultReceiver(new Handler());
-        meetingListReceiver.setReceiver(this);
-        i.putExtra(CommunicationKeys.RECEICER, meetingListReceiver);
-        i.putExtra(CommunicationKeys.COMMAND, "GET");
-        i.putExtra(CommunicationKeys.MEETING_ID, m.getId());
-        startService(i);
-        */
-
-        // TODO block Activity until the The information are there
-
 
         Toast.makeText(this, "TODO create a MeetingService and put the Id: " + meeting.getId(), Toast.LENGTH_LONG);
 
@@ -366,7 +384,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                     case CommunicationKeys.FROM_MEETINGS_SERVICE:
                         meetingsResultReceiverHandler(resultData);
                         break;
-                    case CommunicationKeys.FROM_MEETING_MANAGEMENT_SERVICE:
+                    case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
                         managementResultReceiverHandler(resultData);
                         break;
                     case CommunicationKeys.FROM_MEETING_SERVICE:
@@ -513,6 +531,8 @@ class MeetingListAdapter extends ArrayAdapter<Meeting> {
 
 
         //set the images from the Buttons for each Meeting Confirmation
+        // TODO search for each Meeting the Youselfe as Partcipant
+
         Participant participant = m.getParticipants().get(0);
 
         // Confirmed

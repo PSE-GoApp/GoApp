@@ -29,7 +29,7 @@
             android:exported="false" />
 
         <service
-            android:name="edu.kit.pse.client.goapp.service.GroupUserManagmentService"
+            android:name="edu.kit.pse.client.goapp.service.GroupUserManagementService"
             android:exported="false" />
 
         <activity android:name="edu.kit.pse.client.goapp.activity.GroupMemberActivity"></activity>

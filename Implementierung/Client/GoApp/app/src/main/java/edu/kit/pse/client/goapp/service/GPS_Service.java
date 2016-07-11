@@ -12,7 +12,6 @@ import java.io.IOException;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_GPS_Builder;
-import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 
 /**
  * Created by Ta on 10.07.2016.
@@ -22,7 +21,7 @@ public class GPS_Service extends IntentService {
     //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
 
     public GPS_Service() {
-        super("MeetingService");
+        super("GPS_Service");
     }
 
     /**
@@ -39,14 +38,14 @@ public class GPS_Service extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
         switch (command) {
-            case "GET":
+            case CommunicationKeys.GET:
                 break;
-            case "DELETE":
+            case CommunicationKeys.DELETE:
                 break;
-            case "PUT":
+            case CommunicationKeys.PUT:
                 doPut(intent);
                 break;
-            case "POST":
+            case CommunicationKeys.POST:
                 break;
             default:
                 break;
@@ -61,7 +60,7 @@ public class GPS_Service extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GPS_SERVICE);
 
         GPSAsJsonString = intent.getStringExtra(CommunicationKeys.GPS);
 

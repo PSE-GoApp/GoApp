@@ -12,7 +12,6 @@ import java.io.IOException;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientDelete;
 import edu.kit.pse.client.goapp.uri_builder.URI_LogoutBuilder;
-import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 
 /**
  * Created by Ta on 10.07.2016.
@@ -33,14 +32,14 @@ public class LogoutService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
         switch (command) {
-            case "GET":
+            case CommunicationKeys.GET:
                 break;
-            case "DELETE":
+            case CommunicationKeys.DELETE:
                 doDelete(intent);
                 break;
-            case "PUT":
+            case CommunicationKeys.PUT:
                 break;
-            case "POST":
+            case CommunicationKeys.POST:
                 break;
             default:
                 break;
@@ -54,7 +53,7 @@ public class LogoutService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USERS_SERVICE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_LOGOUT_SERVICE);
 
         // if there no Meeting Id in the Extra returns -1
         int userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);

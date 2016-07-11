@@ -12,7 +12,6 @@ import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
-import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 import edu.kit.pse.client.goapp.uri_builder.URI_MeetingParticipantManagementBuilder;
 
 /**
@@ -25,7 +24,7 @@ public class MeetingParticipantManagementService extends IntentService {
     //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
 
     public MeetingParticipantManagementService() {
-        super("MeetingService");
+        super("MeetingParticipantManagementService");
     }
 
     /**
@@ -48,6 +47,8 @@ public class MeetingParticipantManagementService extends IntentService {
             case CommunicationKeys.DELETE:
                break;
             case CommunicationKeys.PUT:
+                // TODO grischa Fragen Enum oder Participant schicken ?
+                doPut(intent);
               break;
             case CommunicationKeys.POST:
                 break;
@@ -56,7 +57,12 @@ public class MeetingParticipantManagementService extends IntentService {
         }
     }
 
+    private void doPut(Intent intent) {
+        // TODO
+    }
+
     private void doGet(Intent intent) {
+        // Get Participants from Meeting
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -64,14 +70,14 @@ public class MeetingParticipantManagementService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE);
 
         // if there no Meeting Id in the Extra returns -1
-        int meetingParticipantId = intent.getIntExtra(CommunicationKeys.MEETING_PARTICIPANT_ID, -1);
+        int meetingId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
 
-        if (meetingParticipantId != -1) {
+        if (meetingId != -1) {
             URI_MeetingParticipantManagementBuilder uri_meetingParticipantManagementBuilder = new URI_MeetingParticipantManagementBuilder();
-            uri_meetingParticipantManagementBuilder.addParameter(CommunicationKeys.MEETING_ID, Integer.toString(meetingParticipantId));
+            uri_meetingParticipantManagementBuilder.addParameter(CommunicationKeys.MEETING_ID, Integer.toString(meetingId));
 
             HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
             httpAppClientGet.setUri(uri_meetingParticipantManagementBuilder.getURI());
@@ -90,7 +96,7 @@ public class MeetingParticipantManagementService extends IntentService {
                 // TODO handle Exception "can not Convert EntitlyUtils to String"
             }
 
-            bundle.putString(CommunicationKeys.MEETING_PARTICIPANT_ID, jasonString);
+            bundle.putString(CommunicationKeys.MEETING_PARTICIPANT, jasonString);
 
             // send the Bundle and the Status Code from Response
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
