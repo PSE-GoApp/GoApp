@@ -34,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         menu_button.setOnClickListener(this);
         switchGps = (Switch) findViewById(R.id.switchStandort);
 
-        sharedpreferences = getSharedPreferences("sucker", Context.MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences(GPSENABLED, Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
 
         int i = sharedpreferences.getInt(GPSENABLED, 3);
