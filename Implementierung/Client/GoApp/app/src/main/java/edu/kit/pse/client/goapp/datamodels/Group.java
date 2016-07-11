@@ -56,4 +56,19 @@ public class Group {
 	public void setAdmins(List<User> admins) {
 		this.admins = admins;
 	}
+		@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (this.getClass() != obj.getClass())
+			return false;
+		// Class name is Employ & have lastname
+		Group g = (Group) obj;
+		 if(g.getAdmins().equals(admins)&&g.getGroupMembers().equals(members)&&g.getId()==groupId&&g.getName().equals(name)) {
+			return true;
+		}
+		return false;
+	}
 }

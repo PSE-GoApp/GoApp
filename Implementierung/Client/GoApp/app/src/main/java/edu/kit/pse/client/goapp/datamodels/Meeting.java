@@ -3,7 +3,7 @@ package edu.kit.pse.client.goapp.datamodels;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Meeting {
+public abstract class Meeting {
 
 	public static double RADIUS = 200.00;
 
@@ -61,5 +61,20 @@ public class Meeting {
 	public void setParticipants(List<Participant> participants) {
 		this.participants = participants;
 	}
-
+    	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (this.getClass() != obj.getClass())
+			return false;
+		// Class name is Employ & have lastname
+		Meeting m = (Meeting) obj;
+		 if(m.getMeetingId() == meetingId && m.getPlace().equals(place) && m.getCreator().equals(creator)  && m.getDuration() == duration && m.getName().equals(name) && m.getParticipants().equals(participants) 
+				 &&equals(m.getTimespamp() == timespamp) ) {			 
+			return true;
+		}
+		return false;
+	}
 }

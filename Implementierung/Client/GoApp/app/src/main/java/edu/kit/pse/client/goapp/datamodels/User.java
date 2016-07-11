@@ -67,7 +67,7 @@ public class User {
 			return false;
 		// Class name is Employ & have lastname
 		User u = (User) obj;
-		 if((u.getId() == userId)  &&( u.getName() == name)) {
+		 if((u.getId() == userId)  &&( u.getName().equals(name))) {
 			return true;
 		}
 
