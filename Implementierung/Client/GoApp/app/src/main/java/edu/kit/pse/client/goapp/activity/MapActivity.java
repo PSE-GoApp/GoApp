@@ -1,6 +1,7 @@
 package edu.kit.pse.client.goapp.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,9 +13,13 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
@@ -41,7 +46,8 @@ public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        ServiceResultReceiver.Receiver{
+        ServiceResultReceiver.Receiver,
+        View.OnClickListener, PopupMenu.OnMenuItemClickListener{
 
     private List<GPS> gps = new ArrayList<GPS>();
     public ServiceResultReceiver mReceiver;
@@ -55,13 +61,18 @@ public class MapActivity extends AppCompatActivity
      * Represents a geographical location.
      */
     private Location mLastLocation;
-    double lat;
-    double lng;
+    static double lat;
+    static double lng;
+    static String meetingId;
+    private ImageButton menu_button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        menu_button = (ImageButton) findViewById(R.id.menu_termine_groups);
+        menu_button.setOnClickListener(this);
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
         mapView.setClickable(true);
@@ -70,7 +81,17 @@ public class MapActivity extends AppCompatActivity
         buildGoogleApiClient();
     }
 
-
+    /**
+     * Starts the Activity
+     * @param activity: the activity that is calling it
+     */
+    public static void start(Activity activity, String meetingID, Double latit, Double longit) {
+        Intent intent = new Intent(activity, GroupsActivity.class);
+        activity.startActivity(intent);
+        lat = latit;
+        lng = longit;
+        meetingId = meetingID;
+    }
 
     private void test(Context context){
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -293,5 +314,44 @@ public class MapActivity extends AppCompatActivity
         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
         i.putExtra(CommunicationKeys.COMMAND, "GET");
         startService(i);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.menu_map) {
+            showPopUp(v);
+        }
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home_groups:
+                MeetingListActivity.start(this);
+                return true;
+            case R.id.neuer_termin_groups:
+                // TerminActivity.start(this);
+                return true;
+            case R.id.settings_groups:
+                // SettingsActivity.start(this);
+                return true;
+            case R.id.about_groups:
+                // AboutActivity.start(this);
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * method that shows up the popUpMenu
+     * @param v the view
+     */
+    public void showPopUp(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(MapActivity.this);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_map, popup.getMenu());
+        popup.show();
     }
 }
