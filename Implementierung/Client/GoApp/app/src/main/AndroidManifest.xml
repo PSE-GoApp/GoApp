@@ -54,7 +54,8 @@
 
         <receiver android:name="edu.kit.pse.client.goapp.Receiver.AlarmReceiver" />
 
-        <activity android:name="edu.kit.pse.client.goapp.activity.MapActivity"></activity>
+        <activity android:name="edu.kit.pse.client.goapp.activity.MapActivity" />
+        <activity android:name="edu.kit.pse.client.goapp.activity.SettingsActivity"></activity>
     </application>
 
 </manifest>
