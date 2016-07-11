@@ -33,6 +33,20 @@ public class MeetingCenter {
 	public void setParticipants(List<Participant> participants) {
 		this.participants = participants;
 	}
-	
+		@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (this.getClass() != obj.getClass())
+			return false;
+		// Class name is Employ & have lastname
+		MeetingCenter c = (MeetingCenter) obj;
+		 if(c.getPlace().equals(place) && c.getParticipants().equals(participants)) {
+			return true;
+		}
+		return false;
+	}
 
 }

@@ -58,5 +58,19 @@ public class GPS {
 	public double getZ() {
 		return z;
 	}
-
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (this.getClass() != obj.getClass())
+			return false;
+		// Class name is Employ & have lastname
+		GPS g = (GPS) obj;
+		 if(g.getX() == x && g.getY() == y && g.getZ() == z) {
+			return true;
+		}
+		return false;
+	}
 }
