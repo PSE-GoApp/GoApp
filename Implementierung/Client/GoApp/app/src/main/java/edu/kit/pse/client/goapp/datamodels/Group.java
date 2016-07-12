@@ -41,13 +41,9 @@ public class Group {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	public void setName(String name) { this.name = name; }
 
-	public List<User> getMembers() {
-		return members;
-	}
+	public List<User> getMembers() { return members; }
 
 	public void setMembers(List<User> members) {
 		this.members = members;
@@ -56,6 +52,7 @@ public class Group {
 	public void setAdmins(List<User> admins) {
 		this.admins = admins;
 	}
+
 		@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

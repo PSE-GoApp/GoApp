@@ -29,7 +29,9 @@ public class MeetingCenter {
 	public GPS getPlace() {
 		return place;
 	}
-	
+
+	public void setPlace(GPS place) { this.place = place; }
+
 	public void setParticipants(List<Participant> participants) {
 		this.participants = participants;
 	}

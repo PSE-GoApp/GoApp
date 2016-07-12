@@ -53,9 +53,13 @@ public class User {
 		return notificationEnabled;
 	}
 
-	public void setNotificationEnabled(boolean notificationEnabled) {
-		this.notificationEnabled = notificationEnabled;
-	}
+	public void setName(String name) { this.name = name; }
+
+	public void setGroups(List<Group> groups) { this.groups = groups; }
+
+	public void setMeetings(List<Meeting> meetings) { this.meetings = meetings;	}
+
+	public void setNotificationEnabled(boolean notificationEnabled) { this.notificationEnabled = notificationEnabled; }
 	
 	@Override
 	public boolean equals(Object obj) {

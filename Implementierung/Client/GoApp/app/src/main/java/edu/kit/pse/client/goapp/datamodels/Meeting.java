@@ -58,9 +58,20 @@ public abstract class Meeting {
 		return creator;
 	}
 
+	public void setName(String name) { this.name = name; }
+
+	public void setDuration(int duration) { this.duration = duration; }
+
+	public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
+
+	public void setPlace(GPS place) { this.place = place; }
+
+	public void setCreator(Participant creator) { this.creator = creator; }
+
 	public void setParticipants(List<Participant> participants) {
 		this.participants = participants;
 	}
+
     	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

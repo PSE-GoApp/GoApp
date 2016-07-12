@@ -32,6 +32,12 @@ public class Participant {
 		return confirmation;
 	}
 
+	public void setUser(User user) { this.user = user;}
+
+	public void setConfirmation(MeetingConfirmation confirmation) {
+		this.confirmation = confirmation;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
