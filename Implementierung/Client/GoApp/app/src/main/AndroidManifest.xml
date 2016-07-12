@@ -29,17 +29,31 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="edu.kit.pse.client.goapp.activity.MeetingListActivity">
+        <activity
+            android:name="edu.kit.pse.client.goapp.activity.MeetingListActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="edu.kit.pse.client.goapp.activity.MeetingParticipantActivity" />
-        <activity android:name="edu.kit.pse.client.goapp.activity.CreateNewMeetingActivity" />
-        <activity android:name="edu.kit.pse.client.goapp.activity.GroupsActivity" />
-        <activity android:name="edu.kit.pse.client.goapp.activity.LoginActivity" />
+        <activity android:name="edu.kit.pse.client.goapp.activity.MeetingParticipantActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="edu.kit.pse.client.goapp.activity.CreateNewMeetingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="edu.kit.pse.client.goapp.activity.GroupsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="edu.kit.pse.client.goapp.activity.LoginActivity"
+
+            android:screenOrientation="portrait"/>
+        <activity android:name="edu.kit.pse.client.goapp.activity.MapActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="edu.kit.pse.client.goapp.activity.SettingsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="edu.kit.pse.client.goapp.activity.GroupMemberActivity"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name="edu.kit.pse.client.goapp.service.GroupsService"
@@ -50,13 +64,37 @@
         <service
             android:name="edu.kit.pse.client.goapp.service.GroupUserManagementService"
             android:exported="false" />
+        <service
+            android:name="edu.kit.pse.client.goapp.service.MeetingService"
+            android:exported="false" />
+        <service
+            android:name="edu.kit.pse.client.goapp.service.MeetingsService"
+            android:exported="false" />
+        <service
+            android:name="edu.kit.pse.client.goapp.service.MeetingParticipantManagementService"
+            android:exported="false" />
+        <service
+            android:name="edu.kit.pse.client.goapp.service.LoginService"
+            android:exported="false" />
+        <service
+            android:name="edu.kit.pse.client.goapp.service.LogoutService"
+            android:exported="false" />
+        <service
+            android:name="edu.kit.pse.client.goapp.service.GPS_Service"
+            android:exported="false" />
+        <service
+            android:name="edu.kit.pse.client.goapp.service.UserService"
+            android:exported="false" />
+        <service
+            android:name="edu.kit.pse.client.goapp.service.UsersService"
+            android:exported="false" />
+        <service
+            android:name="edu.kit.pse.client.goapp.service.NotificationService"
+            android:exported="false" />
 
-        <activity android:name="edu.kit.pse.client.goapp.activity.GroupMemberActivity" />
 
         <receiver android:name="edu.kit.pse.client.goapp.Receiver.AlarmReceiver" />
 
-        <activity android:name="edu.kit.pse.client.goapp.activity.MapActivity" />
-        <activity android:name="edu.kit.pse.client.goapp.activity.SettingsActivity"></activity>
     </application>
 
 </manifest>

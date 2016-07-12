@@ -139,7 +139,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
                 GroupsActivity.start(this);
                 return true;
             case R.id.settings_participant:
-                // SettingsActivity.start(this);
+                SettingsActivity.start(this);
                 return true;
             case R.id.about_participant:
                 // AboutActivity.start(this);

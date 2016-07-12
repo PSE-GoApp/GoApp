@@ -228,7 +228,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
                 GroupsActivity.start(this);
                 return true;
             case R.id.settings_teilnehmer:
-                //SettingsActivity.start(this);
+                SettingsActivity.start(this);
                 return true;
             case R.id.about_teilnehmer:
                // AboutActivity.start(this);

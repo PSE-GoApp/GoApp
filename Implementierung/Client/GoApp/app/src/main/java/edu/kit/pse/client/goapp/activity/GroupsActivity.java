@@ -130,7 +130,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                // TerminActivity.start(this);
                 return true;
             case R.id.settings_groups:
-               // SettingsActivity.start(this);
+               SettingsActivity.start(this);
                 return true;
             case R.id.about_groups:
                // AboutActivity.start(this);
