@@ -102,7 +102,8 @@ public class GroupUserManagementService extends IntentService {
     }
 
     private void doPut(Intent intent) {
-        String groupUserAsJsonString = null;
+        // TODO groupUser oder komplettes Group ?
+        String groupUserAsJsonString_or_groupAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
@@ -111,14 +112,14 @@ public class GroupUserManagementService extends IntentService {
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_USER_MANAGEMENT);
 
-        groupUserAsJsonString = intent.getStringExtra(CommunicationKeys.GROUP);
+        groupUserAsJsonString_or_groupAsJsonString = intent.getStringExtra(CommunicationKeys.GROUP);
 
         URI_GroupUserManagementBuilder uri_groupUserManagementBuilder = new URI_GroupUserManagementBuilder();
 
         HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
         httpAppClientPut.setUri(uri_groupUserManagementBuilder.getURI());
         try {
-            httpAppClientPut.setBody(groupUserAsJsonString);
+            httpAppClientPut.setBody(groupUserAsJsonString_or_groupAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
         }

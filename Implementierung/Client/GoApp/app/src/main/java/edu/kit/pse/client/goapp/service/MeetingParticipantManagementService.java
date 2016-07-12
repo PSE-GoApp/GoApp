@@ -58,7 +58,7 @@ public class MeetingParticipantManagementService extends IntentService {
     }
 
     private void doPut(Intent intent) {
-        // TODO
+        // TODO (@Tanja du erhälst ein jString mit den CommunikationsKey.PARTICIPANT)
     }
 
     private void doGet(Intent intent) {
@@ -96,7 +96,7 @@ public class MeetingParticipantManagementService extends IntentService {
                 // TODO handle Exception "can not Convert EntitlyUtils to String"
             }
 
-            bundle.putString(CommunicationKeys.MEETING_PARTICIPANT, jasonString);
+            bundle.putString(CommunicationKeys.MEETING_PARTICIPANTS, jasonString);
 
             // send the Bundle and the Status Code from Response
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);

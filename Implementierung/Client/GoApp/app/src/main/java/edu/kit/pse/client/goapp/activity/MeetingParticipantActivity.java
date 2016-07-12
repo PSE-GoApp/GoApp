@@ -1,9 +1,9 @@
 package edu.kit.pse.client.goapp.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
@@ -27,7 +27,6 @@ import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.User;
-import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 /**
@@ -41,7 +40,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
     ObjectConverter<Meeting> meetingConverter;
 
     Bundle bundleMeeting;
-    Meeting meeting;
+    private static Meeting meeting;
 
     ListView list;
 
@@ -53,6 +52,13 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
             add(new Participant(0,2, new User(1, "Niemand"), null));
         }};
 
+    public static void start(Activity activity, Meeting m) {
+        Intent intent = new Intent(activity, MeetingParticipantActivity.class);
+        meeting = m;
+        activity.startActivity(intent);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,23 +68,9 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         cancelButton = (Button) findViewById(R.id.meeting_participant_cancel);
         meetingConverter = new ObjectConverter<>();
 
-        bundleMeeting = getIntent().getExtras();
-        String json = bundleMeeting.getString(CommunicationKeys.MEETING);
-        meeting  = meetingConverter.deserialize(json, Meeting.class);
-
-        /*
-        // Start MeetingServices for the Meeting Information
-        Intent i = new Intent(this, MeetingService.class);
-        meetingParticipantReceiver = new ServiceResultReceiver(new Handler());
-        meetingParticipantReceiver.setReceiver(this);
-        i.putExtra(CommunicationKeys.RECEICER, meetingParticipantReceiver);
-        i.putExtra(CommunicationKeys.COMMAND, "GET");
-        i.putExtra(CommunicationKeys.MEETING_ID, bundleMeetingId.getInt(CommunicationKeys.MEETING_ID));
-        startService(i);
-        */
 
         Toast.makeText(MeetingParticipantActivity.this, "Meeting ID is: "
-                + meeting.getId() , Toast.LENGTH_SHORT).show();
+                + meeting.getMeetingId() , Toast.LENGTH_SHORT).show();
 
 
         participants = meeting.getParticipants();
@@ -113,14 +105,32 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         if (v.getId() == R.id.meeting_participant_cancel) {
 
 
-            // Todo Start MeetingManagementServices for leave the Meeting (delete)
+            //create a MeetingService, that send a meeting conformation change (Accepted)
+          /* TODO GOOGLE TOKEN == participant ----------------------------------------------------------------------------
+            List<Participant> participants = meeting.getParticipants();
+            Participant meAsParticipant = null;
+            GOOGLETOKEN itsMe;
+            for (Participant p : participants) {
+                if (p "Vergleichen" itsMe) {
+                    p.setConfirmation(MeetingConfirmation.CONFIRMDE);
+                    meAsParticipant = p;
+                } else {
+                    Log.d("Error", "Error: Filtering Participants or unexpected has happen");
+                }
+            }
+            meAsParticipant.setConfirmation(MeetingConfirmation.CONFIRMED);
+
+            String jparticipant = participantConverter.serialize(meAsParticipant, Participant.class);
+
             Intent i = new Intent(this, MeetingParticipantManagementService.class);
-            meetingParticipantReceiver = new ServiceResultReceiver(new Handler());
-            meetingParticipantReceiver.setReceiver(this);
-            i.putExtra(CommunicationKeys.RECEICER, meetingParticipantReceiver);
-            i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
-            i.putExtra(CommunicationKeys.MEETING_ID, meeting.getId());
+            activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
+            activityServiceResultReceiver.setReceiver(this);
+            i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
+            i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
+            i.putExtra(CommunicationKeys.PARTICIPANT, jparticipant);
             startService(i);
+            // TODO change AlarmReceiver and SQL Data -----------------------------------------------------------------------
+            */
 
             // TODO warning if they are sure to leave the Meeting (AlertDialog)
         }
@@ -149,7 +159,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         }
     }
 
-    // TODO TEST THIS SHHHIEEEEEEEEEEEAAAAAAAAT
+    // TODO TEST THIS
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultData.getString(CommunicationKeys.SERVICE)) {

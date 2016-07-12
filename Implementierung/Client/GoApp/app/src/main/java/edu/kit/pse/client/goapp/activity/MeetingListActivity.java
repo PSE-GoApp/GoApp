@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -32,14 +31,14 @@ import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.User;
-import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
-    private ServiceResultReceiver meetingListReceiver;
+    private ServiceResultReceiver activityServiceResultReceiver;
+
     private ObjectConverter<List<Meeting>> meetingListConverter;
-    private ObjectConverter<Meeting> meetingConverter;
+
     ImageButton menu_button;
     private Context context = this;
     private ListView list;
@@ -90,12 +89,20 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         menu_button.setOnClickListener(this);
         meetingListConverter = new ObjectConverter<>();
 
-        // TODO aus auklammern
+        list = (ListView) findViewById(R.id.meeting_ListView);
+
+        // TODO aus auklammern // Start a MeetinsService for the Meetinglist
+        /*
+        Intent i = new Intent(this, MeetingsService.class);
+        activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
+        activityServiceResultReceiver.setReceiver(this);
+        i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
+        i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
+        startService(i);
+        */
 
         // Only For the Test Todo delete this after Testing
         if (meetings != null) {
-            list = (ListView) findViewById(R.id.meeting_ListView);
-
             MeetingListAdapter adapter = new MeetingListAdapter(this, meetings);
             list.setAdapter(adapter);
         }
@@ -120,32 +127,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         if (v.getId() == R.id.menu_termine) {
             showPopUp(v);
         }
-
-        /*
-        else if (v.getId() == R.id.teilnehmer) {
-           // TeilnehmerActivity.start(this);
-        }else if (v.getId() == R.id.map) {
-           // MapActivity.start(this);
-        }else if (v.getId() == R.id.textView2){
-            // get prompts.xml view
-            LayoutInflater layoutInflater = LayoutInflater.from(MeetingListActivity.this);
-            View promptView = layoutInflater.inflate(R.layout.information_apoitment, null);
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MeetingListActivity.this);
-            alertDialogBuilder.setView(promptView);
-
-            alertDialogBuilder.setCancelable(false)
-                    .setNegativeButton("Ok",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-
-            // create an alert dialog
-            AlertDialog alert = alertDialogBuilder.create();
-            alert.show();
-        }
-        */
     }
 
     public void meetingList_FirstButtonOnClickHandler(View view) {
@@ -167,15 +148,32 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
         if (imageDirection == R.drawable.checked) {
 
-            //Todo: create a MeetingService, that send a meeting conformation change (Accepted)
+            //create a MeetingService, that send a meeting conformation change (Accepted)
+          /* TODO GOOGLE TOKEN == participant ----------------------------------------------------------------------------
+            List<Participant> participants = meeting.getParticipants();
+            Participant meAsParticipant = null;
+            GOOGLETOKEN itsMe;
+            for (Participant p : participants) {
+                if (p "Vergleichen" itsMe) {
+                    p.setConfirmation(MeetingConfirmation.CONFIRMDE);
+                    meAsParticipant = p;
+                } else {
+                    Log.d("Error", "Error: Filtering Participants or unexpected has happen");
+                }
+            }
+            meAsParticipant.setConfirmation(MeetingConfirmation.CONFIRMED);
+
+            String jparticipant = participantConverter.serialize(meAsParticipant, Participant.class);
+
             Intent i = new Intent(this, MeetingParticipantManagementService.class);
-            meetingListReceiver = new ServiceResultReceiver(new Handler());
-            meetingListReceiver.setReceiver(this);
-            i.putExtra(CommunicationKeys.RECEICER, meetingListReceiver);
-            // TODO Klären was mitgegeben wird-------------------------------------------------------------------------------------------------------
-            i.putExtra(CommunicationKeys.COMMAND, "");
-            i.putExtra(CommunicationKeys.MEETING_ID, "");
+            activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
+            activityServiceResultReceiver.setReceiver(this);
+            i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
+            i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
+            i.putExtra(CommunicationKeys.PARTICIPANT, jparticipant);
             startService(i);
+            */
+
 
             //Todo        if the Request was successful change the Buttons
             //Todo        or change the ArrayList confirmation and go list.invalidateViews();
@@ -232,19 +230,8 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         } else {
             if (imageDirection == R.drawable.participant) {
 
-                // Start MeetingParticipant with a extra (Meeting ID)
-                Intent mParticipantIntent = new Intent(view.getContext(), MeetingParticipantActivity.class);
-
-                Bundle bundle = new Bundle();
-
-                // TODO ERROR ! Exception !
-                String meetingJson = meetingConverter.serialize(meeting,Meeting.class);
-                bundle.putInt(CommunicationKeys.MEETING_ID, meeting.getId());
-                bundle.putString(CommunicationKeys.MEETING, meetingJson);
-
-                mParticipantIntent.putExtras(bundle);
-
-                startActivity(mParticipantIntent);
+                // Start MeetingParticipant with a extra (Meeting)
+                MeetingParticipantActivity.start(this, meeting);
             } else {
                 // should not be Called
                 Toast.makeText(getApplicationContext(), "Something unexpected happened", Toast.LENGTH_SHORT).show();
@@ -278,20 +265,33 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     private void cancelMeeting(Meeting meeting) {
 
-        //Todo: create a MeetingService, that send a meeting conformation change (Cancel)
-        int meetingId = meeting.getId();
+        //create a MeetingService, that send a meeting conformation change (Cancel)
+        /* TODO GOOGLE TOKEN ------------------------------------------------------------------------------------------------
+        List<Participant> participants = meeting.getParticipants();
+        Participant meAsParticipant = null;
+        GOOGLETOKEN itsMe;
+        for (Participant p : participants) {
+            if (p "Vergleichen" itsMe) {
+                meAsParticipant = p;
+            } else {
+                Log.d("Error", "Error: Filtering Participants or unexpected has happen");
+            }
+        }
+        meAsParticipant.setConfirmation(MeetingConfirmation.REJECTED);
+
+        String jparticipant = participantConverter.serialize(meAsParticipant, Participant.class);
 
         Intent i = new Intent(this, MeetingParticipantManagementService.class);
-        meetingListReceiver = new ServiceResultReceiver(new Handler());
-        meetingListReceiver.setReceiver(this);
-        i.putExtra(CommunicationKeys.RECEICER, meetingListReceiver);
-        // TODO Klären was mitgegeben wird-------------------------------------------------------------------------------------------------------
-        i.putExtra(CommunicationKeys.COMMAND, "GET");
-        // i.putExtra(CommunicationKeys.MEETING_ID, meetingId);
+        activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
+        activityServiceResultReceiver.setReceiver(this);
+        i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
+        i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
+        i.putExtra(CommunicationKeys.PARTICIPANT, jparticipant);
         startService(i);
+        */
 
         // Todo remove this Toast Test ----------------------------------------------------------------------------------------------------------------------------------------
-        Toast.makeText(getApplicationContext(), " Service delete Meeting with ID: " + meeting.getId(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), " Service delete Meeting with ID: " + meeting.getMeetingId(), Toast.LENGTH_SHORT).show();
 
         // Todo Button click lock, untill the request is finished. Than remove it from the list.
         //Remove Item from the List
@@ -309,7 +309,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         RelativeLayout meetingRow = (RelativeLayout) v.getParent();
         Meeting meeting = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
 
-        Toast.makeText(this, "TODO create a MeetingService and put the Id: " + meeting.getId(), Toast.LENGTH_LONG);
+        Toast.makeText(this, "TODO create a MeetingService and put the Id: " + meeting.getMeetingId(), Toast.LENGTH_LONG);
 
         // get information_apoitment.xml as Java view
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -463,13 +463,24 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 List<Meeting> mdump = new ArrayList<>();
                 //ArrayList<Meeting> mList = new ArrayList<>();
                 meetings = meetingListConverter.deserialize(jsonString, (Class<List<Meeting>>) mdump.getClass());
+                // TODO FILTER meetings if they are Rejected from User-------------------------------------------------------------------------------
                 /*
-                for (int i = 0; i < meetings.size(); i++) {
-                    List<Participant> par = meetings.get(i).getParticipants()
-                    for (int i = 0; i < par.size(); i++) {
+                for (Meeting m: meetings) {
+                    // TODO
+                    Participant itsMe;
 
+                    List<Participant> participants = m.getParticipants();
+                    for (Participant p: participants) {
+                        if (p.getUser().equals(GOOGLE TOKEN)) {
+                            if (p.getConfirmation() == MeetingConfirmation.REJECTED) {
+                                meetings.remove(m);
+                            } else {
+                        }
                     }
                 }
+                MeetingListAdapter adapter = new MeetingListAdapter(this, meetings);
+                list.setAdapter(adapter);
+                // TODO Test ?? list.invalidateViews();
                 */
                 break;
             default:

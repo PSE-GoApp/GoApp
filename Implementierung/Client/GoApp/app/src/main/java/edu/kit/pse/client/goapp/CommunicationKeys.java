@@ -53,7 +53,8 @@ public class CommunicationKeys {
     public static final String MEETINGS = "meetings";
     // MeetingManagementService
     public static final String FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE = "MeetingParticipantManagementService";
-    public static final String MEETING_PARTICIPANT = "meetingParticipant";
+    public static final String PARTICIPANT = "participant";
+    public static final String MEETING_PARTICIPANTS = "participants";
 
     //GPS
     public static final String FROM_GPS_SERVICE = "GPS_Service";

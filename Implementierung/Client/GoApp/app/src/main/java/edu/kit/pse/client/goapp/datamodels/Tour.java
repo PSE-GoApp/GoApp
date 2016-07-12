@@ -25,7 +25,7 @@ public class Tour extends Meeting {
 		Tour u = (Tour) obj;
 		if (u.getCenter().equals(center)) {
 			Meeting m = (Meeting) obj;
-			if (m.getId() == getId() && m.getPlace().equals(getPlace()) && m.getCreator().equals(getCreator())
+			if (m.getMeetingId() == getMeetingId() && m.getPlace().equals(getPlace()) && m.getCreator().equals(getCreator())
 					&& m.getDuration() == getDuration() && m.getName().equals(getName())
 					&& m.getParticipants().equals(getParticipants()) && m.getTimestamp() == getTimestamp() ) {
 				return true;

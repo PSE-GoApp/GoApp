@@ -42,11 +42,8 @@
         android:id="@+id/button1"
         android:layout_width="50dp"
         android:layout_height="50dp"
-
         android:background="@color/itemBackground"
         android:padding="11dp"
-
-
         android:layout_toLeftOf="@+id/button2"
         android:layout_alignTop="@+id/meetingTime"
         android:layout_alignBottom="@+id/meetingTime"

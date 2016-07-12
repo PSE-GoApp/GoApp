@@ -42,9 +42,7 @@ public abstract class Meeting {
 		return participants;
 	}
 
-	public int getId() {
-		return meetingId;
-	}
+	public int getMeetingId() { return meetingId; }
 
 	public String getName() {
 		return name;
@@ -82,7 +80,7 @@ public abstract class Meeting {
 			return false;
 		// Class name is Employ & have lastname
 		Meeting m = (Meeting) obj;
-		 if(m.getId() == meetingId && m.getPlace().equals(place) && m.getCreator().equals(creator)  && m.getDuration() == duration && m.getName().equals(name) && m.getParticipants().equals(participants)
+		 if(m.getMeetingId() == meetingId && m.getPlace().equals(place) && m.getCreator().equals(creator)  && m.getDuration() == duration && m.getName().equals(name) && m.getParticipants().equals(participants)
 				 &&equals(m.getTimestamp() == timestamp) ) {
 			return true;
 		}
