@@ -41,6 +41,7 @@ public class CommunicationKeys {
     public static final String USER = "user";
     // In additional URI_Builder Keys
     public static final String USER_ID = "userId";
+    public static final String USER_ID_TOKEN = "userIdToken";
 
     //Meeting
     public static final String FROM_MEETING_SERVICE = "MeetingService";

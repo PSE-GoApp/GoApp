@@ -11,9 +11,9 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
+import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
-import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
-import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_LoginBuilder;
 
 /**
@@ -36,7 +36,7 @@ public class LoginService extends IntentService {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
         switch (command) {
             case CommunicationKeys.GET:
-                // TODO Server Leute fragen ob sie das Brauchen ? oder nur für sie ist
+                // TODO Server Leute fragen ob wir das Brauchen/verwenden ? oder nur für sie ist
                 doGet(intent);
                 break;
             case CommunicationKeys.DELETE:
@@ -44,7 +44,7 @@ public class LoginService extends IntentService {
             case CommunicationKeys.PUT:
                 doPut(intent);
                 break;
-            case CommunicationKeys.POST: // creates a new user
+            case CommunicationKeys.POST: // register Client
                 doPost(intent);
                 break;
             default:
@@ -87,7 +87,7 @@ public class LoginService extends IntentService {
                 // TODO handle Exception "can not Convert EntitlyUtils to String"
             }
 
-            bundle.putString(CommunicationKeys.USER, jasonString);
+            bundle.putString(CommunicationKeys.USERS, jasonString);
 
             // send the Bundle and the Status Code from Response
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
@@ -99,8 +99,9 @@ public class LoginService extends IntentService {
         }
     }
 
-    private void doPut(Intent intent) {
-        String userAsJsonString = null;
+    private void doPut(Intent intent) { // Login
+        String resultJsonString = null;
+        String googleIdToken = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
@@ -109,19 +110,21 @@ public class LoginService extends IntentService {
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_LOGIN_SERVICE);
 
-        userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
-
-        URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
+        googleIdToken = intent.getStringExtra(CommunicationKeys.USER_ID_TOKEN);
+        /* TODo Fix Error
+         URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
 
         HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
-        httpAppClientPut.setUri(uri_loginBuilder.getURI());
+         httpAppClientPut.setUri(uri_loginBuilder.getURI());
+
 
         try {
-            httpAppClientPut.setBody(userAsJsonString);
+            httpAppClientPut.setBody(googleIdToken);
         } catch (IOException e) {
             //TODO Handle Exception. Maybe the String Extra was null.
         }
 
+        Todo TEST -----------------------------------------------------------------------------------------------------
         try {
             // TODO catch 404 (No Internet and Request Time out)
             closeableHttpResponse = httpAppClientPut.executeRequest();
@@ -129,13 +132,37 @@ public class LoginService extends IntentService {
             //TODO Handle Exception Toast? Alert Dialog? Sent it to the Activity?
         }
 
+        // accepted
+        try {
+            resultJsonString = EntityUtils.toString(closeableHttpResponse.getEntity());
+        } catch (Throwable e) {
+            // TODO handle Exception "can not Convert EntitlyUtils to String"
+        }
+
+        bundle.putString(CommunicationKeys.USER, resultJsonString);
+
         // send the Bundle and the Status Code from Response
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+
+        // send the Bundle and the Status Code from Response
+        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        */
+
+        // Todo test -----------------------------------------------------------------------------------
+
+        User testUser = new User(42424269, "KANSE'S DICK");
+        ObjectConverter<User> userObjectConverter = new ObjectConverter<>();
+        String json = userObjectConverter.serialize(testUser, User.class);
+
+        bundle.putString(CommunicationKeys.USER, json);
+
+        resultReceiver.send(202, bundle);
     }
 
 
-    private void doPost(Intent intent) {
-        String userAsJsonString = null;
+    private void doPost(Intent intent) {  // Register Client
+        String googeleIdToken = null;
+        String resultJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
@@ -144,7 +171,9 @@ public class LoginService extends IntentService {
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_LOGIN_SERVICE);
 
-        userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
+        googeleIdToken = intent.getStringExtra(CommunicationKeys.USER_ID_TOKEN);
+
+        /*         Todo test -----------------------------------------------------------------------------------
 
         URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
 
@@ -152,10 +181,11 @@ public class LoginService extends IntentService {
         httpAppClientPost.setUri(uri_loginBuilder.getURI());
 
         try {
-            httpAppClientPost.setBody(userAsJsonString);
+            httpAppClientPost.setBody(googeleIdToken);
         } catch (IOException e) {
             //TODO Handle Exception. Maybe the String Extra was null
         }
+
 
         try {
             //TODO catch 404 (No Intent and Request Time out)
@@ -163,9 +193,11 @@ public class LoginService extends IntentService {
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activicy?
         }
+        */
 
         // send the Bundle and the Status Code from Response
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+
     }
 
 }

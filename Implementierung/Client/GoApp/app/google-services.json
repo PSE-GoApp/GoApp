@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "65683074791",
+    "project_id": "firebase-go-app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65683074791:android:fc45f5f895daa994",
+        "android_client_info": {
+          "package_name": "edu.kit.pse.goapp.client.goapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "65683074791-7q11cqshhk0tdqad9ljhf149ulkii4p3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.kit.pse.goapp.client.goapp",
+            "certificate_hash": "2E5C17FA9CA3E51646EADEAD09BA800A5BC3CADB"
+          }
+        },
+        {
+          "client_id": "65683074791-bveovd2tvtbioi8066kljld4hq3v1fbm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoiTO86Wn1_dHBr7KXn92hX2r0hf_Y834"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

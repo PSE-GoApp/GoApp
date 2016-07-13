@@ -25,144 +25,66 @@
     >
 
     <TextView
-        android:id="@+id/login_textUserName"
+        android:id="@+id/textLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:text="Google Konto:"
-        android:textSize="20dp"
+        android:text="Anmelden mit:"
+        android:textSize="30dp"
         android:layout_below="@+id/login_line"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="90dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/signInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textLogin"
+        android:layout_centerHorizontal="true"
+        style=""
+        />
+
+
+    <TextView
+        android:id="@+id/textRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registrieren"
+        android:textSize="25dp"
+        android:layout_below="@+id/signInButton"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"
         />
 
     <TextView
-        android:id="@+id/login_Textname"
+        android:id="@+id/textNewUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
         android:text="Benutzer Name:"
         android:textSize="20dp"
-        android:layout_below="@+id/login_line"
-        android:layout_marginTop="300dp"
+        android:layout_below="@+id/textRegister"
+        android:layout_marginTop="20dp"
         />
 
     <EditText
-        android:id="@+id/login_tipUserName"
-        android:layout_width="150dp"
+        android:id="@+id/tip_NewUserName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/textNewUserName"
+        android:layout_alignBaseline="@+id/textNewUserName"
         android:textSize="20dp"
-        android:layout_below="@+id/login_line"
-
-        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
         android:background="@color/itemBackground"
-        android:layout_alignStart="@+id/login_tipUserPasswort"
-
-        />
-    <EditText
-        android:id="@+id/login_name"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/login_line"
-
-        android:layout_marginTop="300dp"
-        android:background="@color/itemBackground"
-        android:layout_alignStart="@+id/login_tipUserPasswort"
-
         />
 
-    <TextView
-        android:id="@+id/login_textUserPasswort"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Benutzer Passwort:"
-        android:textSize="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/login_textUserName"
-        android:layout_marginLeft="12dp"
-
-        />
-
-    <TextView
-        android:id="@+id/login_textUserPasswort2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Passwort wiederholen:"
-        android:textSize="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_below="@+id/login_textUserName"
-        android:layout_marginLeft="12dp"
-
-        />
-
-
-
-    <EditText
-        android:id="@+id/login_Passwort"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:background="@color/itemBackground"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/login_line"
-        android:layout_marginTop="340dp"
-        android:layout_toRightOf="@id/login_textUserPasswort"
-        />
-
-    <EditText
-        android:id="@+id/login_tipUserPasswort"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:background="@color/itemBackground"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/login_textUserName"
-        android:layout_marginTop="50dp"
-        android:layout_toRightOf="@id/login_textUserPasswort"
-        />
-
-    <EditText
-        android:id="@+id/login_registerPasswort2"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:background="@color/itemBackground"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/login_textUserName"
-        android:layout_marginTop="100dp"
-        android:layout_toRightOf="@id/login_textUserPasswort"
-        />
-
-    <TextView
-        android:id="@+id/login_textPasswort"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Benutzer Passwort:"
-        android:textSize="20dp"
-        android:layout_marginTop="340dp"
-        android:layout_below="@+id/login_line"
-        android:layout_marginLeft="12dp"
-
-        />
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Einloggen"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
-        android:onClick="login"/>
-
-
-
-    <Button
+    <com.google.android.gms.common.SignInButton
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registieren"
-        android:layout_marginTop="80dp"
-        android:onClick="register"
-        android:layout_below="@+id/login_textUserPasswort"
-        android:layout_centerHorizontal="true" />
-
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textNewUserName"
+        android:layout_alignEnd="@+id/signInButton" />
 
 </RelativeLayout>

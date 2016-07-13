@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GoApp</string>
+
+    <string name="server_client_id">65683074791-bveovd2tvtbioi8066kljld4hq3v1fbm.apps.googleusercontent.com</string>
 </resources>

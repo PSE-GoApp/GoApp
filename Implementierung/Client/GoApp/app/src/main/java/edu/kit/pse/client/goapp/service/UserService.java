@@ -177,8 +177,8 @@ public class UserService extends IntentService{
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
 
-    private void doPost(Intent intent) {
-        String userAsJsonString = null;
+    private void doPost(Intent intent) { // Create a new User
+        String jUser = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
@@ -187,14 +187,18 @@ public class UserService extends IntentService{
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICE);
 
-        userAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
+        jUser = intent.getStringExtra(CommunicationKeys.USER);
 
         URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
 
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
         httpAppClientPost.setUri(uri_userBuilder.getURI());
+
+        // TOdo Test-------------------------------------------------------------------------------------------------------------
+
+        /*
         try {
-            httpAppClientPost.setBody(userAsJsonString);
+            httpAppClientPost.setBody(jUser);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
         }
@@ -205,8 +209,11 @@ public class UserService extends IntentService{
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
         }
+        */
 
         // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        // TODO resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+
+        resultReceiver.send(202, bundle);
     }
 }
