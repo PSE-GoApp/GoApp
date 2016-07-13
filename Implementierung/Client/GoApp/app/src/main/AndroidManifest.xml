@@ -62,7 +62,6 @@
             android:screenOrientation="portrait"/>
 
 
-
         <service
             android:name="edu.kit.pse.client.goapp.service.GroupsService"
             android:exported="false" />
@@ -100,9 +99,9 @@
             android:name="edu.kit.pse.client.goapp.service.NotificationService"
             android:exported="false" />
 
-
         <receiver android:name="edu.kit.pse.client.goapp.Receiver.AlarmReceiver" />
 
+        <activity android:name="edu.kit.pse.client.goapp.activity.CreateNewGroupActivity"></activity>
     </application>
 
 </manifest>

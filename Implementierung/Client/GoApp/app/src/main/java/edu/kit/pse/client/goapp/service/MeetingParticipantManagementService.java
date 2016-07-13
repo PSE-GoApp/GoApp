@@ -12,16 +12,21 @@ import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_MeetingParticipantManagementBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages the participants of a meeting.
+ *
  * Created by Ta on 10.07.2016.
  */
 
 
 public class MeetingParticipantManagementService extends IntentService {
 
-    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
 
     public MeetingParticipantManagementService() {
         super("MeetingParticipantManagementService");
@@ -36,7 +41,11 @@ public class MeetingParticipantManagementService extends IntentService {
         super(name);
     }
 
-    // MeetingParticipantManagementService's Logik Intent enthält alle Informationen CommunicationKeys sind String Key werte
+    /**
+     * MeetingParticipantManagementService's logic intent contains all information about the meetingParticipantManagement. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -57,10 +66,49 @@ public class MeetingParticipantManagementService extends IntentService {
         }
     }
 
+    /**
+     * Updates the meetingParticipants status.
+     *
+     * @param intent Intent
+     */
     private void doPut(Intent intent) {
-        // TODO (@Tanja du erhälst ein jString mit den CommunikationsKey.PARTICIPANT)
+        String meetingParticipantAsJsonString = null;
+        CloseableHttpResponse closeableHttpResponse = null;
+
+        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
+
+        meetingParticipantAsJsonString = intent.getStringExtra(CommunicationKeys.PARTICIPANT);
+
+        URI_MeetingParticipantManagementBuilder uri_meetingParticipantManagementBuilder = new URI_MeetingParticipantManagementBuilder();
+
+        HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
+        httpAppClientPut.setUri(uri_meetingParticipantManagementBuilder.getURI());
+        try {
+            httpAppClientPut.setBody(meetingParticipantAsJsonString);
+        } catch (IOException e) {
+            //Todo Handle Exception. Maybe the String Extra was null
+        }
+
+        try {
+            // TODO catch 404 (No Internet and Request Time out)
+            closeableHttpResponse = httpAppClientPut.executeRequest();
+        } catch (IOException e) {
+            // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+        }
+
+        // send the Bundle and the Status Code from Response
+        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
 
+    /**
+     *Returns a list of MeetingParticipants and their commitment status.
+     *
+     * @param intent Intent
+     */
     private void doGet(Intent intent) {
         // Get Participants from Meeting
         String jasonString = null;

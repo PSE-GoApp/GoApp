@@ -17,6 +17,8 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.uri_builder.URI_LoginBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages the user authorisation.
+ *
  * Created by Ta on 10.07.2016.
  */
 public class LoginService extends IntentService {
@@ -30,7 +32,11 @@ public class LoginService extends IntentService {
      */
     public LoginService(String name) { super(name);}
 
-    //LoginService's Logik Intent enthält alle Informationen zum Login. CommunicationKeys sind String-Key-Werte.
+    /**
+     * LoginService's logic intent contains all information about the user login. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -52,7 +58,11 @@ public class LoginService extends IntentService {
         }
     }
 
-
+    /**
+     * Returns if the user is registered.
+     *
+     * @param intent Intent
+     */
     public void doGet(Intent intent) {
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
@@ -99,9 +109,14 @@ public class LoginService extends IntentService {
         }
     }
 
+    /**
+     *
+     * @param intent Intent
+     */
     private void doPut(Intent intent) { // Login
         String resultJsonString = null;
         String googleIdToken = null;
+
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
@@ -159,10 +174,14 @@ public class LoginService extends IntentService {
         resultReceiver.send(202, bundle);
     }
 
-
+    /**
+     *
+     * @param intent Intent
+     */
     private void doPost(Intent intent) {  // Register Client
         String googeleIdToken = null;
         String resultJsonString = null;
+
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);

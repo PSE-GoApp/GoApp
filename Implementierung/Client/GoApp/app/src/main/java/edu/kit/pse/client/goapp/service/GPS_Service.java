@@ -14,12 +14,15 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_GPS_Builder;
 
 /**
+ * Extends the abstract class IntentService and sends GPS-data.
+ *
  * Created by Ta on 10.07.2016.
  */
 public class GPS_Service extends IntentService {
 
-    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
-
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
     public GPS_Service() {
         super("GPS_Service");
     }
@@ -33,7 +36,11 @@ public class GPS_Service extends IntentService {
         super(name);
     }
 
-    //GPS_Service's Logik Intent enthält alle Informationen über die GPS-Daten. CommunicationKeys sind String-Key-Werte.
+    /**
+     * GPS_Service's logic intent contains all information about the GPS data. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -52,6 +59,11 @@ public class GPS_Service extends IntentService {
             }
         }
 
+    /**
+     * Updates GPS coordinates
+     *
+     * @param intent Intent
+     */
     private void doPut(Intent intent) {
         String GPSAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;

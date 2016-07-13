@@ -67,6 +67,10 @@ public class MapActivity extends AppCompatActivity
     private ImageButton menu_button;
 
 
+    /**
+     * on Create method that every activity has
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +97,10 @@ public class MapActivity extends AppCompatActivity
         meetingId = meetingID;
     }
 
+    /**
+     * teste if location is turned on and gives you the dialog window to enable it
+     * @param context
+     */
     private void test(Context context){
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if( !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ) {
@@ -127,6 +135,12 @@ public class MapActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Handler for the request Permissions(because of android 6 permissions are asked on runtime)
+     * @param requestCode the code
+     * @param permissions the permission wanted
+     * @param grantResults results
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -138,13 +152,11 @@ public class MapActivity extends AppCompatActivity
                 mMap.setMyLocationEnabled(true);
             } catch (final SecurityException ex) {
             }
-            // permission was granted, yay! Do the
-            // contacts-related task you need to do.
+            // permission was granted, yay!
 
         } else {
 
-            // permission denied, boo! Disable the
-            // functionality that depends on this permission.
+            // permission denied, boo!
         }
         return;
 
@@ -161,12 +173,18 @@ public class MapActivity extends AppCompatActivity
                 .build();
     }
 
+    /**
+     * start for the mGoogleApiClient
+     */
     @Override
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
     }
 
+    /**
+     * stop for the mGoogleApiClient
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -196,12 +214,20 @@ public class MapActivity extends AppCompatActivity
     }
 
 
+    /**
+     * on suspend for the mGoogleApiClient
+     * @param cause
+     */
     @Override
     public void onConnectionSuspended(int cause) {
         // The connection to Google Play services was lost for some reason. We call connect() to
         // attempt to re-establish the connection.
         mGoogleApiClient.connect();
     }
+
+    /**
+     * asks for the promissions on runtime
+     */
     private void getPromissions() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -239,36 +265,57 @@ public class MapActivity extends AppCompatActivity
         getGPS();
     }
 
+    /**
+     * destroy map
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
     }
 
+    /**
+     * what to du when the memory is low
+     */
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
     }
 
+    /**
+     * calls the super onPause when the app is paused
+     */
     @Override
     protected void onPause() {
         super.onPause();
         mapView.onPause();
     }
 
+    /**
+     * calls the super when the app resums
+     */
     @Override
     protected void onResume() {
         super.onResume();
         mapView.onResume();
     }
 
+    /**
+     * calls on super.onSaveInstancesSTate when the state needs to be saved
+     * @param outState
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
 
+    /**
+     * handler for the communication with the service
+     * @param resultCode
+     * @param resultData
+     */
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         //FILL the gps list
@@ -306,6 +353,9 @@ public class MapActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * asks for the GPS cordinates
+     */
     public void getGPS() {
         //which service?
         Intent i = new Intent(this, MapActivity.class);
@@ -316,6 +366,10 @@ public class MapActivity extends AppCompatActivity
         startService(i);
     }
 
+    /**
+     * on click listener for the acitvity
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.menu_map) {
@@ -323,6 +377,11 @@ public class MapActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * on click listener for the menu
+     * @param item the item clicked
+     * @return true if item was clicked
+     */
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {

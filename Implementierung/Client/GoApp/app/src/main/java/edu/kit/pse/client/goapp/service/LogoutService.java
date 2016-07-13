@@ -14,11 +14,15 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientDelete;
 import edu.kit.pse.client.goapp.uri_builder.URI_LogoutBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages the user logout.
+ *
  * Created by Ta on 10.07.2016.
  */
 public class LogoutService extends IntentService {
 
-    //Konstruktor gibt dem Service einen Namen, der fürs Testen wichtig ist.
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
     public LogoutService() { super("LogoutService"); }
 
     /**
@@ -27,7 +31,11 @@ public class LogoutService extends IntentService {
      */
     public LogoutService(String name) { super(name); }
 
-    //LogoutService's Logic Intent enthält alle Informationen zum Login von Benutzern.. CommunicationKeys sind String-Key-Werte.
+    /**
+     * LogoutService's logic intent contains all information about a user logout. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -46,6 +54,10 @@ public class LogoutService extends IntentService {
         }
     }
 
+    /**
+     * Logout of a user.
+     * @param intent
+     */
     private void doDelete(Intent intent) {
         CloseableHttpResponse closeableHttpResponse = null;
 

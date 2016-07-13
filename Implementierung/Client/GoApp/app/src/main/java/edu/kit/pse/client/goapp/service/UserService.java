@@ -18,12 +18,15 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_UserBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages a user
+ *
  * Created by paula on 10.07.16.
  */
 public class UserService extends IntentService{
 
-    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
-
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
     public UserService() {
         super("UserService");
     }
@@ -37,7 +40,11 @@ public class UserService extends IntentService{
         super(name);
     }
 
-
+    /**
+     * UserService's logic intent contains all information about the user. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(edu.kit.pse.client.goapp.CommunicationKeys.COMMAND);
@@ -59,7 +66,11 @@ public class UserService extends IntentService{
         }
     }
 
-
+    /**
+     * Returns information about the user.
+     *
+     * @param intent Intent
+     */
     private void doGet (Intent intent) //throws  IOException
     {
         String jasonString = null;
@@ -107,6 +118,11 @@ public class UserService extends IntentService{
         }
     }
 
+    /**
+     * Deletes a user.
+     *
+     * @param intent Intent
+     */
     private void doDelete(Intent intent) {
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -144,6 +160,11 @@ public class UserService extends IntentService{
 
     }
 
+    /**
+     * Updates information about a user.
+     *
+     * @param intent Intent
+     */
     private void doPut(Intent intent) {
         String userAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
@@ -177,8 +198,14 @@ public class UserService extends IntentService{
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
 
+    /**
+     * Creates a new user.
+     *
+     * @param intent Intent
+     */
     private void doPost(Intent intent) { // Create a new User
         String jUser = null;
+
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);

@@ -17,11 +17,15 @@ import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 import edu.kit.pse.client.goapp.uri_builder.URI_NotificationsBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages the attitudes of notifications.
+ *
  * Created by Ta on 10.07.2016.
  */
 public class NotificationService extends IntentService {
 
-    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
 
     public NotificationService() {
         super("NotificationService");
@@ -36,7 +40,11 @@ public class NotificationService extends IntentService {
         super(name);
     }
 
-    // NotificationService's Logik Intent enthält alle Informationen CommunicationKeys sind String Key werte
+    /**
+     * NotificationService's logic intent contains all information about the Notifications. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -56,6 +64,11 @@ public class NotificationService extends IntentService {
         }
     }
 
+    /**
+     *Returns a list of Notifications.
+     *
+     * @param intent Intent
+     */
     private void doGet(Intent intent) {
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
@@ -102,6 +115,11 @@ public class NotificationService extends IntentService {
         }
     }
 
+    /**
+     * Activates/deactivates notifications
+     *
+     * @param intent
+     */
     private void doPut(Intent intent) {
         String notificationAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;

@@ -18,12 +18,15 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages a meeting.
+ *
  * Created by kansei on 09.07.16.
  */
 public class MeetingService  extends IntentService {
 
-    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
-
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
     public MeetingService() {
         super("MeetingService");
     }
@@ -37,7 +40,11 @@ public class MeetingService  extends IntentService {
         super(name);
     }
 
-    // MeetingService's Logik Intent enthält alle Informationen CommunicationKeys sind String Key werte
+    /**
+     * MeetingService's logic intent contains all information about the Meetings. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -59,10 +66,13 @@ public class MeetingService  extends IntentService {
         }
     }
 
-
+    /**
+     *Returns all information about a meeting.
+     *
+     * @param intent Intent
+     */
     private void doGet (Intent intent) //throws  IOException
     {
-
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -111,7 +121,11 @@ public class MeetingService  extends IntentService {
         }
     }
 
-
+    /**
+     * Deletes a meeting
+     *
+     * @param intent Intent
+     */
     private void doDelete(Intent intent) {
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -149,6 +163,11 @@ public class MeetingService  extends IntentService {
 
     }
 
+    /**
+     * Updates information about the meeting.
+     *
+     * @param intent
+     */
     private void doPut(Intent intent) {
         String meetingAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
@@ -182,6 +201,11 @@ public class MeetingService  extends IntentService {
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
 
+    /**
+     * Creates a new meeting.
+     *
+     * @param intent Intent
+     */
     private void doPost(Intent intent) {
         String meetingAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;

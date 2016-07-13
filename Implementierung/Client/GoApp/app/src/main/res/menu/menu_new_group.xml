@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_new_group"
+        android:title="Home"
+        />
+
+    <item
+        android:id="@+id/neuer_new_group"
+        android:title="Neuer Termin"
+        />
+
+    <item
+        android:id="@+id/groups_new_group"
+        android:title="Gruppen"
+        />
+
+    <item
+        android:id="@+id/settings_new_group"
+        android:title="Einstellungen"
+        />
+
+    <item
+        android:id="@+id/about_new_group"
+        android:title="Über Uns"
+        />
+
+</menu>

@@ -15,12 +15,15 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.uri_builder.URI_GroupsBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages al list of all groups.
+ *
  * Created by e6420 on 28.6.2016 г..
  */
 public class GroupsService extends IntentService {
 
-    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist
-
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
     public GroupsService() {
         super("GroupsService");
     }
@@ -34,6 +37,11 @@ public class GroupsService extends IntentService {
         super(name);
     }
 
+    /**
+     * GroupsService's logic intent contains all information about the groups. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -47,6 +55,10 @@ public class GroupsService extends IntentService {
 
     }
 
+    /**
+     * Returns a list of all groups
+     * @param intent
+     */
     private void doGet(Intent intent) //throws  IOException
     {
         String jasonString = null;

@@ -16,12 +16,15 @@ import edu.kit.pse.client.goapp.uri_builder.URI_MeetingsBuilder;
 import edu.kit.pse.client.goapp.uri_builder.URI_UsersBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages a list of all meetings.
+ *
  * Created by paula on 10.07.16.
  */
 public class MeetingsService extends IntentService{
 
-    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
-
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
     public MeetingsService() {
         super("MeetingsService");
     }
@@ -35,6 +38,11 @@ public class MeetingsService extends IntentService{
         super(name);
     }
 
+    /**
+     * MeetingsService's logic intent contains all information about the meetings. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -47,6 +55,11 @@ public class MeetingsService extends IntentService{
         }
     }
 
+    /**
+     *Returns a list of Meetings.
+     *
+     * @param intent Intent
+     */
     private void doGet (Intent intent) //throws  IOException
     {
         String jasonString = null;

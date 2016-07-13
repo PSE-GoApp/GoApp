@@ -402,7 +402,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
                 hideProgressDialog();
                 // TOdo auskommentieren
-                // MeetingListActivity.start(this);
+                MeetingListActivity.start(this);
                 // Todo Put it Not in the Stack
 
                 break;
