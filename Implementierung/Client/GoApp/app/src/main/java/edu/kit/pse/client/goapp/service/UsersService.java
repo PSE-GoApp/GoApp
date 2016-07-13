@@ -15,12 +15,15 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.uri_builder.URI_UsersBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages a list of all users.
+ *
  * Created by paula on 10.07.16.
  */
 public class UsersService extends IntentService {
 
-    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist.
-
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
     public UsersService() {
         super("UsersService");
     }
@@ -34,7 +37,11 @@ public class UsersService extends IntentService {
         super(name);
     }
 
-
+    /**
+     * UsersService's logic intent contains all information about the Users. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -47,6 +54,11 @@ public class UsersService extends IntentService {
         }
     }
 
+    /**
+     * Returns a list of all users.
+     *
+     * @param intent Intent
+     */
     private void doGet (Intent intent) //throws  IOException
     {
         String jasonString = null;

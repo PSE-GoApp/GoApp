@@ -16,16 +16,21 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_GroupUserManagementBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages the group members.
+ *
  * Created by e6420 on 4.7.2016 г..
  */
 public class GroupUserManagementService extends IntentService {
 
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
     public GroupUserManagementService() {
         super("GroupUserManagementService");
     }
 
     /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
+     * Creates an IntentService. Invoked by your subclass's constructor.
      *
      * @param name Used to name the worker thread, important only for debugging.
      */
@@ -33,6 +38,11 @@ public class GroupUserManagementService extends IntentService {
         super(name);
     }
 
+    /**
+     * GroupUserManagementService's logic intent contains all information about the groupUserManagement. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -55,6 +65,11 @@ public class GroupUserManagementService extends IntentService {
         }
     }
 
+    /**
+     * Returns a list of all group members.
+     *
+     * @param intent Intent
+     */
     private void doGet(Intent intent) {
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
@@ -101,9 +116,13 @@ public class GroupUserManagementService extends IntentService {
         }
     }
 
+    /**
+     * Updates the group members.
+     *
+     * @param intent Intent
+     */
     private void doPut(Intent intent) {
-        // TODO groupUser oder komplettes Group ?
-        String groupUserAsJsonString_or_groupAsJsonString = null;
+        String groupUserAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
@@ -112,14 +131,14 @@ public class GroupUserManagementService extends IntentService {
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_USER_MANAGEMENT);
 
-        groupUserAsJsonString_or_groupAsJsonString = intent.getStringExtra(CommunicationKeys.GROUP);
+        groupUserAsJsonString = intent.getStringExtra(CommunicationKeys.GROUP);
 
         URI_GroupUserManagementBuilder uri_groupUserManagementBuilder = new URI_GroupUserManagementBuilder();
 
         HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
         httpAppClientPut.setUri(uri_groupUserManagementBuilder.getURI());
         try {
-            httpAppClientPut.setBody(groupUserAsJsonString_or_groupAsJsonString);
+            httpAppClientPut.setBody(groupUserAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
         }

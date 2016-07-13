@@ -18,12 +18,15 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_GroupBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages a group.
+ *
  * Created by e6420 on 3.7.2016 г..
  */
 public class GroupService extends IntentService {
 
-    //Konstruktor gibt den Service ein Namen, der fürs Testen wichtig ist
-
+    /**
+     * Constructor. Sets a name of the service which is important for testing.
+     */
     public GroupService() {
         super("GroupService");
     }
@@ -37,6 +40,11 @@ public class GroupService extends IntentService {
         super(name);
     }
 
+    /**
+     * GroupService's logic intent contains all information about the group. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -59,6 +67,11 @@ public class GroupService extends IntentService {
 
     }
 
+    /**
+     * Returns information about the group.
+     *
+     * @param intent Intent
+     */
     private void doGet (Intent intent) //throws  IOException
     {
         String jasonString = null;
@@ -106,7 +119,11 @@ public class GroupService extends IntentService {
         }
     }
 
-
+    /**
+     * Deletes a group.
+     *
+     * @param intent Intent
+     */
     private void doDelete(Intent intent) {
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -144,6 +161,11 @@ public class GroupService extends IntentService {
 
     }
 
+    /**
+     * Updates group information.
+     *
+     * @param intent Intent
+     */
     private void doPut(Intent intent) {
         String groupAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
@@ -177,6 +199,11 @@ public class GroupService extends IntentService {
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
 
+    /**
+     * Creates a new group.
+     *
+     * @param intent Intent
+     */
     private void doPost(Intent intent) {
         String groupAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;

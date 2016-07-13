@@ -17,6 +17,8 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_LoginBuilder;
 
 /**
+ * Extends the abstract class IntentService and manages the user authorisation.
+ *
  * Created by Ta on 10.07.2016.
  */
 public class LoginService extends IntentService {
@@ -30,7 +32,11 @@ public class LoginService extends IntentService {
      */
     public LoginService(String name) { super(name);}
 
-    //LoginService's Logik Intent enthält alle Informationen zum Login. CommunicationKeys sind String-Key-Werte.
+    /**
+     * LoginService's logic intent contains all information about the user login. CommunicationKeys are String key values
+     *
+     * @param intent Intent
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
@@ -52,7 +58,11 @@ public class LoginService extends IntentService {
         }
     }
 
-
+    /**
+     * Returns if the user is registered.
+     *
+     * @param intent Intent
+     */
     public void doGet(Intent intent) {
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
@@ -99,6 +109,10 @@ public class LoginService extends IntentService {
         }
     }
 
+    /**
+     *
+     * @param intent Intent
+     */
     private void doPut(Intent intent) {
         String userAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
@@ -133,7 +147,11 @@ public class LoginService extends IntentService {
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
 
-
+    /**
+     * Login of a user.
+     *
+     * @param intent Intent
+     */
     private void doPost(Intent intent) {
         String userAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
