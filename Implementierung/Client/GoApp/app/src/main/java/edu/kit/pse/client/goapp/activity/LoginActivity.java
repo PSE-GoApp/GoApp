@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         setContentView(R.layout.activity_login);
 
         newUserName = (EditText) findViewById(R.id.tip_NewUserName);
+        userConvert = new ObjectConverter<>();
 
         // Button listeners
         findViewById(R.id.signInButton).setOnClickListener(this);
@@ -154,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
                 break;
             case R.id.registerButton:
-                if (newUserName.getText() != null) {
+                if (!newUserName.getText().toString().isEmpty()) {
                     // Todo AlertDiaglog sure to create a new member?
 
                     // block Buttons from here NR.42
@@ -162,6 +163,9 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
 
                     register();
+                } else {
+                    // TOdo AlertBuilder
+                    Toast.makeText(this, "Name muss gesetzt sein", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -206,9 +210,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
             case RC_REGISTER:
                 GoogleSignInResult resultRegist = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
                 if (resultRegist.isSuccess()) {
-
                     GoogleSignInAccount acct = resultRegist.getSignInAccount();
-
                     // Get account information
                     userFullName = acct.getDisplayName();
                     userIdToken = acct.getIdToken();
@@ -231,10 +233,8 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
     public void goAppLogin() {
         // Activity still blockt from Blocker nr. 12,7
 
-        // todo Fix Error
         Intent loginIntent = new Intent(this, LoginService.class);
 
-        // Todo
         activityReceiver = new ServiceResultReceiver(new Handler());
         activityReceiver.setReceiver(this);
         loginIntent.putExtra(CommunicationKeys.RECEICER, activityReceiver);
@@ -244,8 +244,6 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
     }
 
     public void goAppRegister() {
-        // todo Activity still blockt from Blocker nr. 42
-        // todo Fix Error
 
         Intent registerIntent = new Intent(this, LoginService.class);
         activityReceiver = new ServiceResultReceiver(new Handler());
@@ -302,7 +300,6 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
                     case CommunicationKeys.FROM_USER_SERVICE:
                         userResultHandler(resultData);
-                        // todo buttons are blocked until here
                         break;
 
                  }
@@ -336,27 +333,9 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
             case CommunicationKeys.POST:
                 // a new User has registered (Added a User)
 
-                String jMyUser = resultData.getString(CommunicationKeys.USER);
+                Toast.makeText(this, "Willkommen! Sie sind Registiert", Toast.LENGTH_SHORT).show();
 
-                User myUser = userConvert.deserialize(jMyUser, User.class);
-
-                // sharePreferances save name and Password
-                SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                // TOdo----------------------------------------------------------------------------------------------------------------------------------------------
-                editor.putString("UserName", myUser.getName());
-                editor.putInt("UserId",myUser.getId());
-
-                editor.commit();
-
-                Toast.makeText(this, "Willkommen " + userFullName, Toast.LENGTH_SHORT).show();
-
-                // TOdo move to the MeetingListactivity
-                // MeetingListActivity.start(this);
-
-
-                // Todo Put it Not in the Stack ??
+                goAppLogin();
 
                 break;
 
@@ -372,8 +351,6 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
     private void loginResultHandler(Bundle resultData) {
 
-
-
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.GET:
                 hideProgressDialog();
@@ -382,27 +359,32 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
             case CommunicationKeys.POST:
                 // a new User has registered
 
-                User myUser = new User(-1, newUserName.getText().toString() );
+                User newUser = new User(-1, newUserName.getText().toString());
+                // {{ setGPS(new GPS(1,1,1));}}
 
-                startnewUserService(myUser);
+                startnewUserService(newUser);
 
                 break;
 
             case CommunicationKeys.PUT:
+
+                String jUser = resultData.getString(CommunicationKeys.USER);
+
+                User myUser = userConvert.deserialize(jUser, User.class);
+
                 Toast.makeText(this, "Sie sind eingelogt", Toast.LENGTH_SHORT).show();
 
                 // sharePreferances save name and Password
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                // TOdo----------------------------------------------------------------------------------------------------------------------------------------------
-                //editor.putString("name", userName.getText().toString());
-                //editor.putString("passwort", userPasswort.getText().toString());
+                editor.putString("name", myUser.getName());
+                editor.putInt("userId", myUser.getId());
 
                 editor.commit();
 
                 hideProgressDialog();
-                // TOdo auskommentieren
                 MeetingListActivity.start(this);
+
                 // Todo Put it Not in the Stack
 
                 break;
@@ -415,7 +397,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
     }
 
     private void startnewUserService(User user) {
-        // todo Activity still blockt from Blocker nr. 42
+        // Activity still blockt from Blocker nr. 42
 
         String jUser = userConvert.serialize(user, User.class);
 

@@ -212,10 +212,12 @@ public class LoginService extends IntentService {
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activicy?
         }
+                resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+
         */
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        // TODO löschen
+        resultReceiver.send(202, bundle);
 
     }
 

@@ -13,7 +13,6 @@ import java.io.IOException;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientDelete;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
-import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_UserBuilder;
 
@@ -216,14 +215,13 @@ public class UserService extends IntentService{
 
         jUser = intent.getStringExtra(CommunicationKeys.USER);
 
+        /* TOdo Test-------------------------------------------------------------------------------------------------------------
         URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
 
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
         httpAppClientPost.setUri(uri_userBuilder.getURI());
 
-        // TOdo Test-------------------------------------------------------------------------------------------------------------
 
-        /*
         try {
             httpAppClientPost.setBody(jUser);
         } catch (IOException e) {
@@ -236,11 +234,13 @@ public class UserService extends IntentService{
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
         }
-        */
+
 
         // send the Bundle and the Status Code from Response
-        // TODO resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        TODO resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        */
 
+        // TOdo löschen-----------------------------------------------------------------------------------------
         resultReceiver.send(202, bundle);
     }
 }

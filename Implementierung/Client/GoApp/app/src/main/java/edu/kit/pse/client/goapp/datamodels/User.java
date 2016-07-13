@@ -29,6 +29,8 @@ public class User {
 		return name;
 	}
 
+	public GPS getGps() {return gps;}
+
 	public void setGPS(GPS gps) {
 		this.gps = gps;
 	}
