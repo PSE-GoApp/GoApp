@@ -30,6 +30,9 @@ import edu.kit.pse.client.goapp.service.GroupService;
 import edu.kit.pse.client.goapp.service.GroupsService;
 import edu.kit.pse.goapp.client.goapp.R;
 
+/**
+ * This Activity shows a List of Groups and receives the interactions for deleting a Group.
+ */
 public class GroupsActivity extends AppCompatActivity  implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
     public ServiceResultReceiver mReceiver;

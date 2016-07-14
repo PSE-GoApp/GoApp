@@ -34,6 +34,9 @@ import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.Tour;
 import edu.kit.pse.goapp.client.goapp.R;
 
+/**
+ *
+ */
 public class CreateNewMeetingActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
 
     ImageButton menu_button;

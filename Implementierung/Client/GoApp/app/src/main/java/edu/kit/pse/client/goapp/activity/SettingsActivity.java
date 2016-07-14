@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import edu.kit.pse.goapp.client.goapp.R;
 
+/**
+ * This Activity shows the Settings an you can change them here.
+ */
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener{
 
     private ImageButton menu_button;
@@ -57,6 +60,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    /**
+     * Starts this Activity
+     * @param activity the activity, wich calls this activity
+     */
     public static void start(Activity activity) {
         Intent intent = new Intent(activity, SettingsActivity.class);
         activity.startActivity(intent);

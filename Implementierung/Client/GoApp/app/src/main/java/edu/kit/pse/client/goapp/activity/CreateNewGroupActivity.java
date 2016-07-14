@@ -42,6 +42,10 @@ import edu.kit.pse.goapp.client.goapp.R;
 //to do setLIsts check it
 //pack users: sendUsers
 // createGroup check it
+
+/**
+ * In this Activity you can create a new Grpup and add Members to it
+ */
 public class CreateNewGroupActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver{
 
     private List<User> users = new ArrayList<User>();
