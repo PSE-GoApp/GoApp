@@ -12,7 +12,7 @@
         android:background="#ededed"
         android:fontFamily="sans-serif-light"
         android:padding="10dp"
-        android:text="Teilnehmer"
+        android:text="@string/meeting_participants"
         android:textColor="#387D1A"
         android:textSize="25sp"
         android:layout_alignParentStart="true"
@@ -26,7 +26,6 @@
         android:layout_below="@+id/title_meeting_participant"
         android:layout_alignEnd="@+id/title_meeting_participant"
         android:id="@+id/meeting_participant_line" />
-    >
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -55,7 +54,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Termin absagen"
+        android:text="@string/decline_meeting"
         android:textColor="#ededed"
         android:id="@+id/meeting_participant_cancel"
         android:layout_alignParentBottom="true"

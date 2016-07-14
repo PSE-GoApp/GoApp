@@ -3,27 +3,27 @@
 
     <item
         android:id="@+id/meetingList_participant"
-        android:title="Home"
+        android:title="@string/meeting_list"
         />
 
     <item
         android:id="@+id/new_meeting_participant"
-        android:title="Neuer Termin"
+        android:title="@string/new_meeting"
         />
 
     <item
         android:id="@+id/groups_participant"
-        android:title="Gruppen"
+        android:title="@string/groups"
         />
 
     <item
         android:id="@+id/settings_participant"
-        android:title="Einstellungen"
+        android:title="@string/settings"
         />
 
     <item
         android:id="@+id/about_participant"
-        android:title="Über Uns"
+        android:title="@string/menu_about"
         />
 
 </menu>

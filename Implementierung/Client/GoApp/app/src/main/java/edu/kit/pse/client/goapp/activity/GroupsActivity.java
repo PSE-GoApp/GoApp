@@ -155,7 +155,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
 
                 Group clickedGroup = groups.get(position);
                 String message = clickedGroup.getName();
-                GroupMemberActivity.start(GroupsActivity.this);
+                GroupMemberActivity.start(GroupsActivity.this, clickedGroup.getId());
             }
         });
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

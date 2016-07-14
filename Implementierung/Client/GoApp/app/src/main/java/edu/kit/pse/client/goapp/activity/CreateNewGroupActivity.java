@@ -97,6 +97,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
             if (resultData.getString(CommunicationKeys.SERVICE) == "UsersService"){
                 setListResult(resultData);
             } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupService"){
+                //Get group Id
                 sendUsers();
                 progressDialog.dismiss();
             }

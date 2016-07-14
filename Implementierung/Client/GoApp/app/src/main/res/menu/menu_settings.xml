@@ -3,21 +3,21 @@
 
     <item
         android:id="@+id/home_settings"
-        android:title="Home"
+        android:title="@string/meeting_list"
         />
 
     <item
         android:id="@+id/neuer_termin_settings"
-        android:title="Neuer Termin"
+        android:title="@string/new_meeting"
         />
 
     <item
         android:id="@+id/groups_settings"
-        android:title="Gruppen"
+        android:title="@string/groups"
         />
 
     <item
         android:id="@+id/about_settings"
-        android:title="Über Uns"
+        android:title="@string/menu_about"
         />
 </menu>

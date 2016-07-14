@@ -41,6 +41,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
     private int positionClicked;
     private ProgressDialog progressDialog;
     private ArrayAdapter<User> adapter;
+    private static int groupId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
         mReceiver.setReceiver(this);
         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
         i.putExtra(CommunicationKeys.COMMAND, "GET");
+        i.putExtra(CommunicationKeys.GROUP_ID,groupId);
         startService(i);
     }
 
@@ -76,7 +78,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
 
                 User clickedUser = users.get(position);
                 String message = clickedUser.getName();
-                GroupMemberActivity.start(GroupMemberActivity.this);
+                //GroupMemberActivity.start(GroupMemberActivity.this);
             }
         });
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -201,7 +203,8 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
      * Starts the Activity
      * @param activity: the activity that is calling it
      */
-    public static void start(Activity activity) {
+    public static void start(Activity activity, int groupID) {
+        groupId = groupID;
         Intent intent = new Intent(activity, GroupMemberActivity.class);
         activity.startActivity(intent);
     }
