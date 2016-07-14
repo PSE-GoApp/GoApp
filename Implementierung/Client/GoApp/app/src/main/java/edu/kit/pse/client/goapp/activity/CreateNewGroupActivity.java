@@ -21,19 +21,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Group;
+import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.UsersService;
 import edu.kit.pse.goapp.client.goapp.R;
 
-//to do setLIsts
+//to do setLIsts check it
 //pack users: sendUsers
-// createGroup
+// createGroup check it
 public class CreateNewGroupActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver{
 
     private List<User> users = new ArrayList<User>();
@@ -93,9 +99,22 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
         }
     }
 
-    //pack users
+    /**
+     * sends the users
+     */
     private void sendUsers() {
+        for (User u : usersAdded) {
+            Intent i = new Intent(this, UsersService.class);
+            mReceiver = new ServiceResultReceiver(new Handler());
+            mReceiver.setReceiver(this);
+            i.putExtra(CommunicationKeys.RECEICER, mReceiver);
+            i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
 
+            ObjectConverter<User> userObjectConverter = new ObjectConverter<>();
+            String jsonObj = userObjectConverter.serialize(u, User.class);
+
+            startService(i);
+        }
     }
 
     /**
@@ -105,6 +124,10 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
 
     private void setListResult(Bundle resultData){
         //GET DATA and FILL users
+            String jsonObj = resultData.getString(CommunicationKeys.USERS);
+            ObjectConverter<List<User>> mConverter = new ObjectConverter<>();
+            List<User> dummy = new ArrayList<>();
+            users = mConverter.deserialize ( jsonObj, (Class<List<User>>) dummy.getClass());
             setLists();
         }
 
@@ -171,7 +194,17 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
      */
     private void createGroup(){
         if(nameGiven()) {
-            //go it here
+            Intent i = new Intent(this, UsersService.class);
+            mReceiver = new ServiceResultReceiver(new Handler());
+            mReceiver.setReceiver(this);
+            i.putExtra(CommunicationKeys.RECEICER, mReceiver);
+            i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
+            //IS IT CORRECT ?
+            Group gr = new Group(0, groupName.getText().toString());
+            ObjectConverter conv = new ObjectConverter();
+            String jsonObj = conv.serialize(gr, Group.class);
+            i.putExtra(CommunicationKeys.MEETING, jsonObj);
+            startService(i);
         }
     }
 
