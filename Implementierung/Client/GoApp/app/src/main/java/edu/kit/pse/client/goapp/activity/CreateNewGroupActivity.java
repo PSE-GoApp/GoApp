@@ -34,6 +34,8 @@ import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.service.GroupService;
+import edu.kit.pse.client.goapp.service.GroupUserManagementService;
 import edu.kit.pse.client.goapp.service.UsersService;
 import edu.kit.pse.goapp.client.goapp.R;
 
@@ -104,7 +106,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
      */
     private void sendUsers() {
         for (User u : usersAdded) {
-            Intent i = new Intent(this, UsersService.class);
+            Intent i = new Intent(this, GroupUserManagementService.class);
             mReceiver = new ServiceResultReceiver(new Handler());
             mReceiver.setReceiver(this);
             i.putExtra(CommunicationKeys.RECEICER, mReceiver);
@@ -194,7 +196,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
      */
     private void createGroup(){
         if(nameGiven()) {
-            Intent i = new Intent(this, UsersService.class);
+            Intent i = new Intent(this, GroupService.class);
             mReceiver = new ServiceResultReceiver(new Handler());
             mReceiver.setReceiver(this);
             i.putExtra(CommunicationKeys.RECEICER, mReceiver);
