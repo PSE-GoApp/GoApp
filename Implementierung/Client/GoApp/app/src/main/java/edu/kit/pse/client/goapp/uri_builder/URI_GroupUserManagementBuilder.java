@@ -9,16 +9,13 @@ import java.net.URI;
  */
 public class URI_GroupUserManagementBuilder extends ClientURI_Builder {
 
-    private static final String servLetAdd = "GroupUserManagement";//we don't know it yet
+    private static final String servletAdd = "GroupUserManagement";//we don't know it yet
     private URIBuilder uribuilder;
     private URI uri;
 
     public URI_GroupUserManagementBuilder() {
-        try {
-            uribuilder = new URIBuilder(serverAdd + servLetAdd);
-        } catch(java.net.URISyntaxException syntaxException) {
-            //handle it somehow
-        }
+        uribuilder = new URIBuilder();
+        uribuilder.setPath(serverAdd+servletAdd);
     }
 
     @Override

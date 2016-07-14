@@ -14,11 +14,8 @@ public class URI_GroupsBuilder extends ClientURI_Builder {
     private URI uri;
 
     public URI_GroupsBuilder() {
-        try {
-            uribuilder = new URIBuilder(serverAdd + servletAdd);
-        } catch (java.net.URISyntaxException syntaxException) {
-            //handle it somehow
-        }
+        uribuilder = new URIBuilder();
+        uribuilder.setPath(serverAdd+servletAdd);
     }
 
     @Override

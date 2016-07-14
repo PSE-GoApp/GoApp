@@ -1,4 +1,5 @@
 package edu.kit.pse.client.goapp.uri_builder;
+
 import org.apache.http.client.utils.URIBuilder;
 
 import java.net.URI;
@@ -12,20 +13,9 @@ public class URI_LoginBuilder extends ClientURI_Builder {
     private URIBuilder uribuilder;
     private URI uri;
 
-    public URI_LoginBuilder() {
-        try {
-            uribuilder = new URIBuilder(serverAdd + servletAdd);
-        } catch(java.net.URISyntaxException syntaxException){
-            //handle it somehow
-            Thread.setDefaultUncaughtExceptionHandler(
-                    new Thread.UncaughtExceptionHandler() {
-                        @Override public  void  uncaughtException(Thread t, Throwable e) {
-                            System.out.println(t.getName() + ": " + e);
-                            URIBuilder uribuilder = new URIBuilder();
-                        }
-                    }
-            );
-        }
+    public URI_LoginBuilder(){
+            uribuilder = new URIBuilder();
+            uribuilder.setPath(serverAdd+servletAdd);
     }
 
     @Override

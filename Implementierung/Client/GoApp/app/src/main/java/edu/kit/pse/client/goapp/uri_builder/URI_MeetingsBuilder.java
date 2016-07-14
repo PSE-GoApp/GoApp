@@ -14,11 +14,8 @@ public class URI_MeetingsBuilder extends ClientURI_Builder {
     private URI uri;
 
     public URI_MeetingsBuilder() {
-        try {
-            uribuilder = new URIBuilder(serverAdd + servletAdd);
-        } catch(java.net.URISyntaxException syntaxException){
-            //handle it somehow
-        }
+        uribuilder = new URIBuilder();
+        uribuilder.setPath(serverAdd+servletAdd);
     }
 
     @Override
