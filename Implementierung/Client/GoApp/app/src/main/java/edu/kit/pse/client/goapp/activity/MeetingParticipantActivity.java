@@ -28,6 +28,7 @@ import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.goapp.client.goapp.R;
 
 /**
+ * This Activity shows a List of MeetingParticipants who have confirmed the meeting
  * Created by kansei on 07.07.16.
  */
 public class MeetingParticipantActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {

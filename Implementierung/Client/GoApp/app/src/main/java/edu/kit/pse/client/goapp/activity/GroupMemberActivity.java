@@ -30,6 +30,9 @@ import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.GroupUserManagementService;
 import edu.kit.pse.goapp.client.goapp.R;
 
+/**
+ * This Activity shows all Groupmembers,you can leave the Group and Administrators can search for Members to add ordelete them.
+ */
 public class GroupMemberActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
     private List<User> users = new ArrayList<User>();
