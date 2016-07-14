@@ -17,6 +17,14 @@ public class URI_LoginBuilder extends ClientURI_Builder {
             uribuilder = new URIBuilder(serverAdd + servletAdd);
         } catch(java.net.URISyntaxException syntaxException){
             //handle it somehow
+            Thread.setDefaultUncaughtExceptionHandler(
+                    new Thread.UncaughtExceptionHandler() {
+                        @Override public  void  uncaughtException(Thread t, Throwable e) {
+                            System.out.println(t.getName() + ": " + e);
+                            URIBuilder uribuilder = new URIBuilder();
+                        }
+                    }
+            );
         }
     }
 
