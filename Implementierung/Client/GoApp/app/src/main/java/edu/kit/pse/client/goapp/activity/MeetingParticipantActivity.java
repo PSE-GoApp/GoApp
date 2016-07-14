@@ -23,10 +23,8 @@ import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
-import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.Participant;
-import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.goapp.client.goapp.R;
 
 /**
@@ -37,7 +35,6 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
     public ServiceResultReceiver meetingParticipantReceiver;
     ImageButton menu_button;
     Button cancelButton;
-    ObjectConverter<Meeting> meetingConverter;
 
     Bundle bundleMeeting;
     private static Meeting meeting;
@@ -46,11 +43,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
 
     // Todo Delete it after Testing
 
-    List<Participant> participants = new ArrayList<Participant>() {{
-            add(new Participant(0,2, new User(42, "ICH BIN DAS"), null));
-            add(new Participant(0,2, new User(0, "Super Heroooo Ohhh"), null));
-            add(new Participant(0,2, new User(1, "Niemand"), null));
-        }};
+    List<Participant> participants = new ArrayList<Participant>();
 
     public static void start(Activity activity, Meeting m) {
         Intent intent = new Intent(activity, MeetingParticipantActivity.class);
@@ -66,13 +59,14 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         menu_button = (ImageButton) findViewById(R.id.menu_meeting_participant);
         menu_button.setOnClickListener(this);
         cancelButton = (Button) findViewById(R.id.meeting_participant_cancel);
-        meetingConverter = new ObjectConverter<>();
 
 
         Toast.makeText(MeetingParticipantActivity.this, "Meeting ID is: "
                 + meeting.getMeetingId() , Toast.LENGTH_SHORT).show();
 
 
+
+        // Todo ausselektieren!------------------------------------------------------------------------------------------
         participants = meeting.getParticipants();
         if (participants != null) {
             list = (ListView) findViewById(R.id.participant_listview);
@@ -162,9 +156,45 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
     // TODO TEST THIS
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
+
+        switch (resultCode) {
+            case 202:
+                switch (resultData.getString(CommunicationKeys.SERVICE)) {
+                    case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
+                        meetingParticipanManagemantResultHandler(resultData);
+                        break;
+                    /* dont neet it
+                    case CommunicationKeys.FROM_MEETING_SERVICE:
+                        meetingResultReceiverHandler(resultData);
+                        break;
+                     */
+                    default:
+                        // TODO wrong Service
+                        Toast.makeText(this, "Error 500: wrong Service", Toast.LENGTH_LONG).show();
+
+                }
+                break;
+            case 400:
+                Toast.makeText(this, "Error 400: bad request", Toast.LENGTH_LONG).show();
+                break;
+            case 403:
+                Toast.makeText(this, "Error 403: forbidden", Toast.LENGTH_LONG).show();
+                break;
+            case 404:
+                Toast.makeText(this, "Error 404: not found", Toast.LENGTH_LONG).show();
+
+            case 408:
+                Toast.makeText(this, "Error 408: request time out", Toast.LENGTH_LONG).show();
+                break;
+            case 500:
+                Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
+                break;
+        }
+
+
         switch (resultData.getString(CommunicationKeys.SERVICE)) {
             case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
-                meetingParticipanManagemantResultHandler(resultCode, resultData);
+                meetingParticipanManagemantResultHandler(resultData);
                 break;
             case CommunicationKeys.FROM_MEETING_SERVICE:
                 // not in use
@@ -175,9 +205,10 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         }
     }
 
-    private void meetingParticipanManagemantResultHandler(int resultCode, Bundle resultData) {
-        switch (resultCode) {
-            case 202:
+    private void meetingParticipanManagemantResultHandler(Bundle resultData) {
+        switch (resultData.getString(CommunicationKeys.COMMAND)) {
+            case CommunicationKeys.GET:
+                /* Don't need it
                 Toast.makeText(this,"202", Toast.LENGTH_SHORT);
                 String jsonString = resultData.getString(CommunicationKeys.MEETING);
                 meeting = meetingConverter.deserialize(jsonString,Meeting.class);
@@ -193,17 +224,15 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
                 } else {
                     Toast.makeText(this, "Error 500: Missing Informations", Toast.LENGTH_LONG).show();
                 }
+                */
                 break;
-            case 400:
+            case CommunicationKeys.POST:
                 Toast.makeText(this, "Error 400: Missing Informations", Toast.LENGTH_LONG).show();
                 break;
-            case 403:
+            case CommunicationKeys.DELETE:
                 Toast.makeText(this, "Error 403: Missing Informations", Toast.LENGTH_LONG).show();
                 break;
-            case 408:
-                Toast.makeText(this, "Error 408: Missing Informations", Toast.LENGTH_LONG).show();
-                break;
-            case 500:
+            case CommunicationKeys.PUT:
                 Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
                 break;
         }

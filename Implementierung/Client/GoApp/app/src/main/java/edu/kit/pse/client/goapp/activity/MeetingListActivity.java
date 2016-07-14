@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -27,10 +29,14 @@ import java.util.List;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
+import edu.kit.pse.client.goapp.datamodels.Event;
+import edu.kit.pse.client.goapp.datamodels.GPS;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
+import edu.kit.pse.client.goapp.datamodels.Tour;
 import edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.service.MeetingsService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
@@ -42,44 +48,8 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     ImageButton menu_button;
     private Context context = this;
     private ListView list;
-
-    // Example ---------------------------------------------------------------------------------------------------------------------------------------------
-    // Todo delete it after Testing
-    User me = new User(42, "GO-App Admin");
-    // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
-
-    Participant itsMeConfirmed = new Participant(0,2,  me, MeetingConfirmation.CONFIRMED);
-    Participant itsMePending = new Participant(0,3, me, MeetingConfirmation.PENDING);
-    Participant imParticipant = new Participant(0,3, me, MeetingConfirmation.REJECTED);
-
-    private List<Meeting> meetings = new ArrayList<Meeting>() {
-        {
-            new Meeting(0, "Mensa", null, 1475953024180L, 2, imParticipant) {{
-                addParticipant(itsMeConfirmed);
-            }};
-            add(new Meeting(1, "Ago", null, 1475953024000L, 2, imParticipant) {{
-                addParticipant(itsMePending);
-            }});
-            add(new Meeting(2, "PSE Treffen", null, 1475953021200L, 2, imParticipant) {{
-                addParticipant(itsMePending);
-            }});
-            add(new Meeting(3, "Iris Füttern", null, 1476953024000L, 2, imParticipant) {{
-                addParticipant(itsMePending);
-            }});
-            add(new Meeting(4, "Schloss Park", null, 1475953021200L, 2, imParticipant) {{
-                addParticipant(itsMeConfirmed);
-            }});
-            add(new Meeting(5, "Klettern", null, 147595302489L, 2, imParticipant) {{
-                addParticipant(itsMePending);
-            }});
-            add(new Meeting(6, "Bar Tour", null, 14759530243560L, 2, imParticipant) {{
-                addParticipant(itsMeConfirmed);
-            }});
-        }
-    };
-
-    //------------------------------------------------------------------------------------------------------------------------------------------------
-
+    private User myUser;
+    private List<Meeting> meetings = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,21 +61,22 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
         list = (ListView) findViewById(R.id.meeting_ListView);
 
-        // TODO aus auklammern // Start a MeetinsService for the Meetinglist
-        /*
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "");
+        int userId = sharedPreferences.getInt("userId", -1);
+        if (userId == -1) {
+            // Todo close App :D
+        }
+        myUser = new User(userId, userName);
+
+
+        // TODO TEST -------------------------------------------------------------------------------------------------------------
         Intent i = new Intent(this, MeetingsService.class);
         activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
         activityServiceResultReceiver.setReceiver(this);
         i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
         i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
         startService(i);
-        */
-
-        // Only For the Test Todo delete this after Testing
-        if (meetings != null) {
-            MeetingListAdapter adapter = new MeetingListAdapter(this, meetings);
-            list.setAdapter(adapter);
-        }
     }
 
 
@@ -387,21 +358,28 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                     case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
                         managementResultReceiverHandler(resultData);
                         break;
+                    /* dont neet it
                     case CommunicationKeys.FROM_MEETING_SERVICE:
                         meetingResultReceiverHandler(resultData);
                         break;
+                     */
                     default:
                         // TODO wrong Service
+                        Toast.makeText(this, "Error 500: wrong Service", Toast.LENGTH_LONG).show();
+
                 }
                 break;
             case 400:
-                Toast.makeText(this, "Error 400: Missing Informations", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error 400: bad request", Toast.LENGTH_LONG).show();
                 break;
             case 403:
-                Toast.makeText(this, "Error 403: Missing Informations", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error 403: forbidden", Toast.LENGTH_LONG).show();
                 break;
+            case 404:
+                Toast.makeText(this, "Error 404: not found", Toast.LENGTH_LONG).show();
+
             case 408:
-                Toast.makeText(this, "Error 408: Missing Informations", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error 408: request time out", Toast.LENGTH_LONG).show();
                 break;
             case 500:
                 Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
@@ -460,34 +438,111 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             case CommunicationKeys.GET:
                 String jsonString = resultData.getString(CommunicationKeys.MEETINGS);
 
-                List<Meeting> mdump = new ArrayList<>();
-                //ArrayList<Meeting> mList = new ArrayList<>();
-                meetings = meetingListConverter.deserialize(jsonString, (Class<List<Meeting>>) mdump.getClass());
+                List<Meeting> dummy = new ArrayList<>();
+                // List<Meeting> fullMeetingList = meetingListConverter.deserialize(jsonString, (Class<List<Meeting>>) dummy.getClass());
+                List<Meeting> fullMeetingList = fullMeeting;
+
                 // TODO FILTER meetings if they are Rejected from User-------------------------------------------------------------------------------
-                /*
-                for (Meeting m: meetings) {
-                    // TODO
-                    Participant itsMe;
+
+                for (Meeting m : fullMeetingList) {
 
                     List<Participant> participants = m.getParticipants();
-                    for (Participant p: participants) {
-                        if (p.getUser().equals(GOOGLE TOKEN)) {
-                            if (p.getConfirmation() == MeetingConfirmation.REJECTED) {
-                                meetings.remove(m);
-                            } else {
+                    for (Participant p : participants) {
+                        if (p.getUser().getId() == myUser.getId()) {
+                            if (p.getConfirmation() != MeetingConfirmation.REJECTED) {
+                                meetings.add(m);
+                            }
                         }
                     }
                 }
                 MeetingListAdapter adapter = new MeetingListAdapter(this, meetings);
                 list.setAdapter(adapter);
                 // TODO Test ?? list.invalidateViews();
-                */
+
                 break;
             default:
+                Toast.makeText(this, "Error: 500. Wrong Command From MeetingService", Toast.LENGTH_SHORT).show();
                 // TODO ERROR wrong Command from Service
-
         }
     }
+
+
+    // Todo delete it after Testing -------------------------------------------------------------------------
+    User me = new User(42424269, "KANSEi'S DICK");
+    User asshole = new User(13, "KEVIN!!");
+    // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
+
+
+    Participant keinKevin = new Participant(0,2,  asshole, MeetingConfirmation.REJECTED);
+    Participant kevin = new Participant(0,2,  asshole, MeetingConfirmation.CONFIRMED);
+    Participant itsMeConfirmed = new Participant(0,2,  me, MeetingConfirmation.CONFIRMED);
+    Participant itsMePending = new Participant(0,3, me, MeetingConfirmation.PENDING);
+    Participant imParticipant = new Participant(0,3, me, MeetingConfirmation.REJECTED);
+
+    private List<Meeting> fullMeeting = new ArrayList<Meeting>() {
+        {
+            new Event(0, "Mensa", new GPS(1,1,1), 1475953024180L, 2, imParticipant) {{
+                addParticipant(itsMeConfirmed);
+                addParticipant(keinKevin);
+            }};
+            add(new Event(1, "Ago", new GPS(1,1,1), 1475953024000L, 2, imParticipant) {{
+                addParticipant(itsMePending);
+                addParticipant(kevin);
+            }});
+            add(new Event(2, "PSE Treffen", new GPS(1,1,1), 1475953021200L, 2, imParticipant) {{
+                addParticipant(itsMePending);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+
+            }});
+            add(new Tour(3, "Iris Füttern", new GPS(1,1,1), 1476953024000L, 2, imParticipant) {{
+                addParticipant(itsMePending);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+            }});
+            add(new Tour(4, "Schloss Park", new GPS(1,1,1), 1475953021200L, 2, imParticipant) {{
+                addParticipant(itsMeConfirmed);
+            }});
+            add(new Event(5, "Klettern", new GPS(1,1,1), 147595302489L, 2, imParticipant) {{
+                addParticipant(itsMePending);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+            }});
+            add(new Tour(6, "Bar Tour", new GPS(1,1,1), 14759530243560L, 2, imParticipant) {{
+                addParticipant(itsMeConfirmed);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+            }});
+            add(new Tour(7, "Bar mit Tour", new GPS(1,1,1), 14759530243560L, 2, kevin) {{
+                addParticipant(imParticipant);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+            }});
+        }
+    };
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
 }
 
 

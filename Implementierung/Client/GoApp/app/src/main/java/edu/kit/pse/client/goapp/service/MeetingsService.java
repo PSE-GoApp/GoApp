@@ -6,14 +6,19 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.util.EntityUtils;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
-import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
-import edu.kit.pse.client.goapp.uri_builder.URI_MeetingsBuilder;
-import edu.kit.pse.client.goapp.uri_builder.URI_UsersBuilder;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
+import edu.kit.pse.client.goapp.datamodels.Event;
+import edu.kit.pse.client.goapp.datamodels.GPS;
+import edu.kit.pse.client.goapp.datamodels.Meeting;
+import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
+import edu.kit.pse.client.goapp.datamodels.Participant;
+import edu.kit.pse.client.goapp.datamodels.Tour;
+import edu.kit.pse.client.goapp.datamodels.User;
 
 /**
  * Extends the abstract class IntentService and manages a list of all meetings.
@@ -71,6 +76,7 @@ public class MeetingsService extends IntentService{
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETINGS_SERVICE);
 
+        /* TODO entcommitten ------------------------------------------------------------------------------------------------
         URI_MeetingsBuilder uri_meetingsBuilder = new URI_MeetingsBuilder();
 
         HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
@@ -94,5 +100,94 @@ public class MeetingsService extends IntentService{
 
         // send the Bundle and the Status Code from Response
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        */
+
+        // TOdo DElete after testing--------------------------------------------------------------------------------
+
+        ObjectConverter<List<Meeting>> mConverter = new ObjectConverter<>();
+        List<Meeting> dummy = new ArrayList<Meeting>();
+        String json = mConverter.serialize(meetings, (Class<List<Meeting>>) dummy.getClass());
+
+        bundle.putString(CommunicationKeys.MEETINGS, json);
+
+        // send the Bundle and the Status Code from Response
+        resultReceiver.send(202, bundle);
+        // todo delete ------------------------------------------------------------------------------------
     }
+
+
+    // Todo delete it after Testing -------------------------------------------------------------------------
+    User me = new User(42424269, "KANSEi'S DICK");
+    User asshole = new User(13, "KEVIN!!");
+    // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
+
+
+    Participant keinKevin = new Participant(0,2,  asshole, MeetingConfirmation.REJECTED);
+    Participant kevin = new Participant(0,2,  asshole, MeetingConfirmation.CONFIRMED);
+    Participant itsMeConfirmed = new Participant(0,2,  me, MeetingConfirmation.CONFIRMED);
+    Participant itsMePending = new Participant(0,3, me, MeetingConfirmation.PENDING);
+    Participant imParticipant = new Participant(0,3, me, MeetingConfirmation.REJECTED);
+
+    private List<Meeting> meetings = new ArrayList<Meeting>() {
+        {
+            new Event(0, "Mensa", new GPS(1,1,1), 1475953024180L, 2, imParticipant) {{
+                addParticipant(itsMeConfirmed);
+                addParticipant(keinKevin);
+            }};
+            add(new Event(1, "Ago", new GPS(1,1,1), 1475953024000L, 2, imParticipant) {{
+                addParticipant(itsMePending);
+                addParticipant(kevin);
+            }});
+            add(new Event(2, "PSE Treffen", new GPS(1,1,1), 1475953021200L, 2, imParticipant) {{
+                addParticipant(itsMePending);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+
+            }});
+            add(new Tour(3, "Iris Füttern", new GPS(1,1,1), 1476953024000L, 2, imParticipant) {{
+                addParticipant(itsMePending);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+            }});
+            add(new Tour(4, "Schloss Park", new GPS(1,1,1), 1475953021200L, 2, imParticipant) {{
+                addParticipant(itsMeConfirmed);
+            }});
+            add(new Event(5, "Klettern", new GPS(1,1,1), 147595302489L, 2, imParticipant) {{
+                addParticipant(itsMePending);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+            }});
+            add(new Tour(6, "Bar Tour", new GPS(1,1,1), 14759530243560L, 2, imParticipant) {{
+                addParticipant(itsMeConfirmed);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+                addParticipant(keinKevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+            }});
+            add(new Tour(7, "Bar mit Tour", new GPS(1,1,1), 14759530243560L, 2, kevin) {{
+                addParticipant(imParticipant);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+                addParticipant(kevin);
+            }});
+        }
+    };
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+
 }

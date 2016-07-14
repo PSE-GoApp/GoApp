@@ -87,4 +87,13 @@
         android:layout_below="@+id/textNewUserName"
         android:layout_alignEnd="@+id/signInButton" />
 
+    <Button
+        android:id="@+id/scheiSButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_line"
+        android:text="Main Activity TEST!"
+        android:layout_alignEnd="@+id/tip_NewUserName"
+        android:onClick="cheatToActivity"/>
+
 </RelativeLayout>

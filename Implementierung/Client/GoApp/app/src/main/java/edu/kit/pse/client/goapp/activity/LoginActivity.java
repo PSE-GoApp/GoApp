@@ -377,7 +377,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 // sharePreferances save name and Password
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("name", myUser.getName());
+                editor.putString("userName", myUser.getName());
                 editor.putInt("userId", myUser.getId());
 
                 editor.commit();
@@ -411,5 +411,20 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         newUserIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
         newUserIntent.putExtra(CommunicationKeys.USER, jUser);
         startService(newUserIntent);
+    }
+
+    public void cheatToActivity(View view) {
+        User testUser = new User(42424269, "KANSE'S DICK");
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userName",testUser.getName());
+        editor.putInt("userId", testUser.getId());
+
+        editor.commit();
+
+        MeetingListActivity.start(this);
+
+
     }
 }
