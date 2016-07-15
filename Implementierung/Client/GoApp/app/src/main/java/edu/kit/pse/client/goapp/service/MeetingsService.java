@@ -19,6 +19,8 @@ import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.Tour;
 import edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
+import edu.kit.pse.client.goapp.uri_builder.URI_MeetingsBuilder;
 
 /**
  * Extends the abstract class IntentService and manages a list of all meetings.
@@ -76,7 +78,7 @@ public class MeetingsService extends IntentService{
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.GET);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETINGS_SERVICE);
 
-        /* TODO entcommitten ------------------------------------------------------------------------------------------------
+        // TODO entcommitten ------------------------------------------------------------------------------------------------
         URI_MeetingsBuilder uri_meetingsBuilder = new URI_MeetingsBuilder();
 */
 
@@ -85,7 +87,7 @@ public class MeetingsService extends IntentService{
         /*
         httpAppClientGet.setUri(uri_meetingsBuilder.getURI());
 
-        try {
+        /*try {
             // TODO catch 404 (No Internet and Request Time out)
             closeableHttpResponse = httpAppClientGet.executeRequest();
         } catch (IOException e) {
