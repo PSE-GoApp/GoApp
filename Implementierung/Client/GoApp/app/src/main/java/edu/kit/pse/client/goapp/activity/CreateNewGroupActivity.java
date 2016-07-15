@@ -5,9 +5,9 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -21,18 +21,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Group;
-import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.GroupService;
 import edu.kit.pse.client.goapp.service.GroupUserManagementService;
@@ -52,6 +47,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
     private List<User> usersAdded = new ArrayList<User>();
     public ServiceResultReceiver mReceiver;
     private ProgressDialog progressDialog;
+    ObjectConverter<Group> groupConverter;
     EditText groupName;
     ArrayAdapter adapter;
     ArrayAdapter adapter2;
@@ -66,6 +62,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_group);
         groupName = (EditText) findViewById(R.id.editText_group_name);
+        groupConverter = new ObjectConverter<>();
         //set second list
         getUsers();
         registerClickCallback();
@@ -206,10 +203,9 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
             mReceiver.setReceiver(this);
             i.putExtra(CommunicationKeys.RECEICER, mReceiver);
             i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
-            //IS IT CORRECT ?
+            //IS IT CORRECT ? Todo
             Group gr = new Group(0, groupName.getText().toString());
-            ObjectConverter conv = new ObjectConverter();
-            String jsonObj = conv.serialize(gr, Group.class);
+            String jsonObj = groupConverter.serialize(gr, Group.class);
             i.putExtra(CommunicationKeys.MEETING, jsonObj);
             startService(i);
         }

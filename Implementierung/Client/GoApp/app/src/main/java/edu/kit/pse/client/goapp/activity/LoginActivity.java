@@ -192,7 +192,12 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         switch (requestCode) {
             case RC_SIGN_IN:
                 GoogleSignInResult resultSign = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+                Log.d(TAG, "onActivityResult:GET_TOKEN:success:" + resultSign.getStatus().isSuccess());
+
+                int statusCode = resultSign.getStatus().getStatusCode();
+                Log.e("Suck dick", "" + statusCode );
                 if (resultSign.isSuccess()) {
+                    Log.e("I made it you son...", "" + statusCode );
                     GoogleSignInAccount acct = resultSign.getSignInAccount();
                     // Get account information
                     userFullName = acct.getDisplayName();
@@ -204,6 +209,8 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                     hideProgressDialog();
                     // Todo Signed out show unauthenticated UI.
                     Log.d("LoginActivity", "Sign In was not successfull");
+                    Log.e("LoginActivity", "Sign In was not successfull");
+
                 }
                 break;
 

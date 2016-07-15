@@ -13,7 +13,6 @@ import java.io.IOException;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientDelete;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
-import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 
@@ -217,7 +216,7 @@ public class MeetingService  extends IntentService {
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
 
         meetingAsJsonString = intent.getStringExtra(CommunicationKeys.MEETING);
-
+        /*
         URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
 
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
@@ -237,6 +236,10 @@ public class MeetingService  extends IntentService {
 
         // send the Bundle and the Status Code from Response
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        */
+
+        resultReceiver.send(202, bundle);
+
     }
 
 }

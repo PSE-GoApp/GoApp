@@ -2,11 +2,14 @@ package edu.kit.pse.client.goapp.activity;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,41 +29,55 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import edu.kit.pse.client.goapp.CommunicationKeys;
+import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Event;
 import edu.kit.pse.client.goapp.datamodels.GPS;
 import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.Tour;
+import edu.kit.pse.client.goapp.service.GroupsService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 /**
  *
  */
-public class CreateNewMeetingActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
+public class CreateNewMeetingActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
-    ImageButton menu_button;
+    private static final String TAG = "CreateNewMeeting";
 
-    Meeting newMeeting;
-    AutoCompleteTextView meetingNameText;
-    AutoCompleteTextView durationText;
-    Button createButton;
+    private ImageButton menu_button;
+
+    private ServiceResultReceiver activityServiceResultReceiver;
+    private ObjectConverter<List<Group>> groupsConverter;
+    private ObjectConverter<Meeting> meetingConverter;
+
+
+    private Meeting newMeeting;
+    private AutoCompleteTextView meetingNameText;
+    private AutoCompleteTextView durationText;
+    private Button createButton;
+    private ProgressDialog mProgressDialog;
+
     //TODO with a time Spinner ?
-    AutoCompleteTextView time;
-    RadioButton radioButtonEvent;
-    RadioButton radioButtonTour;
-    Spinner spinnerGroup;
 
-    AutoCompleteTextView day;
-    AutoCompleteTextView month;
-    AutoCompleteTextView year;
+    private AutoCompleteTextView time;
+    private RadioButton radioButtonEvent;
+    private RadioButton radioButtonTour;
+    private Spinner spinnerGroup;
 
-    AutoCompleteTextView hour;
-    AutoCompleteTextView minute;
+    private AutoCompleteTextView day;
+    private AutoCompleteTextView month;
+    private AutoCompleteTextView year;
+
+    private AutoCompleteTextView hour;
+    private AutoCompleteTextView minute;
 
 
 
-    ArrayList groups = new ArrayList<Group>(Arrays.asList(new Group[]{
+    private ArrayList groups = new ArrayList<Group>(Arrays.asList(new Group[]{
             new Group(0, "PSE GRUPPE"),
             new Group(1, "Kommilitionen"),
             new Group(2, "Lern Gruppe")}));
@@ -72,6 +89,9 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         setContentView(R.layout.activity_create_new_meeting);
         menu_button = (ImageButton) findViewById(R.id.menu_new_meeting);
         menu_button.setOnClickListener(this);
+
+        groupsConverter = new ObjectConverter<>();
+        meetingConverter = new ObjectConverter<>();
 
         meetingNameText = (AutoCompleteTextView) findViewById(R.id.tipMeetingName);
         radioButtonEvent = (RadioButton) findViewById(R.id.buttonEvent);
@@ -94,8 +114,14 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         minute = (AutoCompleteTextView) findViewById(R.id.tipMinute);
         minute.setText(Integer.toString(c.get(Calendar.MINUTE)));
 
-
+        showProgressDialog();
         // TODO create a GroupsService----------------------------------------------------------------------------------
+        Intent i = new Intent(this, GroupsService.class);
+        activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
+        activityServiceResultReceiver.setReceiver(this);
+        i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
+        i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
+        startService(i);
 
         // TODO ERROR Fix it!-------------------------------------------------------------------------------------------
         spinnerGroup = (Spinner) findViewById(R.id.spinnerGroup);
@@ -207,6 +233,113 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 return true;
             default:
                 return false;
+        }
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+
+        switch (resultData.getString(CommunicationKeys.SERVICE)) {
+
+            case CommunicationKeys.FROM_GROUPS_SERVICE:
+                groupServiceHandler(resultData);
+                break;
+
+            case CommunicationKeys.FROM_MEETING_SERVICE:
+                meetingServiceHandler(resultData);
+                break;
+            default:
+                Log.d(TAG, "Wrong Service");
+                hideProgressDialog();
+
+        }
+    }
+
+    private void groupServiceHandler (Bundle resultData) {
+        switch (resultData.getString(CommunicationKeys.COMMAND)) {
+            case CommunicationKeys.PUT: // Leave the Meeting
+
+                Toast.makeText(this,"Error 500: no PUT started", Toast.LENGTH_LONG).show();
+                Log.d(TAG,"PUT caught (wrong Command)");
+                break;
+
+            case CommunicationKeys.GET:
+                Log.d(TAG,"GET caught");
+                Toast.makeText(this, "Group List caught", Toast.LENGTH_LONG).show();
+
+                ArrayList<Group> dummy = new ArrayList<>();
+
+                String jGroupsList = resultData.getString(CommunicationKeys.GROUPS);
+
+                // groups = groupsConverter.deserialize(jGroupsList, (Class<List<Group>>) dummy.getClass());
+
+                break;
+
+            case CommunicationKeys.POST:
+                Toast.makeText(this, "Error 500: no Post started", Toast.LENGTH_LONG).show();
+                Log.d(TAG,"POST caught (wrong Command)");
+                break;
+
+            case CommunicationKeys.DELETE:
+                Toast.makeText(this, "Error 403: no Delete started", Toast.LENGTH_LONG).show();
+                Log.d(TAG,"Delete caught (wrong Command)");
+                break;
+
+            default:
+                Log.d(TAG,"ERROR 500: no Command caught");
+        }
+        hideProgressDialog();
+    }
+
+    private void meetingServiceHandler (Bundle resultData) {
+        hideProgressDialog();
+
+        switch (resultData.getString(CommunicationKeys.COMMAND)) {
+            case CommunicationKeys.PUT: // Leave the Meeting
+
+                Toast.makeText(this,"Error 500: no PUT started", Toast.LENGTH_LONG).show();
+                Log.d(TAG,"PUT caught (wrong Command)");
+                break;
+
+            case CommunicationKeys.GET:
+                Log.d(TAG,"GET caught (wrong Command)");
+                Toast.makeText(this, "Error 500: no GET started", Toast.LENGTH_LONG).show();
+                break;
+
+            case CommunicationKeys.POST: // New Meeting created
+                Toast.makeText(this, "Neues Termin erstellt", Toast.LENGTH_LONG).show();
+                MeetingListActivity.start(this);
+
+                Log.d(TAG,"POST caught");
+                break;
+
+            case CommunicationKeys.DELETE:
+                Toast.makeText(this, "Error 403: no Delete started", Toast.LENGTH_LONG).show();
+                Log.d(TAG,"Delete caught (wrong Command)");
+                break;
+
+            default:
+                Log.d(TAG,"ERROR 500: no Command caught");
+        }
+        hideProgressDialog();
+
+    }
+
+
+
+    private void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage("Lädt...");
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.hide();
         }
     }
 

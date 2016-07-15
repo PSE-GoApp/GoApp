@@ -271,8 +271,6 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         }
         hideProgressDialog();
     }
-
-
 }
 
 class ParticipantListAdapter extends ArrayAdapter<Participant> {
