@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GoApp</string>
 
-    <string name="server_client_id">65683074791-bveovd2tvtbioi8066kljld4hq3v1fbm.apps.googleusercontent.com</string>
+    <string name="server_client_id">49464060393-lfrr55eh72gio0t9g0u4hb2cpq4kgiam.apps.googleusercontent.com</string>
     <string name="meeting_list">Meetings</string>
     <string name="new_meeting">New Meeting</string>
     <string name="groups">Groups</string>
