@@ -1,11 +1,15 @@
 package edu.kit.pse.client.goapp.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,8 +27,11 @@ import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
+import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
+import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 /**
@@ -33,18 +40,26 @@ import edu.kit.pse.goapp.client.goapp.R;
  */
 public class MeetingParticipantActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
-    public ServiceResultReceiver meetingParticipantReceiver;
+    public ServiceResultReceiver activityServiceResultReceiver;
     ImageButton menu_button;
     Button cancelButton;
 
-    Bundle bundleMeeting;
+    private final static String TAG = "MeetingParticipant";
+
     private static Meeting meeting;
 
-    ListView list;
+    private ListView list;
 
-    // Todo Delete it after Testing
+    private ObjectConverter<Participant> participantConverter;
 
-    List<Participant> participants = new ArrayList<Participant>();
+    private List<Participant> participants = new ArrayList<Participant>();
+
+    private ProgressDialog mProgressDialog;
+
+    private int myUserId;
+
+    private Participant meAsParticipant;
+
 
     public static void start(Activity activity, Meeting m) {
         Intent intent = new Intent(activity, MeetingParticipantActivity.class);
@@ -61,15 +76,33 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         menu_button.setOnClickListener(this);
         cancelButton = (Button) findViewById(R.id.meeting_participant_cancel);
 
+        participantConverter = new ObjectConverter<>();
 
         Toast.makeText(MeetingParticipantActivity.this, "Meeting ID is: "
                 + meeting.getMeetingId() , Toast.LENGTH_SHORT).show();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        myUserId = sharedPreferences.getInt("userId", -1);
+
+        if (myUserId == -1) {
+            // todo app schließen oder neu laden / AlertBuilder
+            Toast.makeText(this, "No Client User Id found",Toast.LENGTH_LONG).show();
+            Log.e(TAG, "No Client User Id found");
+        }
 
 
-        // Todo ausselektieren!------------------------------------------------------------------------------------------
-        participants = meeting.getParticipants();
-        if (participants != null) {
+
+        List<Participant> tempParticipant = meeting.getParticipants();
+        if (tempParticipant != null) {
+            for (Participant p : tempParticipant) {
+
+                if (p.getConfirmation() != MeetingConfirmation.REJECTED ) {
+                    participants.add(p);
+                    if (p.getUser().getId() == myUserId) {
+                        meAsParticipant = p;
+                    }
+                }
+            }
             list = (ListView) findViewById(R.id.participant_listview);
 
             ParticipantListAdapter adapter = new ParticipantListAdapter(this, participants);
@@ -98,23 +131,35 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
             showPopUp(v);
         }
         if (v.getId() == R.id.meeting_participant_cancel) {
+            showProgressDialog();
+            startCancelService();
 
 
-            //create a MeetingService, that send a meeting conformation change (Accepted)
-          /* TODO GOOGLE TOKEN == participant ----------------------------------------------------------------------------
-            List<Participant> participants = meeting.getParticipants();
-            Participant meAsParticipant = null;
-            GOOGLETOKEN itsMe;
-            for (Participant p : participants) {
-                if (p "Vergleichen" itsMe) {
-                    p.setConfirmation(MeetingConfirmation.CONFIRMDE);
-                    meAsParticipant = p;
-                } else {
-                    Log.d("Error", "Error: Filtering Participants or unexpected has happen");
-                }
-            }
-            meAsParticipant.setConfirmation(MeetingConfirmation.CONFIRMED);
+            // TODO warning if they are sure to leave the Meeting (AlertDialog)
+        }
+    }
 
+    private void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage("Lädt...");
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.hide();
+        }
+    }
+
+    private void startCancelService() {
+        //create a MeetingService, that send a meeting conformation change (Accepted)
+
+            // StarteService MeetingPartic.Manager put
+            meAsParticipant.setConfirmation(MeetingConfirmation.REJECTED);
             String jparticipant = participantConverter.serialize(meAsParticipant, Participant.class);
 
             Intent i = new Intent(this, MeetingParticipantManagementService.class);
@@ -124,12 +169,10 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
             i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
             i.putExtra(CommunicationKeys.PARTICIPANT, jparticipant);
             startService(i);
-            // TODO change AlarmReceiver and SQL Data -----------------------------------------------------------------------
-            */
 
-            // TODO warning if they are sure to leave the Meeting (AlertDialog)
-        }
+        // TODO change AlarmReceiver and SQL Data -------------------------------------------------------------------------------------------------
     }
+
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -164,79 +207,69 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
                     case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
                         meetingParticipanManagemantResultHandler(resultData);
                         break;
-                    /* dont neet it
-                    case CommunicationKeys.FROM_MEETING_SERVICE:
-                        meetingResultReceiverHandler(resultData);
-                        break;
-                     */
                     default:
                         // TODO wrong Service
+                        hideProgressDialog();
                         Toast.makeText(this, "Error 500: wrong Service", Toast.LENGTH_LONG).show();
 
                 }
                 break;
             case 400:
+                hideProgressDialog();
                 Toast.makeText(this, "Error 400: bad request", Toast.LENGTH_LONG).show();
                 break;
             case 403:
+                hideProgressDialog();
                 Toast.makeText(this, "Error 403: forbidden", Toast.LENGTH_LONG).show();
                 break;
             case 404:
+                hideProgressDialog();
                 Toast.makeText(this, "Error 404: not found", Toast.LENGTH_LONG).show();
 
             case 408:
+                hideProgressDialog();
                 Toast.makeText(this, "Error 408: request time out", Toast.LENGTH_LONG).show();
                 break;
             case 500:
+                hideProgressDialog();
                 Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
                 break;
-        }
-
-
-        switch (resultData.getString(CommunicationKeys.SERVICE)) {
-            case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
-                meetingParticipanManagemantResultHandler(resultData);
-                break;
-            case CommunicationKeys.FROM_MEETING_SERVICE:
-                // not in use
-                break;
-            default:
-                Toast.makeText(this, "Error 500 wrong Service", Toast.LENGTH_LONG).show();
-
         }
     }
 
     private void meetingParticipanManagemantResultHandler(Bundle resultData) {
-        switch (resultData.getString(CommunicationKeys.COMMAND)) {
-            case CommunicationKeys.GET:
-                /* Don't need it
-                Toast.makeText(this,"202", Toast.LENGTH_SHORT);
-                String jsonString = resultData.getString(CommunicationKeys.MEETING);
-                meeting = meetingConverter.deserialize(jsonString,Meeting.class);
-                participants = meeting.getParticipants();
-                if (participants != null) {
-                    list = (ListView) findViewById(R.id.participant_listview);
 
-                    ParticipantListAdapter adapter = new ParticipantListAdapter(this, participants);
-                    list.setAdapter(adapter);
-                    if (meeting.getTimestamp() >= System.currentTimeMillis()) {
-                        cancelButton.setTag("Termin verlassen");
-                    }
-                } else {
-                    Toast.makeText(this, "Error 500: Missing Informations", Toast.LENGTH_LONG).show();
-                }
-                */
+        hideProgressDialog();
+
+        switch (resultData.getString(CommunicationKeys.COMMAND)) {
+            case CommunicationKeys.PUT: // Leave the Meeting
+
+                Toast.makeText(this,meeting.getName() + " Termin abgesagt", Toast.LENGTH_LONG).show();
+
+                MeetingListActivity.start(this);
+
+                Log.d(TAG,"PUT catch");
                 break;
+
+            case CommunicationKeys.GET:
+                Log.d(TAG,"GET catch (wrong Command)");
+                Toast.makeText(this, "Error 500: no GET started", Toast.LENGTH_LONG).show();
+                break;
+
             case CommunicationKeys.POST:
-                Toast.makeText(this, "Error 400: Missing Informations", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error 500: no Post started", Toast.LENGTH_LONG).show();
+                Log.d(TAG,"POST catch (wrong Command)");
                 break;
+
             case CommunicationKeys.DELETE:
-                Toast.makeText(this, "Error 403: Missing Informations", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error 403: no Delete started", Toast.LENGTH_LONG).show();
+                Log.d(TAG,"Delete catch (wrong Command)");
                 break;
-            case CommunicationKeys.PUT:
-                Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
-                break;
+
+            default:
+                Log.d(TAG,"ERROR 500: no Command catch");
         }
+        hideProgressDialog();
     }
 
 

@@ -79,6 +79,8 @@ public class MeetingsService extends IntentService{
         /* TODO entcommitten ------------------------------------------------------------------------------------------------
         URI_MeetingsBuilder uri_meetingsBuilder = new URI_MeetingsBuilder();
 
+
+
         HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
         httpAppClientGet.setUri(uri_meetingsBuilder.getURI());
 

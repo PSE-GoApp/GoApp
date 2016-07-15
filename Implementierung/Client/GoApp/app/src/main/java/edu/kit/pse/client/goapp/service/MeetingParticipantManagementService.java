@@ -12,7 +12,6 @@ import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
-import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_MeetingParticipantManagementBuilder;
 
 /**
@@ -56,7 +55,6 @@ public class MeetingParticipantManagementService extends IntentService {
             case CommunicationKeys.DELETE:
                break;
             case CommunicationKeys.PUT:
-                // TODO grischa Fragen Enum oder Participant schicken ?
                 doPut(intent);
               break;
             case CommunicationKeys.POST:
@@ -79,10 +77,11 @@ public class MeetingParticipantManagementService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE);
 
         meetingParticipantAsJsonString = intent.getStringExtra(CommunicationKeys.PARTICIPANT);
 
+        /*
         URI_MeetingParticipantManagementBuilder uri_meetingParticipantManagementBuilder = new URI_MeetingParticipantManagementBuilder();
 
         HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
@@ -102,6 +101,10 @@ public class MeetingParticipantManagementService extends IntentService {
 
         // send the Bundle and the Status Code from Response
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        */
+
+        resultReceiver.send(202, bundle);
+
     }
 
     /**

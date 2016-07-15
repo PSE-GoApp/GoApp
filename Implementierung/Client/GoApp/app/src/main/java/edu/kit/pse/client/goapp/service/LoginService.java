@@ -14,6 +14,7 @@ import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.uri_builder.URI_LoginBuilder;
 
 /**
@@ -126,8 +127,10 @@ public class LoginService extends IntentService {
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_LOGIN_SERVICE);
 
         googleIdToken = intent.getStringExtra(CommunicationKeys.USER_ID_TOKEN);
-        /* TODo Fix Error
-         URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
+
+               /* Todo TEST -----------------------------------------------------------------------------------------------------
+
+        URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
 
         HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
          httpAppClientPut.setUri(uri_loginBuilder.getURI());
@@ -139,7 +142,7 @@ public class LoginService extends IntentService {
             //TODO Handle Exception. Maybe the String Extra was null.
         }
 
-        Todo TEST -----------------------------------------------------------------------------------------------------
+
         try {
             // TODO catch 404 (No Internet and Request Time out)
             closeableHttpResponse = httpAppClientPut.executeRequest();
@@ -192,7 +195,6 @@ public class LoginService extends IntentService {
 
         googeleIdToken = intent.getStringExtra(CommunicationKeys.USER_ID_TOKEN);
 
-        /*         Todo test -----------------------------------------------------------------------------------
 
         URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
 
@@ -204,6 +206,7 @@ public class LoginService extends IntentService {
         } catch (IOException e) {
             //TODO Handle Exception. Maybe the String Extra was null
         }
+        /*         Todo test -----------------------------------------------------------------------------------
 
 
         try {

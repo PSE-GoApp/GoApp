@@ -35,7 +35,7 @@ import edu.kit.pse.goapp.client.goapp.R;
  */
 public class LoginActivity extends AppCompatActivity implements  ServiceResultReceiver.Receiver, GoogleApiClient.OnConnectionFailedListener,  View.OnClickListener{
 
-    private static final String TAG = "SignInActivity";
+    private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 9001;
     private static final int RC_REGISTER = 9002;
 
@@ -268,7 +268,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
     private void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage("Ladet...");
+            mProgressDialog.setMessage("Lädt...");
             mProgressDialog.setIndeterminate(true);
         }
 

@@ -1,6 +1,7 @@
 package edu.kit.pse.client.goapp.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,17 +38,21 @@ import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.Tour;
 import edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.client.goapp.service.MeetingsService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
+    private static final String TAG = "MeetingList";
     private ServiceResultReceiver activityServiceResultReceiver;
 
     private ObjectConverter<List<Meeting>> meetingListConverter;
+    private ObjectConverter<Participant> participantConverter;
 
     ImageButton menu_button;
     private Context context = this;
+    private ProgressDialog mProgressDialog;
     private ListView list;
     private User myUser;
     private List<Meeting> meetings = new ArrayList<>();
@@ -58,6 +64,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         menu_button = (ImageButton) findViewById(R.id.menu_termine);
         menu_button.setOnClickListener(this);
         meetingListConverter = new ObjectConverter<>();
+        participantConverter = new ObjectConverter<>();
 
         list = (ListView) findViewById(R.id.meeting_ListView);
 
@@ -66,11 +73,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         int userId = sharedPreferences.getInt("userId", -1);
         if (userId == -1) {
             // Todo close App :D
+            Log.e(TAG, "No User Information");
         }
         myUser = new User(userId, userName);
 
-
-        // TODO TEST -------------------------------------------------------------------------------------------------------------
         Intent i = new Intent(this, MeetingsService.class);
         activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
         activityServiceResultReceiver.setReceiver(this);
@@ -118,20 +124,20 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         ImageButton secondButton;
 
         if (imageDirection == R.drawable.checked) {
+            showProgressDialog();
 
             //create a MeetingService, that send a meeting conformation change (Accepted)
-          /* TODO GOOGLE TOKEN == participant ----------------------------------------------------------------------------
             List<Participant> participants = meeting.getParticipants();
             Participant meAsParticipant = null;
-            GOOGLETOKEN itsMe;
-            for (Participant p : participants) {
-                if (p "Vergleichen" itsMe) {
-                    p.setConfirmation(MeetingConfirmation.CONFIRMDE);
+
+            // Find me as Participant
+            for(Participant p : participants) {
+
+                if (p.getUser().getId() == myUser.getId()) {
                     meAsParticipant = p;
-                } else {
-                    Log.d("Error", "Error: Filtering Participants or unexpected has happen");
                 }
             }
+
             meAsParticipant.setConfirmation(MeetingConfirmation.CONFIRMED);
 
             String jparticipant = participantConverter.serialize(meAsParticipant, Participant.class);
@@ -143,12 +149,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
             i.putExtra(CommunicationKeys.PARTICIPANT, jparticipant);
             startService(i);
-            */
 
-
-            //Todo        if the Request was successful change the Buttons
-            //Todo        or change the ArrayList confirmation and go list.invalidateViews();
-            //TOdo        or make a new MeetingsService.
 
             // change buttons to a accepted Meeting.
             firstButton.setImageResource(R.drawable.somemap);
@@ -157,6 +158,8 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             secondButton = (ImageButton) meetingRow.getChildAt(3);
             secondButton.setImageResource(R.drawable.participant);
             secondButton.setTag(R.id.TAG_IMAGE_DIRECTION, R.drawable.participant);
+
+            // TODO aktuallisiere Alarm receiver
 
         } else {
             if (imageDirection == R.drawable.somemap) {
@@ -192,11 +195,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         int imageDirection = (int) secondButton.getTag(R.id.TAG_IMAGE_DIRECTION);
 
         if (imageDirection == R.drawable.cancel) {
+            // TODO AlertDialog doesn' work BufferOverflow!
 
-            // create a new AlertDialog.Builder
             android.support.v7.app.AlertDialog alertDialog = buildCancelAlertDialog(meeting);
             alertDialog.show();
-
 
         } else {
             if (imageDirection == R.drawable.participant) {
@@ -221,7 +223,8 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        cancelMeeting(meeting);
+                        // Todo reason on BufferOverflow are this (LiveTime cant delete Meeting from List)
+                        rejectMeeting(meeting);
                     }
                 })
                 .setNegativeButton("Nein", new DialogInterface.OnClickListener() {
@@ -234,24 +237,25 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         return cancelADB.create();
     }
 
-    private void cancelMeeting(Meeting meeting) {
+    public void rejectMeeting(Meeting meeting) {
+        showProgressDialog();
 
-        //create a MeetingService, that send a meeting conformation change (Cancel)
-        /* TODO GOOGLE TOKEN ------------------------------------------------------------------------------------------------
         List<Participant> participants = meeting.getParticipants();
         Participant meAsParticipant = null;
-        GOOGLETOKEN itsMe;
+
+        // Find me as Participant
         for (Participant p : participants) {
-            if (p "Vergleichen" itsMe) {
+
+            if (p.getUser().getId() == myUser.getId()) {
                 meAsParticipant = p;
-            } else {
-                Log.d("Error", "Error: Filtering Participants or unexpected has happen");
             }
         }
+
         meAsParticipant.setConfirmation(MeetingConfirmation.REJECTED);
 
         String jparticipant = participantConverter.serialize(meAsParticipant, Participant.class);
 
+        //create a MeetingService, that send a meeting conformation change (Cancel)
         Intent i = new Intent(this, MeetingParticipantManagementService.class);
         activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
         activityServiceResultReceiver.setReceiver(this);
@@ -259,20 +263,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
         i.putExtra(CommunicationKeys.PARTICIPANT, jparticipant);
         startService(i);
-        */
-
-        // Todo remove this Toast Test ----------------------------------------------------------------------------------------------------------------------------------------
-        Toast.makeText(getApplicationContext(), " Service delete Meeting with ID: " + meeting.getMeetingId(), Toast.LENGTH_SHORT).show();
-
-        // Todo Button click lock, untill the request is finished. Than remove it from the list.
-        //Remove Item from the List
-        if (!meetings.remove(meeting)) {
-            Toast.makeText(getApplicationContext(), "Error: Meeting are not existing.\nPlease restart the app", Toast.LENGTH_SHORT).show();
-        }
-        list.invalidateViews();
-
-        //Todo remove this Toast Test ---------------------------------------------------------------------------------------------------------------------------------
-        Toast.makeText(getApplicationContext(), "Meeting was removed from List", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -349,41 +339,58 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     public void onReceiveResult(int resultCode, Bundle resultData) {
         // TODO i-eine schöne lösung finden für zwei Services oder String umwandeln
 
-        switch (resultCode) {
-            case 202:
-                switch (resultData.getString(CommunicationKeys.SERVICE)) {
-                    case CommunicationKeys.FROM_MEETINGS_SERVICE:
+        switch (resultData.getString(CommunicationKeys.SERVICE)) {
+            case CommunicationKeys.FROM_MEETINGS_SERVICE:
+                switch (resultCode) {
+                    case 202:
                         meetingsResultReceiverHandler(resultData);
                         break;
-                    case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
-                        managementResultReceiverHandler(resultData);
+                    case 400:
+                        Toast.makeText(this, "Error 400: bad request", Toast.LENGTH_LONG).show();
                         break;
-                    /* dont neet it
-                    case CommunicationKeys.FROM_MEETING_SERVICE:
-                        meetingResultReceiverHandler(resultData);
+                    case 403:
+                        Toast.makeText(this, "Error 403: forbidden", Toast.LENGTH_LONG).show();
                         break;
-                     */
-                    default:
-                        // TODO wrong Service
-                        Toast.makeText(this, "Error 500: wrong Service", Toast.LENGTH_LONG).show();
+                    case 404:
+                        Toast.makeText(this, "Error 404: not found", Toast.LENGTH_LONG).show();
 
+                    case 408:
+                        Toast.makeText(this, "Error 408: request time out", Toast.LENGTH_LONG).show();
+                        break;
+                    case 500:
+                        Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
+                        break;
+                }
+                hideProgressDialog();
+                break;
+            case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
+                switch (resultCode) {
+                    case 202:
+                        managementResultReceiverHandler(resultData);
+                        hideProgressDialog();
+                        break;
+                    case 400:
+                        Toast.makeText(this, "Error 400: bad request", Toast.LENGTH_LONG).show();
+                    case 403:
+                        Toast.makeText(this, "Error 403: forbidden", Toast.LENGTH_LONG).show();
+                    case 404:
+                        Toast.makeText(this, "Error 404: not found", Toast.LENGTH_LONG).show();
+                    case 408:
+                        Toast.makeText(this, "Error 408: request time out", Toast.LENGTH_LONG).show();
+                    case 500:
+                        Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
+                    default:
+                        // it was not 202 Status Code!
+                        // todo start MeetinsServer to actualize
+                        startGetMeetingsService();
+                        Log.d(TAG, "Wrong Status Code. Start MeetingsService");
                 }
                 break;
-            case 400:
-                Toast.makeText(this, "Error 400: bad request", Toast.LENGTH_LONG).show();
-                break;
-            case 403:
-                Toast.makeText(this, "Error 403: forbidden", Toast.LENGTH_LONG).show();
-                break;
-            case 404:
-                Toast.makeText(this, "Error 404: not found", Toast.LENGTH_LONG).show();
-
-            case 408:
-                Toast.makeText(this, "Error 408: request time out", Toast.LENGTH_LONG).show();
-                break;
-            case 500:
-                Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
-                break;
+            default:
+                hideProgressDialog();
+                // TODO wrong Service
+                startGetMeetingsService();
+                Toast.makeText(this, "Error 500: wrong Service", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -391,56 +398,58 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.GET:
                 // don't need it here (Get all Meeting Info from MeetingsService)
+                Log.d(TAG, "Catch GET Form MeetingParticipantManagent");
                 break;
             case CommunicationKeys.DELETE:
+                Log.d(TAG, "Catch DELETE Form MeetingParticipantManagent");
                 // Delete a Participant (Prio B)
                 break;
             case CommunicationKeys.PUT:
                 // Confirmation changed
-                // Todo create a Toast or AlertBuilder
-                Toast.makeText(this, "Zustimmung zum Termin geändert", Toast.LENGTH_LONG).show();
+
+                Log.d(TAG, "Catch PUT Form MeetingParticipantManagent");
+                Toast.makeText(this, "Zustimmung zum Termin geändert\nAktualisieren Sie bitte", Toast.LENGTH_LONG).show();
                 break;
             case CommunicationKeys.POST:
+                Log.d(TAG, "Catch POST Form MeetingParticipantManagent");
                 // add a Listed Participants (Prio B)
                 break;
 
             default:
+                Log.d(TAG, "Wrong Command MeetingParticipantManagent");
+
                 // TODO ERROR wrong Command from Service
 
         }
     }
 
-    private void meetingResultReceiverHandler(Bundle resultData) {
-        switch (resultData.getString(CommunicationKeys.COMMAND)) {
-            case CommunicationKeys.GET:
-                // don't need it here (Get Meeting Info)
-                break;
-            case CommunicationKeys.DELETE:
-                // Delete Meeting
-                // Todo create a Toast or AlertBuilder
-                break;
-            case CommunicationKeys.PUT:
-                // Meeting changed
-                // Todo create a Toast or AlertBuilder
-                break;
-            case CommunicationKeys.POST:
-                // create a new meeting needn' that
-                break;
+    private void startGetMeetingsService() {
+        showProgressDialog();
+        Intent i = new Intent(this, MeetingsService.class);
+        activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
+        activityServiceResultReceiver.setReceiver(this);
+        i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
+        i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
+        startService(i);
 
-            default:
-                // TODO ERROR wrong Command from Service
 
-        }
+        // TODO Delete this TOast
+        Toast.makeText(this, "MeetinsService Started", Toast.LENGTH_LONG).show();
     }
 
     private void meetingsResultReceiverHandler(Bundle resultData) {
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.GET:
+                meetings = new ArrayList<>();
                 String jsonString = resultData.getString(CommunicationKeys.MEETINGS);
 
                 List<Meeting> dummy = new ArrayList<>();
-                // List<Meeting> fullMeetingList = meetingListConverter.deserialize(jsonString, (Class<List<Meeting>>) dummy.getClass());
+
+                // Todo Test----------------------
+                // TODO List<Meeting> fullMeetingList = meetingListConverter.deserialize(jsonString, (Class<List<Meeting>>) dummy.getClass());
+                // this is a test
                 List<Meeting> fullMeetingList = fullMeeting;
+                // TODo TEST-----------------------------------
 
                 // TODO FILTER meetings if they are Rejected from User-------------------------------------------------------------------------------
 
@@ -458,11 +467,31 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 MeetingListAdapter adapter = new MeetingListAdapter(this, meetings);
                 list.setAdapter(adapter);
                 // TODO Test ?? list.invalidateViews();
+                Log.d(TAG, "Catch GET Form MeetinsService");
 
                 break;
             default:
+                Log.d(TAG, "Catch Wrong Command Form MeetinsService");
                 Toast.makeText(this, "Error: 500. Wrong Command From MeetingService", Toast.LENGTH_SHORT).show();
                 // TODO ERROR wrong Command from Service
+        }
+        hideProgressDialog();
+    }
+
+
+    private void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage("Lädt...");
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.hide();
         }
     }
 
@@ -540,8 +569,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         }
     };
     //------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 
 }
 
