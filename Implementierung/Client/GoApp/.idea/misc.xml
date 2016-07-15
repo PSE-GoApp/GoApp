@@ -37,7 +37,11 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+<<<<<<< 426c98dabc1fc7569b36deda222ef70a7d01ccb7
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+>>>>>>> translated and fixed an GroupMemberIssue: needed GroupId
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

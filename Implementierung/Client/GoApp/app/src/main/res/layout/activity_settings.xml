@@ -11,7 +11,7 @@
         android:background="#ededed"
         android:fontFamily="sans-serif-light"
         android:padding="10dp"
-        android:text="Einstellungen"
+        android:text="@string/settings"
         android:textColor="#387D1A"
         android:textSize="25sp"
         android:layout_alignParentStart="true"
@@ -25,7 +25,6 @@
         android:layout_below="@+id/textView_settings"
         android:layout_alignEnd="@+id/textView_settings"
         android:id="@+id/gruenerStrich" />
-    >
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -41,7 +40,7 @@
         android:id="@+id/switchStandort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Standort anzeigen"
+        android:text="@string/share_location"
         android:textSize="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="20dp"

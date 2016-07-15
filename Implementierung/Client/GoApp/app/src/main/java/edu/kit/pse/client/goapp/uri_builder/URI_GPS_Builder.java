@@ -13,11 +13,8 @@ public class URI_GPS_Builder extends ClientURI_Builder {
     private URI uri;
 
     public URI_GPS_Builder() {
-        try {
-            uribuilder = new URIBuilder(serverAdd + servletAdd);
-        } catch(java.net.URISyntaxException syntaxException){
-            //handle it somehow
-        }
+        uribuilder = new URIBuilder();
+        uribuilder.setPath(serverAdd+servletAdd);
     }
 
     @Override

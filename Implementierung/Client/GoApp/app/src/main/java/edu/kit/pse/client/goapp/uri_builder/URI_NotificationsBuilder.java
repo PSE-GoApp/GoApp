@@ -14,11 +14,8 @@ public class URI_NotificationsBuilder extends ClientURI_Builder {
     private URI uri;
 
     public URI_NotificationsBuilder() {
-        try {
-            uribuilder = new URIBuilder(serverAdd + servletAdd);
-        } catch(java.net.URISyntaxException syntaxException){
-            //handle it somehow
-        }
+        uribuilder = new URIBuilder();
+        uribuilder.setPath(serverAdd+servletAdd);
     }
 
     @Override
