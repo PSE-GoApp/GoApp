@@ -74,6 +74,8 @@ public class GroupService extends IntentService {
      */
     private void doGet (Intent intent) //throws  IOException
     {
+        Boolean noError = true;
+        Boolean result = true;
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -98,6 +100,7 @@ public class GroupService extends IntentService {
                 closeableHttpResponse = httpAppClientGet.executeRequest();
             } catch (IOException e) {
                 // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+                result = false;
             }
 
             // accepted
@@ -105,12 +108,18 @@ public class GroupService extends IntentService {
                 jasonString = EntityUtils.toString(closeableHttpResponse.getEntity());
             } catch (Throwable e) {
                 // TODO handle Exception "can not Convert EntitlyUtils to String"
+                noError = false;
             }
 
-            bundle.putString(CommunicationKeys.GROUP, jasonString);
+            if (result && noError) {
 
-            // send the Bundle and the Status Code from Response
-            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+                bundle.putString(CommunicationKeys.GROUP, jasonString);
+
+                // send the Bundle and the Status Code from Response
+                resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+            } else {
+                resultReceiver.send(500, bundle);
+            }
         } else {
             // Send a empty result with 500 as StatusCode
 
@@ -167,6 +176,9 @@ public class GroupService extends IntentService {
      * @param intent Intent
      */
     private void doPut(Intent intent) {
+
+        Boolean noError = true;
+        Boolean result = true;
         String groupAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -186,6 +198,7 @@ public class GroupService extends IntentService {
             httpAppClientPut.setBody(groupAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
+            result = false;
         }
 
         try {
@@ -193,6 +206,7 @@ public class GroupService extends IntentService {
             closeableHttpResponse = httpAppClientPut.executeRequest();
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            noError = false;
         }
 
         // send the Bundle and the Status Code from Response
@@ -205,6 +219,9 @@ public class GroupService extends IntentService {
      * @param intent Intent
      */
     private void doPost(Intent intent) {
+        Boolean noError = true;
+        Boolean result = true;
+        String jsonString = null ;
         String groupAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -224,6 +241,7 @@ public class GroupService extends IntentService {
             httpAppClientPost.setBody(groupAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
+            result = false;
         }
 
         try {
@@ -231,10 +249,27 @@ public class GroupService extends IntentService {
             closeableHttpResponse = httpAppClientPost.executeRequest();
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            noError = false;
         }
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        // accepted
+        try {
+            jsonString = EntityUtils.toString(closeableHttpResponse.getEntity());
+        } catch (Throwable e) {
+            // TODO handle Exception "can not Convert EntitlyUtils to String"
+            noError = false;
+        }
+
+        if (result && noError) {
+
+            bundle.putString(CommunicationKeys.GROUP, jsonString);
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            resultReceiver.send(500, bundle);
+
+        }
+
     }
 
 }

@@ -39,6 +39,7 @@ import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.Tour;
+import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.GroupsService;
 import edu.kit.pse.goapp.client.goapp.R;
 
@@ -51,6 +52,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
     private String userName;
     private int userId;
+    private User myUser;
 
 
     private ImageButton menu_button;
@@ -83,9 +85,23 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
 
     private ArrayList groups = new ArrayList<Group>(Arrays.asList(new Group[]{
-            new Group(0, "PSE GRUPPE"),
-            new Group(1, "Kommilitionen"),
-            new Group(2, "Lern Gruppe")}));
+            new Group(0, "PSE GRUPPE")
+                    {{  addGroupMember(myUser);
+                        addGroupMember(new User(666666, "Iris die Führstin"));
+                        addGroupMember(new User(42, "Rumen the Kind of the Hill"));}},
+            new Group(1, "Kommilitionen")
+                    {{  addGroupMember(myUser);
+                        addGroupMember(new User(666666, "Iris die Führstin"));
+                        addGroupMember(new User(6666666, "Iris die Führstin"));
+                        addGroupMember(new User(66666666, "Iris die Führstin"));
+                        addGroupMember(new User(666666666, "Iris die Führstin"));}},
+            new Group(2, "Lern Gruppe")
+                    {{  addGroupMember(new User(666666, "Iris die Führstin"));
+                        addGroupMember(myUser);
+                        addGroupMember(new User(42, "Rumen the Kind of the Hill"));
+                        addGroupMember(new User(4242, "Rumen the Kind of the Hill"));
+                        addGroupMember(new User(4224, "Rumen the Kind of the Hill"));
+                        addGroupMember(new User(69, "Rumen the Kind of the Hill"));}}}));
 
 
     @Override
@@ -118,6 +134,11 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         hour.setText(Integer.toString(c.get(Calendar.HOUR_OF_DAY)));
         minute = (AutoCompleteTextView) findViewById(R.id.tipMinute);
         minute.setText(Integer.toString(c.get(Calendar.MINUTE)));
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        userName = sharedPreferences.getString("userName", "");
+        userId = sharedPreferences.getInt("userId", -1);
+        myUser = new User(userId, userName);
 
         showProgressDialog();
         // TODO create a GroupsService----------------------------------------------------------------------------------
@@ -175,6 +196,9 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                         "\n" + newMeeting.getTimestamp() + "\n" + newMeeting.getDuration(),
                         Toast.LENGTH_LONG).show();
                 MeetingListActivity.start(this);
+            } else {
+                Toast.makeText(this,"Ihre Eingaben waren nicht korrekt",
+                        Toast.LENGTH_LONG).show();
             }
         }
     }

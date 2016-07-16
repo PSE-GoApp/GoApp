@@ -1,14 +1,10 @@
 package edu.kit.pse.client.goapp.converter;
-  
-import com.google.gson.Gson;
-
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
-import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.kit.pse.client.goapp.datamodels.Event;
@@ -32,6 +28,13 @@ public class ObjectConverter<T> {
 		Gson gson = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory).create();
 
 		return gson.fromJson(json, classType);
+	}
+
+	public <T> List<T> deserializeList(String json, Class<T[]> clazz) {
+		RuntimeTypeAdapterFactory<Meeting> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory.of(Meeting.class)
+				.registerSubtype(Event.class).registerSubtype(Tour.class);
+		T[] arr = new Gson().fromJson(json, clazz);
+		return Arrays.asList(arr);
 	}
 	
 }

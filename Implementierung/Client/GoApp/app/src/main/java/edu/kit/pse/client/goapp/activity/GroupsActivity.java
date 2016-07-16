@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +107,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
             showPopUp(v);
         }
         if (v.getId() == R.id.createGroup) {
-           // CreateNewGroupActivity.start(this);
+           CreateNewGroupActivity.start(this);
         }
        /* if (v.getId() == R.id.delete_group) {
             Intent i = new Intent(this, GroupService.class);
@@ -224,6 +225,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                 adapter.notifyDataSetChanged();
             }
         } else {
+            Toast.makeText(this, resultCode, Toast.LENGTH_LONG).show();
             showError(resultCode);
         }
     }
@@ -259,7 +261,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
     private void setListResult(Bundle resultData) {
 
         String json = resultData.getString(CommunicationKeys.GROUPS);
-        groups = groupsConverter.deserialize(json, (Class<List<Group>>) groups.getClass());
+        groups = groupsConverter.deserializeList(json, Group[].class);
         adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.groupsList);
         list.setAdapter(adapter);

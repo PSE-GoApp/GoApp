@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Group;
+import edu.kit.pse.client.goapp.datamodels.GroupMember;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.GroupService;
 import edu.kit.pse.client.goapp.service.GroupUserManagementService;
@@ -46,11 +48,14 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
     private List<User> users = new ArrayList<User>();
     private List<User> usersAdded = new ArrayList<User>();
     public ServiceResultReceiver mReceiver;
+    private Group createdGroup = null;
     private ProgressDialog progressDialog;
-    ObjectConverter<Group> groupConverter;
-    EditText groupName;
-    ArrayAdapter adapter;
-    ArrayAdapter adapter2;
+    private ObjectConverter<Group> groupConverter;
+    private ObjectConverter<User> userConverter;
+    private EditText groupName;
+    private ArrayAdapter adapter;
+    private ArrayAdapter adapter2;
+    private Button createButton;
 
 
     /**
@@ -63,7 +68,10 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_create_new_group);
         groupName = (EditText) findViewById(R.id.editText_group_name);
         groupConverter = new ObjectConverter<>();
+        createButton = (Button) findViewById(R.id.button_create_group);
+        createButton.setOnClickListener(this);
         //set second list
+        // TODO ----------------------------------------------------------------------------------------------------------------------
         getUsers();
         registerClickCallback();
     }
@@ -90,13 +98,54 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
      */
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        if (resultCode == 202) {
-            if (resultData.getString(CommunicationKeys.SERVICE) == "UsersService"){
+        if (resultCode == 200) {
+            if (resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_USERS_SERVICE){
                 setListResult(resultData);
-            } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupService"){
-                //Get group Id
-                sendUsers();
-                progressDialog.dismiss();
+            } else if(resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_GROUP_SERVICE) {
+
+                switch (resultData.getString(CommunicationKeys.COMMAND)) {
+
+                    case CommunicationKeys.POST:
+
+
+                        String json = resultData.getString(CommunicationKeys.GROUP);
+
+                        createdGroup = groupConverter.deserialize(json, Group.class);
+
+                        // TODO delete Toast
+                        Toast.makeText(this, "Group created\n GroupId: " + createdGroup.getId(), Toast.LENGTH_SHORT).show();
+
+                        // TODo
+                        // sendUsers();
+                        progressDialog.dismiss();
+                        break;
+                    default:
+                        // for DEBUGGING
+                        Toast.makeText(this, "Falscher Befehl", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                if(resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_GROUP_USER_MANAGEMENT) {
+                    switch (resultData.getString(CommunicationKeys.COMMAND)) {
+
+                        /*TODO -------------------------------------------------------------------------------------
+                        case CommunicationKeys.POST:
+
+                            String json = resultData.getString(CommunicationKeys.USER);
+
+                            User user = userConverter.deserialize(json, User.class);
+
+                            Toast.makeText(this, "Benutzer " + user.getName() + " wurde hinzugefügt", Toast.LENGTH_SHORT).show();
+
+
+                            // sendUsers();
+                            progressDialog.dismiss();
+                            break;
+                        default:
+                            // for DEBUGGING
+                            Toast.makeText(this, "Falscher Befehl", Toast.LENGTH_SHORT).show();
+                            */
+                    }
+                }
             }
         } else {
             showError(resultCode);
@@ -114,8 +163,11 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
             i.putExtra(CommunicationKeys.RECEICER, mReceiver);
             i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
 
-            ObjectConverter<User> userObjectConverter = new ObjectConverter<>();
-            String jsonObj = userObjectConverter.serialize(u, User.class);
+            GroupMember newMember = new GroupMember();
+            newMember.setUserId(u.getId());
+            newMember.setGroupId(createdGroup.getId());
+            ObjectConverter<GroupMember> groupMemberConverter = new ObjectConverter<>();
+            String jsonObj = groupMemberConverter.serialize(newMember, GroupMember.class);
 
             startService(i);
         }
@@ -130,8 +182,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
         //GET DATA and FILL users
             String jsonObj = resultData.getString(CommunicationKeys.USERS);
             ObjectConverter<List<User>> mConverter = new ObjectConverter<>();
-            List<User> dummy = new ArrayList<>();
-            users = mConverter.deserialize ( jsonObj, (Class<List<User>>) dummy.getClass());
+            users = mConverter.deserializeList ( jsonObj,User[].class);
             setLists();
         }
 
@@ -206,7 +257,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
             //IS IT CORRECT ? Todo
             Group gr = new Group(0, groupName.getText().toString());
             String jsonObj = groupConverter.serialize(gr, Group.class);
-            i.putExtra(CommunicationKeys.MEETING, jsonObj);
+            i.putExtra(CommunicationKeys.GROUP, jsonObj);
             startService(i);
         }
     }
