@@ -13,6 +13,7 @@ import java.io.IOException;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientDelete;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_MeetingBuilder;
 
@@ -72,6 +73,8 @@ public class MeetingService  extends IntentService {
      */
     private void doGet (Intent intent) //throws  IOException
     {
+        Boolean noError = true;
+        Boolean result = true;
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -126,6 +129,8 @@ public class MeetingService  extends IntentService {
      * @param intent Intent
      */
     private void doDelete(Intent intent) {
+        Boolean noError = true;
+        Boolean result = true;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
@@ -168,6 +173,8 @@ public class MeetingService  extends IntentService {
      * @param intent
      */
     private void doPut(Intent intent) {
+        Boolean noError = true;
+        Boolean result = true;
         String meetingAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -187,6 +194,7 @@ public class MeetingService  extends IntentService {
             httpAppClientPut.setBody(meetingAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
+            noError = false;
         }
 
         try {
@@ -194,6 +202,7 @@ public class MeetingService  extends IntentService {
             closeableHttpResponse = httpAppClientPut.executeRequest();
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            result = false;
         }
 
         // send the Bundle and the Status Code from Response
@@ -206,6 +215,9 @@ public class MeetingService  extends IntentService {
      * @param intent Intent
      */
     private void doPost(Intent intent) {
+        Boolean noError = true;
+        Boolean result = true;
+        String jsonString = null;
         String meetingAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -216,7 +228,7 @@ public class MeetingService  extends IntentService {
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
 
         meetingAsJsonString = intent.getStringExtra(CommunicationKeys.MEETING);
-        /*
+
         URI_MeetingBuilder uri_meetingBuilder = new URI_MeetingBuilder();
 
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
@@ -225,6 +237,7 @@ public class MeetingService  extends IntentService {
             httpAppClientPost.setBody(meetingAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
+            noError = false;
         }
 
         try {
@@ -232,13 +245,24 @@ public class MeetingService  extends IntentService {
             closeableHttpResponse = httpAppClientPost.executeRequest();
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            result = false;
         }
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
-        */
+        try {
+            jsonString = EntityUtils.toString(closeableHttpResponse.getEntity());
+        } catch (Throwable e) {
+            noError = false;
+            // TODO handle Exception "can not Convert EntitlyUtils to String"
+        }
 
-        resultReceiver.send(202, bundle);
+        if (noError && result) {
+            bundle.putString(CommunicationKeys.MEETING, jsonString);
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            resultReceiver.send(500, bundle);
+        }
+
 
     }
 

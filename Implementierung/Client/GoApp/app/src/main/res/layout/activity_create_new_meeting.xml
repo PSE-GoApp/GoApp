@@ -74,7 +74,7 @@
         android:text="Terminname:"
         android:layout_below="@+id/textGroup"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:textSize="18dp"
         />
 
@@ -344,16 +344,51 @@
         android:layout_marginTop="20dp"
         />
 
-    <AutoCompleteTextView
-        android:id="@+id/tipPlace"
+    <TextView
+        android:id="@+id/textLat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Längengrad:"
         android:textSize="18dp"
+        android:layout_toRightOf="@+id/textPlace"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/textDuration"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:id="@+id/textLng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Breitengrad:"
+        android:textSize="18dp"
+        android:layout_toRightOf="@+id/tipLat"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/textDuration"
+        android:layout_marginTop="20dp"
+        />
+
+    <AutoCompleteTextView
+        android:id="@+id/tipLat"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_marginLeft="5dp"
         android:background="@color/itemBackground"
-        android:layout_centerVertical="true"
         android:layout_alignBaseline="@+id/textPlace"
-        android:layout_alignStart="@+id/tipMeetingName"
-        android:layout_alignEnd="@+id/tipMeetingName" />
+        android:layout_toRightOf="@+id/textLat"
+        android:inputType="numberDecimal"
+        />
+    <AutoCompleteTextView
+        android:id="@+id/tipLng"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_marginLeft="5dp"
+        android:background="@color/itemBackground"
+        android:layout_alignBaseline="@+id/textPlace"
+        android:layout_toRightOf="@+id/textLng"
+        android:inputType="numberDecimal"
+        />
 
 
     <!--
@@ -394,14 +429,7 @@
         android:onClick="onClick"
         />
 
-    <!--
-    <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timePicker"
-        android:layout_below="@+id/textGroup"
-        android:layout_alignParentStart="true" />
-        -->
+
 
 
 </RelativeLayout>

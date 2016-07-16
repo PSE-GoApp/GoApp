@@ -186,7 +186,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                                         mReceiver = new ServiceResultReceiver(new Handler());
                                         mReceiver.setReceiver(GroupsActivity.this);
                                         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
-                                        i.putExtra(CommunicationKeys.COMMAND, "DELETE");
+                                        i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
                                         i.putExtra(CommunicationKeys.GROUP_ID, groups.get(positionClicked).getId());
                                         startService(i);
                                         progressDialog = ProgressDialog.show(GroupsActivity.this, "", "Sending");
@@ -219,7 +219,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
         if (resultCode == 200) {
             if (resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_GROUPS_SERVICE){
                 setListResult(resultData);
-            } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupService"){
+            } else if(resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_GROUP_SERVICE){
                 progressDialog.dismiss();
                 groups.remove(positionClicked);
                 adapter.notifyDataSetChanged();

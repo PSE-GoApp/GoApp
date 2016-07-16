@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -37,10 +38,12 @@ import edu.kit.pse.client.goapp.datamodels.Event;
 import edu.kit.pse.client.goapp.datamodels.GPS;
 import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
+import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.Tour;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.GroupsService;
+import edu.kit.pse.client.goapp.service.MeetingService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 /**
@@ -74,6 +77,8 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
     private RadioButton radioButtonEvent;
     private RadioButton radioButtonTour;
     private Spinner spinnerGroup;
+    private ArrayAdapter<String> spinnerAdapter;
+    private int selectedGroupPosition = 0;
 
     private AutoCompleteTextView day;
     private AutoCompleteTextView month;
@@ -82,9 +87,14 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
     private AutoCompleteTextView hour;
     private AutoCompleteTextView minute;
 
+    private AutoCompleteTextView lat;
+    private AutoCompleteTextView lng;
 
 
-    private ArrayList groups = new ArrayList<Group>(Arrays.asList(new Group[]{
+
+
+
+    private List<Group> groups = new ArrayList<>(Arrays.asList(new Group[]{
             new Group(0, "PSE GRUPPE")
                     {{  addGroupMember(myUser);
                         addGroupMember(new User(666666, "Iris die Führstin"));
@@ -121,6 +131,9 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         spinnerGroup = (Spinner) findViewById(R.id.spinnerGroup);
         createButton = (Button) findViewById(R.id.buttonCreate);
 
+        lat = (AutoCompleteTextView) findViewById(R.id.tipLat);
+        lng = (AutoCompleteTextView) findViewById(R.id.tipLng);
+
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(System.currentTimeMillis());
         day = (AutoCompleteTextView) findViewById(R.id.tipDay);
@@ -149,10 +162,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
         startService(i);
 
-        // TODO ERROR Fix it!-------------------------------------------------------------------------------------------
-        spinnerGroup = (Spinner) findViewById(R.id.spinnerGroup);
-        GroupSpinnerAdapter groupSpinnerAdapter = new GroupSpinnerAdapter(this, groups);
-        spinnerGroup.setAdapter(groupSpinnerAdapter);
+
         /*
         spinnerGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -191,13 +201,21 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
             if (setNewMeeting()) {
 
                 // TODO create an MeetinService and block Everything---------------------------------------------------------------------------------
-                // newMeeting;
-                Toast.makeText(this,"Todo: Servcie erstellt\n"+ newMeeting.getName() +
-                        "\n" + newMeeting.getTimestamp() + "\n" + newMeeting.getDuration(),
+
+                Intent i = new Intent(this, MeetingService.class);
+                activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
+                activityServiceResultReceiver.setReceiver(this);
+                i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
+                i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
+                String jsonObj = meetingConverter.serialize(newMeeting, Meeting.class);
+                i.putExtra(CommunicationKeys.MEETING, jsonObj);
+                startService(i);
+
+                Toast.makeText(this,"Todo: MeetingServcie erstellt",
                         Toast.LENGTH_LONG).show();
-                MeetingListActivity.start(this);
+                // MeetingListActivity.start(this);
             } else {
-                Toast.makeText(this,"Ihre Eingaben waren nicht korrekt",
+                Toast.makeText(this,"Ihre Eingaben waren inkorrekt",
                         Toast.LENGTH_LONG).show();
             }
         }
@@ -229,22 +247,45 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 && calendar.get(Calendar.YEAR) == timeYear
                 && calendar.get(Calendar.HOUR_OF_DAY) == timeHour
                 && calendar.get(Calendar.MINUTE) ==timeMinute) {
+            if (groups != null) {
 
-            int duration = Integer.parseInt(durationText.getText().toString());
-            // TODO his null-----------------------------------------------------------------------------------------------
-            SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-            userName = sharedPreferences.getString("userName", "");
-            userId = sharedPreferences.getInt("userId", -1);
+                int duration = Integer.parseInt(durationText.getText().toString());
 
+                Group selectedGroup = groups.get(selectedGroupPosition);
 
-            Participant creator = null;
-            GPS place = null;
-            if (radioButtonEvent.isChecked()) {
-                newMeeting = new Event(-1, name, place, calendar.getTimeInMillis(), duration, creator);
-            } else {
-                newMeeting = new Tour(-1, name, place, calendar.getTimeInMillis(), duration, creator);
+                List<User> users = selectedGroup.getGroupMembers();
+                List<Participant> participants = new ArrayList<>();
+
+                SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                userName = sharedPreferences.getString("userName", "");
+                userId = sharedPreferences.getInt("userId", -1);
+
+                for (User u: users) {
+                    participants.add(new Participant(-1, -1, u, MeetingConfirmation.PENDING));
+                }
+
+                Participant creator = null;
+
+                long latitude = Long.parseLong(lat.getText().toString());
+
+                long longitude = Long.parseLong(lng.getText().toString());
+
+                GPS place = new GPS( latitude, longitude, 0);
+                if (radioButtonEvent.isChecked()) {
+                    newMeeting = new Event(-1, name, place, calendar.getTimeInMillis(), duration, creator);
+                            for (Participant p : participants) {
+                                newMeeting.addParticipant(p);
+                            }
+
+                } else {
+                    newMeeting = new Tour(-1, name, place, calendar.getTimeInMillis(), duration, creator);
+                        for (Participant p : participants) {
+                            newMeeting.addParticipant(p);
+                        }
+                }
+                return true;
             }
-            return true;
+
         }
         // out of Calender
         return false;
@@ -272,24 +313,29 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode) {
 
-        switch (resultData.getString(CommunicationKeys.SERVICE)) {
+            case 200:
+                switch (resultData.getString(CommunicationKeys.SERVICE)) {
 
-            case CommunicationKeys.FROM_GROUPS_SERVICE:
-                groupServiceHandler(resultData);
-                break;
+                    case CommunicationKeys.FROM_GROUPS_SERVICE:
+                        groupsServiceHandler(resultData);
+                        break;
 
-            case CommunicationKeys.FROM_MEETING_SERVICE:
-                meetingServiceHandler(resultData);
+                    case CommunicationKeys.FROM_MEETING_SERVICE:
+                        meetingServiceHandler(resultData);
+                        break;
+                    default:
+                        Log.d(TAG, "Wrong Service");
+                        hideProgressDialog();
+                }
                 break;
             default:
-                Log.d(TAG, "Wrong Service");
-                hideProgressDialog();
-
+                Toast.makeText(this, ""+resultCode, Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void groupServiceHandler (Bundle resultData) {
+    private void groupsServiceHandler (Bundle resultData) {
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.PUT: // Leave the Meeting
 
@@ -301,12 +347,12 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 Log.d(TAG,"GET caught");
                 Toast.makeText(this, "Group List caught", Toast.LENGTH_LONG).show();
 
-                ArrayList<Group> dummy = new ArrayList<>();
 
                 String jGroupsList = resultData.getString(CommunicationKeys.GROUPS);
 
-                // groups = groupsConverter.deserialize(jGroupsList, (Class<List<Group>>) dummy.getClass());
+                groups = groupsConverter.deserializeList(jGroupsList, Group[].class);
 
+                setGroupsSpinner();
                 break;
 
             case CommunicationKeys.POST:
@@ -323,6 +369,27 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 Log.d(TAG,"ERROR 500: no Command caught");
         }
         hideProgressDialog();
+    }
+
+    private void setGroupsSpinner() {
+
+        ArrayList<String> groupNames = new ArrayList<>();
+        for (Group g : groups) {
+            groupNames.add(g.getName());
+        }
+
+        spinnerAdapter = new ArrayAdapter<String> (CreateNewMeetingActivity.this, android.R.layout.simple_spinner_dropdown_item, groupNames);
+        spinnerGroup.setAdapter(spinnerAdapter);
+        spinnerGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedGroupPosition = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
     }
 
     private void meetingServiceHandler (Bundle resultData) {
