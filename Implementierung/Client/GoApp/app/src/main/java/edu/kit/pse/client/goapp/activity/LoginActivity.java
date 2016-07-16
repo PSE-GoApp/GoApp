@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
     private ServiceResultReceiver activityReceiver;
     private String userFullName;
     private String userIdToken;
+    private String googleId;
 
     ObjectConverter<User> userConvert;
 
@@ -130,8 +131,9 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
             GoogleSignInAccount acct = result.getSignInAccount();
             userFullName = acct.getDisplayName();
             userIdToken = acct.getIdToken();
+            googleId = acct.getId();
 
-            goAppLogin();
+            // TODO goAppLogin();
 
 
 
@@ -162,7 +164,10 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                     showProgressDialog();
 
 
-                    register();
+                    // Todo test -----------------
+                    User newUser = new User(-1, newUserName.getText().toString());
+                    startnewUserService(newUser);
+                    // TOdo register();
                 } else {
                     // TOdo AlertBuilder
                     Toast.makeText(this, "Name muss gesetzt sein", Toast.LENGTH_SHORT).show();
@@ -202,6 +207,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                     // Get account information
                     userFullName = acct.getDisplayName();
                     userIdToken = acct.getIdToken();
+                    googleId = acct.getId();
 
                     goAppLogin();
 
@@ -294,10 +300,10 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
     public void onReceiveResult(int resultCode, Bundle resultData) {
 
         switch (resultCode) {
-            case 202:
+            case 200:
 
                 // TODO delet this. it is only for testing
-                Toast.makeText(this, "Result code 202 !Test!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Result code 200 !Test!", Toast.LENGTH_SHORT).show();
 
                 switch (resultData.getString(CommunicationKeys.SERVICE)) {
 
@@ -327,6 +333,10 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 hideProgressDialog();
                 Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
                 break;
+            default:
+                hideProgressDialog();
+                Toast.makeText(this,""+ resultCode,Toast.LENGTH_LONG).show();
+
         }
     }
 
@@ -390,7 +400,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 editor.commit();
 
                 hideProgressDialog();
-                MeetingListActivity.start(this);
+                // MeetingListActivity.start(this);
 
                 // Todo Put it Not in the Stack
 
@@ -417,6 +427,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         // Post = Add a New user
         newUserIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
         newUserIntent.putExtra(CommunicationKeys.USER, jUser);
+        newUserIntent.putExtra(CommunicationKeys.GOOGLE_ID, googleId);
         startService(newUserIntent);
     }
 

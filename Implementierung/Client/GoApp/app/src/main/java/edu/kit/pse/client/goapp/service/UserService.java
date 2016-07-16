@@ -212,6 +212,7 @@ public class UserService extends IntentService{
      */
     private void doPost(Intent intent) { // Create a new User
         String jUser = null;
+        String googleId = null;
 
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -222,8 +223,11 @@ public class UserService extends IntentService{
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICE);
 
         jUser = intent.getStringExtra(CommunicationKeys.USER);
+        googleId = intent.getStringExtra(CommunicationKeys.GOOGLE_ID);
 
         URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
+       // uri_userBuilder.addParameter("googleId", googleId);
+        uri_userBuilder.addParameter("googleId", "test");
 
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
         httpAppClientPost.setUri(uri_userBuilder.getURI());

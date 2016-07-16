@@ -132,16 +132,18 @@ public class LoginService extends IntentService {
 
 
         URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
+        uri_loginBuilder.addParameter("token", googleIdToken);
 
         HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
          httpAppClientPut.setUri(uri_loginBuilder.getURI());
 
-
+        /*
         try {
             httpAppClientPut.setBody(googleIdToken);
         } catch (IOException e) {
             noError = false;
         }
+        */
 
 
         try {
@@ -208,16 +210,20 @@ public class LoginService extends IntentService {
 
 
         URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
+        // uri_loginBuilder.addParameter("token", googeleIdToken);
+        uri_loginBuilder.addParameter("token", "test");
 
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
-        httpAppClientPost.setUri(uri_loginBuilder.getURI());
 
+        httpAppClientPost.setUri(uri_loginBuilder.getURI());
+        /*
         try {
             httpAppClientPost.setBody(googeleIdToken);
         } catch (IOException e) {
             //TODO Handle Exception. Maybe the String Extra was null
             noError = false;
         }
+        */
 
 
         try {

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,10 @@ import edu.kit.pse.goapp.client.goapp.R;
 public class CreateNewMeetingActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
     private static final String TAG = "CreateNewMeeting";
+
+    private String userName;
+    private int userId;
+
 
     private ImageButton menu_button;
 
@@ -163,6 +168,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
         if (v.getId() == R.id.buttonCreate) {
             if (setNewMeeting()) {
+
                 // TODO create an MeetinService and block Everything---------------------------------------------------------------------------------
                 // newMeeting;
                 Toast.makeText(this,"Todo: Servcie erstellt\n"+ newMeeting.getName() +
@@ -200,17 +206,21 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 && calendar.get(Calendar.HOUR_OF_DAY) == timeHour
                 && calendar.get(Calendar.MINUTE) ==timeMinute) {
 
-        int duration = Integer.parseInt(durationText.getText().toString());
-
+            int duration = Integer.parseInt(durationText.getText().toString());
             // TODO his null-----------------------------------------------------------------------------------------------
-        Participant creator = null;
-        GPS place = null;
-        if (radioButtonEvent.isChecked()) {
-            newMeeting = new Event(-1, name, place, calendar.getTimeInMillis(), duration, creator);
-        } else {
-            newMeeting = new Tour(-1, name, place, calendar.getTimeInMillis(), duration, creator);
-        }
-        return true;
+            SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            userName = sharedPreferences.getString("userName", "");
+            userId = sharedPreferences.getInt("userId", -1);
+
+
+            Participant creator = null;
+            GPS place = null;
+            if (radioButtonEvent.isChecked()) {
+                newMeeting = new Event(-1, name, place, calendar.getTimeInMillis(), duration, creator);
+            } else {
+                newMeeting = new Tour(-1, name, place, calendar.getTimeInMillis(), duration, creator);
+            }
+            return true;
         }
         // out of Calender
         return false;

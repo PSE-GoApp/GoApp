@@ -4,7 +4,7 @@ package edu.kit.pse.client.goapp.datamodels;
 
 import java.util.*;
 
-public class Group {
+public class  Group {
 	private int groupId;
 	private String name;
 	private List<User> admins;

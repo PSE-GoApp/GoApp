@@ -59,8 +59,9 @@ public class GroupsService extends IntentService {
      * Returns a list of all groups
      * @param intent
      */
-    private void doGet(Intent intent) //throws  IOException
-    {
+    private void doGet(Intent intent) {
+        Boolean noError = true;
+        Boolean result = true;
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -80,19 +81,25 @@ public class GroupsService extends IntentService {
             closeableHttpResponse = httpAppClientGet.executeRequest();
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            result = false;
         }
 
         // accepted
         try {
             jasonString = EntityUtils.toString(closeableHttpResponse.getEntity());
         } catch (Throwable e) {
+            noError = false;
             // TODO handle Exception "can not Convert EntitlyUtils to String"
         }
 
-        bundle.putString(CommunicationKeys.GROUPS, jasonString);
+        if (result && noError) {
+            bundle.putString(CommunicationKeys.GROUPS, jasonString);
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            resultReceiver.send(500, bundle);
+        }
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
     }
 
 }

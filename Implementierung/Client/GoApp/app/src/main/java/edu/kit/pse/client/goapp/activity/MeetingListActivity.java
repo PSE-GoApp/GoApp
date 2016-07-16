@@ -443,10 +443,8 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 meetings = new ArrayList<>();
                 String jsonString = resultData.getString(CommunicationKeys.MEETINGS);
 
-                List<Meeting> dummy = new ArrayList<>();
-
                 // Todo Test----------------------
-                // TODO List<Meeting> fullMeetingList = meetingListConverter.deserialize(jsonString, (Class<List<Meeting>>) dummy.getClass());
+                // TODO List<Meeting> fullMeetingList = meetingListConverter.deserialize(jsonString, (Class<List<Meeting>>) meetings.getClass());
                 // this is a test
                 List<Meeting> fullMeetingList = fullMeeting;
                 // TODo TEST-----------------------------------

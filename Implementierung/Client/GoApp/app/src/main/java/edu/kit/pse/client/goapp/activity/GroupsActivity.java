@@ -25,6 +25,7 @@ import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.service.GroupService;
 import edu.kit.pse.client.goapp.service.GroupsService;
@@ -36,11 +37,12 @@ import edu.kit.pse.goapp.client.goapp.R;
 public class GroupsActivity extends AppCompatActivity  implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver {
 
     public ServiceResultReceiver mReceiver;
-    private List<Group> groups = new ArrayList<Group>();
+    private List<Group> groups = new ArrayList<>();
     private ImageButton menu_button;
     private ImageButton buttonCreateGroup;
     private int positionClicked;
     private ProgressDialog progressDialog;
+    private ObjectConverter<List<Group>> groupsConverter = new ObjectConverter<>();
     //private ListView list;
     ArrayAdapter<Group> adapter;
 
@@ -213,9 +215,9 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
      */
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        if (resultCode == 202) {
-            if (resultData.getString(CommunicationKeys.SERVICE) == "GroupsService"){
-                //setListResult(resultData);
+        if (resultCode == 200) {
+            if (resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_GROUPS_SERVICE){
+                setListResult(resultData);
             } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupService"){
                 progressDialog.dismiss();
                 groups.remove(positionClicked);
@@ -253,19 +255,15 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
      * sets the list of groups
      * @param resultData all the data from the service
      */
-    /*
-    private void setListResult(Bundle resultData){
-        ArrayList<ParcelableGroup> parcelableGroups = resultData.getParcelableArrayList(CommunicationKeys.GROUPS);
-        if (parcelableGroups != null) {
-            for (ParcelableGroup g : parcelableGroups) {
-                groups.add(g.getGroup());
-            }
-            adapter = new MyListAdapter();
-            ListView list = (ListView) findViewById(R.id.groupsList);
-            list.setAdapter(adapter);
-        }
+
+    private void setListResult(Bundle resultData) {
+
+        String json = resultData.getString(CommunicationKeys.GROUPS);
+        groups = groupsConverter.deserialize(json, (Class<List<Group>>) groups.getClass());
+        adapter = new MyListAdapter();
+        ListView list = (ListView) findViewById(R.id.groupsList);
+        list.setAdapter(adapter);
     }
-    */
 
     /**
      * it a private class that sets up an adapter for the listView

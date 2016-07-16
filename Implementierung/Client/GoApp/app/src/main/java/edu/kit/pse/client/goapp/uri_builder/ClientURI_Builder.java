@@ -8,7 +8,7 @@ import java.net.URI;
 public abstract class ClientURI_Builder {
 
     //The serveradress
-    protected static final String serverAdd = "http://localhost:8080/GoAppServer/";
+    protected static final String serverAdd = "https://i43pc164.ipd.kit.edu/PSESoSe16GoGruppe2/GoAppServer/";
 
     /**
      * Adds Parameters to the private URI
