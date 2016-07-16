@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -47,8 +49,8 @@ import edu.kit.pse.goapp.client.goapp.R;
  */
 public class CreateNewGroupActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, ServiceResultReceiver.Receiver{
 
-    private List<User> users = new ArrayList<User>();
-    private List<User> usersAdded = new ArrayList<User>();
+    public List<User> users = new ArrayList<User>();
+    public List<User> usersAdded = new ArrayList<User>();
     public ServiceResultReceiver mReceiver;
     private Group createdGroup = null;
     private ProgressDialog progressDialog;
@@ -184,7 +186,9 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
         //GET DATA and FILL users
             String jsonObj = resultData.getString(CommunicationKeys.USERS);
             ObjectConverter<List<User>> mConverter = new ObjectConverter<>();
-            users = mConverter.deserializeList ( jsonObj,User[].class);
+            List<User> userTerm = new ArrayList<User>();
+            userTerm = mConverter.deserializeList ( jsonObj,User[].class);
+            users.addAll(userTerm);
             setLists();
         }
 
@@ -314,22 +318,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
                                     int position, long id) {
 
                 User clickedUser = users.get(position);
-                Log.e("USER","" + clickedUser.getName());
-                Log.e("USERS LENGTH","" + users.size());
-
-                //users.remove(position);
-                //users.remove(clickedUser);
-                ListIterator iterator = users.listIterator();
-                while (iterator.hasNext()) {
-                    if(iterator == clickedUser) {
-                        Log.e("I am in","fucker");
-                        iterator.remove();
-                        break;
-                    }
-                    iterator.next();
-                }
-                Log.e("USERS LENGTH","" + users.size());
-
+                users.remove(position);
                 adapter2.notifyDataSetChanged();
                 addToList(clickedUser);
             }
