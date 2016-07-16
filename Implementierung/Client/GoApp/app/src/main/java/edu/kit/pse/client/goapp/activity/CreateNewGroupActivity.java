@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
@@ -312,7 +314,22 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
                                     int position, long id) {
 
                 User clickedUser = users.get(position);
-                users.remove(position);
+                Log.e("USER","" + clickedUser.getName());
+                Log.e("USERS LENGTH","" + users.size());
+
+                //users.remove(position);
+                //users.remove(clickedUser);
+                ListIterator iterator = users.listIterator();
+                while (iterator.hasNext()) {
+                    if(iterator == clickedUser) {
+                        Log.e("I am in","fucker");
+                        iterator.remove();
+                        break;
+                    }
+                    iterator.next();
+                }
+                Log.e("USERS LENGTH","" + users.size());
+
                 adapter2.notifyDataSetChanged();
                 addToList(clickedUser);
             }
