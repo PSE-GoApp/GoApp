@@ -431,7 +431,5 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         editor.commit();
 
         MeetingListActivity.start(this);
-
-
     }
 }

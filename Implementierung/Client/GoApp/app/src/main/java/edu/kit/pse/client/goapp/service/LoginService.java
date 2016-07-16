@@ -11,10 +11,9 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
-import edu.kit.pse.client.goapp.converter.ObjectConverter;
-import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_LoginBuilder;
 
 /**
@@ -117,6 +116,9 @@ public class LoginService extends IntentService {
     private void doPut(Intent intent) { // Login
         String resultJsonString = null;
         String googleIdToken = null;
+        Boolean noError = true;
+        Boolean result = true;
+
 
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -128,7 +130,6 @@ public class LoginService extends IntentService {
 
         googleIdToken = intent.getStringExtra(CommunicationKeys.USER_ID_TOKEN);
 
-               /* Todo TEST -----------------------------------------------------------------------------------------------------
 
         URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
 
@@ -139,7 +140,7 @@ public class LoginService extends IntentService {
         try {
             httpAppClientPut.setBody(googleIdToken);
         } catch (IOException e) {
-            //TODO Handle Exception. Maybe the String Extra was null.
+            noError = false;
         }
 
 
@@ -148,23 +149,29 @@ public class LoginService extends IntentService {
             closeableHttpResponse = httpAppClientPut.executeRequest();
         } catch (IOException e) {
             //TODO Handle Exception Toast? Alert Dialog? Sent it to the Activity?
+            result = false;
         }
 
         // accepted
         try {
             resultJsonString = EntityUtils.toString(closeableHttpResponse.getEntity());
         } catch (Throwable e) {
-            // TODO handle Exception "can not Convert EntitlyUtils to String"
+            noError = false;
         }
 
-        bundle.putString(CommunicationKeys.USER, resultJsonString);
+        if (noError && result) {
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+            bundle.putString(CommunicationKeys.USER, resultJsonString);
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
-        */
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            // Internal Error
+            resultReceiver.send(500, bundle);
+        }
+
+
+       /*
 
         // Todo test -----------------------------------------------------------------------------------
 
@@ -175,6 +182,7 @@ public class LoginService extends IntentService {
         bundle.putString(CommunicationKeys.USER, json);
 
         resultReceiver.send(202, bundle);
+        */
     }
 
     /**
@@ -182,6 +190,9 @@ public class LoginService extends IntentService {
      * @param intent Intent
      */
     private void doPost(Intent intent) {  // Register Client
+        Boolean noError = true;
+        Boolean result = true;
+
         String googeleIdToken = null;
         String resultJsonString = null;
 
@@ -205,8 +216,8 @@ public class LoginService extends IntentService {
             httpAppClientPost.setBody(googeleIdToken);
         } catch (IOException e) {
             //TODO Handle Exception. Maybe the String Extra was null
+            noError = false;
         }
-        /*         Todo test -----------------------------------------------------------------------------------
 
 
         try {
@@ -214,13 +225,22 @@ public class LoginService extends IntentService {
             closeableHttpResponse = httpAppClientPost.executeRequest();
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activicy?
+            result = false;
         }
-                resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
 
-        */
+        if (result && noError) {
 
-        // TODO löschen
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        }
+        else {
+            resultReceiver.send(500, bundle);
+        }
+
+        /*
+
+        TODO löschen
         resultReceiver.send(202, bundle);
+        */
 
     }
 

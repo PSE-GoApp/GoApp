@@ -13,6 +13,7 @@ import java.io.IOException;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientDelete;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_UserBuilder;
 
@@ -70,8 +71,10 @@ public class UserService extends IntentService{
      *
      * @param intent Intent
      */
-    private void doGet (Intent intent) //throws  IOException
-    {
+    private void doGet (Intent intent) {
+        Boolean noError = true;
+        Boolean result = true;
+
         String jasonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -96,6 +99,7 @@ public class UserService extends IntentService{
                 closeableHttpResponse = httpAppClientGet.executeRequest();
             } catch (IOException e) {
                 // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+                result = false;
             }
 
             // accepted
@@ -103,12 +107,16 @@ public class UserService extends IntentService{
                 jasonString = EntityUtils.toString(closeableHttpResponse.getEntity());
             } catch (Throwable e) {
                 // TODO handle Exception "can not Convert EntitlyUtils to String"
+                result = false;
             }
 
-            bundle.putString(edu.kit.pse.client.goapp.CommunicationKeys.USER, jasonString);
+            if (result) {
 
-            // send the Bundle and the Status Code from Response
-            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+                bundle.putString(edu.kit.pse.client.goapp.CommunicationKeys.USER, jasonString);
+
+                // send the Bundle and the Status Code from Response
+                resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+            }
         } else {
             // Send a empty result with 500 as StatusCode
 
@@ -215,7 +223,6 @@ public class UserService extends IntentService{
 
         jUser = intent.getStringExtra(CommunicationKeys.USER);
 
-        /* TOdo Test-------------------------------------------------------------------------------------------------------------
         URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
 
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
@@ -237,10 +244,11 @@ public class UserService extends IntentService{
 
 
         // send the Bundle and the Status Code from Response
-        TODO resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
-        */
+        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
 
+        /*
         // TOdo löschen-----------------------------------------------------------------------------------------
         resultReceiver.send(202, bundle);
+        */
     }
 }
