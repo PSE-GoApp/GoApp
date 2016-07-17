@@ -8,10 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.activity.SettingsActivity;
+import edu.kit.pse.client.goapp.databasehandler.DataBaseHandler;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_GPS_Builder;
 
@@ -39,12 +43,17 @@ public class AlarmReceiver extends BroadcastReceiver {
     private final static String COUNTER = "counter";
 
 
+    /**
+     * onReceive handler. Starts the gps service
+     * @param context from activity
+     * @param intent from activity
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
 
         this.context = context;
 
-        if(!gpsOkUser(context)){
+        if(gpsOkUser(context)){
             return;
         }
 
@@ -54,15 +63,10 @@ public class AlarmReceiver extends BroadcastReceiver {
             editor.putInt(COUNTER, 1);
             editor.commit();
 
-            /*
-            Intent intent = new Intent(context, AlarmReceiver.class);
-             alarmIntent = PendingIntent.getBroadcast(context, 0, intent,0);
-             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 2*60*1000,alarmIntent);
-             */
 
             //
             int id = getId(context);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1253, intent, 0);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             alarmManager.cancel(pendingIntent);
         }
@@ -111,6 +115,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * gest location
+     * @return users cordinates
+     */
+    //TODO not tested and maybe not ready. To be honest the person who wrote it can not even remember what he did!
     public LatLng getLocation() {
         // Get the location manager
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -159,6 +168,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         return null;
     }
 
+    /**
+     * checks if the user ist ok with sharing gps cordinates
+     * @param context from activity
+     * @return true if he doesn't want to share
+     */
     private boolean gpsOkUser(Context context){
         SharedPreferences sharedpreferences = context.getSharedPreferences(SettingsActivity.GPSENABLED, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -171,6 +185,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * checks if it should continue sending gps cordinates
+     * @param context from activity
+     * @return true if should stop
+     */
     private boolean counter(Context context) {
         SharedPreferences sharedpreferences = context.getSharedPreferences(COUNTER, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -183,8 +202,26 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * gets the meeting id
+     * @param context from activity
+     * @return the id
+     */
     private int getId(Context context){
-        return 0;
+        SQLiteDatabase db = context.openOrCreateDatabase("MeetingStarts.db", Context.MODE_PRIVATE, null);
+        final Cursor cursor = db.rawQuery("SELECT "+ DataBaseHandler.COLUMN_MEETING_ID+" FROM " +DataBaseHandler.TABLE_MEETING + " ORDER BY "+DataBaseHandler.COLUMN_TIMESTAMP+" ASC LIMIT 1", null);
+        int sum = -1;
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    sum = cursor.getInt(0);
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        db.delete("MeetingStarts.db",DataBaseHandler.COLUMN_MEETING_ID + " =" + sum,null);
+        return sum;
     }
 
     // Listener class to get coordinates
