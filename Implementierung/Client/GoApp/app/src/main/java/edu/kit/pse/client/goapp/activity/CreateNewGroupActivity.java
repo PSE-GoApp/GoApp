@@ -280,13 +280,13 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
                 MeetingListActivity.start(this);
                 return true;
             case R.id.neuer_new_group:
-                //TerminActivity.start(this);
+                CreateNewMeetingActivity.start(this);
                 return true;
             case R.id.groups_new_group:
                 GroupsActivity.start(this);
                 return true;
             case R.id.about_new_group:
-                // AboutActivity.start(this);
+                AboutActivity.start(this);
                 return true;
             default:
                 return false;

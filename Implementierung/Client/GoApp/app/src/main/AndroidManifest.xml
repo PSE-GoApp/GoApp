@@ -32,19 +32,18 @@
 
         <activity
             android:name="edu.kit.pse.client.goapp.activity.MeetingListActivity"
-            android:screenOrientation="portrait"/>
-
-
-        <activity android:name="edu.kit.pse.client.goapp.activity.MeetingParticipantActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name="edu.kit.pse.client.goapp.activity.CreateNewMeetingActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="edu.kit.pse.client.goapp.activity.GroupsActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="edu.kit.pse.client.goapp.activity.LoginActivity"
+        <activity
+            android:name="edu.kit.pse.client.goapp.activity.MeetingParticipantActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="edu.kit.pse.client.goapp.activity.CreateNewMeetingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="edu.kit.pse.client.goapp.activity.GroupsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="edu.kit.pse.client.goapp.activity.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,16 +51,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="edu.kit.pse.client.goapp.activity.MapActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="edu.kit.pse.client.goapp.activity.SettingsActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="edu.kit.pse.client.goapp.activity.GroupMemberActivity"
-            android:screenOrientation="portrait"/>
-
+        <activity
+            android:name="edu.kit.pse.client.goapp.activity.MapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="edu.kit.pse.client.goapp.activity.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="edu.kit.pse.client.goapp.activity.GroupMemberActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="edu.kit.pse.client.goapp.service.GroupsService"
@@ -102,7 +100,8 @@
 
         <receiver android:name="edu.kit.pse.client.goapp.Receiver.AlarmReceiver" />
 
-        <activity android:name="edu.kit.pse.client.goapp.activity.CreateNewGroupActivity"></activity>
+        <activity android:name="edu.kit.pse.client.goapp.activity.CreateNewGroupActivity" />
+        <activity android:name="edu.kit.pse.client.goapp.activity.AboutActivity"></activity>
     </application>
 
 </manifest>

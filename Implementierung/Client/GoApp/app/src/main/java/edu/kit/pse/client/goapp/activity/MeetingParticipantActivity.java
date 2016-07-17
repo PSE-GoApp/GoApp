@@ -190,7 +190,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
                 SettingsActivity.start(this);
                 return true;
             case R.id.about_participant:
-                // AboutActivity.start(this);
+                AboutActivity.start(this);
                 return true;
             default:
                 return false;

@@ -328,7 +328,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 SettingsActivity.start(this);
                 return true;
             case R.id.about_MeetingList:
-                //AboutActivity.start(this);
+                AboutActivity.start(this);
                 return true;
             default:
                 return false;

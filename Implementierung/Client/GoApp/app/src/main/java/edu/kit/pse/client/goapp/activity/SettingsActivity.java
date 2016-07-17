@@ -91,13 +91,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 MeetingListActivity.start(this);
                 return true;
             case R.id.neuer_termin_settings:
-                //TerminActivity.start(this);
+                CreateNewMeetingActivity.start(this);
                 return true;
             case R.id.groups_settings:
                 GroupsActivity.start(this);
                 return true;
             case R.id.about_settings:
-                // AboutActivity.start(this);
+                AboutActivity.start(this);
                 return true;
             default:
                 return false;

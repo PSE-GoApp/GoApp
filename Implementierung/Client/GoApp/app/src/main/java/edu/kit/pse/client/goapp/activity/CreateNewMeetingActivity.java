@@ -304,7 +304,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 SettingsActivity.start(this);
                 return true;
             case R.id.about_new_meeting:
-                // AboutActivity.start(this);
+                AboutActivity.start(this);
                 return true;
             default:
                 return false;
