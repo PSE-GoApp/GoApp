@@ -27,7 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -71,7 +70,6 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
     private Button createButton;
     private ProgressDialog mProgressDialog;
 
-    //TODO with a time Spinner ?
 
     private AutoCompleteTextView time;
     private RadioButton radioButtonEvent;
@@ -94,24 +92,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
 
 
-    private List<Group> groups = new ArrayList<>(Arrays.asList(new Group[]{
-            new Group(0, "PSE GRUPPE")
-                    {{  addGroupMember(myUser);
-                        addGroupMember(new User(666666, "Iris die Führstin"));
-                        addGroupMember(new User(42, "Rumen the Kind of the Hill"));}},
-            new Group(1, "Kommilitionen")
-                    {{  addGroupMember(myUser);
-                        addGroupMember(new User(666666, "Iris die Führstin"));
-                        addGroupMember(new User(6666666, "Iris die Führstin"));
-                        addGroupMember(new User(66666666, "Iris die Führstin"));
-                        addGroupMember(new User(666666666, "Iris die Führstin"));}},
-            new Group(2, "Lern Gruppe")
-                    {{  addGroupMember(new User(666666, "Iris die Führstin"));
-                        addGroupMember(myUser);
-                        addGroupMember(new User(42, "Rumen the Kind of the Hill"));
-                        addGroupMember(new User(4242, "Rumen the Kind of the Hill"));
-                        addGroupMember(new User(4224, "Rumen the Kind of the Hill"));
-                        addGroupMember(new User(69, "Rumen the Kind of the Hill"));}}}));
+    private List<Group> groups = new ArrayList<>();
 
 
     @Override
@@ -154,7 +135,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         myUser = new User(userId, userName);
 
         showProgressDialog();
-        // TODO create a GroupsService----------------------------------------------------------------------------------
+        // create a GroupsService
         Intent i = new Intent(this, GroupsService.class);
         activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
         activityServiceResultReceiver.setReceiver(this);

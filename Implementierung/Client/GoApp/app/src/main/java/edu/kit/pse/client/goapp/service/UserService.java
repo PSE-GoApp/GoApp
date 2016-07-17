@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -224,11 +223,8 @@ public class UserService extends IntentService{
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICE);
 
         jUser = intent.getStringExtra(CommunicationKeys.USER);
-        googleId = intent.getStringExtra(CommunicationKeys.GOOGLE_ID);
 
         URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
-       // uri_userBuilder.addParameter("googleId", googleId);
-        uri_userBuilder.addParameter("googleId", "test");
 
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
         httpAppClientPost.setUri(uri_userBuilder.getURI());
@@ -256,4 +252,5 @@ public class UserService extends IntentService{
         resultReceiver.send(202, bundle);
         */
     }
+
 }
