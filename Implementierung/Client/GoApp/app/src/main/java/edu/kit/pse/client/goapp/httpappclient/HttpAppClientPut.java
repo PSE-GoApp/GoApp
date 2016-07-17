@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPut;
@@ -28,7 +29,7 @@ public class HttpAppClientPut extends HttpAppClient{
 		   request.setEntity(params);
 
 	}
-	public CloseableHttpResponse executeRequest() throws ClientProtocolException, IOException
+	public HttpResponse executeRequest() throws ClientProtocolException, IOException
 	{
 		return client.execute(request);
 	}

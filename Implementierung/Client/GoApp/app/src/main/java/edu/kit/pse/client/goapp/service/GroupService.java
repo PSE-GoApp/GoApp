@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
@@ -77,7 +78,7 @@ public class GroupService extends IntentService {
         Boolean noError = true;
         Boolean result = true;
         String jasonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -135,7 +136,7 @@ public class GroupService extends IntentService {
      */
     private void doDelete(Intent intent) {
         Boolean result = true;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -187,7 +188,7 @@ public class GroupService extends IntentService {
         Boolean noError = true;
         Boolean result = true;
         String groupAsJsonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -230,7 +231,7 @@ public class GroupService extends IntentService {
         Boolean result = true;
         String jsonString = null ;
         String groupAsJsonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 

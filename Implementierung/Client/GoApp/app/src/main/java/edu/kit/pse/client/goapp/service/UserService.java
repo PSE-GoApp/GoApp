@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
@@ -76,7 +77,7 @@ public class UserService extends IntentService{
         Boolean result = true;
 
         String jasonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -131,7 +132,7 @@ public class UserService extends IntentService{
      * @param intent Intent
      */
     private void doDelete(Intent intent) {
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -174,7 +175,7 @@ public class UserService extends IntentService{
      */
     private void doPut(Intent intent) {
         String userAsJsonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -214,7 +215,7 @@ public class UserService extends IntentService{
         String jUser = null;
         String googleId = null;
 
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
@@ -71,7 +72,7 @@ public class MeetingParticipantManagementService extends IntentService {
      */
     private void doPut(Intent intent) {
         String meetingParticipantAsJsonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -115,7 +116,7 @@ public class MeetingParticipantManagementService extends IntentService {
     private void doGet(Intent intent) {
         // Get Participants from Meeting
         String jasonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 

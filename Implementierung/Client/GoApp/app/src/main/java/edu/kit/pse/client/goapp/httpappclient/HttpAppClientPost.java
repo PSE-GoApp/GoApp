@@ -1,5 +1,8 @@
 package edu.kit.pse.client.goapp.httpappclient;
 
+import android.util.Log;
+
+import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -17,19 +20,23 @@ public class HttpAppClientPost extends HttpAppClient{
 		super();
 	}
 	public void setUri(URI uri)
-	{
+ 	{  synchronized (this) {
 		request = new HttpPost(uri);
-	    request.addHeader("content-type", "application/json");
-	    request.addHeader("Accept","application/json");
+		request.addHeader("content-type", "application/json");
+		request.addHeader("Accept", "application/json");
+	}
 	}
 	public void setBody(String jsonData) throws UnsupportedEncodingException
-	{
-		   StringEntity params = new StringEntity(jsonData);
-		   request.setEntity(params);
-
+	{ synchronized (this) {
+		StringEntity params = new StringEntity(jsonData);
+		request.setEntity(params);
 	}
-	public CloseableHttpResponse executeRequest() throws ClientProtocolException, IOException
-	{
-		return client.execute(request);
 	}
+	public HttpResponse executeRequest() throws ClientProtocolException, IOException
+	{
+		synchronized (this) {		Log.e("try"," trysend");
+			HttpResponse r= client.execute(request);
+		Log.e("try"," finished send");
+		return r;
+	}}
 }

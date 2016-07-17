@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
@@ -76,7 +77,7 @@ public class MeetingService  extends IntentService {
         Boolean noError = true;
         Boolean result = true;
         String jasonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -131,7 +132,7 @@ public class MeetingService  extends IntentService {
     private void doDelete(Intent intent) {
         Boolean noError = true;
         Boolean result = true;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -176,7 +177,7 @@ public class MeetingService  extends IntentService {
         Boolean noError = true;
         Boolean result = true;
         String meetingAsJsonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -219,7 +220,7 @@ public class MeetingService  extends IntentService {
         Boolean result = true;
         String jsonString = null;
         String meetingAsJsonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 

@@ -144,6 +144,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
                             progressDialog.dismiss();
                             break;
                             */
+                            break;
                         default:
                             // for DEBUGGING
                             Toast.makeText(this, "Falscher Befehl", Toast.LENGTH_SHORT).show();

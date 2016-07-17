@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
         String GPSAsJsonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 

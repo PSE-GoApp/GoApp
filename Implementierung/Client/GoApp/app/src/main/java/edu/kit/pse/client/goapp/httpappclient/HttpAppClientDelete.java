@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.io.DefaultHttpResponseWriter;
 
 public class HttpAppClientDelete extends HttpAppClient{
 
@@ -21,8 +23,9 @@ public class HttpAppClientDelete extends HttpAppClient{
 		request = new HttpDelete(uri);
 	}
 
-	public CloseableHttpResponse executeRequest() throws ClientProtocolException, IOException
+	public HttpResponse executeRequest() throws ClientProtocolException, IOException
 	{
+
 		return client.execute(request);
 	}
 }

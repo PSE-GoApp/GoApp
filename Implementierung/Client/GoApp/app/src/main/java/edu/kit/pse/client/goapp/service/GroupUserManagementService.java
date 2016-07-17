@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
@@ -28,7 +29,12 @@ public class GroupUserManagementService extends IntentService {
     public GroupUserManagementService() {
         super("GroupUserManagementService");
     }
-
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent, flags, startId);
+                /* Register this SensorEventListener with Android sensor service */
+        return START_STICKY;
+    }
     /**
      * Creates an IntentService. Invoked by your subclass's constructor.
      *
@@ -71,7 +77,7 @@ public class GroupUserManagementService extends IntentService {
      */
     private void doGet(Intent intent) {
         String jasonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -124,7 +130,7 @@ public class GroupUserManagementService extends IntentService {
         Boolean noError = true;
         Boolean result = true;
         String groupUserAsJsonString = null;
-        CloseableHttpResponse closeableHttpResponse = null;
+        HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
