@@ -19,8 +19,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
@@ -98,6 +96,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
     }
 
+    /*
     @Override
     public void onStart() {
         super.onStart();
@@ -122,6 +121,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
             });
         }
     }
+    */
 
     // [START handleSignInResult]
     private void handleSignInResult(GoogleSignInResult result) {
