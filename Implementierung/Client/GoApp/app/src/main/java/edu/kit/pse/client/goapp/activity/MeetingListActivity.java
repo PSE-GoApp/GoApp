@@ -342,7 +342,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         switch (resultData.getString(CommunicationKeys.SERVICE)) {
             case CommunicationKeys.FROM_MEETINGS_SERVICE:
                 switch (resultCode) {
-                    case 202:
+                    case 200:
                         meetingsResultReceiverHandler(resultData);
                         break;
                     case 400:
@@ -444,9 +444,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 String jsonString = resultData.getString(CommunicationKeys.MEETINGS);
 
                 // Todo Test----------------------
-                // TODO List<Meeting> fullMeetingList = meetingListConverter.deserialize(jsonString, (Class<List<Meeting>>) meetings.getClass());
+                List<Meeting> fullMeetingList = meetingListConverter.deserializeList(jsonString, Meeting[].class);
                 // this is a test
-                List<Meeting> fullMeetingList = fullMeeting;
+                // List<Meeting> fullMeetingList = fullMeeting;
                 // TODo TEST-----------------------------------
 
                 // TODO FILTER meetings if they are Rejected from User-------------------------------------------------------------------------------

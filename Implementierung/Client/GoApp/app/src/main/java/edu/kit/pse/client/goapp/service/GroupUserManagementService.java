@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -51,6 +52,7 @@ public class GroupUserManagementService extends IntentService {
      */
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.e("Started ","Service");
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
         switch (command) {
             case CommunicationKeys.GET:
@@ -142,22 +144,26 @@ public class GroupUserManagementService extends IntentService {
 
         URI_GroupUserManagementBuilder uri_groupUserManagementBuilder = new URI_GroupUserManagementBuilder();
 
+
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
         httpAppClientPost.setUri(uri_groupUserManagementBuilder.getURI());
         try {
             httpAppClientPost.setBody(groupUserAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
-            result = false;
+            noError = false;
         }
 
+        Log.e("GroupUserManagement", "bevor starting execute ");
         try {
             // TODO catch 404 (No Internet and Request Time out)
             closeableHttpResponse = httpAppClientPost.executeRequest();
-        } catch (IOException e) {
+            Log.e("GroupUserManagement", "Got result from Server");
+        } catch (Exception e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
-            noError = false;
+            result = false;
         }
+        Log.e("GroupUserManagement", "middlediddle");
 
         if (result && noError) {
             // send the Bundle and  the Status Code from Response

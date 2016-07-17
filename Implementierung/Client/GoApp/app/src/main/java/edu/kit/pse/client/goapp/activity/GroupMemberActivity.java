@@ -41,7 +41,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
     private ServiceResultReceiver mReceiver;
     private int positionClicked;
     private ProgressDialog progressDialog;
-    private ArrayAdapter<User> adapter;
+    private ArrayAdapter adapter;
     private static Group groupInfo;
 
     @Override
@@ -54,6 +54,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
 
         users = groupInfo.getGroupMembers();
         ListView list = (ListView) findViewById(R.id.groupMemberList);
+        adapter = new MyListAdapter();
         list.setAdapter(adapter);
         registerClickCallback();
     }
@@ -140,7 +141,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
      */
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        if (resultCode == 202) {
+        if (resultCode == 200) {
             if (resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_GROUP_USER_MANAGEMENT) {
                 if (resultData.getString(CommunicationKeys.COMMAND)  == CommunicationKeys.DELETE) {
                     Log.e("returned", "groupUserManagementService");

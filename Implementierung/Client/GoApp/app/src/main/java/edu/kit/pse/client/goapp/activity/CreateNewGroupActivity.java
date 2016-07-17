@@ -100,6 +100,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         if (resultCode == 200) {
+            Log.e("Returned","ith good code");
             if (resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_USERS_SERVICE){
                 setListResult(resultData);
             } else if(resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_GROUP_SERVICE) {

@@ -33,7 +33,9 @@ public class ObjectConverter<T> {
 	public <T> List<T> deserializeList(String json, Class<T[]> clazz) {
 		RuntimeTypeAdapterFactory<Meeting> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory.of(Meeting.class)
 				.registerSubtype(Event.class).registerSubtype(Tour.class);
-		T[] arr = new Gson().fromJson(json, clazz);
+		Gson gson = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory).create();
+
+		T[] arr = gson.fromJson(json, clazz);
 		return Arrays.asList(arr);
 	}
 	

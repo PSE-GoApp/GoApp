@@ -225,7 +225,9 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
         } else {
            // Toast.makeText(this, resultCode, Toast.LENGTH_LONG).show();
             showError(resultCode);
-            //progressDialog.dismiss();
+            if (resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_GROUP_SERVICE) {
+                progressDialog.dismiss();
+            }
         }
     }
 
