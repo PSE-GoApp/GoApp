@@ -211,8 +211,7 @@ public class LoginService extends IntentService {
 
 
         URI_LoginBuilder uri_loginBuilder = new URI_LoginBuilder();
-        // uri_loginBuilder.addParameter("token", googeleIdToken);
-        uri_loginBuilder.addParameter("token", "test");
+        uri_loginBuilder.addParameter("token", googeleIdToken);
 
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
 

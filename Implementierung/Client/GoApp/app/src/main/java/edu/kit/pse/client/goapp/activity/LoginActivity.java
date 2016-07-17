@@ -163,11 +163,11 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                     // block Buttons from here NR.42
                     showProgressDialog();
 
-
+                    register();
                     // Todo test -----------------
-                    User newUser = new User(-1, newUserName.getText().toString());
-                    startnewUserService(newUser);
-                    // TOdo register();
+                //    User newUser = new User(-1, newUserName.getText().toString());
+              //       startnewUserService(newUser);
+
                 } else {
                     // TOdo AlertBuilder
                     Toast.makeText(this, "Name muss gesetzt sein", Toast.LENGTH_SHORT).show();
@@ -230,8 +230,9 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
                     goAppRegister();
                 } else {
+
                     hideProgressDialog();
-                    Log.d("LoginActivity", "Register was not successful");
+                    Log.d("LoginActivity", "Register was not successful" +  resultRegist.getStatus().toString());
                 }
                 break;
             default:
