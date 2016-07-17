@@ -43,12 +43,17 @@ public class AlarmReceiver extends BroadcastReceiver {
     private final static String COUNTER = "counter";
 
 
+    /**
+     * onReceive handler. Starts the gps service
+     * @param context from activity
+     * @param intent from activity
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
 
         this.context = context;
 
-        if(!gpsOkUser(context)){
+        if(gpsOkUser(context)){
             return;
         }
 
@@ -110,6 +115,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * gest location
+     * @return users cordinates
+     */
+    //TODO not tested and maybe not ready. To be honest the person who wrote it can not even remember what he did!
     public LatLng getLocation() {
         // Get the location manager
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -158,6 +168,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         return null;
     }
 
+    /**
+     * checks if the user ist ok with sharing gps cordinates
+     * @param context from activity
+     * @return true if he doesn't want to share
+     */
     private boolean gpsOkUser(Context context){
         SharedPreferences sharedpreferences = context.getSharedPreferences(SettingsActivity.GPSENABLED, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -170,6 +185,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * checks if it should continue sending gps cordinates
+     * @param context from activity
+     * @return true if should stop
+     */
     private boolean counter(Context context) {
         SharedPreferences sharedpreferences = context.getSharedPreferences(COUNTER, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -182,9 +202,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * gets the meeting id
+     * @param context from activity
+     * @return the id
+     */
     private int getId(Context context){
         SQLiteDatabase db = context.openOrCreateDatabase("MeetingStarts.db", Context.MODE_PRIVATE, null);
-        final Cursor cursor = db.rawQuery("SELECT MEETING_ID FROM MeetingStarts.db ORDER BY TIMESTAMP ASC LIMIT 1", null);
+        final Cursor cursor = db.rawQuery("SELECT "+ DataBaseHandler.COLUMN_MEETING_ID+" FROM " +DataBaseHandler.TABLE_MEETING + " ORDER BY "+DataBaseHandler.COLUMN_TIMESTAMP+" ASC LIMIT 1", null);
         int sum = -1;
         if (cursor != null) {
             try {
@@ -195,7 +220,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 cursor.close();
             }
         }
-        db.delete("MeetingStarts.db","MEETING_ID =" + sum,null);
+        db.delete("MeetingStarts.db",DataBaseHandler.COLUMN_MEETING_ID + " =" + sum,null);
         return sum;
     }
 
