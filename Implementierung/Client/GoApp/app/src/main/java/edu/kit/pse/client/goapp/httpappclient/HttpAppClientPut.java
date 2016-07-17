@@ -1,14 +1,13 @@
 package edu.kit.pse.client.goapp.httpappclient;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
 
 public class HttpAppClientPut extends HttpAppClient{
 
@@ -18,19 +17,22 @@ public class HttpAppClientPut extends HttpAppClient{
 		super();
 	}
 	public void setUri(URI uri)
-	{
+	{synchronized (this) {
 		request = new HttpPut(uri);
 	    request.addHeader("content-type", "application/json");
 	    request.addHeader("Accept","application/json");
-	}
+	}}
 	public void setBody(String jsonData) throws UnsupportedEncodingException
 	{
-		   StringEntity params = new StringEntity(jsonData);
-		   request.setEntity(params);
-
+		synchronized (this) {
+			StringEntity params = new StringEntity(jsonData);
+			request.setEntity(params);
+		}
 	}
 	public HttpResponse executeRequest() throws ClientProtocolException, IOException
 	{
-		return client.execute(request);
+		synchronized (this) {
+			return client.execute(request);
+		}
 	}
 }

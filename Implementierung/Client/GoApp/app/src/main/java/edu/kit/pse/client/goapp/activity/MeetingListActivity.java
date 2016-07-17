@@ -1,6 +1,8 @@
 package edu.kit.pse.client.goapp.activity;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -38,6 +40,7 @@ import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.Tour;
 import edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.receiver.AlarmReceiver;
 import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.client.goapp.service.MeetingsService;
 import edu.kit.pse.goapp.client.goapp.R;
@@ -159,7 +162,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             secondButton.setImageResource(R.drawable.participant);
             secondButton.setTag(R.id.TAG_IMAGE_DIRECTION, R.drawable.participant);
 
-            // TODO aktuallisiere Alarm receiver
 
         } else {
             if (imageDirection == R.drawable.somemap) {
@@ -466,6 +468,17 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 list.setAdapter(adapter);
                 // TODO Test ?? list.invalidateViews();
                 Log.d(TAG, "Catch GET Form MeetinsService");
+
+                // TODO update AlarmReceiver-----------------------------------------------------------------------------
+                for (Meeting m : meetings) {
+                    long timestamp = m.getTimestamp();
+                    Intent intent = new Intent(context, AlarmReceiver.class);
+                    PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent,0);
+
+                    AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                            timestamp, 60*1000,alarmIntent);
+                }
 
                 break;
             default:

@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -15,6 +16,7 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_LoginBuilder;
+import edu.kit.pse.client.goapp.uri_builder.URI_UserBuilder;
 
 /**
  * Extends the abstract class IntentService and manages the user authorisation.
@@ -243,6 +245,49 @@ public class LoginService extends IntentService {
         if (result && noError) {
 
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+
+            String jUser = null;
+
+            HttpResponse closeableHttpResponse1 = null;
+
+            final ResultReceiver resultReceiver1 = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+
+            Bundle bundle1 = new Bundle();
+            bundle1.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
+            bundle1.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_USER_SERVICE);
+
+            jUser = intent.getStringExtra(CommunicationKeys.USER);
+
+            URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
+            // uri_userBuilder.addParameter("token",);
+
+            httpAppClientPost.setUri(uri_userBuilder.getURI());
+
+
+            try {
+                httpAppClientPost.setBody(jUser);
+            } catch (IOException e) {
+                //Todo Handle Exception. Maybe the String Extra was null
+            }
+
+            try {
+                // TODO catch 404 (No Internet and Request Time out)
+                closeableHttpResponse1 = httpAppClientPost.executeRequest();
+            } catch (IOException e) {
+                // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            }
+
+            String resultJsonString1 = null;
+            // accepted
+            try {
+                resultJsonString1 = EntityUtils.toString(closeableHttpResponse1.getEntity());
+            } catch (Throwable e) {
+                Log.e("error",e.getMessage());
+            }
+            Log.e("e", resultJsonString1);
+
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse1.getStatusLine().getStatusCode(), bundle1);
         }
         else {
             resultReceiver.send(500, bundle);

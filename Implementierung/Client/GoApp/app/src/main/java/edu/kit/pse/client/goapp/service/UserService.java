@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -211,6 +212,7 @@ public class UserService extends IntentService{
      * @param intent Intent
      */
     private void doPost(Intent intent) { // Create a new User
+
         String jUser = null;
         String googleId = null;
 
@@ -225,7 +227,7 @@ public class UserService extends IntentService{
         jUser = intent.getStringExtra(CommunicationKeys.USER);
 
         URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
-
+      // uri_userBuilder.addParameter("token",);
         HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
         httpAppClientPost.setUri(uri_userBuilder.getURI());
 
@@ -243,6 +245,14 @@ public class UserService extends IntentService{
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
         }
 
+        String resultJsonString = null;
+        // accepted
+        try {
+            resultJsonString = EntityUtils.toString(closeableHttpResponse.getEntity());
+        } catch (Throwable e) {
+            Log.e("error",e.getMessage());
+        }
+        Log.e("e", resultJsonString);
 
         // send the Bundle and the Status Code from Response
         resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);

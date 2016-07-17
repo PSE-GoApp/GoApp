@@ -1,12 +1,11 @@
 package edu.kit.pse.client.goapp.httpappclient;
 
-import java.io.IOException;
-import java.net.URI;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+
+import java.io.IOException;
+import java.net.URI;
 
 public class HttpAppClientGet extends HttpAppClient {
 
@@ -20,8 +19,9 @@ public class HttpAppClientGet extends HttpAppClient {
 		request = new HttpGet(uri);
 	}
 	public HttpResponse executeRequest() throws ClientProtocolException, IOException
-	{
+	{synchronized (this) {
 		return client.execute(request);
+	}
 	}
 	
 	

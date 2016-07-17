@@ -264,10 +264,30 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         activityReceiver.setReceiver(this);
         registerIntent.putExtra(CommunicationKeys.RECEICER, activityReceiver);
 
+        User user = new User(-1, newUserName.getText().toString());
+        String jUser = userConvert.serialize(user, User.class);
+        registerIntent.putExtra(CommunicationKeys.USER, jUser);
+
         // Post = Register this User
         registerIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
         registerIntent.putExtra(CommunicationKeys.USER_ID_TOKEN, userIdToken);
         startService(registerIntent);
+
+
+        /* todo
+        String jUser = userConvert.serialize(user, User.class);
+
+        activityReceiver = new ServiceResultReceiver(new Handler());
+        activityReceiver.setReceiver(this);
+
+        Intent newUserIntent = new Intent(this, UserService.class);
+        newUserIntent.putExtra(CommunicationKeys.RECEICER, activityReceiver);
+
+        // Post = Add a New user
+        newUserIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
+        newUserIntent.putExtra(CommunicationKeys.USER, jUser);
+        newUserIntent.putExtra(CommunicationKeys.GOOGLE_ID, googleId);
+        */
     }
 
 
@@ -317,6 +337,23 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                         break;
 
                  }
+                break;
+            case 203:
+
+                // TODO delet this. it is only for testing
+                Toast.makeText(this, "Result code 200 !Test!", Toast.LENGTH_SHORT).show();
+
+                switch (resultData.getString(CommunicationKeys.SERVICE)) {
+
+                    case CommunicationKeys.FROM_LOGIN_SERVICE:
+                        loginResultHandler(resultData);
+                        break;
+
+                    case CommunicationKeys.FROM_USER_SERVICE:
+                        userResultHandler(resultData);
+                        break;
+
+                }
                 break;
             case 400:
                 hideProgressDialog();
@@ -380,7 +417,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 User newUser = new User(-1, newUserName.getText().toString());
                 // {{ setGPS(new GPS(1,1,1));}}
 
-                startnewUserService(newUser);
+                // startnewUserService(newUser);
 
                 break;
 
@@ -432,16 +469,4 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         startService(newUserIntent);
     }
 
-    public void cheatToActivity(View view) {
-        User testUser = new User(42424269, "KANSE'S DICK");
-
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("userName",testUser.getName());
-        editor.putInt("userId", testUser.getId());
-
-        editor.commit();
-
-        MeetingListActivity.start(this);
-    }
 }
