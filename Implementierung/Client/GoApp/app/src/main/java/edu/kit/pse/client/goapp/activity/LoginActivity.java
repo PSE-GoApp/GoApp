@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
             userIdToken = acct.getIdToken();
             googleId = acct.getId();
 
-            // TODO goAppLogin();
+            goAppLogin();
 
 
 

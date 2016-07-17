@@ -24,10 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
@@ -120,8 +117,9 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
                         Toast.makeText(this, "Group created\n GroupId: " + createdGroup.getId(), Toast.LENGTH_SHORT).show();
 
                         // TODo
-                        // sendUsers();
-                        progressDialog.dismiss();
+                        sendUsers();
+                        Log.e("getting users", "calling users");
+                       // progressDialog.dismiss();
                         break;
                     default:
                         // for DEBUGGING
@@ -131,9 +129,10 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
                 if(resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_GROUP_USER_MANAGEMENT) {
                     switch (resultData.getString(CommunicationKeys.COMMAND)) {
 
-                        /*TODO -------------------------------------------------------------------------------------
                         case CommunicationKeys.POST:
-
+                            Log.e("Made","It User");
+                            sendUsers();
+                            /*
                             String json = resultData.getString(CommunicationKeys.USER);
 
                             User user = userConverter.deserialize(json, User.class);
@@ -144,10 +143,10 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
                             // sendUsers();
                             progressDialog.dismiss();
                             break;
+                            */
                         default:
                             // for DEBUGGING
                             Toast.makeText(this, "Falscher Befehl", Toast.LENGTH_SHORT).show();
-                            */
                     }
                 }
             }
@@ -160,7 +159,25 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
      * sends the users
      */
     private void sendUsers() {
-        for (User u : usersAdded) {
+        if (usersAdded.size() > 0){
+            Intent i = new Intent(this, GroupUserManagementService.class);
+            mReceiver = new ServiceResultReceiver(new Handler());
+            mReceiver.setReceiver(this);
+            i.putExtra(CommunicationKeys.RECEICER, mReceiver);
+            i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
+
+            GroupMember newMember = new GroupMember();
+            newMember.setUserId(usersAdded.get(0).getId());
+            usersAdded.remove(0);
+            newMember.setGroupId(createdGroup.getId());
+            ObjectConverter<GroupMember> groupMemberConverter = new ObjectConverter<>();
+            String jsonObj = groupMemberConverter.serialize(newMember, GroupMember.class);
+
+            i.putExtra(CommunicationKeys.USER, jsonObj);
+            Log.e("Started"," sending");
+            startService(i);
+        }
+        /*for (User u : usersAdded) {
             Intent i = new Intent(this, GroupUserManagementService.class);
             mReceiver = new ServiceResultReceiver(new Handler());
             mReceiver.setReceiver(this);
@@ -173,8 +190,10 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
             ObjectConverter<GroupMember> groupMemberConverter = new ObjectConverter<>();
             String jsonObj = groupMemberConverter.serialize(newMember, GroupMember.class);
 
+            i.putExtra(CommunicationKeys.USER, jsonObj);
+            Log.e("Started"," sending");
             startService(i);
-        }
+        }*/
     }
 
     /**

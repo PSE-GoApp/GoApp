@@ -26,6 +26,7 @@ import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.GroupUserManagementService;
 import edu.kit.pse.goapp.client.goapp.R;
@@ -41,7 +42,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
     private int positionClicked;
     private ProgressDialog progressDialog;
     private ArrayAdapter<User> adapter;
-    private static int groupId;
+    private static Group groupInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +50,19 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_group_member);
         menu_button = (ImageButton) findViewById(R.id.menu_group_members);
         menu_button.setOnClickListener(this);
-        populateListView();
+
+
+        users = groupInfo.getGroupMembers();
+        ListView list = (ListView) findViewById(R.id.groupMemberList);
+        list.setAdapter(adapter);
         registerClickCallback();
     }
 
     /**
      * creates the listView
      */
+
+    /* Dont need it anymore
     private void populateListView() {
         Intent i = new Intent(this, GroupUserManagementService.class);
         mReceiver = new ServiceResultReceiver(new Handler());
@@ -65,6 +72,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
         i.putExtra(CommunicationKeys.GROUP_ID,groupId);
         startService(i);
     }
+    */
 
     /**
      * onClick listener for the list
@@ -133,16 +141,20 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         if (resultCode == 202) {
-            if (resultData.getString(CommunicationKeys.SERVICE) == "GroupsService"){
-                // TODO setListResult(resultData);
-            } else if(resultData.getString(CommunicationKeys.SERVICE) == "GroupUserManagementService"){
-                Log.e("returned","groupService");
-                progressDialog.dismiss();
-                users.remove(positionClicked);
-                adapter.notifyDataSetChanged();
+            if (resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_GROUP_USER_MANAGEMENT) {
+                if (resultData.getString(CommunicationKeys.COMMAND)  == CommunicationKeys.DELETE) {
+                    Log.e("returned", "groupUserManagementService");
+                    progressDialog.dismiss();
+                    users.remove(positionClicked);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    showError(resultCode);
+                    progressDialog.dismiss();
+                }
             }
         } else {
             showError(resultCode);
+            progressDialog.dismiss();
         }
     }
 
@@ -203,8 +215,8 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
      * Starts the Activity
      * @param activity: the activity that is calling it
      */
-    public static void start(Activity activity, int groupID) {
-        groupId = groupID;
+    public static void start(Activity activity, Group group) {
+        groupInfo = group;
         Intent intent = new Intent(activity, GroupMemberActivity.class);
         activity.startActivity(intent);
     }

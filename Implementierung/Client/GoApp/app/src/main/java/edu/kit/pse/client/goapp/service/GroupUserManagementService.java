@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
-import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.uri_builder.URI_GroupUserManagementBuilder;
 
 /**
@@ -54,11 +54,10 @@ public class GroupUserManagementService extends IntentService {
                 // TODO PRIO B ?
                 break;
             case CommunicationKeys.PUT:
-                doPut(intent);
+               //  doPut(intent);
                 break;
             case CommunicationKeys.POST: // Add a User in the Group
-                // TODO nicht löschen Grischa Fragen ob man da UserId und GroupId mitgibt, wenn ja wie und welche reinfolge
-                // TODO Benutzer zu einer Gruppe hinzufügen
+                doPost(intent);
                 break;
             default:
                 break;
@@ -117,40 +116,48 @@ public class GroupUserManagementService extends IntentService {
     }
 
     /**
-     * Updates the group members.
+     * Add the group members.
      *
      * @param intent Intent
      */
-    private void doPut(Intent intent) {
+    private void doPost(Intent intent) {
+        Boolean noError = true;
+        Boolean result = true;
         String groupUserAsJsonString = null;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
         Bundle bundle = new Bundle();
-        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
+        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_USER_MANAGEMENT);
 
-        groupUserAsJsonString = intent.getStringExtra(CommunicationKeys.GROUP);
+        groupUserAsJsonString = intent.getStringExtra(CommunicationKeys.USER);
 
         URI_GroupUserManagementBuilder uri_groupUserManagementBuilder = new URI_GroupUserManagementBuilder();
 
-        HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
-        httpAppClientPut.setUri(uri_groupUserManagementBuilder.getURI());
+        HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
+        httpAppClientPost.setUri(uri_groupUserManagementBuilder.getURI());
         try {
-            httpAppClientPut.setBody(groupUserAsJsonString);
+            httpAppClientPost.setBody(groupUserAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
+            result = false;
         }
 
         try {
             // TODO catch 404 (No Internet and Request Time out)
-            closeableHttpResponse = httpAppClientPut.executeRequest();
+            closeableHttpResponse = httpAppClientPost.executeRequest();
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            noError = false;
         }
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        if (result && noError) {
+            // send the Bundle and  the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            resultReceiver.send(500, bundle);
+        }
     }
 }

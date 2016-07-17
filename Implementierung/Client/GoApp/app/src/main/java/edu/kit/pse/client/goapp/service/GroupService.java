@@ -134,6 +134,7 @@ public class GroupService extends IntentService {
      * @param intent Intent
      */
     private void doDelete(Intent intent) {
+        Boolean result = true;
         CloseableHttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
@@ -147,7 +148,7 @@ public class GroupService extends IntentService {
 
         if (groupId != -1) {
             URI_GroupBuilder uri_groupBuilder = new URI_GroupBuilder();
-            uri_groupBuilder.addParameter(CommunicationKeys.MEETING_ID, Integer.toString(groupId));
+            uri_groupBuilder.addParameter(CommunicationKeys.GROUP_ID, Integer.toString(groupId));
 
             HttpAppClientDelete httpAppClientDelete = new HttpAppClientDelete();
             httpAppClientDelete.setUri(uri_groupBuilder.getURI());
@@ -157,10 +158,16 @@ public class GroupService extends IntentService {
                 closeableHttpResponse = httpAppClientDelete.executeRequest();
             } catch (IOException e) {
                 // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+                result = false;
             }
 
-            // send the Bundle and the Status Code from Response
-            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+            if (result) {
+                // send the Bundle and the Status Code from Response
+                resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+            } else {
+                // StatusCode 500 is an unexpected Error. Here no Meeting ID in Intent
+                resultReceiver.send(500, bundle);
+            }
         } else {
             // Send a empty result with 500 as StatusCode
 

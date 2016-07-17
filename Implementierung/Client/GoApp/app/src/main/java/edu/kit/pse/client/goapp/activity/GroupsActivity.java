@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,8 +156,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                                     int position, long id) {
 
                 Group clickedGroup = groups.get(position);
-                String message = clickedGroup.getName();
-                GroupMemberActivity.start(GroupsActivity.this, clickedGroup.getId());
+                GroupMemberActivity.start(GroupsActivity.this, clickedGroup);
             }
         });
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -225,8 +223,9 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
                 adapter.notifyDataSetChanged();
             }
         } else {
-            Toast.makeText(this, resultCode, Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, resultCode, Toast.LENGTH_LONG).show();
             showError(resultCode);
+            //progressDialog.dismiss();
         }
     }
 
@@ -261,7 +260,9 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
     private void setListResult(Bundle resultData) {
 
         String json = resultData.getString(CommunicationKeys.GROUPS);
-        groups = groupsConverter.deserializeList(json, Group[].class);
+        List<Group> grouptemp = new ArrayList<Group>();
+        grouptemp = groupsConverter.deserializeList(json, Group[].class);
+        groups.addAll(grouptemp);
         adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.groupsList);
         list.setAdapter(adapter);
