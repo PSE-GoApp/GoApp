@@ -19,6 +19,11 @@ public class HttpAppClientPost extends HttpAppClient{
 	{
 		super();
 	}
+
+	/**
+	 * sets uri builder
+	 * @param uri
+     */
 	public void setUri(URI uri)
  	{  synchronized (this) {
 		request = new HttpPost(uri);
@@ -26,12 +31,25 @@ public class HttpAppClientPost extends HttpAppClient{
 		request.addHeader("Accept", "application/json");
 	}
 	}
+
+	/**
+	 * sets the body
+	 * @param jsonData jsonString
+	 * @throws UnsupportedEncodingException
+     */
 	public void setBody(String jsonData) throws UnsupportedEncodingException
 	{ synchronized (this) {
 		StringEntity params = new StringEntity(jsonData);
 		request.setEntity(params);
 	}
 	}
+
+	/**
+	 * execute request
+	 * @return http responce
+	 * @throws ClientProtocolException
+	 * @throws IOException
+     */
 	public HttpResponse executeRequest() throws ClientProtocolException, IOException
 	{
 		synchronized (this) {		Log.e("try"," trysend");

@@ -12,9 +12,16 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
+/**
+ * abstract class for the hhttp client
+ */
 public abstract class HttpAppClient {
 
      protected static DefaultHttpClient client;
+
+    /**
+     * http client
+     */
     public HttpAppClient() {
         synchronized (this) {
             if (client == null) {
