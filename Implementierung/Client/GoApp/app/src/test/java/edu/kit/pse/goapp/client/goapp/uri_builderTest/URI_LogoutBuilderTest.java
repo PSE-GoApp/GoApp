@@ -19,7 +19,7 @@ public class URI_LogoutBuilderTest {
         URI uri = builder.getURI();
         URI testUri = null;
         try {
-            testUri = new URI("http://localhost:8080/GoAppServer/Logout");
+            testUri = new URI("https://i43pc164.ipd.kit.edu/PSESoSe16GoGruppe2/GoAppServer/Logout");
         } catch (java.net.URISyntaxException e){
             //cant happen
         }
@@ -33,7 +33,7 @@ public class URI_LogoutBuilderTest {
         URI uri = builder.getURI();
         URI testUri= null;
         try {
-            testUri = new URI("http://localhost:8080/GoAppServer/Logout?testKey=testValue");
+            testUri = new URI("https://i43pc164.ipd.kit.edu/PSESoSe16GoGruppe2/GoAppServer/Logout?testKey=testValue");
         } catch (java.net.URISyntaxException e){
             //cant happen
         }

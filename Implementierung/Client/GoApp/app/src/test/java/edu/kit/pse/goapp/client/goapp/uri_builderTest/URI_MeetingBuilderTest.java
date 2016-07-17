@@ -19,7 +19,7 @@ public class URI_MeetingBuilderTest {
         URI uri = builder.getURI();
         URI testUri = null;
         try {
-            testUri = new URI("http://localhost:8080/GoAppServer/Meeting");
+            testUri = new URI("https://i43pc164.ipd.kit.edu/PSESoSe16GoGruppe2/GoAppServer/Meeting");
         } catch (java.net.URISyntaxException e){
             //cant happen
         }
@@ -33,7 +33,7 @@ public class URI_MeetingBuilderTest {
         URI uri = builder.getURI();
         URI testUri= null;
         try {
-            testUri = new URI("http://localhost:8080/GoAppServer/Meeting?testKey=testValue");
+            testUri = new URI("https://i43pc164.ipd.kit.edu/PSESoSe16GoGruppe2/GoAppServer/Meeting?testKey=testValue");
         } catch (java.net.URISyntaxException e){
             //cant happen
         }
