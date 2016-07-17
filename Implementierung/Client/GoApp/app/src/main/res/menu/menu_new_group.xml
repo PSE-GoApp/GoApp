@@ -23,7 +23,7 @@
 
     <item
         android:id="@+id/about_new_group"
-        android:title="@string/menu_about"
+        android:title="@string/about"
         />
 
 </menu>

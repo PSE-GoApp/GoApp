@@ -88,7 +88,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
     private boolean nameGiven(){
         String name = groupName.getText().toString();
         if (name.matches("")) {
-            Toast.makeText(this, "You did not enter a Group Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Gruppenname war nicht eingetragen", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
