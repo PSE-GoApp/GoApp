@@ -326,31 +326,30 @@ public class MapActivity extends AppCompatActivity
             }
         }*/
         mMap.clear();
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
         if (gps.size() == 0) {
-            Marker mark = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(0, 0))
-                    .title("Marker"));
-            marker.add(mark);
+                Marker mark = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(lat, lng))
+                        .title("Treffpunkt"));
+                marker.add(mark);
+                builder.include(new LatLng(lat, lng));
+
         } else {
             for (GPS g : gps) {
                 Marker mark = mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(g.getX(), g.getY()))
-                        .title("Marker"));
+                        .title("Freund"));
                 marker.add(mark);
 
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                if (lat != 0) {
-                    Log.e("Something", "is not working");
-                    builder.include(new LatLng(lat, lng));
-                }
                 for (Marker m : marker) {
                     builder.include(m.getPosition());
                 }
-                LatLngBounds bounds = builder.build();
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 30);
-                mMap.moveCamera(cu);
+
             }
         }
+        LatLngBounds bounds = builder.build();
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 30);
+        mMap.moveCamera(cu);
     }
 
     /**
