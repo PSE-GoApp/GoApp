@@ -58,11 +58,6 @@ public class AlarmReceiver extends BroadcastReceiver {
             editor.putInt(COUNTER, 1);
             editor.commit();
 
-            /*
-            Intent intent = new Intent(context, AlarmReceiver.class);
-             alarmIntent = PendingIntent.getBroadcast(context, 0, intent,0);
-             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 2*60*1000,alarmIntent);
-             */
 
             //
             int id = getId(context);
@@ -200,6 +195,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 cursor.close();
             }
         }
+        db.delete("MeetingStarts.db","MEETING_ID =" + sum,null);
         return sum;
     }
 
