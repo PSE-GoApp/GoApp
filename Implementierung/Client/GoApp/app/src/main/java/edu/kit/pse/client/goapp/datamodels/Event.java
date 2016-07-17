@@ -18,7 +18,7 @@ public class Event extends Meeting{
 			Meeting m = (Meeting) obj;
 			if (m.getMeetingId() == this.getMeetingId() && m.getPlace().equals(this.getPlace()) && m.getCreator().equals(this.getCreator())
 					&& m.getDuration() == this.getDuration() && m.getName().equals(this.getName())
-					&& m.getParticipants().equals(this.getParticipants()) && equals(m.getTimestamp() == this.getTimestamp())) {
+					&& m.getParticipants().equals(this.getParticipants()) && m.getTimestamp() == this.getTimestamp()) {
 				return true;
 			}	
 

@@ -18,7 +18,7 @@ public class URI_GPS_BuilderTest {
         URI uri = builder.getURI();
         URI testUri = null;
         try {
-            testUri = new URI("http://localhost:8080/GoAppServer/Gps");
+            testUri = new URI("https://i43pc164.ipd.kit.edu/PSESoSe16GoGruppe2/GoAppServer/Gps");
         } catch (java.net.URISyntaxException e){
             //cant happen
         }
@@ -32,7 +32,7 @@ public class URI_GPS_BuilderTest {
         URI uri = builder.getURI();
         URI testUri= null;
         try {
-            testUri = new URI("http://localhost:8080/GoAppServer/Gps?testKey=testValue");
+            testUri = new URI("https://i43pc164.ipd.kit.edu/PSESoSe16GoGruppe2/GoAppServer/Gps?testKey=testValue");
         } catch (java.net.URISyntaxException e){
             //cant happen
         }

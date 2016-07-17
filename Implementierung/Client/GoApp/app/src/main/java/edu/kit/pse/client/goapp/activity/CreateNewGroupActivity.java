@@ -85,7 +85,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
     private boolean nameGiven(){
         String name = groupName.getText().toString();
         if (name.matches("")) {
-            Toast.makeText(this, "You did not enter a Group Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Gruppenname war nicht eingetragen", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
@@ -299,13 +299,13 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
                 MeetingListActivity.start(this);
                 return true;
             case R.id.neuer_new_group:
-                //TerminActivity.start(this);
+                CreateNewMeetingActivity.start(this);
                 return true;
             case R.id.groups_new_group:
                 GroupsActivity.start(this);
                 return true;
             case R.id.about_new_group:
-                // AboutActivity.start(this);
+                AboutActivity.start(this);
                 return true;
             default:
                 return false;

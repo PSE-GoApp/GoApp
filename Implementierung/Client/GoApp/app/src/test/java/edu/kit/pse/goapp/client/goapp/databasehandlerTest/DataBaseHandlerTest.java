@@ -1,4 +1,4 @@
-package edu.kit.pse.goapp.client.goapp;
+package edu.kit.pse.goapp.client.goapp.databasehandlerTest;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

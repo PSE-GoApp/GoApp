@@ -240,7 +240,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
                 MeetingListActivity.start(this);
                 return true;
             case R.id.neuer_termin_teilnehmer:
-                //TerminActivity.start(this);
+                CreateNewMeetingActivity.start(this);
                 return true;
             case R.id.groups_teilnehmer:
                 GroupsActivity.start(this);
@@ -249,7 +249,7 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
                 SettingsActivity.start(this);
                 return true;
             case R.id.about_teilnehmer:
-               // AboutActivity.start(this);
+               AboutActivity.start(this);
                 return true;
             default:
                 return false;

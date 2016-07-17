@@ -389,13 +389,13 @@ public class MapActivity extends AppCompatActivity
                 MeetingListActivity.start(this);
                 return true;
             case R.id.neuer_termin_groups:
-                // TerminActivity.start(this);
+                CreateNewMeetingActivity.start(this);
                 return true;
             case R.id.settings_groups:
-                // SettingsActivity.start(this);
+                SettingsActivity.start(this);
                 return true;
             case R.id.about_groups:
-                // AboutActivity.start(this);
+                AboutActivity.start(this);
                 return true;
             default:
                 return false;
