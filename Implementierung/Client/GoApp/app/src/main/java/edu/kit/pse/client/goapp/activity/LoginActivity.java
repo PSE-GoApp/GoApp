@@ -29,7 +29,7 @@ import edu.kit.pse.client.goapp.service.UserService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 /**
- * Created by kansei on 10.07.16.
+ * Created by PSE on 10.07.16.
  */
 public class LoginActivity extends AppCompatActivity implements  ServiceResultReceiver.Receiver, GoogleApiClient.OnConnectionFailedListener,  View.OnClickListener{
 
@@ -50,6 +50,10 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
     private EditText newUserName;
 
+    /**
+     * Wir aufgerufen wen diese Activity erstellt wird
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,6 +150,10 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
     // [END handleSignInResult]
 
 
+    /**
+     * click handler
+     * @param v view was angeklickt wurde
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -176,18 +184,29 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         }
     }
 
+    /**
+     * erstellt ein Google Service um sich anzumelden
+     */
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(loginGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    /**
+     * erstellt ein google Service, um sich im Google anzumelden. Das Ergebnis wir anders gehand habt
+     */
     private void register() {
         Intent registerIntent = Auth.GoogleSignInApi.getSignInIntent(loginGoogleApiClient);
         startActivityForResult(registerIntent, RC_REGISTER);
     }
 
 
-    // [START onActivityResult]
+    /**
+     *  START onActivityResult from Google
+     * @param requestCode request Code for the Google
+     * @param resultCode result code from Google
+     * @param data result Data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -243,7 +262,9 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         // [END onActivityResult]
 
 
-
+    /**
+     * Starte ein Login Service für die GoApp
+     */
     public void goAppLogin() {
         // Activity still blockt from Blocker nr. 12,7
 
@@ -257,6 +278,9 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         startService(loginIntent);
     }
 
+    /**
+     * Startet ein Login Service um sich zu registiern
+     */
     public void goAppRegister() {
 
         Intent registerIntent = new Intent(this, LoginService.class);
@@ -274,7 +298,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         startService(registerIntent);
 
 
-        /* todo
+        /*
         String jUser = userConvert.serialize(user, User.class);
 
         activityReceiver = new ServiceResultReceiver(new Handler());
@@ -291,7 +315,10 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
     }
 
 
-
+    /**
+     * Bei Gooogle Connection fail create a Log
+     * @param connectionResult connection result
+     */
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
@@ -299,6 +326,9 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
+    /**
+     * show if a Progress Dialog doesn't exist
+     */
     private void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -309,6 +339,9 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         mProgressDialog.show();
     }
 
+    /**
+     * hide a existing Progress Dialog
+     */
     private void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.hide();
@@ -316,7 +349,11 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
     }
 
 
-
+    /**
+     * Händelt alle Service Ergebnis
+     * @param resultCode
+     * @param resultData
+     */
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
 
@@ -378,6 +415,10 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         }
     }
 
+    /**
+     * UserService result handler
+     * @param resultData result data
+     */
     private void userResultHandler(Bundle resultData) {
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.GET:
@@ -404,6 +445,10 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         }
     }
 
+    /**
+     * Login Service result handler
+     * @param resultData
+     */
     private void loginResultHandler(Bundle resultData) {
 
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
@@ -451,6 +496,10 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
     }
 
+    /**
+     *
+     * @param user
+     */
     private void startnewUserService(User user) {
         // Activity still blockt from Blocker nr. 42
 

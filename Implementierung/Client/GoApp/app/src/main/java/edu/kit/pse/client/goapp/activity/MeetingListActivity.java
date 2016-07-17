@@ -60,6 +60,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     private User myUser;
     private List<Meeting> meetings = new ArrayList<>();
 
+    /**
+     * wird beim aufruf erstellt
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,11 +93,19 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     }
 
 
+    /**
+     * start Service method
+     * @param activity
+     */
     public static void start(Activity activity) {
         Intent intent = new Intent(activity, MeetingListActivity.class);
         activity.startActivity(intent);
     }
 
+    /**
+     * show pop up
+     * @param v view
+     */
     private void showPopUp(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(MeetingListActivity.this);
@@ -102,6 +114,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         popup.show();
     }
 
+    /**
+     * onClick handler
+     * @param v view that was clicked
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.menu_termine) {
@@ -109,6 +125,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    /**
+     * First Button click handler
+     * @param view
+     */
     public void meetingList_FirstButtonOnClickHandler(View view) {
 
         RelativeLayout meetingRow = (RelativeLayout) view.getParent();
@@ -184,6 +204,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     }
 
 
+    /**
+     * Secound button click handler
+     * @param view the view that was clicked
+     */
     public void meetingList_SecondButtonClickHandler(View view) {
 
         RelativeLayout meetingRow = (RelativeLayout) view.getParent();
@@ -215,6 +239,11 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    /**
+     * Alert Dialog aske "if are you sure?"
+     * @param m Meeting
+     * @return Created dialog
+     */
     private android.support.v7.app.AlertDialog buildCancelAlertDialog(Meeting m) {
         final Meeting meeting = m;
         android.support.v7.app.AlertDialog.Builder cancelADB = new android.support.v7.app.AlertDialog.Builder(context);
@@ -239,6 +268,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         return cancelADB.create();
     }
 
+    /**
+     * if a Meeting rejected
+     * @param meeting meeting that rejeceted
+     */
     public void rejectMeeting(Meeting meeting) {
         showProgressDialog();
 
@@ -268,6 +301,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     }
 
 
+    /**
+     * show Meeting info
+     * @param v
+     */
     public void showMeetingInfo(View v) {
         RelativeLayout meetingRow = (RelativeLayout) v.getParent();
         Meeting meeting = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
