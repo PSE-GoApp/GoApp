@@ -19,6 +19,12 @@ public class HttpAppClientDelete extends HttpAppClient{
 		request = new HttpDelete(uri);
 	}
 
+	/**
+	 * http request for delete
+	 * @return http responce
+	 * @throws ClientProtocolException
+	 * @throws IOException
+     */
 	public HttpResponse executeRequest() throws ClientProtocolException, IOException
 	{synchronized (this) {
 
