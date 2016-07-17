@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
     private ArrayAdapter adapter;
     private ArrayAdapter adapter2;
     private Button createButton;
+    private ImageButton menuButton;
 
 
     /**
@@ -71,6 +73,8 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
         groupConverter = new ObjectConverter<>();
         createButton = (Button) findViewById(R.id.button_create_group);
         createButton.setOnClickListener(this);
+        menuButton = (ImageButton) findViewById(R.id.menu_new_group);
+        menuButton.setOnClickListener(this);
         //set second list
         // TODO ----------------------------------------------------------------------------------------------------------------------
         getUsers();
@@ -178,6 +182,8 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
             i.putExtra(CommunicationKeys.USER, jsonObj);
             Log.e("Started"," sending");
             startService(i);
+        } else {
+            GroupsActivity.start(this);
         }
         /*for (User u : usersAdded) {
             Intent i = new Intent(this, GroupUserManagementService.class);
