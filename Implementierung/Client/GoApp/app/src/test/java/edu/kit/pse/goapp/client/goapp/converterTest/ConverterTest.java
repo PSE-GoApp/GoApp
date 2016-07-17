@@ -1,4 +1,4 @@
-package edu.kit.pse.goapp.client.goapp;
+package edu.kit.pse.goapp.client.goapp.converterTest;
 
 import org.junit.Assert.*;
 import org.junit.Test;
