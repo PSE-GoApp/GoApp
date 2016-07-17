@@ -8,10 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.activity.SettingsActivity;
+import edu.kit.pse.client.goapp.databasehandler.DataBaseHandler;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_GPS_Builder;
 
@@ -62,7 +66,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
             //
             int id = getId(context);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1253, intent, 0);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             alarmManager.cancel(pendingIntent);
         }
@@ -184,7 +188,19 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private int getId(Context context){
-        return 0;
+        SQLiteDatabase db = context.openOrCreateDatabase("MeetingStarts.db", Context.MODE_PRIVATE, null);
+        final Cursor cursor = db.rawQuery("SELECT MEETING_ID FROM MeetingStarts.db ORDER BY TIMESTAMP ASC LIMIT 1", null);
+        int sum = -1;
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    sum = cursor.getInt(0);
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        return sum;
     }
 
     // Listener class to get coordinates
