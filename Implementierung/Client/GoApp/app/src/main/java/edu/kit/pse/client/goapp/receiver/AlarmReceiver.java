@@ -1,9 +1,12 @@
 package edu.kit.pse.client.goapp.receiver;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -21,6 +24,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
+import edu.kit.pse.client.goapp.activity.SettingsActivity;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_GPS_Builder;
 
@@ -32,12 +36,36 @@ public class AlarmReceiver extends BroadcastReceiver {
     private LocationManager locationManager;
     Context context;
     Double lat, lon;
+    private final static String COUNTER = "counter";
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
         this.context = context;
+
+        if(!gpsOkUser(context)){
+            return;
+        }
+
+        if(counter(context)){
+            SharedPreferences sharedpreferences = context.getSharedPreferences(COUNTER, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putInt(COUNTER, 1);
+            editor.commit();
+
+            /*
+            Intent intent = new Intent(context, AlarmReceiver.class);
+             alarmIntent = PendingIntent.getBroadcast(context, 0, intent,0);
+             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 2*60*1000,alarmIntent);
+             */
+
+            //
+            int id = getId(context);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1253, intent, 0);
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.cancel(pendingIntent);
+        }
 
         Boolean noError = true;
         Boolean result = true;
@@ -131,6 +159,33 @@ public class AlarmReceiver extends BroadcastReceiver {
         return null;
     }
 
+    private boolean gpsOkUser(Context context){
+        SharedPreferences sharedpreferences = context.getSharedPreferences(SettingsActivity.GPSENABLED, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        int i = sharedpreferences.getInt(SettingsActivity.GPSENABLED, 3);
+        if (i == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private boolean counter(Context context) {
+        SharedPreferences sharedpreferences = context.getSharedPreferences(COUNTER, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        int i = sharedpreferences.getInt(COUNTER, 121);
+        if (i > 120){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private int getId(Context context){
+        return 0;
+    }
 
     // Listener class to get coordinates
     /*
