@@ -350,7 +350,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
                 String jGroupsList = resultData.getString(CommunicationKeys.GROUPS);
 
-                groups = groupsConverter.deserializeList(jGroupsList, Group[].class);
+                groups = groupsConverter.deserializeList(jGroupsList, Group.class);
 
                 setGroupsSpinner();
                 break;

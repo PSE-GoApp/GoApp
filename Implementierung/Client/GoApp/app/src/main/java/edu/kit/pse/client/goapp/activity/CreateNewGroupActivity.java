@@ -208,7 +208,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
             String jsonObj = resultData.getString(CommunicationKeys.USERS);
             ObjectConverter<List<User>> mConverter = new ObjectConverter<>();
             List<User> userTerm = new ArrayList<User>();
-            userTerm = mConverter.deserializeList ( jsonObj,User[].class);
+            userTerm = mConverter.deserializeList ( jsonObj,User.class);
             users.addAll(userTerm);
             setLists();
         }

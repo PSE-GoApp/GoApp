@@ -263,7 +263,7 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
 
         String json = resultData.getString(CommunicationKeys.GROUPS);
         List<Group> grouptemp = new ArrayList<Group>();
-        grouptemp = groupsConverter.deserializeList(json, Group[].class);
+        grouptemp = groupsConverter.deserializeList(json, Group.class);
         groups.addAll(grouptemp);
         adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.groupsList);

@@ -444,9 +444,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 String jsonString = resultData.getString(CommunicationKeys.MEETINGS);
 
                 // Todo Test----------------------
-               //  List<Meeting> fullMeetingList = meetingListConverter.deserializeList(jsonString, Meeting[].class);
+                List<Meeting> fullMeetingList = meetingListConverter.deserializeList(jsonString, Meeting.class);
                 // this is a test
-                List<Meeting> fullMeetingList = fullMeeting;
+           // List<Meeting> fullMeetingList = fullMeeting;
                 // TODo TEST-----------------------------------
 
                 // TODO FILTER meetings if they are Rejected from User-------------------------------------------------------------------------------
