@@ -258,7 +258,6 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
      * sets the list of groups
      * @param resultData all the data from the service
      */
-
     private void setListResult(Bundle resultData) {
 
         String json = resultData.getString(CommunicationKeys.GROUPS);
@@ -278,6 +277,13 @@ public class GroupsActivity extends AppCompatActivity  implements View.OnClickLi
             super(GroupsActivity.this, R.layout.groups_item, groups);
         }
 
+        /**
+         * Returns the view
+         * @param position position of the view
+         * @param convertView view
+         * @param parent ViewGroup
+         * @return itemView view
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             // Make sure we have a view to work with (may have been given null)
