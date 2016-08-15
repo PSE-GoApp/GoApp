@@ -2,6 +2,9 @@ package edu.kit.pse.goapp.client.goapp;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.GPS;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
@@ -63,5 +66,34 @@ public class ConverterTest {
         String json = converter.serialize(expected,Meeting.class);
         Meeting meeting = converter.deserialize(json,Meeting.class);
         assertEquals(expected, meeting);
+    }
+
+    @Test
+    public void testJsonToList() {
+        String json = "[{\"type\":\"Tour\",\"center\":{\""
+                + "participants\":[],\"place\":{\"x\":5.0,\"y\":6.0,\"z\":7.0}},\"meetingId\""
+                + ":4,\"name\":\"testTour\",\"place\":{\"x\":5.0,\"y\":6.0,\"z\":7.0},"
+                + "\"timestamp\":8,\"duration\":9,\"creator"
+                + "\":{\"participantId\":2,\"meetingId\":3,\"user\":{\"userId\":1,\"name\":\"testUser\",\"notificationEnabled\":false,\"meetings\":[],\"groups\":[]},\"confirmation\":"
+                +"\"CONFIRMED\"},\"participants\":[]},"
+                +"{\"type\":\"Tour\",\"center\":{\""
+                + "participants\":[],\"place\":{\"x\":5.0,\"y\":6.0,\"z\":7.0}},\"meetingId\""
+                + ":5,\"name\":\"otherTour\",\"place\":{\"x\":5.0,\"y\":6.0,\"z\":7.0},"
+                + "\"timestamp\":8,\"duration\":9,\"creator"
+                + "\":{\"participantId\":2,\"meetingId\":3,\"user\":{\"userId\":1,\"name\":\"testUser\",\"notificationEnabled\":false,\"meetings\":[],\"groups\":[]},\"confirmation\":"
+                +"\"CONFIRMED\"},\"participants\":[]}]";
+        User user = new User(1,"testUser");
+        GPS gps = new GPS(5,6,7);
+        Participant participant = new Participant(2,3,user, MeetingConfirmation.CONFIRMED);
+        Meeting meet1 = new Tour(4,"testTour",gps,8,9,participant);
+        Meeting meet2 = new Tour(5,"otherTour",gps,8,9,participant);
+        ArrayList<Meeting> expected= new ArrayList<Meeting>();
+        expected.add(meet1);
+        expected.add(meet2);
+
+        ObjectConverter converter = new ObjectConverter();
+        List<Meeting> list = converter.deserializeList(json,Meeting.class);
+        assertEquals(expected,list);
+
     }
 }
