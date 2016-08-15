@@ -244,7 +244,7 @@ public class LoginService extends IntentService {
 
         if (result && noError) {
 
-            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+            // resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
 
             String jUser = null;
 
@@ -287,7 +287,7 @@ public class LoginService extends IntentService {
             Log.e("e", resultJsonString1);
 
             // send the Bundle and the Status Code from Response
-            resultReceiver.send(closeableHttpResponse1.getStatusLine().getStatusCode(), bundle1);
+            resultReceiver1.send(closeableHttpResponse1.getStatusLine().getStatusCode(), bundle1);
         }
         else {
             resultReceiver.send(500, bundle);

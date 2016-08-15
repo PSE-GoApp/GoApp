@@ -232,6 +232,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
                 } else {
                     hideProgressDialog();
+                    Toast.makeText(this, "Google Login war nicht erfolgreich", Toast.LENGTH_SHORT).show();
                     // Todo Signed out show unauthenticated UI.
                     Log.d("LoginActivity", "Sign In was not successfull");
                     Log.e("LoginActivity", "Sign In was not successfull");
@@ -249,7 +250,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
                     goAppRegister();
                 } else {
-
+                    Toast.makeText(this, "Google Login war nicht erfolgreich", Toast.LENGTH_SHORT).show();
                     hideProgressDialog();
                     Log.d("LoginActivity", "Register was not successful" +  resultRegist.getStatus().toString());
                 }
@@ -296,7 +297,6 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         registerIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
         registerIntent.putExtra(CommunicationKeys.USER_ID_TOKEN, userIdToken);
         startService(registerIntent);
-
 
         /*
         String jUser = userConvert.serialize(user, User.class);
@@ -375,23 +375,6 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
                  }
                 break;
-            case 203:
-
-                // TODO delet this. it is only for testing
-                Toast.makeText(this, "Result code 200 !Test!", Toast.LENGTH_SHORT).show();
-
-                switch (resultData.getString(CommunicationKeys.SERVICE)) {
-
-                    case CommunicationKeys.FROM_LOGIN_SERVICE:
-                        loginResultHandler(resultData);
-                        break;
-
-                    case CommunicationKeys.FROM_USER_SERVICE:
-                        userResultHandler(resultData);
-                        break;
-
-                }
-                break;
             case 400:
                 hideProgressDialog();
                 Toast.makeText(this, "Error 400: Bad request", Toast.LENGTH_LONG).show();
@@ -462,7 +445,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 User newUser = new User(-1, newUserName.getText().toString());
                 // {{ setGPS(new GPS(1,1,1));}}
 
-                // startnewUserService(newUser);
+                // Todo startnewUserService(newUser);
 
                 break;
 

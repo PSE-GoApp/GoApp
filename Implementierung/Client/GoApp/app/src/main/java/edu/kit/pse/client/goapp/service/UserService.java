@@ -215,6 +215,8 @@ public class UserService extends IntentService{
 
         String jUser = null;
         String googleId = null;
+        Boolean noError = true;
+        Boolean result = true;
 
         HttpResponse closeableHttpResponse = null;
 
@@ -236,6 +238,7 @@ public class UserService extends IntentService{
             httpAppClientPost.setBody(jUser);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
+            noError = false;
         }
 
         try {
@@ -243,6 +246,7 @@ public class UserService extends IntentService{
             closeableHttpResponse = httpAppClientPost.executeRequest();
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            result = false;
         }
 
         String resultJsonString = null;
@@ -250,17 +254,18 @@ public class UserService extends IntentService{
         try {
             resultJsonString = EntityUtils.toString(closeableHttpResponse.getEntity());
         } catch (Throwable e) {
+            noError = false;
             Log.e("error",e.getMessage());
         }
         Log.e("e", resultJsonString);
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        if (noError && result) {
 
-        /*
-        // TOdo löschen-----------------------------------------------------------------------------------------
-        resultReceiver.send(202, bundle);
-        */
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            resultReceiver.send(500 , bundle);
+        }
     }
 
 }
