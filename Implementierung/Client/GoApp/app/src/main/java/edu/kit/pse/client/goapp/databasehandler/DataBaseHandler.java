@@ -18,6 +18,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String TABLE_MEETING = "MEETINGS";
     public static final String COLUMN_MEETING_ID = "MEETING_ID";
     public static final String COLUMN_TIMESTAMP = "TIMESTAMP";
+    public static final String COLUMN_DURATION = "DURATION";
 
     /* Datenbank erstellt mit den namen MEETINGS
     ID als primary key autoincrement
@@ -28,7 +29,8 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     private static final String TABLE_CREATE_VERLAUF = ""
             + "create table MEETINGS("
             + "MEETING_ID int primary key, "
-            + "TIMESTAMP long";
+            + "TIMESTAMP long"
+            + "DURATION int";
 
     /**
      * constructor

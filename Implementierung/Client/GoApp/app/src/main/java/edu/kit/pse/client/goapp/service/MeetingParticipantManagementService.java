@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -12,6 +13,7 @@ import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.uri_builder.URI_MeetingParticipantManagementBuilder;
 
 /**
@@ -58,6 +60,7 @@ public class MeetingParticipantManagementService extends IntentService {
                 doPut(intent);
               break;
             case CommunicationKeys.POST:
+                doPost(intent);
                 break;
             default:
                 break;
@@ -155,6 +158,53 @@ public class MeetingParticipantManagementService extends IntentService {
             // Send a empty result with 500 as StatusCode
 
             // StatusCode 500 is an unexpected Error. Here no Meeting ID in Intent
+            resultReceiver.send(500, bundle);
+        }
+    }
+
+
+    /**
+     * Add the group members.
+     *
+     * @param intent Intent
+     */
+    private void doPost(Intent intent) {
+        Boolean noError = true;
+        Boolean result = true;
+        String participantAsJsonString = null;
+        HttpResponse closeableHttpResponse = null;
+
+        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.POST);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE);
+
+        participantAsJsonString = intent.getStringExtra(CommunicationKeys.PARTICIPANT);
+
+        URI_MeetingParticipantManagementBuilder uri_meetingParticipantManagementBuilder = new URI_MeetingParticipantManagementBuilder();
+
+
+        HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
+        httpAppClientPost.setUri(uri_meetingParticipantManagementBuilder.getURI());
+        try {
+            httpAppClientPost.setBody(participantAsJsonString);
+        } catch (IOException e) {
+            noError = false;
+        }
+
+        try {
+            // TODO catch 404 (No Internet and Request Time out)
+            closeableHttpResponse = httpAppClientPost.executeRequest();
+            Log.e("GroupUserManagement", "Got result from Server");
+        } catch (Exception e) {
+            result = false;
+        }
+
+        if (result && noError) {
+            // send the Bundle and  the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
             resultReceiver.send(500, bundle);
         }
     }

@@ -42,6 +42,7 @@ import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.Tour;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.GroupsService;
+import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.client.goapp.service.MeetingService;
 import edu.kit.pse.goapp.client.goapp.R;
 
@@ -62,6 +63,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
     private ServiceResultReceiver activityServiceResultReceiver;
     private ObjectConverter<List<Group>> groupsConverter;
     private ObjectConverter<Meeting> meetingConverter;
+    private ObjectConverter<Participant> participantConverter;
 
 
     private Meeting newMeeting;
@@ -91,7 +93,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
 
 
-
+    List<Participant> participants = new ArrayList<>();
     private List<Group> groups = new ArrayList<>();
 
 
@@ -104,6 +106,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
         groupsConverter = new ObjectConverter<>();
         meetingConverter = new ObjectConverter<>();
+        participantConverter = new ObjectConverter<>();
 
         meetingNameText = (AutoCompleteTextView) findViewById(R.id.tipMeetingName);
         radioButtonEvent = (RadioButton) findViewById(R.id.buttonEvent);
@@ -176,12 +179,20 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         }
         if (v.getId() == R.id.buttonEvent || v.getId() == R.id.buttonTour) {
             // Todo change duration time
+            if (v.getId() == R.id.buttonEvent) {
+                // Set durantion = 1h
+                durationText.setText(1 + "");
+            } else {
+                // set durantion = 2h
+                durationText.setText(2 + "");
+            }
         }
 
         if (v.getId() == R.id.buttonCreate) {
+            newMeeting = null;
             if (setNewMeeting()) {
 
-                // TODO create an MeetinService and block Everything---------------------------------------------------------------------------------
+                showProgressDialog();
 
                 Intent i = new Intent(this, MeetingService.class);
                 activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
@@ -228,6 +239,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 && calendar.get(Calendar.YEAR) == timeYear
                 && calendar.get(Calendar.HOUR_OF_DAY) == timeHour
                 && calendar.get(Calendar.MINUTE) ==timeMinute) {
+
             if (groups != null) {
 
                 int duration = Integer.parseInt(durationText.getText().toString());
@@ -235,13 +247,16 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 Group selectedGroup = groups.get(selectedGroupPosition);
 
                 List<User> users = selectedGroup.getGroupMembers();
-                List<Participant> participants = new ArrayList<>();
 
+                // get my user and Id
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 userName = sharedPreferences.getString("userName", "");
                 userId = sharedPreferences.getInt("userId", -1);
 
+                // convert Users to participants for the new meeting
                 for (User u: users) {
+                    if (u.getId() != userId)
+
                     participants.add(new Participant(-1, -1, u, MeetingConfirmation.PENDING));
                 }
 
@@ -254,15 +269,19 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 GPS place = new GPS( latitude, longitude, 0);
                 if (radioButtonEvent.isChecked()) {
                     newMeeting = new Event(-1, name, place, calendar.getTimeInMillis(), duration, creator);
+                    /* the server cant manage this yet
                             for (Participant p : participants) {
                                 newMeeting.addParticipant(p);
                             }
+                            */
 
                 } else {
                     newMeeting = new Tour(-1, name, place, calendar.getTimeInMillis(), duration, creator);
+                    /* the server cant manage this yet
                         for (Participant p : participants) {
                             newMeeting.addParticipant(p);
                         }
+                        */
                 }
                 return true;
             }
@@ -306,12 +325,16 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                     case CommunicationKeys.FROM_MEETING_SERVICE:
                         meetingServiceHandler(resultData);
                         break;
+                    case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
+                        meetingPartManageHandler(resultData);
+                        break;
                     default:
                         Log.d(TAG, "Wrong Service");
                         hideProgressDialog();
                 }
                 break;
             default:
+                hideProgressDialog();
                 Toast.makeText(this, ""+resultCode, Toast.LENGTH_SHORT).show();
         }
     }
@@ -374,39 +397,93 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
     }
 
     private void meetingServiceHandler (Bundle resultData) {
-        hideProgressDialog();
 
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.PUT: // Leave the Meeting
+
+                hideProgressDialog();
 
                 Toast.makeText(this,"Error 500: no PUT started", Toast.LENGTH_LONG).show();
                 Log.d(TAG,"PUT caught (wrong Command)");
                 break;
 
             case CommunicationKeys.GET:
+                hideProgressDialog();
+
                 Log.d(TAG,"GET caught (wrong Command)");
                 Toast.makeText(this, "Error 500: no GET started", Toast.LENGTH_LONG).show();
                 break;
 
             case CommunicationKeys.POST: // New Meeting created
-                Toast.makeText(this, "Neues Termin erstellt", Toast.LENGTH_LONG).show();
-                MeetingListActivity.start(this);
+                Toast.makeText(this, "Termin ohne Mitglieder erstellt", Toast.LENGTH_LONG).show();
+
+                // TOdo start to add all participants
+                addParticipants();
+                // MeetingListActivity.start(this);
 
                 Log.d(TAG,"POST caught");
                 break;
 
             case CommunicationKeys.DELETE:
+                hideProgressDialog();
+
                 Toast.makeText(this, "Error 403: no Delete started", Toast.LENGTH_LONG).show();
                 Log.d(TAG,"Delete caught (wrong Command)");
                 break;
 
             default:
+                hideProgressDialog();
+
                 Log.d(TAG,"ERROR 500: no Command caught");
         }
-        hideProgressDialog();
-
     }
 
+    public void addParticipants() {
+        if (participants.isEmpty()) {
+            hideProgressDialog();
+            Toast.makeText(this, "Termin erstellt", Toast.LENGTH_LONG).show();
+        } else {
+            Participant p = new Participant(-1, -1, null, null);
+            p = participants.get(0);
+
+            // start ParticipantsManagementService
+
+            Intent i = new Intent(this, MeetingParticipantManagementService.class);
+            activityServiceResultReceiver = new ServiceResultReceiver(new Handler());
+            activityServiceResultReceiver.setReceiver(this);
+            i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
+            i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
+            String jsonObj = participantConverter.serialize(p, Participant.class);
+            i.putExtra(CommunicationKeys.MEETING, jsonObj);
+            startService(i);
+
+            Toast.makeText(this, "Versuche " + p.getUser().getName() + " hinzu zufügen", Toast.LENGTH_SHORT).show();
+
+
+            // Object time Life error ? -> check Service, is json = null!!
+            participants.remove(0);
+
+        }
+    }
+
+    public void meetingPartManageHandler(Bundle resultData) {
+        switch (resultData.getString(CommunicationKeys.COMMAND)) {
+            case CommunicationKeys.POST: // new Pariticipant added
+                Toast.makeText(this, "Erfolgreich hinzugefügt", Toast.LENGTH_SHORT).show();
+
+                // TOdo start to add all participants
+                addParticipants();
+                // MeetingListActivity.start(this);
+
+                Log.d(TAG,"POST caught");
+                break;
+
+            default:
+                // TODO delet the Meeting from DB!
+                hideProgressDialog();
+                Log.d(TAG,"ERROR 500: no Command caught");
+        }
+    }
 
 
     private void showProgressDialog() {
@@ -449,7 +526,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
             Group group = groups.get(position);
             groupRow.setTag(R.id.TAG_GROUP_ID, group.getId());
 
-            //deputy the buttons and TextViews as a java objects
+               //deputy the buttons and TextViews as a java objects
             TextView name = (TextView) groupRow.findViewById(R.id.c_n_m_group_name);
 
             name.setText(group.getName());

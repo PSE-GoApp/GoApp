@@ -483,7 +483,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 editor.commit();
 
                 hideProgressDialog();
-                // MeetingListActivity.start(this);
+                // Todo: MeetingListActivity.start(this);
 
                 // Todo Put it Not in the Stack
 
@@ -518,4 +518,17 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         startService(newUserIntent);
     }
 
+    public void cheateToMain(View view) {
+
+        User myUser = new User(42424269, "KakaKansei");
+        // sharePreferances save name and Password
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userName", myUser.getName());
+        editor.putInt("userId", myUser.getId());
+
+        editor.commit();
+
+        MeetingListActivity.start(this);
+    }
 }

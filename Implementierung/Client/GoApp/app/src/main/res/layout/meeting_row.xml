@@ -31,7 +31,6 @@
         android:layout_weight="0.05"
         android:layout_alignTop="@+id/meetingTime"
         android:layout_alignBottom="@+id/meetingTime"
-        android:onClick="showMeetingInfo"
 
         android:text="Meeting Name"
 
@@ -48,7 +47,7 @@
         android:layout_alignTop="@+id/meetingTime"
         android:layout_alignBottom="@+id/meetingTime"
         android:scaleType="fitCenter"
-        android:onClick="meetingList_FirstButtonOnClickHandler" />
+        />
 
 
     <ImageButton
@@ -63,7 +62,6 @@
         android:layout_alignTop="@+id/meetingTime"
         android:layout_alignBottom="@+id/meetingTime"
         android:scaleType="fitCenter"
-        android:onClick="meetingList_SecondButtonClickHandler"
         />
 
 </RelativeLayout>

@@ -87,4 +87,15 @@
         android:layout_below="@+id/textNewUserName"
         android:layout_alignEnd="@+id/signInButton" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cheate to nex Activity"
+        android:id="@+id/cheate"
+        android:layout_below="@+id/login_line"
+        android:layout_alignEnd="@+id/tip_NewUserName"
+        android:layout_marginEnd="29dp"
+        android:onClick="cheateToMain"
+        />
+
 </RelativeLayout>

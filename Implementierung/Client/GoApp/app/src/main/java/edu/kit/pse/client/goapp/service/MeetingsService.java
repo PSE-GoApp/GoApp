@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -80,6 +79,7 @@ public class MeetingsService extends IntentService{
 
         httpAppClientGet.setUri(uri_meetingsBuilder.getURI());
 
+
         try {
             // TODO catch 404 (No Internet and Request Time out)
             closeableHttpResponse = httpAppClientGet.executeRequest();
@@ -96,6 +96,7 @@ public class MeetingsService extends IntentService{
             noError = false;
         }
 
+        /*
         if (noError && result) {
 
             bundle.putString(CommunicationKeys.MEETINGS, jasonString);
@@ -103,8 +104,12 @@ public class MeetingsService extends IntentService{
             // send the Bundle and the Status Code from Response
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
         } else {
-            // a Try catch goes wrong: send the Bundle and the Status Code 500
-            resultReceiver.send(200, bundle);
+            // the Try catch went wrong: send the Bundle and a Status Code 500
+            resultReceiver.send(500, bundle);
         }
+        */
+        // todo Delet its a Test
+        resultReceiver.send(200, bundle);
+
     }
 }

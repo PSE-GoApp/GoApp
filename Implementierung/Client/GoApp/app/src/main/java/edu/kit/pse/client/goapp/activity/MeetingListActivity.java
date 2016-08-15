@@ -1,8 +1,6 @@
 package edu.kit.pse.client.goapp.activity;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,7 +38,6 @@ import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.Tour;
 import edu.kit.pse.client.goapp.datamodels.User;
-import edu.kit.pse.client.goapp.receiver.AlarmReceiver;
 import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.client.goapp.service.MeetingsService;
 import edu.kit.pse.goapp.client.goapp.R;
@@ -59,9 +56,11 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     private ListView list;
     private User myUser;
     private List<Meeting> meetings = new ArrayList<>();
+    private MeetingListAdapter adapter = null;
 
     /**
      * wird beim aufruf erstellt
+     *
      * @param savedInstanceState
      */
     @Override
@@ -95,6 +94,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * start Service method
+     *
      * @param activity
      */
     public static void start(Activity activity) {
@@ -104,6 +104,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * show pop up
+     *
      * @param v view
      */
     private void showPopUp(View v) {
@@ -116,6 +117,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * onClick handler
+     *
      * @param v view that was clicked
      */
     @Override
@@ -127,6 +129,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * First Button click handler
+     *
      * @param view
      */
     public void meetingList_FirstButtonOnClickHandler(View view) {
@@ -154,7 +157,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             Participant meAsParticipant = null;
 
             // Find me as Participant
-            for(Participant p : participants) {
+            for (Participant p : participants) {
 
                 if (p.getUser().getId() == myUser.getId()) {
                     meAsParticipant = p;
@@ -188,7 +191,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
                 // Todo: open MapActivity from Meeting with startActivity with a Intent that has a Extra Integer with the key word MEETING_ID form Meeting class
                 /*
-                Intent mapIntent = new Intent(this, MapActivity.class);
+                Intent mapItent = new Intent(this, MapActivity.class);
                 mapIntent.putExtra(Meeting.MEETING_ID_KEY, meeting.getId());
                 startActivity(mapIntent);
                 */
@@ -206,6 +209,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * Secound button click handler
+     *
      * @param view the view that was clicked
      */
     public void meetingList_SecondButtonClickHandler(View view) {
@@ -241,6 +245,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * Alert Dialog aske "if are you sure?"
+     *
      * @param m Meeting
      * @return Created dialog
      */
@@ -270,6 +275,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * if a Meeting rejected
+     *
      * @param meeting meeting that rejeceted
      */
     public void rejectMeeting(Meeting meeting) {
@@ -298,11 +304,18 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
         i.putExtra(CommunicationKeys.PARTICIPANT, jparticipant);
         startService(i);
+
+        adapter.notifyDataSetChanged();
+
+        if (meetings.size() == 12) {
+
+        }
     }
 
 
     /**
      * show Meeting info
+     *
      * @param v
      */
     public void showMeetingInfo(View v) {
@@ -404,7 +417,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 break;
             case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
                 switch (resultCode) {
-                    case 202:
+                    case 200:
                         managementResultReceiverHandler(resultData);
                         hideProgressDialog();
                         break;
@@ -446,6 +459,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             case CommunicationKeys.PUT:
                 // Confirmation changed
 
+
                 Log.d(TAG, "Catch PUT Form MeetingParticipantManagent");
                 Toast.makeText(this, "Zustimmung zum Termin geändert\nAktualisieren Sie bitte", Toast.LENGTH_LONG).show();
                 break;
@@ -483,9 +497,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 String jsonString = resultData.getString(CommunicationKeys.MEETINGS);
 
                 // Todo Test----------------------
-               List<Meeting> fullMeetingList = meetingListConverter.deserializeList(jsonString, Meeting.class);
+                // List<Meeting> fullMeetingList = meetingListConverter.deserializeList(jsonString, Meeting.class);
                 // this is a test
-         // List<Meeting> fullMeetingList = fullMeeting;
+                List<Meeting> fullMeetingList = fullMeeting;
                 // TODo TEST-----------------------------------
 
                 // TODO FILTER meetings if they are Rejected from User-------------------------------------------------------------------------------
@@ -501,12 +515,12 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                         }
                     }
                 }
-                MeetingListAdapter adapter = new MeetingListAdapter(this, meetings);
+                adapter = new MeetingListAdapter(this, meetings);
                 list.setAdapter(adapter);
                 // TODO Test ?? list.invalidateViews();
                 Log.d(TAG, "Catch GET Form MeetinsService");
 
-                // TODO update AlarmReceiver-----------------------------------------------------------------------------
+                /* TODO update AlarmReceiver-----------------------------------------------------------------------------
                 for (Meeting m : meetings) {
                     long timestamp = m.getTimestamp();
                     Intent intent = new Intent(context, AlarmReceiver.class);
@@ -516,6 +530,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
                             timestamp, 60*1000,alarmIntent);
                 }
+                */ // TOdo -------------------------------------------------------------------------------------------------
 
                 break;
             default:
@@ -550,42 +565,45 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
 
 
-    Participant keinKevin = new Participant(0,2,  asshole, MeetingConfirmation.REJECTED);
-    Participant kevin = new Participant(0,2,  asshole, MeetingConfirmation.CONFIRMED);
-    Participant itsMeConfirmed = new Participant(0,2,  me, MeetingConfirmation.CONFIRMED);
-    Participant itsMePending = new Participant(0,3, me, MeetingConfirmation.PENDING);
-    Participant imParticipant = new Participant(0,3, me, MeetingConfirmation.REJECTED);
+    Participant keinKevin = new Participant(0, 2, asshole, MeetingConfirmation.REJECTED);
+    Participant kevin = new Participant(0, 2, asshole, MeetingConfirmation.CONFIRMED);
+    Participant itsMeConfirmed = new Participant(0, 2, me, MeetingConfirmation.CONFIRMED);
+    Participant itsMePending1 = new Participant(0, 3, me, MeetingConfirmation.PENDING);
+    Participant itsMePending2 = new Participant(0, 3, me, MeetingConfirmation.PENDING);
+    Participant itsMePending3 = new Participant(0, 3, me, MeetingConfirmation.PENDING);
+    Participant itsMePending4 = new Participant(0, 3, me, MeetingConfirmation.PENDING);
+    Participant imParticipant = new Participant(0, 3, me, MeetingConfirmation.REJECTED);
 
     private List<Meeting> fullMeeting = new ArrayList<Meeting>() {
         {
-            new Event(0, "Mensa", new GPS(1,1,1), 1475953024180L, 2, imParticipant) {{
+            add(new Event(0, "Mensa", new GPS(1, 1, 1), 1475953024180L, 2, imParticipant) {{
                 addParticipant(itsMeConfirmed);
                 addParticipant(keinKevin);
-            }};
-            add(new Event(1, "Ago", new GPS(1,1,1), 1475953024000L, 2, imParticipant) {{
-                addParticipant(itsMePending);
+            }});
+            add(new Event(1, "Ago", new GPS(1, 1, 1), 1475953024000L, 2, imParticipant) {{
+                addParticipant(itsMePending1);
                 addParticipant(kevin);
             }});
-            add(new Event(2, "PSE Treffen", new GPS(1,1,1), 1475953021200L, 2, imParticipant) {{
-                addParticipant(itsMePending);
+            add(new Event(2, "PSE Treffen", new GPS(1, 1, 1), 1475953021200L, 2, imParticipant) {{
+                addParticipant(itsMePending2);
                 addParticipant(kevin);
                 addParticipant(keinKevin);
                 addParticipant(kevin);
 
             }});
-            add(new Tour(3, "Iris Füttern", new GPS(1,1,1), 1476953024000L, 2, imParticipant) {{
-                addParticipant(itsMePending);
+            add(new Tour(3, "Iris Füttern", new GPS(1, 1, 1), 1476953024000L, 2, imParticipant) {{
+                addParticipant(itsMePending3);
                 addParticipant(kevin);
                 addParticipant(keinKevin);
                 addParticipant(kevin);
                 addParticipant(keinKevin);
                 addParticipant(kevin);
             }});
-            add(new Tour(4, "Schloss Park", new GPS(1,1,1), 1475953021200L, 2, imParticipant) {{
+            add(new Tour(4, "Schloss Park", new GPS(1, 1, 1), 1475953021200L, 2, imParticipant) {{
                 addParticipant(itsMeConfirmed);
             }});
-            add(new Event(5, "Klettern", new GPS(1,1,1), 147595302489L, 2, imParticipant) {{
-                addParticipant(itsMePending);
+            add(new Event(5, "Klettern", new GPS(1, 1, 1), 147595302489L, 2, imParticipant) {{
+                addParticipant(itsMePending4);
                 addParticipant(kevin);
                 addParticipant(keinKevin);
                 addParticipant(kevin);
@@ -593,7 +611,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 addParticipant(kevin);
                 addParticipant(kevin);
             }});
-            add(new Tour(6, "Bar Tour", new GPS(1,1,1), 14759530243560L, 2, imParticipant) {{
+            add(new Tour(6, "Bar Tour", new GPS(1, 1, 1), 14759530243560L, 2, imParticipant) {{
                 addParticipant(itsMeConfirmed);
                 addParticipant(kevin);
                 addParticipant(keinKevin);
@@ -603,7 +621,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 addParticipant(kevin);
                 addParticipant(kevin);
             }});
-            add(new Tour(7, "Bar mit Tour", new GPS(1,1,1), 14759530243560L, 2, kevin) {{
+            add(new Tour(7, "Bar mit Tour", new GPS(1, 1, 1), 14759530243560L, 2, kevin) {{
                 addParticipant(imParticipant);
                 addParticipant(kevin);
                 addParticipant(kevin);
@@ -618,88 +636,104 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     };
     //------------------------------------------------------------------------------------------------------------------------------------------------
 
-}
+
+    class MeetingListAdapter extends ArrayAdapter<Meeting> {
+        Context context;
+
+        List<Meeting> meetings;
+
+        private final int checkedImageId = R.drawable.checked;
+        private final int cancelImageId = R.drawable.cancel;
+        private final int mapImageId = R.drawable.somemap;
+        private final int participantImageId = R.drawable.participant;
 
 
+        MeetingListAdapter(Context c, List<Meeting> meetings) {
+            super(c, R.layout.meeting_row, R.id.meetingName, meetings);
 
-class MeetingListAdapter extends ArrayAdapter<Meeting> {
-    Context context;
+            this.context = c;
 
-    List<Meeting> meetings;
+            this.meetings = meetings;
 
-    private final int checkedImageId = R.drawable.checked;
-    private final int cancelImageId = R.drawable.cancel;
-    private final int mapImageId = R.drawable.somemap;
-    private final int participantImageId = R.drawable.participant;
-
-
-    MeetingListAdapter(Context c, List<Meeting> meetings) {
-        super(c, R.layout.meeting_row, R.id.meetingName,meetings);
-
-        this.context = c;
-
-        this.meetings = meetings;
-
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        //make the xml layout into a java object
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View meetingRow = inflater.inflate(R.layout.meeting_row, parent, false);
-
-        Meeting m = meetings.get(position);
-        meetingRow.setTag(R.id.TAG_MEETING, m);
-
-
-        //deputy the buttons and TextViews as a java objects
-        ImageButton button1 = (ImageButton) meetingRow.findViewById(R.id.button1);
-        ImageButton button2 = (ImageButton) meetingRow.findViewById(R.id.button2);
-        TextView name = (TextView) meetingRow.findViewById(R.id.meetingName);
-        TextView time = (TextView) meetingRow.findViewById(R.id.meetingTime);
-
-
-        name.setText(m.getName());
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(m.getTimestamp());
-        time.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
-
-        // TODO the date------------------------------------------------------------------------------------------------------------------
-
-
-        //set the images from the Buttons for each Meeting Confirmation
-        // TODO search for each Meeting the Youselfe as Partcipant
-
-        Participant participant = m.getParticipants().get(0);
-
-        // Confirmed
-        if (participant.getConfirmation() == MeetingConfirmation.CONFIRMED) {
-
-            button1.setImageResource(mapImageId);
-            button1.setTag(R.id.TAG_IMAGE_DIRECTION, mapImageId);
-
-            button2.setImageResource(participantImageId);
-            button2.setTag(R.id.TAG_IMAGE_DIRECTION, participantImageId);
-
-        } else {
-            // Pending
-            if (participant.getConfirmation() == MeetingConfirmation.PENDING) {
-                button1.setImageResource(checkedImageId);
-                button1.setTag(R.id.TAG_IMAGE_DIRECTION, checkedImageId);
-
-                button2.setImageResource(cancelImageId);
-                button2.setTag(R.id.TAG_IMAGE_DIRECTION, cancelImageId);
-            } else {
-                /* Todo REJECTED Meeting should not be here or
-Todo                             delete alle Rejected Meetings bevor calling the adapteritsMeConfirmed
-                */
-                return null;
-            }
         }
 
-        return meetingRow;
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            //make the xml layout into a java object
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View meetingRow = inflater.inflate(R.layout.meeting_row, parent, false);
+
+            Meeting m = meetings.get(position);
+            meetingRow.setTag(R.id.TAG_MEETING, m);
+
+
+            //deputy the buttons and TextViews as a java objects
+            ImageButton button1 = (ImageButton) meetingRow.findViewById(R.id.button1);
+            ImageButton button2 = (ImageButton) meetingRow.findViewById(R.id.button2);
+            TextView name = (TextView) meetingRow.findViewById(R.id.meetingName);
+            TextView time = (TextView) meetingRow.findViewById(R.id.meetingTime);
+
+
+            name.setText(m.getName());
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showMeetingInfo(v);
+                }
+            });
+            button1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    meetingList_FirstButtonOnClickHandler(v);
+                }
+                });
+
+            button2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    meetingList_SecondButtonClickHandler(v);
+                }
+            });
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(m.getTimestamp());
+            time.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
+
+            // TODO show the date time------------------------------------------------------------------------------------------------------------------
+
+
+            // search for each Meeting Yourselfe as Partcipant
+            //set the images from the Buttons for each Meeting Confirmation
+
+            for (Participant participant : m.getParticipants()) {
+                if (participant.getUser().getId() == myUser.getId()) {
+                    // Confirmed
+                    if (participant.getConfirmation() == MeetingConfirmation.CONFIRMED) {
+
+                        button1.setImageResource(mapImageId);
+                        button1.setTag(R.id.TAG_IMAGE_DIRECTION, mapImageId);
+
+                        button2.setImageResource(participantImageId);
+                        button2.setTag(R.id.TAG_IMAGE_DIRECTION, participantImageId);
+
+                    } else {
+                        // Pending
+                        if (participant.getConfirmation() == MeetingConfirmation.PENDING) {
+                            button1.setImageResource(checkedImageId);
+                            button1.setTag(R.id.TAG_IMAGE_DIRECTION, checkedImageId);
+
+                            button2.setImageResource(cancelImageId);
+                            button2.setTag(R.id.TAG_IMAGE_DIRECTION, cancelImageId);
+                        }
+                    }
+                }
+            }
+
+            return meetingRow;
+        }
     }
+
 }
+
 
