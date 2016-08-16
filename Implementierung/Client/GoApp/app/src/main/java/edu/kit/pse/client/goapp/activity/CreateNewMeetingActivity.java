@@ -11,11 +11,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -23,7 +21,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -57,44 +54,41 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
     private int userId;
     private User myUser;
 
+    List<User> users;
+
+    List<Participant> participants = new ArrayList<>();
+    private List<Group> groups = new ArrayList<>();
 
     private ImageButton menu_button;
-
     private ServiceResultReceiver activityServiceResultReceiver;
     private ObjectConverter<List<Group>> groupsConverter;
     private ObjectConverter<Meeting> meetingConverter;
+
+
     private ObjectConverter<Participant> participantConverter;
-
-
     private Meeting newMeeting;
     private AutoCompleteTextView meetingNameText;
     private AutoCompleteTextView durationText;
     private Button createButton;
+
+
     private ProgressDialog mProgressDialog;
-
-
     private AutoCompleteTextView time;
     private RadioButton radioButtonEvent;
     private RadioButton radioButtonTour;
     private Spinner spinnerGroup;
     private ArrayAdapter<String> spinnerAdapter;
+
     private int selectedGroupPosition = 0;
 
     private AutoCompleteTextView day;
     private AutoCompleteTextView month;
     private AutoCompleteTextView year;
-
     private AutoCompleteTextView hour;
     private AutoCompleteTextView minute;
 
     private AutoCompleteTextView lat;
     private AutoCompleteTextView lng;
-
-
-
-
-    List<Participant> participants = new ArrayList<>();
-    private List<Group> groups = new ArrayList<>();
 
 
     @Override
@@ -246,19 +240,21 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
                 Group selectedGroup = groups.get(selectedGroupPosition);
 
-                List<User> users = selectedGroup.getGroupMembers();
+                users = selectedGroup.getGroupMembers();
 
+                /*
                 // get my user and Id
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 userName = sharedPreferences.getString("userName", "");
                 userId = sharedPreferences.getInt("userId", -1);
 
-                // convert Users to participants for the new meeting
+                // convert Users to participants for the new meeting todo dont need it !----------------------------------------
                 for (User u: users) {
                     if (u.getId() != userId)
 
                     participants.add(new Participant(-1, -1, u, MeetingConfirmation.PENDING));
                 }
+                */
 
                 Participant creator = null;
 
@@ -349,14 +345,20 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
             case CommunicationKeys.GET:
                 Log.d(TAG,"GET caught");
-                Toast.makeText(this, "Group List caught", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Group List caught", Toast.LENGTH_SHORT).show();
 
 
                 String jGroupsList = resultData.getString(CommunicationKeys.GROUPS);
 
+
                 groups = groupsConverter.deserializeList(jGroupsList, Group.class);
 
                 setGroupsSpinner();
+
+                if (groups.isEmpty()) {
+                    Toast.makeText(this, "Sie müssen Mitglied in einer Gruppe sein, um ein Termin zu erstellen", Toast.LENGTH_LONG).show();
+                    MeetingListActivity.start(this);
+                }
                 break;
 
             case CommunicationKeys.POST:
@@ -403,25 +405,43 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
 
                 hideProgressDialog();
 
-                Toast.makeText(this,"Error 500: no PUT started", Toast.LENGTH_LONG).show();
-                Log.d(TAG,"PUT caught (wrong Command)");
+                Toast.makeText(this, "Error 500: no PUT started", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "PUT caught (wrong Command)");
                 break;
 
             case CommunicationKeys.GET:
                 hideProgressDialog();
 
-                Log.d(TAG,"GET caught (wrong Command)");
+                Log.d(TAG, "GET caught (wrong Command)");
                 Toast.makeText(this, "Error 500: no GET started", Toast.LENGTH_LONG).show();
                 break;
 
             case CommunicationKeys.POST: // New Meeting created
-                Toast.makeText(this, "Termin ohne Mitglieder erstellt", Toast.LENGTH_LONG).show();
 
-                // TOdo start to add all participants
-                addParticipants();
-                // MeetingListActivity.start(this);
+                Log.d("CreateNewMeetingActivi", "Termin ohne Mitglieder erstellt");
 
-                Log.d(TAG,"POST caught");
+                String jMeeting = resultData.getString(CommunicationKeys.MEETING);
+
+                newMeeting = meetingConverter.deserialize(jMeeting, Meeting.class);
+
+                if (newMeeting != null) {
+                    // get my user and Id
+                    SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                    userName = sharedPreferences.getString("userName", "");
+                    userId = sharedPreferences.getInt("userId", -1);
+
+                    for (User user : users) {
+                        if (user.getId() != userId)
+
+                            participants.add(new Participant(-1, newMeeting.getMeetingId(), user, MeetingConfirmation.PENDING));
+                    }
+
+                    // start to add all participants
+                    addParticipants();
+                } else {
+                    // TOdo Error Delet Meeting.....---------------------------------------------------------------------------
+                }
+
                 break;
 
             case CommunicationKeys.DELETE:
@@ -442,6 +462,8 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         if (participants.isEmpty()) {
             hideProgressDialog();
             Toast.makeText(this, "Termin erstellt", Toast.LENGTH_LONG).show();
+            // Meeting Created and go to the MeetingListAcitivity.
+            MeetingListActivity.start(this);
         } else {
             Participant p = new Participant(-1, -1, null, null);
             p = participants.get(0);
@@ -454,14 +476,14 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
             i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
             i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
             String jsonObj = participantConverter.serialize(p, Participant.class);
-            i.putExtra(CommunicationKeys.MEETING, jsonObj);
+            i.putExtra(CommunicationKeys.PARTICIPANT, jsonObj);
             startService(i);
 
-            Toast.makeText(this, "Versuche " + p.getUser().getName() + " hinzu zufügen", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Versuche " + p.getUser().getName() + " hinzuzufügen", Toast.LENGTH_SHORT).show();
 
 
             // Object time Life error ? -> check Service, is json = null!!
-            participants.remove(0);
+            // tnp0o9participants.remove(0);
 
         }
     }
@@ -470,12 +492,9 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.POST: // new Pariticipant added
                 Toast.makeText(this, "Erfolgreich hinzugefügt", Toast.LENGTH_SHORT).show();
-
-                // TOdo start to add all participants
+                participants.remove(0);
+                // start to add all participants
                 addParticipants();
-                // MeetingListActivity.start(this);
-
-                Log.d(TAG,"POST caught");
                 break;
 
             default:
@@ -502,7 +521,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         }
     }
 
-
+/*
     class GroupSpinnerAdapter extends ArrayAdapter<Group> {
         Context context;
 
@@ -534,4 +553,5 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
             return groupRow;
         }
     }
+    */
 }

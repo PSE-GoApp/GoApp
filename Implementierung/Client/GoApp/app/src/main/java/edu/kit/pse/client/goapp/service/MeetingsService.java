@@ -61,7 +61,7 @@ public class MeetingsService extends IntentService{
      */
     private void doGet (Intent intent) //throws  IOException
     {
-        Boolean noError = true;
+        Boolean gotJString = false;
         Boolean result = true;
         String jasonString = null;
         HttpResponse closeableHttpResponse = null;
@@ -91,15 +91,17 @@ public class MeetingsService extends IntentService{
         // accepted
         try {
             jasonString = EntityUtils.toString(closeableHttpResponse.getEntity());
+            gotJString = true;
         } catch (Throwable e) {
             // TODO handle Exception "can not Convert EntitlyUtils to String"
-            noError = false;
+            gotJString = false;
         }
 
-        /*
-        if (noError && result) {
 
-            bundle.putString(CommunicationKeys.MEETINGS, jasonString);
+        if (result) {
+            if (gotJString) {
+                bundle.putString(CommunicationKeys.MEETINGS, jasonString);
+            }
 
             // send the Bundle and the Status Code from Response
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
@@ -107,9 +109,5 @@ public class MeetingsService extends IntentService{
             // the Try catch went wrong: send the Bundle and a Status Code 500
             resultReceiver.send(500, bundle);
         }
-        */
-        // todo Delet its a Test
-        resultReceiver.send(200, bundle);
-
     }
 }

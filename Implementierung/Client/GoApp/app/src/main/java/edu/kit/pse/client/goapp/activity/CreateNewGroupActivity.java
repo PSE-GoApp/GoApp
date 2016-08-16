@@ -3,8 +3,10 @@ package edu.kit.pse.client.goapp.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +61,7 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
     private ArrayAdapter adapter2;
     private Button createButton;
     private ImageButton menuButton;
+    private User myUser;
 
 
     /**
@@ -79,6 +82,12 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
         // TODO ----------------------------------------------------------------------------------------------------------------------
         getUsers();
         registerClickCallback();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "");
+        int userId = sharedPreferences.getInt("userId", -1);
+        myUser = new User(userId, userName);
+
     }
 
 
@@ -209,15 +218,21 @@ public class CreateNewGroupActivity extends AppCompatActivity implements View.On
      * @param resultData all the data from the service
      */
 
-    private void setListResult(Bundle resultData){
+    private void setListResult(Bundle resultData) {
         //GET DATA and FILL users
-            String jsonObj = resultData.getString(CommunicationKeys.USERS);
-            ObjectConverter<List<User>> mConverter = new ObjectConverter<>();
-            List<User> userTerm = new ArrayList<User>();
-            userTerm = mConverter.deserializeList ( jsonObj,User.class);
-            users.addAll(userTerm);
-            setLists();
+        String jsonObj = resultData.getString(CommunicationKeys.USERS);
+        ObjectConverter<List<User>> mConverter = new ObjectConverter<>();
+        List<User> userTerm = new ArrayList<User>();
+        userTerm = mConverter.deserializeList(jsonObj, User.class);
+
+
+        for (User u : userTerm) {
+            if (u.getId() != myUser.getId()) {
+                users.add(u);
+            }
         }
+        setLists();
+    }
 
 
     /**

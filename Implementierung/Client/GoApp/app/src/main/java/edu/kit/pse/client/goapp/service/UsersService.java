@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -62,6 +61,8 @@ public class UsersService extends IntentService {
      */
     private void doGet (Intent intent) //throws  IOException
     {
+        Boolean result = true;
+        Boolean gotJString = false;
         String jasonString = null;
         HttpResponse closeableHttpResponse = null;
 
@@ -81,18 +82,27 @@ public class UsersService extends IntentService {
             closeableHttpResponse = httpAppClientGet.executeRequest();
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            result = false;
         }
 
         // accepted
         try {
             jasonString = EntityUtils.toString(closeableHttpResponse.getEntity());
+            gotJString = true;
         } catch (Throwable e) {
             // TODO handle Exception "can not Convert EntitlyUtils to String"
+            gotJString = false;
         }
 
-        bundle.putString(CommunicationKeys.USERS, jasonString);
+        if (result) {
+            if (gotJString) {
+                bundle.putString(CommunicationKeys.USERS, jasonString);
+            }
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            resultReceiver.send(500, bundle);
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        }
     }
 }

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
