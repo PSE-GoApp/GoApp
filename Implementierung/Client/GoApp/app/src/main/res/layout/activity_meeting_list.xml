@@ -41,11 +41,19 @@
         android:id="@+id/meeting_ListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/view"
+        android:layout_below="@+id/text_List_is_empty"
         android:layout_alignParentLeft="true"
         >
 
         </ListView>
 
+    <TextView
+        android:id="@+id/text_List_is_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/view"
+        />
 </RelativeLayout>

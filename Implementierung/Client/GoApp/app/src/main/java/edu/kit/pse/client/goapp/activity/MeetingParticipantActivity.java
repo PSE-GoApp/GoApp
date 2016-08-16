@@ -202,7 +202,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
     public void onReceiveResult(int resultCode, Bundle resultData) {
 
         switch (resultCode) {
-            case 202:
+            case 200:
                 switch (resultData.getString(CommunicationKeys.SERVICE)) {
                     case CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE:
                         meetingParticipanManagemantResultHandler(resultData);
@@ -238,8 +238,6 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
     }
 
     private void meetingParticipanManagemantResultHandler(Bundle resultData) {
-
-        hideProgressDialog();
 
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.PUT: // Leave the Meeting

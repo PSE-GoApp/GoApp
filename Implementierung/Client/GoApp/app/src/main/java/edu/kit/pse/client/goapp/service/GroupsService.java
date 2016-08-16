@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -61,7 +60,7 @@ public class GroupsService extends IntentService {
      * @param intent
      */
     private void doGet(Intent intent) {
-        Boolean noError = true;
+        Boolean gotJString = false;
         Boolean result = true;
         String jasonString = null;
         HttpResponse closeableHttpResponse = null;
@@ -88,13 +87,16 @@ public class GroupsService extends IntentService {
         // accepted
         try {
             jasonString = EntityUtils.toString(closeableHttpResponse.getEntity());
+            gotJString = true;
         } catch (Throwable e) {
-            noError = false;
+            gotJString = false;
             // TODO handle Exception "can not Convert EntitlyUtils to String"
         }
 
-        if (result && noError) {
-            bundle.putString(CommunicationKeys.GROUPS, jasonString);
+        if (result) {
+            if (gotJString) {
+                bundle.putString(CommunicationKeys.GROUPS, jasonString);
+            }
             // send the Bundle and the Status Code from Response
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
         } else {

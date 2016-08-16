@@ -14,6 +14,7 @@ import java.io.IOException;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_MeetingParticipantManagementBuilder;
 
 /**
@@ -73,6 +74,9 @@ public class MeetingParticipantManagementService extends IntentService {
      * @param intent Intent
      */
     private void doPut(Intent intent) {
+
+        boolean noError = true;
+        boolean result = false;
         String meetingParticipantAsJsonString = null;
         HttpResponse closeableHttpResponse = null;
 
@@ -84,7 +88,7 @@ public class MeetingParticipantManagementService extends IntentService {
 
         meetingParticipantAsJsonString = intent.getStringExtra(CommunicationKeys.PARTICIPANT);
 
-        /*
+
         URI_MeetingParticipantManagementBuilder uri_meetingParticipantManagementBuilder = new URI_MeetingParticipantManagementBuilder();
 
         HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
@@ -93,21 +97,24 @@ public class MeetingParticipantManagementService extends IntentService {
             httpAppClientPut.setBody(meetingParticipantAsJsonString);
         } catch (IOException e) {
             //Todo Handle Exception. Maybe the String Extra was null
+            noError = false;
         }
 
         try {
             // TODO catch 404 (No Internet and Request Time out)
             closeableHttpResponse = httpAppClientPut.executeRequest();
+            result = true;
         } catch (IOException e) {
+            result = false;
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
         }
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
-        */
-
-        resultReceiver.send(202, bundle);
-
+        if (result && noError) {
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            resultReceiver.send(500, bundle);
+        }
     }
 
     /**
@@ -164,7 +171,7 @@ public class MeetingParticipantManagementService extends IntentService {
 
 
     /**
-     * Add the group members.
+     * Add a Participant
      *
      * @param intent Intent
      */

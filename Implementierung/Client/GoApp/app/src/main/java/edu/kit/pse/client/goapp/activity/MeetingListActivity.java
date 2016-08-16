@@ -31,12 +31,9 @@ import java.util.List;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
-import edu.kit.pse.client.goapp.datamodels.Event;
-import edu.kit.pse.client.goapp.datamodels.GPS;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
-import edu.kit.pse.client.goapp.datamodels.Tour;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.client.goapp.service.MeetingsService;
@@ -50,7 +47,8 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     private ObjectConverter<List<Meeting>> meetingListConverter;
     private ObjectConverter<Participant> participantConverter;
 
-    ImageButton menu_button;
+    private ImageButton menu_button;
+    private TextView textViewListIsEmpty;
     private Context context = this;
     private ProgressDialog mProgressDialog;
     private ListView list;
@@ -67,6 +65,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_list);
+        textViewListIsEmpty = (TextView) findViewById(R.id.text_List_is_empty);
         menu_button = (ImageButton) findViewById(R.id.menu_termine);
         menu_button.setOnClickListener(this);
         meetingListConverter = new ObjectConverter<>();
@@ -305,11 +304,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         i.putExtra(CommunicationKeys.PARTICIPANT, jparticipant);
         startService(i);
 
-        adapter.notifyDataSetChanged();
-
-        if (meetings.size() == 12) {
-
-        }
+        meetings.remove(meeting);
     }
 
 
@@ -458,10 +453,12 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 break;
             case CommunicationKeys.PUT:
                 // Confirmation changed
-
-
+                adapter.notifyDataSetChanged();
+                if (adapter.isEmpty()) {
+                    textViewListIsEmpty.setText("Alle bevorstehende Termine abgesagt");
+                }
                 Log.d(TAG, "Catch PUT Form MeetingParticipantManagent");
-                Toast.makeText(this, "Zustimmung zum Termin geändert\nAktualisieren Sie bitte", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Zustimmung zum Termin geändert", Toast.LENGTH_LONG).show();
                 break;
             case CommunicationKeys.POST:
                 Log.d(TAG, "Catch POST Form MeetingParticipantManagent");
@@ -496,29 +493,35 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 meetings = new ArrayList<>();
                 String jsonString = resultData.getString(CommunicationKeys.MEETINGS);
 
-                // Todo Test----------------------
-                // List<Meeting> fullMeetingList = meetingListConverter.deserializeList(jsonString, Meeting.class);
-                // this is a test
-                List<Meeting> fullMeetingList = fullMeeting;
-                // TODo TEST-----------------------------------
+                    List<Meeting> fullMeetingList = meetingListConverter.deserializeList(jsonString, Meeting.class);
 
-                // TODO FILTER meetings if they are Rejected from User-------------------------------------------------------------------------------
+                    // Todo Test----------------------
+                    // this is a test
+                    // List<Meeting> fullMeetingList = fullMeeting;
+                    // TODo TEST-----------------------------------
 
-                for (Meeting m : fullMeetingList) {
+                    // TODO FILTER meetings if they are Rejected from User-------------------------------------------------------------------------------
 
-                    List<Participant> participants = m.getParticipants();
-                    for (Participant p : participants) {
-                        if (p.getUser().getId() == myUser.getId()) {
-                            if (p.getConfirmation() != MeetingConfirmation.REJECTED) {
-                                meetings.add(m);
+                    for (Meeting m : fullMeetingList) {
+
+                        List<Participant> participants = m.getParticipants();
+                        for (Participant p : participants) {
+                            if (p.getUser().getId() == myUser.getId()) {
+                                if (p.getConfirmation() != MeetingConfirmation.REJECTED) {
+                                    meetings.add(m);
+                                }
                             }
                         }
                     }
-                }
-                adapter = new MeetingListAdapter(this, meetings);
-                list.setAdapter(adapter);
-                // TODO Test ?? list.invalidateViews();
-                Log.d(TAG, "Catch GET Form MeetinsService");
+                    if (meetings.isEmpty()) {
+                        textViewListIsEmpty.setText("Keine bevorstehende Termine");
+                    } else {
+
+                        adapter = new MeetingListAdapter(this, meetings);
+                        list.setAdapter(adapter);
+                        // TODO Test ?? list.invalidateViews();
+                        Log.d(TAG, "Catch GET Form MeetinsService");
+
 
                 /* TODO update AlarmReceiver-----------------------------------------------------------------------------
                 for (Meeting m : meetings) {
@@ -531,7 +534,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                             timestamp, 60*1000,alarmIntent);
                 }
                 */ // TOdo -------------------------------------------------------------------------------------------------
-
+                    }
                 break;
             default:
                 Log.d(TAG, "Catch Wrong Command Form MeetinsService");
@@ -559,7 +562,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    // Todo delete it after Testing -------------------------------------------------------------------------
+    /* Todo delete it after Testing -------------------------------------------------------------------------
     User me = new User(42424269, "KANSEi'S DICK");
     User asshole = new User(13, "KEVIN!!");
     // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
@@ -634,7 +637,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             }});
         }
     };
-    //------------------------------------------------------------------------------------------------------------------------------------------------
+    *///------------------------------------------------------------------------------------------------------------------------------------------------
 
 
     class MeetingListAdapter extends ArrayAdapter<Meeting> {

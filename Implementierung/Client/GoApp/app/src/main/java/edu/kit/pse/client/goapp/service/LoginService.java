@@ -4,7 +4,6 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -16,7 +15,6 @@ import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
 import edu.kit.pse.client.goapp.uri_builder.URI_LoginBuilder;
-import edu.kit.pse.client.goapp.uri_builder.URI_UserBuilder;
 
 /**
  * Extends the abstract class IntentService and manages the user authorisation.
@@ -242,13 +240,23 @@ public class LoginService extends IntentService {
             noError = false;
         }
 
+        // todo ein service draus machen
         if (result && noError) {
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            resultReceiver.send(500, bundle);
+        }
+        //*/
 
-            // resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        /* Todo test
+
+        if (result && noError) {
 
             String jUser = null;
 
             HttpResponse closeableHttpResponse1 = null;
+
+            HttpAppClientPost httpAppClientPost1 = new HttpAppClientPost();
 
             final ResultReceiver resultReceiver1 = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -261,18 +269,18 @@ public class LoginService extends IntentService {
             URI_UserBuilder uri_userBuilder = new URI_UserBuilder();
             // uri_userBuilder.addParameter("token",);
 
-            httpAppClientPost.setUri(uri_userBuilder.getURI());
+            httpAppClientPost1.setUri(uri_userBuilder.getURI());
 
 
             try {
-                httpAppClientPost.setBody(jUser);
+                httpAppClientPost1.setBody(jUser);
             } catch (IOException e) {
                 //Todo Handle Exception. Maybe the String Extra was null
             }
 
             try {
                 // TODO catch 404 (No Internet and Request Time out)
-                closeableHttpResponse1 = httpAppClientPost.executeRequest();
+                closeableHttpResponse1 = httpAppClientPost1.executeRequest();
             } catch (IOException e) {
                 // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
             }
@@ -292,6 +300,7 @@ public class LoginService extends IntentService {
         else {
             resultReceiver.send(500, bundle);
         }
+        */
 
         /*
 

@@ -289,9 +289,11 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         activityReceiver.setReceiver(this);
         registerIntent.putExtra(CommunicationKeys.RECEICER, activityReceiver);
 
+        // todo needed for a Test ------------------------------------------------------------------------------
         User user = new User(-1, newUserName.getText().toString());
         String jUser = userConvert.serialize(user, User.class);
         registerIntent.putExtra(CommunicationKeys.USER, jUser);
+        // todo ----------------------------------------------------------------------------------------------
 
         // Post = Register this User
         registerIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
@@ -443,9 +445,9 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 // a new User has registered
 
                 User newUser = new User(-1, newUserName.getText().toString());
-                // {{ setGPS(new GPS(1,1,1));}}
 
-                // Todo startnewUserService(newUser);
+                // TODo stimmt das so ? wegen loginServer -> Post = Registieren + Usererstellen ---------------------------------------------------------------------
+                startnewUserService(newUser);
 
                 break;
 
@@ -466,7 +468,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 editor.commit();
 
                 hideProgressDialog();
-                // Todo: MeetingListActivity.start(this);
+                MeetingListActivity.start(this);
 
                 // Todo Put it Not in the Stack
 
@@ -503,7 +505,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
     public void cheateToMain(View view) {
 
-        User myUser = new User(42424269, "KakaKansei");
+        User myUser = new User(10, "Aff forever and ever <3ah oah");
         // sharePreferances save name and Password
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
