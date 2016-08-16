@@ -68,7 +68,7 @@ public class LogoutService extends IntentService {
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_LOGOUT_SERVICE);
 
-        // if there no Meeting Id in the Extra returns -1
+        // if there no User Id in the Extra returns -1
         int userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);
 
         if (userId != -1) {
@@ -90,7 +90,7 @@ public class LogoutService extends IntentService {
         } else {
             // Send a empty result with 500 as StatusCode
 
-            // StatusCode 500 is an unexpected Error. Here no Meeting ID in Intent
+            // StatusCode 500 is an unexpected Error. Here no User ID in Intent
             resultReceiver.send(500, bundle);
         }
 

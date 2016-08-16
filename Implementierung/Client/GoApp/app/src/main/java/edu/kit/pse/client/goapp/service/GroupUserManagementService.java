@@ -13,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientDelete;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientGet;
 import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPost;
 import edu.kit.pse.client.goapp.uri_builder.URI_GroupUserManagementBuilder;
@@ -172,4 +173,42 @@ public class GroupUserManagementService extends IntentService {
             resultReceiver.send(500, bundle);
         }
     }
+
+    private void doDelete(Intent intent) {
+        HttpResponse closeableHttpResponse = null;
+
+        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
+
+        // if there no GroupUserManagement Id in the Extra returns -1
+        int groupUserManagementId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
+
+        if (groupUserManagementId != -1) {
+            URI_GroupUserManagementBuilder uri_groupUserManagementBuilder = new URI_GroupUserManagementBuilder();
+            uri_groupUserManagementBuilder.addParameter(CommunicationKeys.MEETING_ID, Integer.toString(groupUserManagementId));
+
+            HttpAppClientDelete httpAppClientDelete = new HttpAppClientDelete();
+            httpAppClientDelete.setUri(uri_groupUserManagementBuilder.getURI());
+
+            try {
+                // TODO catch 404 (No Internet and Request Time out)
+                closeableHttpResponse = httpAppClientDelete.executeRequest();
+            } catch (IOException e) {
+                // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            }
+
+            // send the Bundle and the Status Code from Response
+            resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        } else {
+            // Send a empty result with 500 as StatusCode
+
+            // StatusCode 500 is an unexpected Error. Here no GroupUserManagement ID in Intent
+            resultReceiver.send(500, bundle);
+        }
+
+    }
+
 }
