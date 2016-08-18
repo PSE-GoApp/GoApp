@@ -10,14 +10,13 @@ import org.junit.Test;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
-import edu.kit.pse.client.goapp.converter.ObjectConverter;
-import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.service.GroupService;
+import edu.kit.pse.client.goapp.service.LoginService;
 
 /**
- * Created by paula on 17.08.16.
+ * Created by paula on 18.08.16.
  */
-public class GroupServiceTest extends AppCompatActivity implements ServiceResultReceiver.Receiver{
+public class LoginServiceTest extends AppCompatActivity implements ServiceResultReceiver.Receiver{
 
     Intent intent;
     int resultCode;
@@ -28,7 +27,7 @@ public class GroupServiceTest extends AppCompatActivity implements ServiceResult
 
     @Before
     public void initializeTest() {
-        intent = new Intent(this, GroupService.class);
+        intent = new Intent(this, LoginService.class);
         receiver = new ServiceResultReceiver(new Handler());
         receiver.setReceiver(this);
         intent.putExtra(CommunicationKeys.RECEICER, receiver);
@@ -36,36 +35,23 @@ public class GroupServiceTest extends AppCompatActivity implements ServiceResult
     }
 
     @Test
-    public void putTest() {
-        Group testGroup = new Group(1,"test");
-        ObjectConverter<Group> conv = new ObjectConverter<>();
-        String jsonGroup = conv.serialize(testGroup,Group.class);
-        intent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        intent.putExtra(CommunicationKeys.GROUP,jsonGroup);
-        startService(intent);
-    }
-
-    @Test
     public void getTest() {
         intent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        intent.putExtra(CommunicationKeys.GROUP_ID,1);
+        intent.putExtra(CommunicationKeys.USER_ID,1);
         startService(intent);
     }
 
     @Test
-    public void deleteTest() {
-        intent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
-        intent.putExtra(CommunicationKeys.GROUP_ID,1);
+    public void putTest() {
+        intent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
+        intent.putExtra(CommunicationKeys.USER_ID_TOKEN,1);
         startService(intent);
     }
 
     @Test
     public void postTest() {
-        Group testGroup = new Group(1,"test");
-        ObjectConverter<Group> conv = new ObjectConverter<>();
-        String jsonGroup = conv.serialize(testGroup,Group.class);
         intent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
-        intent.putExtra(CommunicationKeys.GROUP,jsonGroup);
+        intent.putExtra(CommunicationKeys.USER_ID_TOKEN,1);
         startService(intent);
     }
 
