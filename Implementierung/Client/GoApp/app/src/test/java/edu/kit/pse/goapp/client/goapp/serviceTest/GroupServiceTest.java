@@ -19,13 +19,20 @@ import edu.kit.pse.client.goapp.service.GroupService;
  */
 public class GroupServiceTest extends AppCompatActivity implements ServiceResultReceiver.Receiver{
 
-    Intent groupIntent;
+    Intent intent;
+    int resultCode;
+    Bundle resultBundle;
+    ServiceResultReceiver receiver;
+
+
 
     @Before
     public void initializeTest() {
-        groupIntent = new Intent(this, GroupService.class);
-        ServiceResultReceiver gpsReceiver = new ServiceResultReceiver(new Handler());
-        gpsReceiver.setReceiver(this);
+        intent = new Intent(this, GroupService.class);
+        receiver = new ServiceResultReceiver(new Handler());
+        receiver.setReceiver(this);
+        intent.putExtra(CommunicationKeys.RECEICER, receiver);
+        resultCode = -1;
 
     }
 
@@ -34,23 +41,23 @@ public class GroupServiceTest extends AppCompatActivity implements ServiceResult
         Group testGroup = new Group(1,"test");
         ObjectConverter<Group> conv = new ObjectConverter<>();
         String jsonGroup = conv.serialize(testGroup,Group.class);
-        groupIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        groupIntent.putExtra(CommunicationKeys.GROUP,jsonGroup);
-        startService(groupIntent);
+        intent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
+        intent.putExtra(CommunicationKeys.GROUP,jsonGroup);
+        startService(intent);
     }
 
     @Test
     public void getTest() {
-        groupIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        groupIntent.putExtra(CommunicationKeys.GROUP_ID,1);
-        startService(groupIntent);
+        intent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
+        intent.putExtra(CommunicationKeys.GROUP_ID,1);
+        startService(intent);
     }
 
     @Test
     public void deleteTest() {
-        groupIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
-        groupIntent.putExtra(CommunicationKeys.GROUP_ID,1);
-        startService(groupIntent);
+        intent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
+        intent.putExtra(CommunicationKeys.GROUP_ID,1);
+        startService(intent);
     }
 
     @Test
@@ -58,27 +65,15 @@ public class GroupServiceTest extends AppCompatActivity implements ServiceResult
         Group testGroup = new Group(1,"test");
         ObjectConverter<Group> conv = new ObjectConverter<>();
         String jsonGroup = conv.serialize(testGroup,Group.class);
-        groupIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
-        groupIntent.putExtra(CommunicationKeys.GROUP,jsonGroup);
-        startService(groupIntent);
+        intent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
+        intent.putExtra(CommunicationKeys.GROUP,jsonGroup);
+        startService(intent);
     }
 
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        switch (resultCode) {
-            case 200:
-                break;
-            case 400:
-                break;
-            case 403:
-                break;
-            case 408:
-                break;
-            case 500:
-                break;
-            default:
-                break;
-        }
+        this.resultCode = resultCode;
+        this.resultBundle = resultData;
     }
 }

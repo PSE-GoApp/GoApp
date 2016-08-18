@@ -10,47 +10,37 @@ import org.junit.Test;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
-import edu.kit.pse.client.goapp.converter.ObjectConverter;
-import edu.kit.pse.client.goapp.datamodels.Group;
-import edu.kit.pse.client.goapp.service.GroupService;
+import edu.kit.pse.client.goapp.service.GroupsService;
 
 /**
  * Created by paula on 17.08.16.
  */
 public class GroupsServiceTest extends AppCompatActivity implements ServiceResultReceiver.Receiver{
 
-    Intent groupIntent;
+    Intent intent;
+    int resultCode;
+    Bundle resultBundle;
+    ServiceResultReceiver receiver;
 
     @Before
     public void initializeTest() {
-        groupIntent = new Intent(this, GroupService.class);
-        ServiceResultReceiver gpsReceiver = new ServiceResultReceiver(new Handler());
-        gpsReceiver.setReceiver(this);
-
+        intent = new Intent(this, GroupsService.class);
+        receiver = new ServiceResultReceiver(new Handler());
+        receiver.setReceiver(this);
+        intent.putExtra(CommunicationKeys.RECEICER, receiver);
+        resultCode = -1;
     }
 
 
     @Test
     public void getTest() {
-        groupIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
-        startService(groupIntent);
+        intent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
+        startService(intent);
     }
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        switch (resultCode) {
-            case 200:
-                break;
-            case 400:
-                break;
-            case 403:
-                break;
-            case 408:
-                break;
-            case 500:
-                break;
-            default:
-                break;
-        }
+        this.resultCode = resultCode;
+        this.resultBundle = resultData;
     }
 }
