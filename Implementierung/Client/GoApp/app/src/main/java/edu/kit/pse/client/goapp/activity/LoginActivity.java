@@ -289,11 +289,13 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         activityReceiver.setReceiver(this);
         registerIntent.putExtra(CommunicationKeys.RECEICER, activityReceiver);
 
+
         // todo needed for a Test ------------------------------------------------------------------------------
+        //fails testGoAppRegister in LoginActivityTest
         User user = new User(-1, newUserName.getText().toString());
         String jUser = userConvert.serialize(user, User.class);
         registerIntent.putExtra(CommunicationKeys.USER, jUser);
-        // todo ----------------------------------------------------------------------------------------------
+        //todo ----------------------------------------------------------------------------------------------
 
         // Post = Register this User
         registerIntent.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.POST);
