@@ -11,9 +11,7 @@ import org.junit.Test;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
-import edu.kit.pse.client.goapp.datamodels.Group;
 import edu.kit.pse.client.goapp.datamodels.Notification;
-import edu.kit.pse.client.goapp.service.GroupService;
 import edu.kit.pse.client.goapp.service.NotificationService;
 
 /**
