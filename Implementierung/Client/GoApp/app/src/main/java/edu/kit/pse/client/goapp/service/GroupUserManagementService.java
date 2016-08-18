@@ -181,14 +181,14 @@ public class GroupUserManagementService extends IntentService {
 
         Bundle bundle = new Bundle();
         bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.DELETE);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_SERVICE);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_USER_MANAGEMENT);
 
         // if there no GroupUserManagement Id in the Extra returns -1
-        int groupUserManagementId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
+        int groupUserManagementId = intent.getIntExtra(CommunicationKeys.GROUP_ID, -1);
 
         if (groupUserManagementId != -1) {
             URI_GroupUserManagementBuilder uri_groupUserManagementBuilder = new URI_GroupUserManagementBuilder();
-            uri_groupUserManagementBuilder.addParameter(CommunicationKeys.MEETING_ID, Integer.toString(groupUserManagementId));
+            uri_groupUserManagementBuilder.addParameter(CommunicationKeys.GROUP_ID, Integer.toString(groupUserManagementId));
 
             HttpAppClientDelete httpAppClientDelete = new HttpAppClientDelete();
             httpAppClientDelete.setUri(uri_groupUserManagementBuilder.getURI());
