@@ -103,8 +103,24 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         participantConverter = new ObjectConverter<>();
 
         meetingNameText = (AutoCompleteTextView) findViewById(R.id.tipMeetingName);
+
         radioButtonEvent = (RadioButton) findViewById(R.id.buttonEvent);
         radioButtonTour = (RadioButton) findViewById(R.id.buttonTour);
+
+        radioButtonEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickRadioButton(v);
+            }
+        });
+
+        radioButtonTour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickRadioButton(v);
+            }
+        });
+
         durationText = (AutoCompleteTextView) findViewById(R.id.tipDuration);
         spinnerGroup = (Spinner) findViewById(R.id.spinnerGroup);
         createButton = (Button) findViewById(R.id.buttonCreate);
@@ -166,13 +182,9 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         popup.show();
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.menu_new_meeting) {
-            showPopUp(v);
-        }
+    private void onClickRadioButton(View v) {
         if (v.getId() == R.id.buttonEvent || v.getId() == R.id.buttonTour) {
-            // Todo change duration time
+            // Todo Test this
             if (v.getId() == R.id.buttonEvent) {
                 // Set durantion = 1h
                 durationText.setText(1 + "");
@@ -180,6 +192,13 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 // set durantion = 2h
                 durationText.setText(2 + "");
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.menu_new_meeting) {
+            showPopUp(v);
         }
 
         if (v.getId() == R.id.buttonCreate) {
@@ -232,29 +251,19 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 && calendar.get(Calendar.MONTH) == timeMonth
                 && calendar.get(Calendar.YEAR) == timeYear
                 && calendar.get(Calendar.HOUR_OF_DAY) == timeHour
-                && calendar.get(Calendar.MINUTE) ==timeMinute) {
+                && calendar.get(Calendar.MINUTE) ==timeMinute
+                && calendar.getTimeInMillis() >= System.currentTimeMillis()) {
 
             if (groups != null) {
 
                 int duration = Integer.parseInt(durationText.getText().toString());
+                if (duration <= 0) {
+                    return false;
+                }
 
                 Group selectedGroup = groups.get(selectedGroupPosition);
 
                 users = selectedGroup.getGroupMembers();
-
-                /*
-                // get my user and Id
-                SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-                userName = sharedPreferences.getString("userName", "");
-                userId = sharedPreferences.getInt("userId", -1);
-
-                // convert Users to participants for the new meeting todo dont need it !----------------------------------------
-                for (User u: users) {
-                    if (u.getId() != userId)
-
-                    participants.add(new Participant(-1, -1, u, MeetingConfirmation.PENDING));
-                }
-                */
 
                 Participant creator = null;
 
@@ -439,6 +448,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                     // start to add all participants
                     addParticipants();
                 } else {
+
                     // TOdo Error Delet Meeting.....---------------------------------------------------------------------------
                 }
 
@@ -520,38 +530,4 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
             mProgressDialog.hide();
         }
     }
-
-/*
-    class GroupSpinnerAdapter extends ArrayAdapter<Group> {
-        Context context;
-
-        List<Group> groups;
-
-
-        GroupSpinnerAdapter(Context c, List<Group> groups) {
-            super(c, R.layout.create_new_meeting_group_row, R.id.c_n_m_group_name,groups);
-
-            this.context = c;
-            this.groups = groups;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            //make the xml layout into a java object
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View groupRow = inflater.inflate(R.layout.create_new_meeting_group_row, parent, false);
-
-            Group group = groups.get(position);
-            groupRow.setTag(R.id.TAG_GROUP_ID, group.getId());
-
-               //deputy the buttons and TextViews as a java objects
-            TextView name = (TextView) groupRow.findViewById(R.id.c_n_m_group_name);
-
-            name.setText(group.getName());
-
-            return groupRow;
-        }
-    }
-    */
 }

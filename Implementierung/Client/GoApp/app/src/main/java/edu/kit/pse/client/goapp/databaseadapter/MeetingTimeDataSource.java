@@ -1,19 +1,10 @@
-package edu.kit.pse.client.goapp.databasehandler;
-
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
+package edu.kit.pse.client.goapp.databaseadapter;
 
 /**
  * Created by kansei on 06.07.16.
  */
 public class MeetingTimeDataSource {
-
+/*
     private SQLiteDatabase database;
     private DataBaseHandler dbHelper;
     private String[] allColums = {"ID", "MEETING_ID", "TIMESTAMP"};
@@ -73,5 +64,5 @@ public class MeetingTimeDataSource {
     }
 
 
-
+*/
 }

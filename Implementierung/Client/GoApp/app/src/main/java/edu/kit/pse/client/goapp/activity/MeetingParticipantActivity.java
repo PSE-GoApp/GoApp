@@ -28,6 +28,7 @@ import java.util.List;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
+import edu.kit.pse.client.goapp.databaseadapter.DataBaseAdapter;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
@@ -59,6 +60,10 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
     private int myUserId;
 
     private Participant meAsParticipant;
+
+    private Context context = this;
+
+    private DataBaseAdapter dbAdapter;
 
 
     public static void start(Activity activity, Meeting m) {
@@ -112,7 +117,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
             cancelButton.setTag("Termin verlassen");
         }
 
-
+        dbAdapter = new DataBaseAdapter(context);
     }
 
 
@@ -171,6 +176,9 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
             startService(i);
 
         // TODO change AlarmReceiver and SQL Data -------------------------------------------------------------------------------------------------
+
+        dbAdapter.deleteProduct(meeting.getMeetingId());
+
     }
 
 
@@ -197,7 +205,6 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         }
     }
 
-    // TODO TEST THIS
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
 
@@ -208,7 +215,6 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
                         meetingParticipanManagemantResultHandler(resultData);
                         break;
                     default:
-                        // TODO wrong Service
                         hideProgressDialog();
                         Toast.makeText(this, "Error 500: wrong Service", Toast.LENGTH_LONG).show();
 
@@ -234,6 +240,9 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
                 hideProgressDialog();
                 Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
                 break;
+            default:
+                Toast.makeText(this, "Error "+ resultCode +": unexpected Error", Toast.LENGTH_LONG).show();
+
         }
     }
 
