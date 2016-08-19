@@ -1,4 +1,4 @@
-package edu.kit.pse.client.goapp.databasehandler;
+package edu.kit.pse.client.goapp.databaseadapter;
 
 import java.util.Calendar;
 

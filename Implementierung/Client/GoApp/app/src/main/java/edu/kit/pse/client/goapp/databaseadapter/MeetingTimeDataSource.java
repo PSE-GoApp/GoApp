@@ -1,5 +1,4 @@
-package edu.kit.pse.client.goapp.databasehandler;
-
+package edu.kit.pse.client.goapp.databaseadapter;
 
 /**
  * Created by kansei on 06.07.16.

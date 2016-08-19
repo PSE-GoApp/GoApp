@@ -2,16 +2,13 @@ package edu.kit.pse.goapp.client.goapp;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.cglib.proxy.Factory;
 
-import edu.kit.pse.client.goapp.databasehandler.DataBaseHandler;
-import edu.kit.pse.client.goapp.databasehandler.Entry;
-import edu.kit.pse.client.goapp.databasehandler.MeetingTimeDataSource;
+import edu.kit.pse.client.goapp.databaseadapter.DataBaseHandler;
+import edu.kit.pse.client.goapp.databaseadapter.Entry;
+import edu.kit.pse.client.goapp.databaseadapter.MeetingTimeDataSource;
 
 import static org.junit.Assert.*;
 

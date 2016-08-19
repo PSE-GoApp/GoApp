@@ -8,11 +8,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,11 +20,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-
-import edu.kit.pse.client.goapp.CommunicationKeys;
-import edu.kit.pse.client.goapp.ServiceResultReceiver;
-import edu.kit.pse.client.goapp.datamodels.GPS;
-import edu.kit.pse.goapp.client.goapp.R;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -41,6 +36,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.kit.pse.client.goapp.CommunicationKeys;
+import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.datamodels.GPS;
+import edu.kit.pse.goapp.client.goapp.R;
 
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
@@ -75,9 +75,9 @@ public class MapActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        menu_button = (ImageButton) findViewById(R.id.menu_termine_groups);
+        menu_button = (ImageButton) findViewById(R.id.menu_map);
         menu_button.setOnClickListener(this);
-        mapView = (MapView) findViewById(R.id.map);
+        mapView = (MapView) findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
         mapView.setClickable(true);
         mapView.getMapAsync(this);
@@ -90,7 +90,7 @@ public class MapActivity extends AppCompatActivity
      * @param activity: the activity that is calling it
      */
     public static void start(Activity activity, String meetingID, Double latit, Double longit) {
-        Intent intent = new Intent(activity, GroupsActivity.class);
+        Intent intent = new Intent(activity, MapActivity.class);
         activity.startActivity(intent);
         lat = latit;
         lng = longit;

@@ -31,6 +31,7 @@ import java.util.List;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
+import edu.kit.pse.client.goapp.databaseadapter.DataBaseAdapter;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
@@ -56,6 +57,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     private List<Meeting> meetings = new ArrayList<>();
     private MeetingListAdapter adapter = null;
 
+    private DataBaseAdapter dbAdapter;
     /**
      * wird beim aufruf erstellt
      *
@@ -88,6 +90,8 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
         i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
         startService(i);
+
+        dbAdapter = new DataBaseAdapter(context);
     }
 
 
@@ -137,11 +141,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
         // should be in Try catch ? Nope because of the Unique Key R.id.TAG_MEETING
         Meeting meeting = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
-
-        // Todo remove this Toast Test --------------------------------------------------------------------------------------------------------------------------------
-        Toast.makeText(getApplicationContext(), meeting.getName() + " Button 1 was clicked", Toast.LENGTH_SHORT).show();
-
-
         ImageButton firstButton;
         firstButton = (ImageButton) meetingRow.getChildAt(2);
         int imageDirection = (int) firstButton.getTag(R.id.TAG_IMAGE_DIRECTION);
@@ -184,23 +183,20 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             secondButton.setImageResource(R.drawable.participant);
             secondButton.setTag(R.id.TAG_IMAGE_DIRECTION, R.drawable.participant);
 
+            // if request goes wrong, the meeting List will actualize => DB will update
+            dbAdapter.insertMeeting(meeting);
 
         } else {
             if (imageDirection == R.drawable.somemap) {
 
                 // Todo: open MapActivity from Meeting with startActivity with a Intent that has a Extra Integer with the key word MEETING_ID form Meeting class
-                /*
-                Intent mapItent = new Intent(this, MapActivity.class);
-                mapIntent.putExtra(Meeting.MEETING_ID_KEY, meeting.getId());
-                startActivity(mapIntent);
-                */
+
+                MapActivity.start(this,meeting.getMeetingId() + "", meeting.getPlace().getY(), meeting.getPlace().getX());
 
             } else {
                 // should not be Called
                 Toast.makeText(getApplicationContext(), "Error: Something unexpected happened", Toast.LENGTH_SHORT).show();
-
-                //Todo remove this Toast TEST-----------------------------------------------------------------------------------------------------------------------------------------
-                Toast.makeText(getApplicationContext(), "Wrong Button Image", Toast.LENGTH_SHORT).show();
+                MeetingListActivity.start(this);
             }
         }
     }
@@ -217,14 +213,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         // should be in Try catch ? Nope because of the Unique Key R.id.TAG_MEETING
         final Meeting meeting = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
 
-        //Todo remove this Toast TEST-----------------------------------------------------------------------------------------------------------------------------------------
-        Toast.makeText(getApplicationContext(), meeting.getName() + " Button 2 was clicked", Toast.LENGTH_SHORT).show();
-
         ImageButton secondButton = (ImageButton) meetingRow.getChildAt(3);
         int imageDirection = (int) secondButton.getTag(R.id.TAG_IMAGE_DIRECTION);
 
         if (imageDirection == R.drawable.cancel) {
-            // TODO AlertDialog doesn' work BufferOverflow!
 
             android.support.v7.app.AlertDialog alertDialog = buildCancelAlertDialog(meeting);
             alertDialog.show();
@@ -258,7 +250,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Todo reason on BufferOverflow are this (LiveTime cant delete Meeting from List)
                         rejectMeeting(meeting);
                     }
                 })
@@ -384,7 +375,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        // TODO i-eine schöne lösung finden für zwei Services oder String umwandeln
 
         switch (resultData.getString(CommunicationKeys.SERVICE)) {
             case CommunicationKeys.FROM_MEETINGS_SERVICE:
@@ -407,6 +397,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                     case 500:
                         Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
                         break;
+                    default:
+                        // todo handle Error
+
                 }
                 hideProgressDialog();
                 break;
@@ -427,16 +420,14 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                     case 500:
                         Toast.makeText(this, "Error 500: unexpected Error", Toast.LENGTH_LONG).show();
                     default:
-                        // it was not 202 Status Code!
-                        // todo start MeetinsServer to actualize
+                        // start MeetinsServer to actualize
                         startGetMeetingsService();
                         Log.d(TAG, "Wrong Status Code. Start MeetingsService");
                 }
                 break;
             default:
                 hideProgressDialog();
-                // TODO wrong Service
-                startGetMeetingsService();
+                // (wrong Service) should not call this
                 Toast.makeText(this, "Error 500: wrong Service", Toast.LENGTH_LONG).show();
         }
     }
@@ -466,9 +457,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             default:
+                // should not call this
                 Log.d(TAG, "Wrong Command MeetingParticipantManagent");
 
-                // TODO ERROR wrong Command from Service
+                // Todo ERROR wrong Command from Service
 
         }
     }
@@ -481,26 +473,16 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         i.putExtra(CommunicationKeys.RECEICER, activityServiceResultReceiver);
         i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.GET);
         startService(i);
-
-
-        // TODO Delete this TOast
-        Toast.makeText(this, "MeetinsService Started", Toast.LENGTH_LONG).show();
     }
 
     private void meetingsResultReceiverHandler(Bundle resultData) {
         switch (resultData.getString(CommunicationKeys.COMMAND)) {
             case CommunicationKeys.GET:
                 meetings = new ArrayList<>();
+                List<Meeting> confirmedMeetings = new ArrayList<>();
                 String jsonString = resultData.getString(CommunicationKeys.MEETINGS);
 
                     List<Meeting> fullMeetingList = meetingListConverter.deserializeList(jsonString, Meeting.class);
-
-                    // Todo Test----------------------
-                    // this is a test
-                    // List<Meeting> fullMeetingList = fullMeeting;
-                    // TODo TEST-----------------------------------
-
-                    // TODO FILTER meetings if they are Rejected from User-------------------------------------------------------------------------------
 
                     for (Meeting m : fullMeetingList) {
 
@@ -509,6 +491,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                             if (p.getUser().getId() == myUser.getId()) {
                                 if (p.getConfirmation() != MeetingConfirmation.REJECTED) {
                                     meetings.add(m);
+                                    if (p.getConfirmation() == MeetingConfirmation.CONFIRMED) {
+                                        confirmedMeetings.add(m);
+                                    }
                                 }
                             }
                         }
@@ -519,9 +504,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
                         adapter = new MeetingListAdapter(this, meetings);
                         list.setAdapter(adapter);
-                        // TODO Test ?? list.invalidateViews();
                         Log.d(TAG, "Catch GET Form MeetinsService");
 
+                        // TODO upDateDB(confirmedMeetings);
 
                 /* TODO update AlarmReceiver-----------------------------------------------------------------------------
                 for (Meeting m : meetings) {
@@ -539,9 +524,28 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             default:
                 Log.d(TAG, "Catch Wrong Command Form MeetinsService");
                 Toast.makeText(this, "Error: 500. Wrong Command From MeetingService", Toast.LENGTH_SHORT).show();
-                // TODO ERROR wrong Command from Service
         }
         hideProgressDialog();
+    }
+
+    public void upDateDB(List<Meeting> confirmedMeetings) {
+        List<Meeting> dbMeetings = dbAdapter.getAllMeetings();
+        List<Meeting> dbMeetingsTemp = dbAdapter.getAllMeetings();
+        for (Meeting cm : confirmedMeetings) {
+            Boolean successfulInsert = dbAdapter.insertMeeting(cm);
+
+            int dbMeetingsIndex = 0;
+            for (int i = 0; i < dbMeetings.size(); i++) {
+                if (dbMeetings.get(i).getMeetingId() == cm.getMeetingId()) {
+                    dbMeetings.remove(dbMeetingsIndex);
+                }
+                dbMeetingsIndex++;
+            }
+        }
+
+        for (Meeting dbm : dbMeetings) {
+            dbAdapter.deleteProduct(dbm.getMeetingId());
+        }
     }
 
 
@@ -560,84 +564,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             mProgressDialog.hide();
         }
     }
-
-
-    /* Todo delete it after Testing -------------------------------------------------------------------------
-    User me = new User(42424269, "KANSEi'S DICK");
-    User asshole = new User(13, "KEVIN!!");
-    // private int[] imageId = {R.drawable.checked, R.drawable.cancel, R.drawable.somemap, R.drawable.participant};
-
-
-    Participant keinKevin = new Participant(0, 2, asshole, MeetingConfirmation.REJECTED);
-    Participant kevin = new Participant(0, 2, asshole, MeetingConfirmation.CONFIRMED);
-    Participant itsMeConfirmed = new Participant(0, 2, me, MeetingConfirmation.CONFIRMED);
-    Participant itsMePending1 = new Participant(0, 3, me, MeetingConfirmation.PENDING);
-    Participant itsMePending2 = new Participant(0, 3, me, MeetingConfirmation.PENDING);
-    Participant itsMePending3 = new Participant(0, 3, me, MeetingConfirmation.PENDING);
-    Participant itsMePending4 = new Participant(0, 3, me, MeetingConfirmation.PENDING);
-    Participant imParticipant = new Participant(0, 3, me, MeetingConfirmation.REJECTED);
-
-    private List<Meeting> fullMeeting = new ArrayList<Meeting>() {
-        {
-            add(new Event(0, "Mensa", new GPS(1, 1, 1), 1475953024180L, 2, imParticipant) {{
-                addParticipant(itsMeConfirmed);
-                addParticipant(keinKevin);
-            }});
-            add(new Event(1, "Ago", new GPS(1, 1, 1), 1475953024000L, 2, imParticipant) {{
-                addParticipant(itsMePending1);
-                addParticipant(kevin);
-            }});
-            add(new Event(2, "PSE Treffen", new GPS(1, 1, 1), 1475953021200L, 2, imParticipant) {{
-                addParticipant(itsMePending2);
-                addParticipant(kevin);
-                addParticipant(keinKevin);
-                addParticipant(kevin);
-
-            }});
-            add(new Tour(3, "Iris Füttern", new GPS(1, 1, 1), 1476953024000L, 2, imParticipant) {{
-                addParticipant(itsMePending3);
-                addParticipant(kevin);
-                addParticipant(keinKevin);
-                addParticipant(kevin);
-                addParticipant(keinKevin);
-                addParticipant(kevin);
-            }});
-            add(new Tour(4, "Schloss Park", new GPS(1, 1, 1), 1475953021200L, 2, imParticipant) {{
-                addParticipant(itsMeConfirmed);
-            }});
-            add(new Event(5, "Klettern", new GPS(1, 1, 1), 147595302489L, 2, imParticipant) {{
-                addParticipant(itsMePending4);
-                addParticipant(kevin);
-                addParticipant(keinKevin);
-                addParticipant(kevin);
-                addParticipant(keinKevin);
-                addParticipant(kevin);
-                addParticipant(kevin);
-            }});
-            add(new Tour(6, "Bar Tour", new GPS(1, 1, 1), 14759530243560L, 2, imParticipant) {{
-                addParticipant(itsMeConfirmed);
-                addParticipant(kevin);
-                addParticipant(keinKevin);
-                addParticipant(kevin);
-                addParticipant(keinKevin);
-                addParticipant(kevin);
-                addParticipant(kevin);
-                addParticipant(kevin);
-            }});
-            add(new Tour(7, "Bar mit Tour", new GPS(1, 1, 1), 14759530243560L, 2, kevin) {{
-                addParticipant(imParticipant);
-                addParticipant(kevin);
-                addParticipant(kevin);
-                addParticipant(kevin);
-                addParticipant(kevin);
-                addParticipant(kevin);
-                addParticipant(kevin);
-                addParticipant(kevin);
-                addParticipant(kevin);
-            }});
-        }
-    };
-    *///------------------------------------------------------------------------------------------------------------------------------------------------
 
 
     class MeetingListAdapter extends ArrayAdapter<Meeting> {
@@ -738,5 +664,3 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     }
 
 }
-
-

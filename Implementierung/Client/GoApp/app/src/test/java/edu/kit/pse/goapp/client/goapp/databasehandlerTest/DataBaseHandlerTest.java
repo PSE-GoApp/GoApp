@@ -2,13 +2,11 @@ package edu.kit.pse.goapp.client.goapp.databasehandlerTest;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import org.junit.Test;
-import org.junit.Assert.*;
 import org.mockito.Mockito;
 
-import edu.kit.pse.client.goapp.databasehandler.DataBaseHandler;
+import edu.kit.pse.client.goapp.databaseadapter.DataBaseHandler;
 
 /**
  * Created by Ta on 16.07.2016.
