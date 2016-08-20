@@ -6,16 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import edu.kit.pse.client.goapp.databaseadapter.DataBaseHandler;
+//import edu.kit.pse.client.goapp.databaseadapter.DataBaseHandler;
 import edu.kit.pse.client.goapp.databaseadapter.Entry;
-import edu.kit.pse.client.goapp.databaseadapter.MeetingTimeDataSource;
+//import edu.kit.pse.client.goapp.databaseadapter.MeetingTimeDataSource;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by Ta on 16.07.2016.
  */
-/*public class DataBaseHandlerTest {
+/*public class DataBaseAdapterTest {
     @Test
     public void testCreateDatabase() {
         SQLiteDatabase mockDb = Mockito.mock(SQLiteDatabase.class);
