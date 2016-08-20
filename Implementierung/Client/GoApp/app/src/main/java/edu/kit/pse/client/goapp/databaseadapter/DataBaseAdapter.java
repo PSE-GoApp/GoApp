@@ -105,7 +105,7 @@ public class DataBaseAdapter {
             int duration;
             long timeStamp;
             try {
-                int index = cursor.getColumnIndex(DataBaseHandler.TABLE_MEETING);
+                int index = cursor.getColumnIndex(DataBaseHandler.COLUMN_MEETING_ID);
                 id = cursor.getInt(index);
 
                 index = cursor.getColumnIndex(DataBaseHandler.COLUMN_TIMESTAMP);
@@ -131,7 +131,7 @@ public class DataBaseAdapter {
      * @param meetingId the meeting Id
      * @return True if the Row deleted, otherwise false
      */
-    public boolean deleteProduct(int meetingId) {
+    public boolean deleteRow(int meetingId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int numberOfDeletRows = db.delete(DataBaseHandler.TABLE_MEETING, DataBaseHandler.COLUMN_MEETING_ID+" = "+meetingId,null);
         if (numberOfDeletRows > 0) {

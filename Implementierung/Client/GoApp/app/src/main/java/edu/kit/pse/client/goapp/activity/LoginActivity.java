@@ -1,11 +1,16 @@
 package edu.kit.pse.client.goapp.activity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +36,8 @@ import edu.kit.pse.goapp.client.goapp.R;
 /**
  * Created by PSE on 10.07.16.
  */
-public class LoginActivity extends AppCompatActivity implements  ServiceResultReceiver.Receiver, GoogleApiClient.OnConnectionFailedListener,  View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements  ServiceResultReceiver.Receiver, GoogleApiClient.OnConnectionFailedListener,  View.OnClickListener, GoogleApiClient.ConnectionCallbacks {
+
 
     private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -41,6 +47,8 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
     private String userFullName;
     private String userIdToken;
     private String googleId;
+
+    private static final int PERMISSION_ACCESS_COARSE_LOCATION = 1;
 
     ObjectConverter<User> userConvert;
 
@@ -97,7 +105,6 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
          SignInButton registerButton = (SignInButton) findViewById(R.id.registerButton);
         registerButton.setSize(SignInButton.SIZE_STANDARD);
         registerButton.setScopes(gso.getScopeArray());
-
     }
 
     /*
@@ -178,7 +185,7 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
                 } else {
                     // TOdo AlertBuilder
-                    Toast.makeText(this, "Name muss gesetzt sein", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Ein Name muss gesetzt sein", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -219,9 +226,9 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 Log.d(TAG, "onActivityResult:GET_TOKEN:success:" + resultSign.getStatus().isSuccess());
 
                 int statusCode = resultSign.getStatus().getStatusCode();
-                Log.e("Suck dick", "" + statusCode );
+                Log.e("LoginActivity", "Google Statuscode:" + statusCode );
                 if (resultSign.isSuccess()) {
-                    Log.e("I made it you son...", "" + statusCode );
+                    Log.e("LoginActivity", "Result success, Statuscode: " + statusCode );
                     GoogleSignInAccount acct = resultSign.getSignInAccount();
                     // Get account information
                     userFullName = acct.getDisplayName();
@@ -316,18 +323,6 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         newUserIntent.putExtra(CommunicationKeys.USER, jUser);
         newUserIntent.putExtra(CommunicationKeys.GOOGLE_ID, googleId);
         */
-    }
-
-
-    /**
-     * Bei Gooogle Connection fail create a Log
-     * @param connectionResult connection result
-     */
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-        // be available.
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
     /**
@@ -448,7 +443,6 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
 
                 User newUser = new User(-1, newUserName.getText().toString());
 
-                // TODo stimmt das so ? wegen loginServer -> Post = Registieren + Usererstellen ---------------------------------------------------------------------
                 startnewUserService(newUser);
 
                 break;
@@ -470,9 +464,14 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 editor.commit();
 
                 hideProgressDialog();
-                MeetingListActivity.start(this);
 
-                // Todo Put it Not in the Stack
+                // TODO Permissions
+
+                getPermissions();
+
+                // TODO zum testen, delete this ---------------------->
+                // MeetingListActivity.start(this);
+
 
                 break;
             default:
@@ -481,6 +480,20 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
                 Toast.makeText(this, "Error: 500 wrong Command", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void getPermissions() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_COARSE_LOCATION },
+                    PERMISSION_ACCESS_COARSE_LOCATION);
+            Log.d("Made","acked for promissions");
+        } else {
+            Log.d("Made","did not acked for promissions");
+
+            MeetingListActivity.start(this);
+            // Todo Put it Not in the Stack
+        }
     }
 
     /**
@@ -517,5 +530,53 @@ public class LoginActivity extends AppCompatActivity implements  ServiceResultRe
         editor.commit();
 
         MeetingListActivity.start(this);
+    }
+
+    /**
+     * Handler for the request Permissions(because of android 6 permissions are asked on runtime)
+     * @param requestCode the code
+     * @param permissions the permission wanted
+     * @param grantResults results
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+
+        // If request is cancelled, the result arrays are empty.
+        if (grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            try {
+                Log.d("Made","granted");
+            } catch (final SecurityException ex) {
+            }
+            // permission was granted, yay!
+            //googleApiClient = new GoogleApiClient.Builder(this, this, this).addApi(LocationServices.API).build();
+            MeetingListActivity.start(this);
+        } else {
+
+            // permission denied, boo!
+        }
+        return;
+    }
+
+    /**
+     * Bei Gooogle Connection fail create a Log
+     * @param connectionResult connection result
+     */
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
+        // be available.
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
     }
 }

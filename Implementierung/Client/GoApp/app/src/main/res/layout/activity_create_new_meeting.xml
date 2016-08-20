@@ -260,8 +260,8 @@
         android:layout_alignBaseline="@+id/textDuration"
         android:layout_alignStart="@+id/tipMeetingName"
         android:background="@color/itemBackground"
-        android:text="1"
-        android:gravity="right"
+        android:paddingRight="30dp"
+        android:text="60"
         android:textSize="18dp"
         />
 
@@ -269,7 +269,7 @@
         android:id="@+id/textTimeUnits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stunden"
+        android:text="Minuten"
         android:layout_alignBaseline="@id/textDuration"
         android:layout_toEndOf="@+id/tipDuration"
         android:layout_marginLeft="3dp"

@@ -5,14 +5,14 @@
     >
     <TextView
         android:id="@+id/meetingTime"
-        android:layout_width="60dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
         android:gravity="center_horizontal|center_vertical"
         android:textSize="18dp"
         android:background="#ffffff"
         android:layout_weight="0.05"
 
-        android:text="TIME"
+        android:text="12.12.9999\n24:00"
 
         />
 

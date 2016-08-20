@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -39,7 +40,11 @@ import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.GPS;
+import edu.kit.pse.client.goapp.datamodels.Meeting;
+import edu.kit.pse.client.goapp.datamodels.Participant;
+import edu.kit.pse.client.goapp.service.MeetingService;
 import edu.kit.pse.goapp.client.goapp.R;
 
 public class MapActivity extends AppCompatActivity
@@ -53,6 +58,8 @@ public class MapActivity extends AppCompatActivity
     public ServiceResultReceiver mReceiver;
     private List<Marker> marker = new ArrayList<Marker>();
 
+    private ObjectConverter<Meeting> mConverter =  new ObjectConverter<>();
+
     private GoogleMap mMap;
     private MapView mapView;
     private int REQUEST_LOCATION = 2;
@@ -63,7 +70,7 @@ public class MapActivity extends AppCompatActivity
     private Location mLastLocation;
     static double lat;
     static double lng;
-    static String meetingId;
+    static int meetingId;
     private ImageButton menu_button;
 
 
@@ -89,7 +96,7 @@ public class MapActivity extends AppCompatActivity
      * Starts the Activity
      * @param activity: the activity that is calling it
      */
-    public static void start(Activity activity, String meetingID, Double latit, Double longit) {
+    public static void start(Activity activity, int meetingID, Double latit, Double longit) {
         Intent intent = new Intent(activity, MapActivity.class);
         activity.startActivity(intent);
         lat = latit;
@@ -235,7 +242,9 @@ public class MapActivity extends AppCompatActivity
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION);
+            Log.d("Made", "fuck you");
         } else {
+            Log.d("Made", "fuck yeah!");
             mMap.setMyLocationEnabled(true);
             // permission has been granted, continue as usual
             Location myLocation =
@@ -262,7 +271,7 @@ public class MapActivity extends AppCompatActivity
         mMap = googleMap;
         mMap.setIndoorEnabled(true);
         // getPromissions();
-        getGPS();
+        startServiceGetParticipant();
     }
 
     /**
@@ -318,21 +327,47 @@ public class MapActivity extends AppCompatActivity
      */
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        //FILL the gps list
-        //ArrayList<ParcelableGPS> parcelableGps = resultData.getParcelableArrayList("GPS");
-       /* if (parcelableGps != null) {
-            for (ParcelableGPS g : parcelableGps) {
-                gps.add(g.getGps());
+
+        if (resultCode == 200) {
+            if (resultData.getString(CommunicationKeys.SERVICE) == CommunicationKeys.FROM_MEETING_SERVICE){
+
+                String jString = resultData.getString(CommunicationKeys.MEETING);
+                List<Participant> participants;
+                Meeting meeting;
+                meeting = mConverter.deserialize(jString, Meeting.class);
+                participants = meeting.getParticipants();
+
+                gps = new ArrayList<>();
+
+                for (Participant p : participants) {
+                    GPS tempGPS = p.getUser().getGps();
+                    if (tempGPS != null) {
+                        gps.add(tempGPS);
+                    }
+                }
+                updateMap();
+
+            } else {
+                // should not called
+                Toast.makeText(this, "Error: falscher Service", Toast.LENGTH_LONG).show();
+
             }
-        }*/
+        } else {
+            Toast.makeText(this, "Error: " + resultCode, Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
+    private void updateMap() {
         mMap.clear();
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         if (gps.size() == 0) {
-                Marker mark = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(lat, lng))
-                        .title("Treffpunkt"));
-                marker.add(mark);
-                builder.include(new LatLng(lat, lng));
+            Marker mark = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(lat, lng))
+                    .title("Treffpunkt"));
+            marker.add(mark);
+            builder.include(new LatLng(lat, lng));
 
         } else {
             for (GPS g : gps) {
@@ -355,11 +390,12 @@ public class MapActivity extends AppCompatActivity
     /**
      * asks for the GPS cordinates
      */
-    public void getGPS() {
+    public void startServiceGetParticipant() {
         //which service?
-        Intent i = new Intent(this, MapActivity.class);
+        Intent i = new Intent(this, MeetingService.class);
         mReceiver = new ServiceResultReceiver(new Handler());
         mReceiver.setReceiver(this);
+        i.putExtra(CommunicationKeys.MEETING_ID, meetingId);
         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
         i.putExtra(CommunicationKeys.COMMAND, "GET");
         startService(i);

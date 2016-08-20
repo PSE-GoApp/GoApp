@@ -67,7 +67,7 @@ public class MeetingService  extends IntentService {
     }
 
     /**
-     *Returns all information about a meeting.
+     *Returns Meeting with all information about a meeting.
      *
      * @param intent Intent
      */

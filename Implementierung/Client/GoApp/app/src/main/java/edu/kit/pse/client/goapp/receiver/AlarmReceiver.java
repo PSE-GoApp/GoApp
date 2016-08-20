@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -21,8 +22,18 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 
+import org.apache.http.HttpResponse;
+
+import java.io.IOException;
+
+import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.activity.SettingsActivity;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.databaseadapter.DataBaseAdapter;
+import edu.kit.pse.client.goapp.datamodels.GPS;
+import edu.kit.pse.client.goapp.datamodels.Meeting;
+import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
+import edu.kit.pse.client.goapp.uri_builder.URI_GPS_Builder;
 
 /**
  * Created by PSE
@@ -36,6 +47,9 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
     private GoogleApiClient googleApiClient;
     private LatLng cordinates;
     private DataBaseAdapter dataBaseAdapter;
+    private int meetingId;
+    private Intent intent;
+    private Meeting meeting;
 
     protected GoogleApiClient mGoogleApiClient;
 
@@ -43,6 +57,7 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
      * Stores parameters for requests to the FusedLocationProviderApi.
      */
     protected LocationRequest mLocationRequest;
+
     /**
      * onReceive handler. Starts the gps service
      *
@@ -53,11 +68,35 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
     public void onReceive(Context context, Intent intent) {
 
         this.context = context;
+        this.intent = intent;
+        meetingId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
+        if (meetingId == -1) {
+            cancelAlarm();
+            Log.d("AlarmReceiver", "Cancel Meeting Intent Extra was empty");
+            return;
+        }
 
         dataBaseAdapter = new DataBaseAdapter(context);
+        meeting = dataBaseAdapter.getMeeting(meetingId);
+        if (meeting == null) {
+            cancelAlarm();
+            Log.d("AlarmReceiver", "Cancel Meeting: " + meetingId + "\n Meeting = null");
+            return;
+        }
 
-        Log.d("Made", "IT in");
+        Log.d("AlarmReceiver", "Hallo from Receiver: " + meetingId
+                + "\nTimeStamp = " + meeting.getTimestamp() + "\nDuration = " + meeting.getDuration());
+
+
+        if (System.currentTimeMillis() >= meeting.getTimestamp() + meeting.getDuration() * 60 * 1000) {
+            cancelAlarm();
+            Log.d("AlarmReceiver", "Cancel Meeting: " + meetingId + "\nMeeting expired");
+            return;
+        }
+
         if (gpsOkUser(context)) {
+            Log.d("AlarmReceiver", "Cancel Meeting: " + meetingId + "\nSettings-GPS-off");
+            cancelAlarm();
             return;
         }
 
@@ -71,67 +110,26 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
             googleApiClient.connect();
         }
 
+        /*
         if (counter(context)) {
             SharedPreferences sharedpreferences = context.getSharedPreferences(COUNTER, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putInt(COUNTER, 1);
             editor.commit();
+            */
 
+        // TODO TEST THIS !!--------------------------------------------------------------------------------------------
+        // LatLng latLng = getLocation();
+        // sentGPS(latLng);
+        // TODO --------------------------------------------------------------------------------------------------------
 
-            //
-            /*int id = getId(context);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            alarmManager.cancel(pendingIntent);*/
+    }
 
-            int id = 0;
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            alarmManager.cancel(pendingIntent);
-        }
+    public void cancelAlarm() {
 
-        /*Boolean noError = true;
-        Boolean result = true;
-
-        Toast.makeText(context, "Good Morning!", Toast.LENGTH_LONG).show();
-
-
-        String GPSAsJsonString = null;
-        HttpResponse closeableHttpResponse = null;
-
-        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
-
-        Bundle bundle = new Bundle();
-        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GPS_SERVICE);
-
-        GPSAsJsonString = intent.getStringExtra(CommunicationKeys.GPS);
-
-        URI_GPS_Builder uri_gps_builder = new URI_GPS_Builder();
-
-        HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
-        httpAppClientPut.setUri(uri_gps_builder.getURI());
-        try {
-            httpAppClientPut.setBody(GPSAsJsonString);
-        } catch (IOException e) {
-            //Todo Handle Exception. Maybe the String Extra was null
-            result = false;
-        }
-
-        try {
-            // TODO catch 404 (No Internet and Request Time out)
-            closeableHttpResponse = httpAppClientPut.executeRequest();
-        } catch (IOException e) {
-            // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
-            noError = false;
-        }
-
-        if (result && noError) {
-            if (closeableHttpResponse.getStatusLine().getStatusCode() == 200) {
-
-            }
-
-        }*/
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, meetingId, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
     }
 
     /**
@@ -209,7 +207,8 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
         SharedPreferences sharedpreferences = context.getSharedPreferences(SettingsActivity.GPSENABLED, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
-        int i = sharedpreferences.getInt(SettingsActivity.GPSENABLED, 3);
+        // default value = 0, because they dont set the Settings => send GPS
+        int i = sharedpreferences.getInt(SettingsActivity.GPSENABLED, 1);
         if (i == 0) {
             return true;
         } else {
@@ -315,8 +314,6 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
         public void onStatusChanged(String provider, int status, Bundle extras) {}
     }
     */
-
-
     @Override
     public void onConnected(Bundle bundle) {
         Log.d("Made", "Connected to Google Play Services!");
@@ -343,5 +340,51 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
         Log.i("Made", "Can't connect to Google Play Services!");
     }
 
+    public int sentGPS(LatLng latLng) {
 
+        Log.d("AlarmReceiver", "Sending GPS");
+
+        Boolean noError = true;
+        Boolean result = true;
+        GPS gps = new GPS(latLng.longitude, latLng.latitude, 0);
+
+        ObjectConverter<GPS> gpsObjectConverter = new ObjectConverter<>();
+
+        String GPSAsJsonString = gpsObjectConverter.serialize(gps, GPS.class);
+        HttpResponse closeableHttpResponse = null;
+
+        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
+        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GPS_SERVICE);
+
+        URI_GPS_Builder uri_gps_builder = new URI_GPS_Builder();
+
+        HttpAppClientPut httpAppClientPut = new HttpAppClientPut();
+        httpAppClientPut.setUri(uri_gps_builder.getURI());
+        try {
+            httpAppClientPut.setBody(GPSAsJsonString);
+        } catch (IOException e) {
+            //Todo Handle Exception. Maybe the String Extra was null
+            result = false;
+        }
+
+        try {
+            // TODO catch 404 (No Internet and Request Time out)
+            closeableHttpResponse = httpAppClientPut.executeRequest();
+        } catch (IOException e) {
+            // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
+            noError = false;
+        }
+
+        if (result && noError) {
+            Log.d("AlarmReceiver", "Successful execut! StatusCode=" + closeableHttpResponse.getStatusLine().getStatusCode());
+            return closeableHttpResponse.getStatusLine().getStatusCode();
+        } else {
+            return 500;
+        }
+    }
 }
+
+

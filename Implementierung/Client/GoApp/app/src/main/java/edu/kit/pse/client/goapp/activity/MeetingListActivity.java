@@ -1,6 +1,8 @@
 package edu.kit.pse.client.goapp.activity;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
@@ -36,6 +39,7 @@ import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.User;
+import edu.kit.pse.client.goapp.receiver.AlarmReceiver;
 import edu.kit.pse.client.goapp.service.MeetingParticipantManagementService;
 import edu.kit.pse.client.goapp.service.MeetingsService;
 import edu.kit.pse.goapp.client.goapp.R;
@@ -56,6 +60,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     private User myUser;
     private List<Meeting> meetings = new ArrayList<>();
     private MeetingListAdapter adapter = null;
+    private AlarmManager alarmManager;
 
     private DataBaseAdapter dbAdapter;
     /**
@@ -92,6 +97,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         startService(i);
 
         dbAdapter = new DataBaseAdapter(context);
+        alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
     }
 
 
@@ -191,7 +197,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
                 // Todo: open MapActivity from Meeting with startActivity with a Intent that has a Extra Integer with the key word MEETING_ID form Meeting class
 
-                MapActivity.start(this,meeting.getMeetingId() + "", meeting.getPlace().getY(), meeting.getPlace().getX());
+                MapActivity.start(this,meeting.getMeetingId(), meeting.getPlace().getY(), meeting.getPlace().getX());
 
             } else {
                 // should not be Called
@@ -506,7 +512,12 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                         list.setAdapter(adapter);
                         Log.d(TAG, "Catch GET Form MeetinsService");
 
-                        // TODO upDateDB(confirmedMeetings);
+                        upDateDB(confirmedMeetings);
+                        // TODO updateAllAlarmReceivers();
+
+                        // deleteAllAlarmReceiver();
+
+                        // setAllAlarmReceiver();
 
                 /* TODO update AlarmReceiver-----------------------------------------------------------------------------
                 for (Meeting m : meetings) {
@@ -530,23 +541,69 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     public void upDateDB(List<Meeting> confirmedMeetings) {
         List<Meeting> dbMeetings = dbAdapter.getAllMeetings();
-        List<Meeting> dbMeetingsTemp = dbAdapter.getAllMeetings();
         for (Meeting cm : confirmedMeetings) {
             Boolean successfulInsert = dbAdapter.insertMeeting(cm);
 
-            int dbMeetingsIndex = 0;
-            for (int i = 0; i < dbMeetings.size(); i++) {
-                if (dbMeetings.get(i).getMeetingId() == cm.getMeetingId()) {
-                    dbMeetings.remove(dbMeetingsIndex);
-                }
-                dbMeetingsIndex++;
-            }
+            Iterator<Meeting> iterator = dbMeetings.iterator();
+
+            dbMeetings = deleteMeetingFromList(cm, dbMeetings);
         }
 
         for (Meeting dbm : dbMeetings) {
-            dbAdapter.deleteProduct(dbm.getMeetingId());
+            dbAdapter.deleteRow(dbm.getMeetingId());
         }
     }
+
+    private List<Meeting> deleteMeetingFromList (Meeting meeting, List<Meeting> list) {
+        int index = 0;
+        for (Meeting m : list) {
+            if (m.getMeetingId() == meeting.getMeetingId()) {
+                list.remove(index);
+                return list;
+            }
+            index++;
+        }
+        return list;
+    }
+
+    public void updateAllAlarmReceivers() {
+        List<Meeting> dbMeetings = dbAdapter.getAllMeetings();
+// todo .--------------------------------------------------------------------------------------
+
+    }
+
+
+
+    public void deleteAllAlarmReceiver() {
+        List<Meeting> dbMeetings = dbAdapter.getAllMeetings();
+
+        for (Meeting meeting : dbMeetings) {
+            Intent intent = new Intent(context, AlarmReceiver.class);
+            intent.putExtra(CommunicationKeys.MEETING_ID, meeting.getMeetingId());
+            PendingIntent alarmIntent
+                    = PendingIntent.getBroadcast(context, meeting.getMeetingId(), intent,0);
+            // delete the AlarmReceiver with the Meeting_ID as Alarm ID
+            alarmManager.cancel(alarmIntent);
+        }
+    }
+
+    public void setAllAlarmReceiver() {
+        List<Meeting> dbMeetings = dbAdapter.getAllMeetings();
+
+
+        for (Meeting meeting : dbMeetings) {
+            Intent intent = new Intent(context, AlarmReceiver.class);
+            intent.putExtra(CommunicationKeys.MEETING_ID, meeting.getMeetingId());
+            PendingIntent alarmIntent
+                    = PendingIntent.getBroadcast(context, meeting.getMeetingId(), intent,0);
+
+            // every 10 Minute repeating
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                    meeting.getTimestamp(), 10*1000,alarmIntent);
+            Log.e("AlarmManager", "Alarm: "+ meeting.getMeetingId() + " is set" );
+        }
+    }
+
 
 
     private void showProgressDialog() {
@@ -627,7 +684,10 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(m.getTimestamp());
-            time.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
+
+            String date = calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.YEAR);
+            String clockTime = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+            time.setText(date + "\n" + clockTime);
 
             // TODO show the date time------------------------------------------------------------------------------------------------------------------
 

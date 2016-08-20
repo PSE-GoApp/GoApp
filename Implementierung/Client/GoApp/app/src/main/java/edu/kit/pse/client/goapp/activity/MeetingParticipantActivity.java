@@ -177,8 +177,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
 
         // TODO change AlarmReceiver and SQL Data -------------------------------------------------------------------------------------------------
 
-        dbAdapter.deleteProduct(meeting.getMeetingId());
-
+        dbAdapter.deleteRow(meeting.getMeetingId());
     }
 
 

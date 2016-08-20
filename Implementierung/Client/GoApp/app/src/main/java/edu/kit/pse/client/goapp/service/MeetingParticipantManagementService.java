@@ -109,6 +109,14 @@ public class MeetingParticipantManagementService extends IntentService {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
         }
 
+        String test = null;
+        try {
+
+            test = EntityUtils.toString(closeableHttpResponse.getEntity());
+        } catch (Exception e ) {
+
+        }
+
         if (result && noError) {
             // send the Bundle and the Status Code from Response
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
@@ -118,7 +126,7 @@ public class MeetingParticipantManagementService extends IntentService {
     }
 
     /**
-     *Returns a list of MeetingParticipants and their commitment status.
+     *Returns a Partcipant of Meeting and their commitment status.
      *
      * @param intent Intent
      */
@@ -134,11 +142,11 @@ public class MeetingParticipantManagementService extends IntentService {
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_MEETING_PARTICIPANT_MANAGEMENT_SERVICE);
 
         // if there no Meeting Id in the Extra returns -1
-        int meetingId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
+        int Id = intent.getIntExtra(CommunicationKeys.PARTICIPANT_ID, -1);
 
-        if (meetingId != -1) {
+        if (Id != -1) {
             URI_MeetingParticipantManagementBuilder uri_meetingParticipantManagementBuilder = new URI_MeetingParticipantManagementBuilder();
-            uri_meetingParticipantManagementBuilder.addParameter(CommunicationKeys.MEETING_ID, Integer.toString(meetingId));
+            uri_meetingParticipantManagementBuilder.addParameter(CommunicationKeys.PARTICIPANT_ID, Integer.toString(Id));
 
             HttpAppClientGet httpAppClientGet = new HttpAppClientGet();
             httpAppClientGet.setUri(uri_meetingParticipantManagementBuilder.getURI());
@@ -157,7 +165,7 @@ public class MeetingParticipantManagementService extends IntentService {
                 // TODO handle Exception "can not Convert EntitlyUtils to String"
             }
 
-            bundle.putString(CommunicationKeys.MEETING_PARTICIPANTS, jasonString);
+            bundle.putString(CommunicationKeys.PARTICIPANT, jasonString);
 
             // send the Bundle and the Status Code from Response
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
