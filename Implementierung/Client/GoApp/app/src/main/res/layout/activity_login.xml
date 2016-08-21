@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         android:text="Benutzer Name:"
         android:textSize="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_below="@+id/textRegister"
         android:layout_marginTop="20dp"
         />
@@ -71,14 +72,13 @@
         android:id="@+id/tip_NewUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/textNewUserName"
-        android:layout_alignBaseline="@+id/textNewUserName"
         android:textSize="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="30dp"
         android:background="@color/itemBackground"
         android:maxLength="20"
-        />
+        android:layout_alignTop="@+id/textNewUserName"
+        android:layout_alignStart="@+id/registerButton" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/registerButton"

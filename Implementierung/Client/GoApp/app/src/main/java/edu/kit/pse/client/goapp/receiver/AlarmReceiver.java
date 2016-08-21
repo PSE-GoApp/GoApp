@@ -115,6 +115,7 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
 
         // TODO TEST THIS !!--------------------------------------------------------------------------------------------
         LatLng latLng = getLocation();
+        /*
         if (latLng != null) {
             Log.d(tag, "Latitude (Y): " + latLng.latitude+ ", Longitude (X): " + latLng.longitude);
 
@@ -125,11 +126,18 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
                 case 400:
                     cancelAlarm();
             }*/
-
+/*
         } else {
-            Log.d(tag, "No Location got.");
+            Log.d(tag, "No Location got, but");
+            if (lat == null) {
+                return;
+            }
+            Log.d(tag, "made it bitch");
+            LatLng ner = new LatLng(lat,lon);
+            startingGPSServicePut(ner);
+
         }
-        // TODO --------------------------------------------------------------------------------------------------------
+    */
 
     }
 
@@ -184,8 +192,8 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
                     .getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
             try {
-                lat = location.getLatitude();
-                lon = location.getLongitude();
+                lat = gotLoc.getLatitude();
+                lon = gotLoc.getLongitude();
                 Log.d(tag, "lat: " + lat);
                 Log.d(tag, "lon: " + lon);
                 return new LatLng(lat, lon);
@@ -336,6 +344,8 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
             double lat = lastLocation.getLatitude(), lon = lastLocation.getLongitude();
             Log.d(tag, " here are:" + lat + ", " + lon);
             cordinates = new LatLng(lat, lon);
+            Log.d(tag, "made it bitch yeah");
+            startingGPSServicePut(cordinates);
         } else {
             Log.d(tag, "connected? ");
         }
@@ -397,7 +407,7 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
     */
 
     private void startingGPSServicePut(LatLng latLng) {
-        GPS gps = new GPS(latLng.longitude, latLng.latitude, 0);
+        GPS gps = new GPS(latLng.latitude, latLng.longitude, 0);
         ObjectConverter<GPS> gpsObjectConverter = new ObjectConverter<>();
 
         String GPSAsJsonString = gpsObjectConverter.serialize(gps, GPS.class);

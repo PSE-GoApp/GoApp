@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -46,6 +47,7 @@ import edu.kit.pse.client.goapp.datamodels.GPS;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.Participant;
 import edu.kit.pse.client.goapp.datamodels.Tour;
+import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.MeetingService;
 import edu.kit.pse.goapp.client.goapp.R;
 
@@ -59,6 +61,8 @@ public class MapActivity extends AppCompatActivity
     private List<GPS> gps = new ArrayList<GPS>();
     public ServiceResultReceiver mReceiver;
     private List<Marker> marker = new ArrayList<Marker>();
+    private List<Participant> participantLocation = new ArrayList<>();
+    private User myUser;
 
     private ObjectConverter<Meeting> mConverter =  new ObjectConverter<>();
 
@@ -93,6 +97,16 @@ public class MapActivity extends AppCompatActivity
         mapView.getMapAsync(this);
         test(this);
         buildGoogleApiClient();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "");
+        int userId = sharedPreferences.getInt("userId", -1);
+        if (userId == -1) {
+            // Todo close App :D
+            Log.e("MapActivity", "No User Information");
+        }
+        myUser = new User(userId, userName);
+
     }
 
     /**
@@ -340,11 +354,13 @@ public class MapActivity extends AppCompatActivity
                 participants = meeting.getParticipants();
 
                 gps = new ArrayList<>();
+                participantLocation = new ArrayList<>();
 
                 for (Participant p : participants) {
                     GPS tempGPS = p.getUser().getGps();
-                    if (tempGPS != null) {
+                    if (tempGPS != null && p.getUser().getId() != myUser.getId() ) {
                         gps.add(tempGPS);
+                        participantLocation.add(p);
                     }
                 }
 
@@ -369,7 +385,7 @@ public class MapActivity extends AppCompatActivity
     private void updateEventMap() {
         mMap.clear();
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        if (gps.size() == 0) {
+        if (participantLocation.size() == 0) {
             Marker mark = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(lat, lng))
                     .title("Treffpunkt"));
@@ -377,16 +393,24 @@ public class MapActivity extends AppCompatActivity
             builder.include(new LatLng(lat, lng));
 
         } else {
-            for (GPS g : gps) {
+            if (participantLocation.size() == 0) {
                 Marker mark = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(g.getX(), g.getY()))
-                        .title("Freund"));
+                        .position(new LatLng(lat, lng))
+                        .title("Treffpunkt"));
                 marker.add(mark);
+                builder.include(new LatLng(lat, lng));
 
-                for (Marker m : marker) {
-                    builder.include(m.getPosition());
+                for (Participant p : participantLocation) {
+
+                    mark = mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(p.getUser().getGps().getX(), p.getUser().getGps().getY()))
+                            .title(p.getUser().getName()));
+                    marker.add(mark);
+
+                    for (Marker m : marker) {
+                        builder.include(m.getPosition());
+                    }
                 }
-
             }
         }
         LatLngBounds bounds = builder.build();
@@ -411,11 +435,15 @@ public class MapActivity extends AppCompatActivity
         } else {
             GPS gps = tour.getCenter().getPlace();
 
+            String partCenter = "Treffpunkt";
+            for ( Participant p : tour.getCenter().getParticipants()) {
+                partCenter = partCenter + "\n" + p.getUser().getName();
+            }
             Marker mark = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(gps.getY(), gps.getY()))
-                    .title("Treffpunkt"));
+                    .position(new LatLng(gps.getX(), gps.getY()))
+                    .title(partCenter));
             marker.add(mark);
-            builder.include(new LatLng(gps.getY(), gps.getX()));
+            builder.include(new LatLng(gps.getX(), gps.getY()));
         }
     }
 

@@ -141,7 +141,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         day = (AutoCompleteTextView) findViewById(R.id.tipDay);
         day.setText(Integer.toString(c.get(Calendar.DAY_OF_MONTH)));
         month = (AutoCompleteTextView) findViewById(R.id.tipMonth);
-        month.setText(Integer.toString(c.get(Calendar.MONTH)));
+        month.setText(Integer.toString(c.get(Calendar.MONTH) + 1));
         year = (AutoCompleteTextView) findViewById(R.id.tipYear);
         year.setText(Integer.toString(c.get(Calendar.YEAR)));
 
@@ -149,14 +149,14 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         minute = (AutoCompleteTextView) findViewById(R.id.tipMinute);
 
         if (c.get(Calendar.HOUR_OF_DAY) < 10) {
-            minute.setText("0" + c.get(Calendar.HOUR_OF_DAY));
-        } else {
-            minute.setText(c.get(Calendar.HOUR_OF_DAY) + "");
-        }
-        if (c.get(Calendar.MINUTE) < 10) {
             hour.setText("0" + c.get(Calendar.HOUR_OF_DAY));
         } else {
             hour.setText(c.get(Calendar.HOUR_OF_DAY) + "");
+        }
+        if (c.get(Calendar.MINUTE) < 10) {
+            minute.setText("0" + c.get(Calendar.MINUTE));
+        } else {
+            minute.setText(c.get(Calendar.MINUTE) + "");
         }
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
@@ -279,7 +279,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
     // if successfull set the New Meeting in meeting returns true, otherwise false
     private Boolean setNewMeeting() {
         int timeDay = Integer.parseInt(day.getText().toString()); //Fehler
-        int timeMonth = Integer.parseInt(month.getText().toString());
+        int timeMonth = Integer.parseInt(month.getText().toString()) - 1;
         int timeYear = Integer.parseInt(year.getText().toString());
         int timeHour = Integer.parseInt(hour.getText().toString());
         int timeMinute = Integer.parseInt(minute.getText().toString());
@@ -324,7 +324,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                     latitude = Double.parseDouble(latitudeString);
 
 
-                    String longitudeString = lat.getText().toString();
+                    String longitudeString = lng.getText().toString();
                     longitude = Double.parseDouble(longitudeString);
                 } catch (Exception e) {
                     return false;
