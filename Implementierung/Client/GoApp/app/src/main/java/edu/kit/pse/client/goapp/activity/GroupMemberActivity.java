@@ -26,7 +26,9 @@ import java.util.List;
 
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
+import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.datamodels.Group;
+import edu.kit.pse.client.goapp.datamodels.GroupMember;
 import edu.kit.pse.client.goapp.datamodels.User;
 import edu.kit.pse.client.goapp.service.GroupUserManagementService;
 import edu.kit.pse.goapp.client.goapp.R;
@@ -113,7 +115,16 @@ public class GroupMemberActivity extends AppCompatActivity implements View.OnCli
                                         mReceiver.setReceiver(GroupMemberActivity.this);
                                         i.putExtra(CommunicationKeys.RECEICER, mReceiver);
                                         i.putExtra(CommunicationKeys.COMMAND, "DELETE");
-                                        i.putExtra(CommunicationKeys.GROUP_ID, users.get(positionClicked).getId());
+                                        User temp = users.get(positionClicked);
+                                        GroupMember groupMember = new GroupMember();
+                                        groupMember.setGroupId(groupInfo.getId());
+                                        groupMember.setUserId(temp.getId());
+
+                                        ObjectConverter<GroupMember> groupMemberObjectConverter = new ObjectConverter<GroupMember>();
+
+                                        String memberString = groupMemberObjectConverter.serialize(groupMember, GroupMember.class);
+
+                                        i.putExtra(CommunicationKeys.GROUP_MEMBER, memberString);
                                         startService(i);
                                         progressDialog = ProgressDialog.show(GroupMemberActivity.this, "", "Sending");
                                     }

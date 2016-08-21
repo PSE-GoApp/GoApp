@@ -393,25 +393,24 @@ public class MapActivity extends AppCompatActivity
             builder.include(new LatLng(lat, lng));
 
         } else {
-            if (participantLocation.size() == 0) {
-                Marker mark = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(lat, lng))
-                        .title("Treffpunkt"));
+            Marker mark = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(lat, lng))
+                    .title("Treffpunkt"));
+            marker.add(mark);
+            builder.include(new LatLng(lat, lng));
+
+            for (Participant p : participantLocation) {
+
+                mark = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(p.getUser().getGps().getX(), p.getUser().getGps().getY()))
+                        .title(p.getUser().getName()));
                 marker.add(mark);
-                builder.include(new LatLng(lat, lng));
 
-                for (Participant p : participantLocation) {
-
-                    mark = mMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(p.getUser().getGps().getX(), p.getUser().getGps().getY()))
-                            .title(p.getUser().getName()));
-                    marker.add(mark);
-
-                    for (Marker m : marker) {
-                        builder.include(m.getPosition());
-                    }
+                for (Marker m : marker) {
+                    builder.include(m.getPosition());
                 }
             }
+
         }
         LatLngBounds bounds = builder.build();
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 30);

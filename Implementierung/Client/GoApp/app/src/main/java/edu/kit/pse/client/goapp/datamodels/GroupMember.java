@@ -5,7 +5,6 @@ package edu.kit.pse.client.goapp.datamodels;
  * @author PSE group
  */
 public class GroupMember {
-
     private int groupId;
     private int userId;
     private boolean isAdmin;

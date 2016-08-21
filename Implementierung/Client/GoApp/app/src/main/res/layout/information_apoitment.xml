@@ -45,15 +45,7 @@
         android:paddingBottom="8dp"
         />
 
-    <TextView
-        android:id="@+id/meeting_info_adress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Meeting Adress"
-        android:paddingBottom="8dp"
-        android:paddingLeft="10dp"
-        />
+
 
     <TextView
         android:id="@+id/info_Meeting_creator"
@@ -65,14 +57,5 @@
         android:paddingBottom="8dp"
         />
 
-    <TextView
-        android:id="@+id/meeting_info_memo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Meeting Memo"
-        android:paddingLeft="10dp"
-        android:paddingBottom="8dp"
-        />
 
 </LinearLayout>

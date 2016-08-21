@@ -21,6 +21,8 @@ public class CommunicationKeys {
     public static final String GROUP = "group";
     // In additional URI_Builder Keys
     public static final String GROUP_ID = "groupId";
+    public static final String GROUP_MEMBER = "groupMember";
+
 
     //Groups
     public static final String FROM_GROUPS_SERVICE = "GroupsService";

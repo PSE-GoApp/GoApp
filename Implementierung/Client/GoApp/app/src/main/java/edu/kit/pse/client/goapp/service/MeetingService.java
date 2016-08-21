@@ -246,6 +246,7 @@ public class MeetingService  extends IntentService {
         } catch (IOException e) {
             // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
             result = false;
+            jsonString = e.getMessage();
         }
 
         try {

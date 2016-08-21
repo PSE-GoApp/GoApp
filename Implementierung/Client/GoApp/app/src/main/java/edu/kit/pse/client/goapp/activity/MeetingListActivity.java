@@ -314,8 +314,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         RelativeLayout meetingRow = (RelativeLayout) v.getParent();
         Meeting meeting = (Meeting) meetingRow.getTag(R.id.TAG_MEETING);
 
-        Toast.makeText(this, "TODO create a MeetingService and put the Id: " + meeting.getMeetingId(), Toast.LENGTH_LONG);
-
         // get information_apoitment.xml as Java view
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View infoApoitment = inflater.inflate(R.layout.information_apoitment, null, false);
@@ -323,19 +321,18 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         // set the Meeting information in information_apoitment xml
         TextView time = (TextView) infoApoitment.findViewById(R.id.meeting_info_time);
         TextView name = (TextView) infoApoitment.findViewById(R.id.meeting_info_name);
-        TextView place = (TextView) infoApoitment.findViewById(R.id.meeting_info_adress);
+        // TextView place = (TextView) infoApoitment.findViewById(R.id.meeting_info_adress);
         TextView creator = (TextView) infoApoitment.findViewById(R.id.info_Meeting_creator);
 
         // Convert TimeStampt with a Calendar
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(meeting.getTimestamp());
 
-        time.setText("Am " + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH) + "."
+        time.setText("Am " + calendar.get(Calendar.DAY_OF_MONTH)+1 + "." + calendar.get(Calendar.MONTH) + "."
                 + calendar.get(Calendar.YEAR) + " um " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
 
-        name.setText(meeting.getName());
+        name.setText("Termin Name: " + meeting.getName());
         //Todo  GPS getPlace as String!
-        place.setText("TODO Set place here !!!");
         creator.setText("Ersteller: " + meeting.getCreator().getUser().getName());
 
        /*   (Priority B)

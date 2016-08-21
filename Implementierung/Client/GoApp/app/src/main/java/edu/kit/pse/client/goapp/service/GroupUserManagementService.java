@@ -7,7 +7,6 @@ import android.os.ResultReceiver;
 import android.util.Log;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -60,7 +59,7 @@ public class GroupUserManagementService extends IntentService {
                 doGet(intent); // wird eventuell nicht gebraucht @rumen
                 break;
             case CommunicationKeys.DELETE:
-                // TODO PRIO B ?
+                doDelete(intent);
                 break;
             case CommunicationKeys.PUT:
                //  doPut(intent);
@@ -175,6 +174,9 @@ public class GroupUserManagementService extends IntentService {
     }
 
     private void doDelete(Intent intent) {
+
+        boolean noError = true;
+
         HttpResponse closeableHttpResponse = null;
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
@@ -184,11 +186,20 @@ public class GroupUserManagementService extends IntentService {
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_USER_MANAGEMENT);
 
         // if there no GroupUserManagement Id in the Extra returns -1
-        int groupUserManagementId = intent.getIntExtra(CommunicationKeys.GROUP_ID, -1);
+        String groupUseMember = intent.getStringExtra(CommunicationKeys.GROUP_MEMBER);
 
-        if (groupUserManagementId != -1) {
             URI_GroupUserManagementBuilder uri_groupUserManagementBuilder = new URI_GroupUserManagementBuilder();
-            uri_groupUserManagementBuilder.addParameter(CommunicationKeys.GROUP_ID, Integer.toString(groupUserManagementId));
+
+            HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
+            httpAppClientPost.setUri(uri_groupUserManagementBuilder.getURI());
+            try {
+                httpAppClientPost.setBody(groupUseMember);
+            } catch (IOException e) {
+                //Todo Handle Exception. Maybe the String Extra was null
+                noError = false;
+            }
+
+            // uri_groupUserManagementBuilder.addParameter(CommunicationKeys.USER, Integer.toString(groupUserManagementId));
 
             HttpAppClientDelete httpAppClientDelete = new HttpAppClientDelete();
             httpAppClientDelete.setUri(uri_groupUserManagementBuilder.getURI());
@@ -202,13 +213,6 @@ public class GroupUserManagementService extends IntentService {
 
             // send the Bundle and the Status Code from Response
             resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
-        } else {
-            // Send a empty result with 500 as StatusCode
-
-            // StatusCode 500 is an unexpected Error. Here no GroupUserManagement ID in Intent
-            resultReceiver.send(500, bundle);
-        }
-
     }
 
 }
