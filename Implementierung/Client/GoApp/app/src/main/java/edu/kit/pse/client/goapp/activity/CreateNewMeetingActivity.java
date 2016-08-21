@@ -146,9 +146,18 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
         year.setText(Integer.toString(c.get(Calendar.YEAR)));
 
         hour = (AutoCompleteTextView) findViewById(R.id.tipHour);
-        hour.setText(Integer.toString(c.get(Calendar.HOUR_OF_DAY)));
         minute = (AutoCompleteTextView) findViewById(R.id.tipMinute);
-        minute.setText(Integer.toString(c.get(Calendar.MINUTE)));
+
+        if (c.get(Calendar.HOUR_OF_DAY) < 10) {
+            minute.setText("0" + c.get(Calendar.HOUR_OF_DAY));
+        } else {
+            minute.setText(c.get(Calendar.HOUR_OF_DAY) + "");
+        }
+        if (c.get(Calendar.MINUTE) < 10) {
+            hour.setText("0" + c.get(Calendar.HOUR_OF_DAY));
+        } else {
+            hour.setText(c.get(Calendar.HOUR_OF_DAY) + "");
+        }
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
         userName = sharedPreferences.getString("userName", "");
@@ -199,10 +208,10 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
             // Todo Test this
             if (v.getId() == R.id.buttonEvent) {
                 // Set durantion = 1h
-                durationText.setText(1 + "");
+                durationText.setText(60 + "");
             } else {
                 // set durantion = 2h
-                durationText.setText(2 + "");
+                durationText.setText(120 + "");
             }
         }
     }
@@ -298,7 +307,7 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
             if (groups != null) {
 
                 int duration = Integer.parseInt(durationText.getText().toString());
-                if (duration <= 0) {
+                if (duration <= 0 && 1048576 < duration) {
                     return false;
                 }
 
@@ -307,10 +316,23 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                 users = selectedGroup.getGroupMembers();
 
                 Participant creator = null;
+                double latitude = -200;
+                double longitude= -200;
 
-                long latitude = Long.parseLong(lat.getText().toString());
+                try {
+                    String latitudeString = lat.getText().toString();
+                    latitude = Double.parseDouble(latitudeString);
 
-                long longitude = Long.parseLong(lng.getText().toString());
+
+                    String longitudeString = lat.getText().toString();
+                    longitude = Double.parseDouble(longitudeString);
+                } catch (Exception e) {
+                    return false;
+                }
+                if (!((-90 <= latitude) && (latitude < 90)
+                        && (-180 <= longitude) && (longitude <180))) {
+                    return false;
+                }
 
                 GPS place = new GPS( latitude, longitude, 0);
                 if (radioButtonEvent.isChecked()) {

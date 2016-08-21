@@ -195,7 +195,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         } else {
             if (imageDirection == R.drawable.somemap) {
 
-                // Todo: open MapActivity from Meeting with startActivity with a Intent that has a Extra Integer with the key word MEETING_ID form Meeting class
+                // start MapActivity from Meeting with startActivity with meeting ID and LatLng place
 
                 MapActivity.start(this,meeting.getMeetingId(), meeting.getPlace().getY(), meeting.getPlace().getX());
 
@@ -506,30 +506,20 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                     }
                     if (meetings.isEmpty()) {
                         textViewListIsEmpty.setText("Keine bevorstehende Termine");
+                        deleteAllAlarmReceiver();
                     } else {
 
                         adapter = new MeetingListAdapter(this, meetings);
                         list.setAdapter(adapter);
                         Log.d(TAG, "Catch GET Form MeetinsService");
 
+                        // Update Database and set AlarmReceiver new
+                        // cancel all old AlarmReceiver
+                        deleteAllAlarmReceiver();
+
                         upDateDB(confirmedMeetings);
-                        // TODO updateAllAlarmReceivers();
-
-                        // deleteAllAlarmReceiver();
-
-                        // setAllAlarmReceiver();
-
-                /* TODO update AlarmReceiver-----------------------------------------------------------------------------
-                for (Meeting m : meetings) {
-                    long timestamp = m.getTimestamp();
-                    Intent intent = new Intent(context, AlarmReceiver.class);
-                    PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent,0);
-
-                    AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                            timestamp, 60*1000,alarmIntent);
-                }
-                */ // TOdo -------------------------------------------------------------------------------------------------
+                        // set all new AlarmReceivers();
+                        setAllAlarmReceiver();
                     }
                 break;
             default:
@@ -566,12 +556,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         return list;
     }
 
-    public void updateAllAlarmReceivers() {
-        List<Meeting> dbMeetings = dbAdapter.getAllMeetings();
-// todo .--------------------------------------------------------------------------------------
-
-    }
-
 
 
     public void deleteAllAlarmReceiver() {
@@ -588,8 +572,13 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void setAllAlarmReceiver() {
-        List<Meeting> dbMeetings = dbAdapter.getAllMeetings();
+        // every 10 second
+        Long repeatTime = 10*1000L;
 
+        // buffer Time 20 Second
+        Long bufferTime = 20*1000L;
+
+        List<Meeting> dbMeetings = dbAdapter.getAllMeetings();
 
         for (Meeting meeting : dbMeetings) {
             Intent intent = new Intent(context, AlarmReceiver.class);
@@ -597,10 +586,18 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             PendingIntent alarmIntent
                     = PendingIntent.getBroadcast(context, meeting.getMeetingId(), intent,0);
 
-            // every 10 Minute repeating
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                    meeting.getTimestamp(), 10*1000,alarmIntent);
-            Log.e("AlarmManager", "Alarm: "+ meeting.getMeetingId() + " is set" );
+            if (meeting.getMeetingId() + 1000 <= System.currentTimeMillis()) {
+
+                // Allready started Meetings will start in System Time + 20 Second
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                        System.currentTimeMillis() + bufferTime, repeatTime,alarmIntent);
+                Log.e("AlarmManager", "Alarm: "+ meeting.getMeetingId() + " is set" );
+            } else {
+                // every 10 Second repeating. starting the AlarmReceiver is meetingTime+20 Second later (Buffer)
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                        meeting.getTimestamp() + bufferTime, repeatTime ,alarmIntent);
+                Log.e("AlarmManager", "Alarm: "+ meeting.getMeetingId() + " is set" );
+            }
         }
     }
 
@@ -686,7 +683,21 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             calendar.setTimeInMillis(m.getTimestamp());
 
             String date = calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.YEAR);
-            String clockTime = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+            String clockTime;
+            String minute = null;
+            String hour = null;
+            if (calendar.get(Calendar.HOUR_OF_DAY) < 10) {
+                minute = "0" + calendar.get(Calendar.HOUR_OF_DAY);
+            } else {
+                minute = calendar.get(Calendar.HOUR_OF_DAY) + "";
+            }
+            if (calendar.get(Calendar.MINUTE) < 10) {
+                hour = "0" + calendar.get(Calendar.HOUR_OF_DAY);
+            } else {
+                hour = calendar.get(Calendar.HOUR_OF_DAY) + "";
+            }
+            clockTime = hour + ":" + minute;
+
             time.setText(date + "\n" + clockTime);
 
             // TODO show the date time------------------------------------------------------------------------------------------------------------------
