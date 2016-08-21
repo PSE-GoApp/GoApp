@@ -330,7 +330,9 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-
+            if (lastLocation == null) {
+                return;
+            }
             double lat = lastLocation.getLatitude(), lon = lastLocation.getLongitude();
             Log.d(tag, " here are:" + lat + ", " + lon);
             cordinates = new LatLng(lat, lon);

@@ -90,8 +90,8 @@
         android:maxLines="1"
         android:maxLength="20"
         android:singleLine="true"
-        android:layout_alignBaseline="@+id/textMeetingName"
-        android:layout_toEndOf="@+id/textEvent" />
+        android:layout_toEndOf="@+id/textEvent"
+        android:layout_above="@+id/textEvent" />
 
     <TextView
         android:id="@+id/textAt"
