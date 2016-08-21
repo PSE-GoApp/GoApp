@@ -176,8 +176,14 @@ public class GroupUserManagementService extends IntentService {
     private void doDelete(Intent intent) {
 
         boolean noError = true;
+        int groupId = -1;
+        int userId = -1;
 
         HttpResponse closeableHttpResponse = null;
+
+        groupId = intent.getIntExtra(CommunicationKeys.GROUP_ID, -1);
+        userId = intent.getIntExtra(CommunicationKeys.USER_ID, -1);
+
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
@@ -186,10 +192,13 @@ public class GroupUserManagementService extends IntentService {
         bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GROUP_USER_MANAGEMENT);
 
         // if there no GroupUserManagement Id in the Extra returns -1
-        String groupUseMember = intent.getStringExtra(CommunicationKeys.GROUP_MEMBER);
+        // String groupUseMember = intent.getStringExtra(CommunicationKeys.USER);
 
             URI_GroupUserManagementBuilder uri_groupUserManagementBuilder = new URI_GroupUserManagementBuilder();
+        uri_groupUserManagementBuilder.addParameter("userId", userId + "");
+        uri_groupUserManagementBuilder.addParameter("groudId", groupId + "");
 
+        /*
             HttpAppClientPost httpAppClientPost = new HttpAppClientPost();
             httpAppClientPost.setUri(uri_groupUserManagementBuilder.getURI());
             try {
@@ -198,6 +207,7 @@ public class GroupUserManagementService extends IntentService {
                 //Todo Handle Exception. Maybe the String Extra was null
                 noError = false;
             }
+            */
 
             // uri_groupUserManagementBuilder.addParameter(CommunicationKeys.USER, Integer.toString(groupUserManagementId));
 
