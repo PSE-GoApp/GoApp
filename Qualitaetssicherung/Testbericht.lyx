@@ -7,7 +7,7 @@
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
-\language english
+\language ngerman
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -27,9 +27,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -53,11 +54,15 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 3cm
+\topmargin 2.5cm
+\rightmargin 3cm
+\bottommargin 2.5cm
 \secnumdepth 3
-\tocdepth 3
+\tocdepth 5
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\quotes_language german
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -74,11 +79,25 @@
 Testbericht
 \end_layout
 
-\begin_layout Section*
+\begin_layout Author
+Rumen Donchev, Kansei Hara, Grischa Hauser, Tanja Müller, Paula Klein, Iris
+ Landerer
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Korrigierte Fehler und Bugs
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
 Server
 \end_layout
 
@@ -86,9 +105,9 @@ Server
 \begin_inset Tabular
 <lyxtabular version="3" rows="11" columns="3">
 <features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="4cm">
-<column alignment="left" valignment="top" width="4cm">
-<column alignment="left" valignment="top" width="4cm">
+<column alignment="left" valignment="top" width="5cm">
+<column alignment="left" valignment="top" width="5cm">
+<column alignment="left" valignment="top" width="5cm">
 <row>
 <cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -160,7 +179,7 @@ Ein User kann zu einer Gruppe hinzugefügt werden, obwohl dieser User nicht
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -191,7 +210,7 @@ Ein User kann zu einem Meeting hinzugefügt werden, obwohl dieser User nicht
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -222,7 +241,7 @@ Ein User, der bereits in einer Gruppe ist, kann nochmal in dieselbe Gruppe
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -254,7 +273,7 @@ User, der bereits Participant eines Meetings ist, kann nochmal zu dem Meeting
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -285,7 +304,7 @@ User können in einer Gruppe upgedatet oder aus einer Gruppe gelöscht werden,
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -316,7 +335,7 @@ User können in einem Meeting upgedated oder aus dem Meeting gelöscht werden,
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -337,7 +356,7 @@ Vor dem Updaten oder Löschen eines Users aus einem Meeting wird geprüft,
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -362,7 +381,7 @@ confirmed
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -379,7 +398,7 @@ pending
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -399,7 +418,7 @@ pending
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -409,7 +428,7 @@ Beim Updaten eines Meetings kommt die Fehlermeldung, dass ein Meeting einen
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -420,7 +439,7 @@ Es gibt eine Überprüfung, ob die creatorId >=0 ist.
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -433,29 +452,32 @@ ing(DatabaseConection) der Klasse MeetingDaoImpl entfernt, da ein Meeting
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Der Server hat sehr häufig die Session des Clients verloren
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Nicht genau bekannt.
+ Zusammenspiel zwischen Tomcat und Android httpappclient
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Neues session system basierend auf Cookies geschrieben.
+ Mit eigener klasse zum managen von Cookies inklusive Anpassungen im login
+ system
 \end_layout
 
 \end_inset
@@ -468,17 +490,17 @@ ing(DatabaseConection) der Klasse MeetingDaoImpl entfernt, da ein Meeting
 
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
 Client
 \end_layout
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="11" columns="3">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="4cm">
-<column alignment="left" valignment="top" width="4cm">
-<column alignment="left" valignment="top" width="4cm">
+<lyxtabular version="3" rows="19" columns="3">
+<features islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="5cm">
+<column alignment="left" valignment="top" width="5cm">
+<column alignment="left" valignment="top" width="5cm">
 <row>
 <cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -558,7 +580,7 @@ Klasse GroupMemberActivity wurde in das Package Service kopiert, obwohl
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -588,7 +610,7 @@ Klasse GroupsActivity wurde in das Package Service kopiert, obwohl sie dort
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -603,7 +625,8 @@ Klasse GroupsActivity aus dem Package Service gelöscht
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Creator eines Meetings kann sich selber als Participant zu seinem Meeting
+ hinzufügen
 \end_layout
 
 \end_inset
@@ -612,16 +635,32 @@ Klasse GroupsActivity aus dem Package Service gelöscht
 \begin_inset Text
 
 \begin_layout Plain Layout
+Beim Login des Users wird seine UserID in 
+\begin_inset Quotes gld
+\end_inset
 
+SharedPreferences
+\begin_inset Quotes grd
+\end_inset
+
+ gespeichert
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+UserID wird beim Login aus 
+\begin_inset Quotes gld
+\end_inset
 
+SharedPreferences
+\begin_inset Quotes grd
+\end_inset
+
+ gefiltert
 \end_layout
 
 \end_inset
@@ -632,7 +671,8 @@ Klasse GroupsActivity aus dem Package Service gelöscht
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Creator einer Gruppe kann sich selber als Gruppenmitglied zu seiner Gruppe
+ hinzufügen
 \end_layout
 
 \end_inset
@@ -641,16 +681,32 @@ Klasse GroupsActivity aus dem Package Service gelöscht
 \begin_inset Text
 
 \begin_layout Plain Layout
+Beim Login des Users wird seine UserID in 
+\begin_inset Quotes gld
+\end_inset
 
+SharedPreferences
+\begin_inset Quotes grd
+\end_inset
+
+ gespeichert
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+UserID wird beim Login aus 
+\begin_inset Quotes gld
+\end_inset
 
+SharedPreferences
+\begin_inset Quotes grd
+\end_inset
+
+ gefiltert
 \end_layout
 
 \end_inset
@@ -661,7 +717,9 @@ Klasse GroupsActivity aus dem Package Service gelöscht
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Wenn ein User in keiner Gruppe Mitglied ist, kann er beim Erstellen eines
+ Meetings keine Gruppe auswählen aber bekommt keine Warnung (benutzerunfreundlic
+h)
 \end_layout
 
 \end_inset
@@ -670,16 +728,17 @@ Klasse GroupsActivity aus dem Package Service gelöscht
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Kein Verweis zurück zur MeetingListActivity in der CreateNewMeetingActivity
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Der User bekommt eine Warnmeldung und kommt automatisch zurück zur MeetingListAc
+tivity
 \end_layout
 
 \end_inset
@@ -690,7 +749,10 @@ Klasse GroupsActivity aus dem Package Service gelöscht
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Beim Erstellen eines Meetings werden sofort alle Participants an den Server
+ übermittelt.
+ Der Server speichert jedoch nur den Creator und verwirft alle anderen Participa
+nts
 \end_layout
 
 \end_inset
@@ -699,103 +761,405 @@ Klasse GroupsActivity aus dem Package Service gelöscht
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Server speichert die Participants erst, wenn sie nach dem Erstellen des
+ Meetings separat übermittelt werden
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+Das Meeting wird beim Client erstellt und dem Server übermittelt.
+ Danach werden bei einer separaten Anfrage die Participants übermittelt.
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Beim Hinzufügen von Participants erhält man badRequest
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Im Intent war der JsonString im falschen Schlüssel gespeichert
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+Der Schlüssel 
+\begin_inset Quotes gld
+\end_inset
 
+CommunicationKey.Meeting
+\begin_inset Quotes grd
+\end_inset
+
+ wird zu CommunicationKey.Participant
+\begin_inset Quotes grd
+\end_inset
+
+ geändert
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+Wenn ein User keine bevorstehenden Meetings hat, wird ihm eine leere Liste
+ angezeigt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Es existiert noch kein Feature, das diesen Ausnahmefall behandelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Feature hinzugefügt, das in diesem Fall die Meldung 
+\begin_inset Quotes gld
+\end_inset
+
+Keine bevorstehenden Termine
+\begin_inset Quotes grd
+\end_inset
+
+ ausgibt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachdem ein Termin abgesagt wurde, verschwindet ProgressDialog nicht mehr
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Es wurde Statuscode 202 angegeben, statt 200
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Statuscode 202 wurde zu 200 geändert und es wurde ein default status hinzugefügt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row newpage="true">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wenn GPS ausgeschaltet ist, gibt es eine NullPointerException
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Exception nicht behandelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+In der Methode getGPS wurde eine if-Abfrage hinzugefügt, ob GPS eingeschaltet
+ ist
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Es werden alle Participants eines Meetings angezeigt deren Status 
+\begin_inset Quotes gld
+\end_inset
+
+confirmed
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+pending
+\begin_inset Quotes grd
+\end_inset
+
+ ist.
+ Es sollen jedoch nur die Participants angezeigt werden, deren Status 
+\begin_inset Quotes gld
+\end_inset
+
+confirmed
+\begin_inset Quotes grd
+\end_inset
+
+ ist
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+In der MeetingParticipantActivity war die Bedingung zum Hinzufügen eines
+ Participants zu einem Meeting 
+\begin_inset Quotes gld
+\end_inset
+
+!= rejected
+\begin_inset Quotes grd
+\end_inset
+
 
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+Die Bedingung wurde zu 
+\begin_inset Quotes gld
+\end_inset
 
+== confirmed
+\begin_inset Quotes grd
+\end_inset
+
+ geändert
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+Bei GPS-Kooridnaten (double) stürzt die CreateNewMeetingActivity ab
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Die CreateNewMeetingActivity versucht, die GPS-Daten von double in long
+ zu parsen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Long in double umgewandelt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Exception beim Ausführen der Klasse android.os.NetworkOnMainThreadExceptions
+ beim HTTP.execute
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+BroadcastReceiver verhindert, dass Aktionen im Internet ausgeführt werden
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+AlarmReceiver startet den GPS-Service
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+AlarmReceiver konnte nicht gestartet werden
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+AlarmReceiver war im Manifest falsch definiert (Schreibfehler)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Schreibfehler wurde korrigiert
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RuntimePermission bei Android 6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Methode getLocation() in der Klasse AlarmReceiver für Android 6 nicht angepasst
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Methode getLocation() neu geschrieben
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPS-Koordinaten : Breitengrad kann auch außerhalb des Intervalls [-90°,90°]
+ und Längengrad außerhalb der Werte [-180°,180°] eingegeben werden
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fall wurde in der Implementierung nicht behandelt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fehlermeldung, wenn die Werte außerhalb des Intervalls liegen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Länge des Namens für User, Group und Meeting nicht begrenzt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Länge wurde in der Implementierung nicht festgelegt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Maximale Länge des Namens für User, Group und Meeting wurde auf 20 Zeichen
+ festgelegt
 \end_layout
 
 \end_inset
@@ -806,6 +1170,31 @@ Klasse GroupsActivity aus dem Package Service gelöscht
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Veränderungen
+\end_layout
+
+\begin_layout Itemize
+Database erweitert: DatabaseAdapter für die Activitys geschrieben, innere
+ Klasse DataBaseHandler implementiert die Methoden onCreate(SQLiteDatabase)
+ und onUpgrade(SQLiteDatabase, int, int) der Klasse SQLiteDatabase
+\end_layout
+
+\begin_layout Itemize
+MeetingListActivity erweitert: MeetingListActivity verwendet Methoden der
+ Klasse DatabaseAdapter (z.B.
+ insertMeeting())
+\end_layout
+
+\begin_layout Itemize
+CreateNewMeetingActivity: Feld für Adresse und Button zum automatischen
+ Hinzufügen von Koordinaten hinzugefügt
+\end_layout
+
+\begin_layout Section
+Szenarien
 \end_layout
 
 \end_body
