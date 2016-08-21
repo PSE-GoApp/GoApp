@@ -197,7 +197,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
                 // start MapActivity from Meeting with startActivity with meeting ID and LatLng place
 
-                MapActivity.start(this,meeting.getMeetingId(), meeting.getPlace().getY(), meeting.getPlace().getX());
+                MapActivity.start(this,meeting.getMeetingId(), meeting.getPlace().getX(), meeting.getPlace().getY());
 
             } else {
                 // should not be Called
@@ -682,16 +682,16 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(m.getTimestamp());
 
-            String date = calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.YEAR);
+            String date = calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH)+1 + "." + calendar.get(Calendar.YEAR);
             String clockTime;
             String minute = null;
             String hour = null;
-            if (calendar.get(Calendar.HOUR_OF_DAY) < 10) {
-                minute = "0" + calendar.get(Calendar.HOUR_OF_DAY);
-            } else {
-                minute = calendar.get(Calendar.HOUR_OF_DAY) + "";
-            }
             if (calendar.get(Calendar.MINUTE) < 10) {
+                minute = "0" + calendar.get(Calendar.MINUTE);
+            } else {
+                minute = calendar.get(Calendar.MINUTE) + "";
+            }
+            if (calendar.get(Calendar.HOUR_OF_DAY) < 10) {
                 hour = "0" + calendar.get(Calendar.HOUR_OF_DAY);
             } else {
                 hour = calendar.get(Calendar.HOUR_OF_DAY) + "";

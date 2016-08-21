@@ -101,7 +101,7 @@ public class MeetingParticipantActivity extends AppCompatActivity implements Vie
         if (tempParticipant != null) {
             for (Participant p : tempParticipant) {
 
-                if (p.getConfirmation() != MeetingConfirmation.REJECTED ) {
+                if (p.getConfirmation() == MeetingConfirmation.CONFIRMED ) {
                     participants.add(p);
                     if (p.getUser().getId() == myUserId) {
                         meAsParticipant = p;
