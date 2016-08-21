@@ -418,6 +418,30 @@
 
             -->
 
+    <EditText
+        android:id="@+id/addressView"
+        android:layout_width="250dp"
+        android:layout_height="34dp"
+        android:layout_marginLeft="18dp"
+        android:hint="Search Location"
+        android:textColor="@android:color/black"
+        android:background="@android:color/white"
+        android:layout_below="@+id/textLat"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/menu_new_meeting">
+    </EditText>
+
+    <Button
+        android:id="@+id/getaddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="getAddress"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:onClick="onClick"
+        android:layout_below="@+id/addressView"
+        android:layout_alignEnd="@+id/spinnerGroup" />
+
     <Button
         android:id="@+id/buttonCreate"
         android:layout_width="match_parent"

@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +23,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -90,6 +95,9 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
     private AutoCompleteTextView lat;
     private AutoCompleteTextView lng;
 
+
+    private TextView address;
+    private Button getAdress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +184,10 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
             }
         });
         */
+
+        address = (TextView)findViewById(R.id.addressView);
+        getAdress = (Button)findViewById(R.id.getaddress);
+        getAdress.setOnClickListener(this);
     }
 
     public static void start(Activity activity) {
@@ -233,6 +245,35 @@ public class CreateNewMeetingActivity extends AppCompatActivity implements View.
                         Toast.LENGTH_LONG).show();
             }
         }
+        if (v.getId() == R.id.getaddress) {
+            String g = address.getText().toString();
+
+            Geocoder geocoder = new Geocoder(getBaseContext());
+            List<Address> addresses = null;
+
+            try {
+                // Getting a maximum of 3 Address that matches the input
+                // text
+                addresses = geocoder.getFromLocationName(g, 3);
+                if (addresses != null && !addresses.equals(""))
+                    search(addresses);
+
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
+    protected void search(List<Address> addresses) {
+
+        Address address = (Address) addresses.get(0);
+        Double home_long = address.getLongitude();
+        Double home_lat = address.getLatitude();
+        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+
+        lat.setText(""+home_lat);
+        lng.setText(""+home_long);
+
     }
 
     // if successfull set the New Meeting in meeting returns true, otherwise false
