@@ -93,6 +93,13 @@ LatexCommand tableofcontents
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Korrigierte Fehler und Bugs
 \end_layout
@@ -104,7 +111,7 @@ Server
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="11" columns="3">
-<features tabularvalignment="middle">
+<features islongtable="true" longtabularalignment="center">
 <column alignment="left" valignment="top" width="5cm">
 <column alignment="left" valignment="top" width="5cm">
 <column alignment="left" valignment="top" width="5cm">
@@ -214,7 +221,7 @@ Ein User kann zu einem Meeting hinzugefügt werden, obwohl dieser User nicht
 \begin_inset Text
 
 \begin_layout Plain Layout
-Es wird nicht geprüft, ob der User in der Datenbank ist, bevor edr zu einem
+Es wird nicht geprüft, ob der User in der Datenbank ist, bevor er zu einem
  Meeting hinzugefügt wird
 \end_layout
 
@@ -329,7 +336,7 @@ Vor dem Updaten oder Löschen eines Users aus einer Gruppe wird geprüft,
 \begin_inset Text
 
 \begin_layout Plain Layout
-User können in einem Meeting upgedated oder aus dem Meeting gelöscht werden,
+User können in einem Meeting upgedatet oder aus dem Meeting gelöscht werden,
  obwohl sie kein Participant des Meetings sind
 \end_layout
 
@@ -402,7 +409,15 @@ pending
 \begin_inset Text
 
 \begin_layout Plain Layout
-Confirmation des Creators ist bei default immer confirmed.
+Confirmation des Creators ist bei default immer 
+\begin_inset Quotes gld
+\end_inset
+
+confirmed
+\begin_inset Quotes grd
+\end_inset
+
+.
  Alle anderen Participants haben bei default 
 \begin_inset Quotes eld
 \end_inset
@@ -496,7 +511,7 @@ Client
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="19" columns="3">
+<lyxtabular version="3" rows="18" columns="3">
 <features islongtable="true" longtabularalignment="center">
 <column alignment="left" valignment="top" width="5cm">
 <column alignment="left" valignment="top" width="5cm">
@@ -535,7 +550,7 @@ Behebung
 \begin_inset Text
 
 \begin_layout Plain Layout
-Error: Klassenname AboutActivity doppelt
+Error: Klassenname AboutActivity existierte doppelt
 \end_layout
 
 \end_inset
@@ -545,7 +560,7 @@ Error: Klassenname AboutActivity doppelt
 
 \begin_layout Plain Layout
 Klasse AboutActivity wurde in das Package Service kopiert, obwohl sie dort
- nicht hin gehört
+ nicht hin gehört (Fehler beim Pushen in Github)
 \end_layout
 
 \end_inset
@@ -565,7 +580,7 @@ Klasse AboutActivity aus dem Package Service gelöscht
 \begin_inset Text
 
 \begin_layout Plain Layout
-Error: Klassenname GroupMemberActivity doppelt
+Error: Klassenname GroupMemberActivity existierte doppelt
 \end_layout
 
 \end_inset
@@ -575,7 +590,7 @@ Error: Klassenname GroupMemberActivity doppelt
 
 \begin_layout Plain Layout
 Klasse GroupMemberActivity wurde in das Package Service kopiert, obwohl
- sie dort nicht hin gehört
+ sie dort nicht hin gehör t(Fehler beim Pushen in Github)
 \end_layout
 
 \end_inset
@@ -595,7 +610,7 @@ Klasse GroupMemberActivity aus dem Package Service gelöscht
 \begin_inset Text
 
 \begin_layout Plain Layout
-Error: Klassenname GroupsActivity doppelt
+Error: Klassenname GroupsActivity existierte doppelt
 \end_layout
 
 \end_inset
@@ -605,7 +620,7 @@ Error: Klassenname GroupsActivity doppelt
 
 \begin_layout Plain Layout
 Klasse GroupsActivity wurde in das Package Service kopiert, obwohl sie dort
- nicht hin gehört
+ nicht hin gehört (Fehler beim Pushen in Github)
 \end_layout
 
 \end_inset
@@ -626,7 +641,7 @@ Klasse GroupsActivity aus dem Package Service gelöscht
 
 \begin_layout Plain Layout
 Creator eines Meetings kann sich selber als Participant zu seinem Meeting
- hinzufügen
+ hinzufügen (wurde beim Server und beim Client gefixt)
 \end_layout
 
 \end_inset
@@ -635,15 +650,7 @@ Creator eines Meetings kann sich selber als Participant zu seinem Meeting
 \begin_inset Text
 
 \begin_layout Plain Layout
-Beim Login des Users wird seine UserID in 
-\begin_inset Quotes gld
-\end_inset
-
-SharedPreferences
-\begin_inset Quotes grd
-\end_inset
-
- gespeichert
+Fehlende Filterung des eigenen Users
 \end_layout
 
 \end_inset
@@ -660,7 +667,7 @@ SharedPreferences
 \begin_inset Quotes grd
 \end_inset
 
- gefiltert
+ gespeichert und beim Erstellen eines Meetings gefiltert
 \end_layout
 
 \end_inset
@@ -681,15 +688,7 @@ Creator einer Gruppe kann sich selber als Gruppenmitglied zu seiner Gruppe
 \begin_inset Text
 
 \begin_layout Plain Layout
-Beim Login des Users wird seine UserID in 
-\begin_inset Quotes gld
-\end_inset
-
-SharedPreferences
-\begin_inset Quotes grd
-\end_inset
-
- gespeichert
+Fehlende Filterung des eigenen Users
 \end_layout
 
 \end_inset
@@ -706,39 +705,7 @@ SharedPreferences
 \begin_inset Quotes grd
 \end_inset
 
- gefiltert
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Wenn ein User in keiner Gruppe Mitglied ist, kann er beim Erstellen eines
- Meetings keine Gruppe auswählen aber bekommt keine Warnung (benutzerunfreundlic
-h)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Kein Verweis zurück zur MeetingListActivity in der CreateNewMeetingActivity
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Der User bekommt eine Warnmeldung und kommt automatisch zurück zur MeetingListAc
-tivity
+gespeichert und beim Erstellen einer Gruppe gefiltert
 \end_layout
 
 \end_inset
@@ -783,7 +750,7 @@ Das Meeting wird beim Client erstellt und dem Server übermittelt.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Beim Hinzufügen von Participants erhält man badRequest
+Beim Hinzufügen von Participants erhält man badRequest (Errorcode 400)
 \end_layout
 
 \end_inset
@@ -824,44 +791,6 @@ CommunicationKey.Meeting
 \begin_inset Text
 
 \begin_layout Plain Layout
-Wenn ein User keine bevorstehenden Meetings hat, wird ihm eine leere Liste
- angezeigt
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Es existiert noch kein Feature, das diesen Ausnahmefall behandelt
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Feature hinzugefügt, das in diesem Fall die Meldung 
-\begin_inset Quotes gld
-\end_inset
-
-Keine bevorstehenden Termine
-\begin_inset Quotes grd
-\end_inset
-
- ausgibt
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 Nachdem ein Termin abgesagt wurde, verschwindet ProgressDialog nicht mehr
 \end_layout
 
@@ -871,7 +800,7 @@ Nachdem ein Termin abgesagt wurde, verschwindet ProgressDialog nicht mehr
 \begin_inset Text
 
 \begin_layout Plain Layout
-Es wurde Statuscode 202 angegeben, statt 200
+Es wurde Statuscode 202 erwartet, statt 200
 \end_layout
 
 \end_inset
@@ -881,12 +810,13 @@ Es wurde Statuscode 202 angegeben, statt 200
 
 \begin_layout Plain Layout
 Statuscode 202 wurde zu 200 geändert und es wurde ein default status hinzugefügt
+, welches den ProgressDialog schließt
 \end_layout
 
 \end_inset
 </cell>
 </row>
-<row newpage="true">
+<row>
 <cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -992,7 +922,8 @@ Die Bedingung wurde zu
 \begin_inset Text
 
 \begin_layout Plain Layout
-Bei GPS-Kooridnaten (double) stürzt die CreateNewMeetingActivity ab
+Bei GPS-Kooridnaten (double-Format) stürzt die CreateNewMeetingActivity
+ ab
 \end_layout
 
 \end_inset
@@ -1001,7 +932,7 @@ Bei GPS-Kooridnaten (double) stürzt die CreateNewMeetingActivity ab
 \begin_inset Text
 
 \begin_layout Plain Layout
-Die CreateNewMeetingActivity versucht, die GPS-Daten von double in long
+Die CreateNewMeetingActivity versucht, die GPS-Daten von String in long
  zu parsen
 \end_layout
 
@@ -1011,7 +942,7 @@ Die CreateNewMeetingActivity versucht, die GPS-Daten von double in long
 \begin_inset Text
 
 \begin_layout Plain Layout
-Long in double umgewandelt
+String in double umgewandelt
 \end_layout
 
 \end_inset
@@ -1110,8 +1041,8 @@ Methode getLocation() neu geschrieben
 \begin_inset Text
 
 \begin_layout Plain Layout
-GPS-Koordinaten : Breitengrad kann auch außerhalb des Intervalls [-90°,90°]
- und Längengrad außerhalb der Werte [-180°,180°] eingegeben werden
+GPS-Koordinaten : Breitengrad kann auch außerhalb des Intervalls [-90°,90°)
+ und Längengrad außerhalb der Werte [-180°,180°) eingegeben werden
 \end_layout
 
 \end_inset
@@ -1154,12 +1085,41 @@ Länge wurde in der Implementierung nicht festgelegt
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 Maximale Länge des Namens für User, Group und Meeting wurde auf 20 Zeichen
  festgelegt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Auf der Karte wurde der Treffpunkt falsch angezeigt (MapActivity)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Latitude und Longitude wurden beim Übergeben verwechselt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parameter für Latitude und Longitude wurden richtig eingesetzt
 \end_layout
 
 \end_inset
@@ -1177,9 +1137,11 @@ Veränderungen
 \end_layout
 
 \begin_layout Itemize
-Database erweitert: DatabaseAdapter für die Activitys geschrieben, innere
- Klasse DataBaseHandler implementiert die Methoden onCreate(SQLiteDatabase)
- und onUpgrade(SQLiteDatabase, int, int) der Klasse SQLiteDatabase
+Database erweitert: DatabaseAdapter für die Activitys geschrieben, der die
+ Methoden insertMeeting(), getMeeting() und deleteRow() der Klasse DataBaseHandl
+er vereinfacht.
+ Die innere Klasse DataBaseHandler implementiert die Methoden onCreate(SQLiteDat
+abase) und onUpgrade(SQLiteDatabase, int, int) der Klasse SQLiteDatabase
 \end_layout
 
 \begin_layout Itemize
@@ -1189,12 +1151,236 @@ MeetingListActivity erweitert: MeetingListActivity verwendet Methoden der
 \end_layout
 
 \begin_layout Itemize
-CreateNewMeetingActivity: Feld für Adresse und Button zum automatischen
+CreateNewMeetingActivity: Suchfeld für Suchadresse und Button zum automatischen
  Hinzufügen von Koordinaten hinzugefügt
 \end_layout
 
+\begin_layout Itemize
+Wenn ein User in keiner Gruppe Mitglied ist, kann er beim Erstellen eines
+ Meetings keine Gruppe auswählen aber bekam auch keine Warnung (benutzerunfreund
+lich).
+ Jetzt bekommt er eine Warnmeldung und kommt automatisch zurück zur MeetingListA
+ctivity
+\end_layout
+
+\begin_layout Itemize
+Wenn ein User keine bevorstehenden Meetings hat, wurde ihm eine leere Liste
+ angezeigt.
+ Es wurde ein Feature hinzugefügt, das in diesem Fall statt der Tabelle
+ Meldung 
+\begin_inset Quotes gld
+\end_inset
+
+Keine bevorstehenden Termine
+\begin_inset Quotes grd
+\end_inset
+
+ anzeigt
+\end_layout
+
 \begin_layout Section
-Szenarien
+Testabdeckung
+\end_layout
+
+\begin_layout Subsection
+Client
+\end_layout
+
+\begin_layout Standard
+Da wir uns in dieser Phase hauptsächlich darauf konzentriert haben, die
+ Bugs und Fehler aus Implementierungsphase zu fixen, hatten wir am Ende
+ nicht mehr so viel Zeit, um JUnit-Tests zu schreiben.
+ Außerdem sind beim Schreiben der JUnit-Tests in einigen Methoden Exceptions
+ aufgetreten (NullPointerException), obwohl diese bei manuellen Tests funktionie
+ren.
+ Daher vermuten wir, dass diese Methoden nur manuell getestet werden können
+ und haben daraufhin unsere (nicht funktionierenden) Junit-Tests wieder
+ aus dem Projekt entfernt.
+ Deshalb wurde im gesamten Projekt auf der Clientseite nur eine Testabeckung
+ von 34% der Klassen erreicht.
+\end_layout
+
+\begin_layout Standard
+Im Package edu.kit.pse.client.goapp.converter wurde die größte Überdeckung mit
+ 100% der Klassen und 92% der Zeilen erreicht.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Package edu.kit.pse.client.goapp.datamodels hat eine Abdeckung der Klassen
+ von 100% und er Zeilen von 60%.
+\end_layout
+
+\begin_layout Standard
+Bei den Uri-Buildern wurden die Klassen zu 92% überdeckt und die Zeilen
+ zu 90%.
+\end_layout
+
+\begin_layout Standard
+Im Package edu.kit.pse.client.goapp.activity gab es einige Schwierigkeiten beim
+ mit JUnit-Tests.
+ Diese Klassen wurden hauptsächlich manuell getestet.
+ Daher wurde nur eine Testüberdeckung von 34% der Klassen erreicht.
+\end_layout
+
+\begin_layout Standard
+Die anderen Packages konnten teilweise nicht direkt getestet werden, da
+ sie einige private oder protected Methoden enthalten.
+ Die verbleibenden Klassen und Methoden lassen sich, wie oben schon erwähnt,
+ vermutlich nur manuell testen.
+\end_layout
+
+\begin_layout Subsection
+Server
+\end_layout
+
+\begin_layout Standard
+Beim Server konnten wir hingegen eine deutlich höhere Testabdeckung erzielen.
+ Die gesamte Testabdeckung des Servers beträgt 78,7%.
+\end_layout
+
+\begin_layout Standard
+Die Packages kit.edu.pse.goapp.server.algorithm und kit.edu.pse.goapp.server.exceptions
+ erreichten sogar eine Überdeckung von 100%.
+\end_layout
+
+\begin_layout Standard
+Die Packages kit.edu.pse.goapp.server.converter.dao wurde zu 97,6% überdeckt und
+ das Package kit.edu.pse.goapp.server.converter.object zu 91%.
+\end_layout
+
+\begin_layout Standard
+Das Package kit.edu.pse.goapp.server.creating_obj_with_dao wurde zu 90,5% überdeckt.
+\end_layout
+
+\begin_layout Standard
+Im Package kit.edu.pse.goapp.server.tests konnte eine Testabdeckung von 89,8%
+ erreicht werden.
+\end_layout
+
+\begin_layout Standard
+Das Package kit.edu.pse.goapp.server.validation erreichte eine Überdeckung von
+ 87,1%.
+\end_layout
+
+\begin_layout Standard
+Im Package kit.edu.pse.goapp.server.datamodels wurde eine Überdeckung von 84,8%
+ erreicht.
+\end_layout
+
+\begin_layout Standard
+Das Package kit.edu.pse.goapp.server.daos konnte zu 80,9% überdeckt werden.
+\end_layout
+
+\begin_layout Standard
+Das Package kit.edu.pse.goapp.gson.typeadapters wurde zu 77% mit Tests überdeckt.
+\end_layout
+
+\begin_layout Standard
+Das Package kit.edu.pse.goapp.server.authentication erreichte eine Testabdeckung
+ von 72,7%.
+\end_layout
+
+\begin_layout Standard
+Und das Package kit.edu.pse.goapp.server.servlets konnte zu 31,7% abgedeckt werden.
+\end_layout
+
+\begin_layout Section
+Szenarien/Manuelle Tests
+\end_layout
+
+\begin_layout Standard
+Folgende Funktionen der App wurden manuell getestet:
+\end_layout
+
+\begin_layout Subsection
+Gruppenverwaltung
+\end_layout
+
+\begin_layout Itemize
+Erstellen einer Gruppe mit Gruppennamen
+\end_layout
+
+\begin_layout Itemize
+Hinzufügen von Personen zu der Gruppe
+\end_layout
+
+\begin_layout Itemize
+Anzeigen der Gruppeninformationen: Namen der Gruppenmitglieder
+\end_layout
+
+\begin_layout Itemize
+Löschen eines Gruppenmitgliedes
+\end_layout
+
+\begin_layout Itemize
+Gruppe löschen
+\end_layout
+
+\begin_layout Subsection
+Terminverwaltung
+\end_layout
+
+\begin_layout Itemize
+Erstellen eines Termins mit Angabe von: Terminname, Gruppe, Ort, Zeit, Datum
+ und Dauer der Veranstaltung
+\end_layout
+
+\begin_layout Itemize
+Anzeigen von Daten des Termins: Datum, Uhrzeit, Terminname, Ort und Ersteller
+ des Termins
+\end_layout
+
+\begin_layout Itemize
+Zusagen oder Absagen eines Termins
+\end_layout
+
+\begin_layout Itemize
+Zugriff auf Teilnehmerliste und Karte, nachdem man einen Termin zugesagt
+ hat
+\end_layout
+
+\begin_layout Itemize
+Automatisches Löschen eines Termins, wenn er vorbei ist
+\end_layout
+
+\begin_layout Subsection
+Lokalisierung
+\end_layout
+
+\begin_layout Itemize
+Lokalisierung aller Teilnehmer einer Veranstaltung eine halbe Stunde vor
+ Beginn des Termins
+\end_layout
+
+\begin_layout Itemize
+Warnung an Teilnehmer mit ausgeschaltetem GPS
+\end_layout
+
+\begin_layout Itemize
+Anzeige der Teilnehmer als individuelle Marker auf der Karte ist nur für
+ Gruppenmitglieder sichtbar, sie am Termin teilnehmen, sobald sie sich in
+ einem bestimmten Umkreis um den Treffpunkt befinden
+\end_layout
+
+\begin_layout Itemize
+Die GPS-Lokalisierung wird nach Ablauf der Veranstaltungsdauer beendet
+\end_layout
+
+\begin_layout Subsection
+Schnittstelle zur Benutzerverwaltung
+\end_layout
+
+\begin_layout Itemize
+Registrierung eines Benutzers über den Google-Account
+\end_layout
+
+\begin_layout Itemize
+Anmelden des Benutzers in der App
+\end_layout
+
+\begin_layout Itemize
+Speicherung des Benutzers auf dem Server
 \end_layout
 
 \end_body
