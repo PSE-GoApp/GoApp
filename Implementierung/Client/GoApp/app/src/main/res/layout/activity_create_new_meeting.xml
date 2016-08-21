@@ -88,8 +88,9 @@
         android:layout_marginRight="15dp"
         android:background="@color/itemBackground"
         android:maxLines="1"
+        android:maxLength="20"
         android:singleLine="true"
-        android:layout_alignTop="@+id/textMeetingName"
+        android:layout_alignBaseline="@+id/textMeetingName"
         android:layout_toEndOf="@+id/textEvent" />
 
     <TextView
@@ -376,7 +377,7 @@
         android:background="@color/itemBackground"
         android:layout_alignBaseline="@+id/textPlace"
         android:layout_toRightOf="@+id/textLat"
-        android:inputType="numberDecimal"
+        android:inputType="numberDecimal|numberSigned"
         />
     <AutoCompleteTextView
         android:id="@+id/tipLng"
@@ -387,7 +388,7 @@
         android:background="@color/itemBackground"
         android:layout_alignBaseline="@+id/textPlace"
         android:layout_toRightOf="@+id/textLng"
-        android:inputType="numberDecimal"
+        android:inputType="numberDecimal|numberSigned"
         />
 
 

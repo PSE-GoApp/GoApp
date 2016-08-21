@@ -2,11 +2,10 @@ package edu.kit.pse.client.goapp.service;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.util.Log;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.CloseableHttpResponse;
 
 import java.io.IOException;
 
@@ -45,6 +44,7 @@ public class GPS_Service extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         String command = intent.getStringExtra(CommunicationKeys.COMMAND);
+        Log.d("GPS_Service", "Started");
         switch (command) {
             case CommunicationKeys.GET:
                 break;
@@ -71,10 +71,6 @@ public class GPS_Service extends IntentService {
 
         final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
 
-        Bundle bundle = new Bundle();
-        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GPS_SERVICE);
-
         GPSAsJsonString = intent.getStringExtra(CommunicationKeys.GPS);
 
         URI_GPS_Builder uri_gps_builder = new URI_GPS_Builder();
@@ -84,17 +80,38 @@ public class GPS_Service extends IntentService {
         try {
             httpAppClientPut.setBody(GPSAsJsonString);
         } catch (IOException e) {
-            //Todo Handle Exception. Maybe the String Extra was null
         }
 
         try {
-            // TODO catch 404 (No Internet and Request Time out)
             closeableHttpResponse = httpAppClientPut.executeRequest();
         } catch (IOException e) {
-            // TODO handle Exception Toast? Alert Dialog? sent it to the Activity?
         }
 
-        // send the Bundle and the Status Code from Response
-        resultReceiver.send(closeableHttpResponse.getStatusLine().getStatusCode(), bundle);
+        int resultCode = closeableHttpResponse.getStatusLine().getStatusCode();
+        Log.e("GPS_Service", "ResultCode: " + resultCode);
+
+        switch (resultCode) {
+            case 200:
+                break;
+            case 400:
+                // TODOstatusCode 400 => stopAlarmReceiver
+                break;
+        }
+
     }
+
+    /*
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(action.equals("android.provider.Telephony.SMS_RECEIVED")){
+                //action for sms received
+            }
+            else if(action.equals(android.telephony.TelephonyManager.ACTION_PHONE_STATE_CHANGED)){
+                //action for phone state changed
+            }
+        }
+    };
+    */
 }

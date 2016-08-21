@@ -41,9 +41,11 @@ import java.util.List;
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
+import edu.kit.pse.client.goapp.datamodels.Event;
 import edu.kit.pse.client.goapp.datamodels.GPS;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.Participant;
+import edu.kit.pse.client.goapp.datamodels.Tour;
 import edu.kit.pse.client.goapp.service.MeetingService;
 import edu.kit.pse.goapp.client.goapp.R;
 
@@ -71,6 +73,7 @@ public class MapActivity extends AppCompatActivity
     static double lat;
     static double lng;
     static int meetingId;
+    private static Meeting meeting;
     private ImageButton menu_button;
 
 
@@ -333,7 +336,6 @@ public class MapActivity extends AppCompatActivity
 
                 String jString = resultData.getString(CommunicationKeys.MEETING);
                 List<Participant> participants;
-                Meeting meeting;
                 meeting = mConverter.deserialize(jString, Meeting.class);
                 participants = meeting.getParticipants();
 
@@ -345,7 +347,12 @@ public class MapActivity extends AppCompatActivity
                         gps.add(tempGPS);
                     }
                 }
-                updateMap();
+
+                if (meeting.getClass() == Event.class) {
+                    updateEventMap();
+                } else {
+                    updateTourMap();
+                }
 
             } else {
                 // should not called
@@ -359,7 +366,7 @@ public class MapActivity extends AppCompatActivity
 
 
 
-    private void updateMap() {
+    private void updateEventMap() {
         mMap.clear();
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         if (gps.size() == 0) {
@@ -387,12 +394,37 @@ public class MapActivity extends AppCompatActivity
         mMap.moveCamera(cu);
     }
 
+
+
+    private void updateTourMap() {
+        mMap.clear();
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        Tour tour = (Tour) meeting;
+
+        if (tour.getCenter() == null) {
+            Marker mark = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(lat, lng))
+                    .title("Treffpunkt"));
+            marker.add(mark);
+            builder.include(new LatLng(lat, lng));
+
+        } else {
+            GPS gps = tour.getCenter().getPlace();
+
+            Marker mark = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(gps.getY(), gps.getY()))
+                    .title("Treffpunkt"));
+            marker.add(mark);
+            builder.include(new LatLng(gps.getY(), gps.getX()));
+        }
+    }
+
     /**
      * asks for the GPS cordinates
      */
     public void startServiceGetParticipant() {
-        //which service?
         Intent i = new Intent(this, MeetingService.class);
+
         mReceiver = new ServiceResultReceiver(new Handler());
         mReceiver.setReceiver(this);
         i.putExtra(CommunicationKeys.MEETING_ID, meetingId);

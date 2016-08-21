@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.ResultReceiver;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -22,18 +21,13 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 
-import org.apache.http.HttpResponse;
-
-import java.io.IOException;
-
 import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.activity.SettingsActivity;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.databaseadapter.DataBaseAdapter;
 import edu.kit.pse.client.goapp.datamodels.GPS;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
-import edu.kit.pse.client.goapp.httpappclient.HttpAppClientPut;
-import edu.kit.pse.client.goapp.uri_builder.URI_GPS_Builder;
+import edu.kit.pse.client.goapp.service.GPS_Service;
 
 /**
  * Created by PSE
@@ -41,6 +35,7 @@ import edu.kit.pse.client.goapp.uri_builder.URI_GPS_Builder;
 public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private LocationManager locationManager;
+    private final String tag = "AlarmReceiver";
     private Context context;
     private Double lat, lon;
     private final static String COUNTER = "counter";
@@ -72,7 +67,7 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
         meetingId = intent.getIntExtra(CommunicationKeys.MEETING_ID, -1);
         if (meetingId == -1) {
             cancelAlarm();
-            Log.d("AlarmReceiver", "Cancel Meeting Intent Extra was empty");
+            Log.d(tag, "Cancel Meeting Intent Extra was empty");
             return;
         }
 
@@ -80,22 +75,22 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
         meeting = dataBaseAdapter.getMeeting(meetingId);
         if (meeting == null) {
             cancelAlarm();
-            Log.d("AlarmReceiver", "Cancel Meeting: " + meetingId + "\n Meeting = null");
+            Log.d(tag, "Cancel Meeting: " + meetingId + "\n Meeting = null");
             return;
         }
 
-        Log.d("AlarmReceiver", "Hallo from Receiver: " + meetingId
+        Log.d(tag, "Hallo from Receiver: " + meetingId
                 + "\nTimeStamp = " + meeting.getTimestamp() + "\nDuration = " + meeting.getDuration());
 
 
         if (System.currentTimeMillis() >= meeting.getTimestamp() + meeting.getDuration() * 60 * 1000) {
             cancelAlarm();
-            Log.d("AlarmReceiver", "Cancel Meeting: " + meetingId + "\nMeeting expired");
+            Log.d(tag, "Cancel Meeting: " + meetingId + "\nMeeting expired");
             return;
         }
 
         if (gpsOkUser(context)) {
-            Log.d("AlarmReceiver", "Cancel Meeting: " + meetingId + "\nSettings-GPS-off");
+            Log.d(tag, "Cancel Meeting: " + meetingId + "\nSettings-GPS-off");
             cancelAlarm();
             return;
         }
@@ -106,7 +101,7 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
                 .addOnConnectionFailedListener(this)
                 .build();
         if (googleApiClient != null) {
-            Log.d("Made", "connecting");
+            Log.d(tag, "connecting");
             googleApiClient.connect();
         }
 
@@ -119,14 +114,28 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
             */
 
         // TODO TEST THIS !!--------------------------------------------------------------------------------------------
-        // LatLng latLng = getLocation();
-        // sentGPS(latLng);
+        LatLng latLng = getLocation();
+        if (latLng != null) {
+            Log.d(tag, "Latitude (Y): " + latLng.latitude+ ", Longitude (X): " + latLng.longitude);
+
+            startingGPSServicePut(latLng);
+
+            /*int statusCode = sentGPS(latLng);
+            switch (statusCode) {
+                case 400:
+                    cancelAlarm();
+            }*/
+
+        } else {
+            Log.d(tag, "No Location got.");
+        }
         // TODO --------------------------------------------------------------------------------------------------------
 
     }
 
     public void cancelAlarm() {
 
+        // wrong intent
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, meetingId, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
@@ -155,10 +164,10 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
 
             // todo Notivication
 
-            Log.d("Made", "no permissions");
+            Log.d(tag, "no permissions");
             return null;
         } else {
-            Log.d("Made", "permissions");
+            Log.d(tag, "permissions");
             //if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
             // todo a new Location Listener
@@ -177,15 +186,15 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
             try {
                 lat = location.getLatitude();
                 lon = location.getLongitude();
-                Log.d("Made", "lat: " + lat);
-                Log.d("Made", "lon: " + lon);
+                Log.d(tag, "lat: " + lat);
+                Log.d(tag, "lon: " + lon);
                 return new LatLng(lat, lon);
             } catch (NullPointerException e) {
-                Log.d("Made", "something went wrong");
-                Log.e("Receiver", "no GPS(" + e.getMessage() + ")");
+                Log.d(tag, "something went wrong");
+                Log.e(tag, "no GPS(" + e.getMessage() + ")");
                 return null;
             } catch (Exception e) {
-                Log.d("Made", "something went wrong:" + e.toString());
+                Log.d(tag, "something went wrong:" + e.toString());
 
             }
 
@@ -223,20 +232,20 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
      * @return true if should stop
      */
     private boolean counter(Context context) {
-        Log.d("Made", "counter");
+        Log.d(tag, "counter");
         SharedPreferences sharedpreferences = context.getSharedPreferences(COUNTER, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
         int i = sharedpreferences.getInt(COUNTER, 121);
-        Log.d("Made", "counter:" + i);
+        Log.d(tag, "counter:" + i);
         //TODO is not todo: duration the number multiplied by the time interval for the alarm
         if (i > 3) {
-            Log.d("Made", "counter true");
+            Log.d(tag, "counter true");
             return true;
         } else {
             editor.putInt(COUNTER, i + 1);
             editor.commit();
-            Log.d("Made", "counter false");
+            Log.d(tag, "counter false");
             return false;
         }
     }
@@ -323,10 +332,10 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
             Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
             double lat = lastLocation.getLatitude(), lon = lastLocation.getLongitude();
-            Log.d("Made", " here are:" + lat + ", " + lon);
+            Log.d(tag, " here are:" + lat + ", " + lon);
             cordinates = new LatLng(lat, lon);
         } else {
-            Log.d("Made", "connected? ");
+            Log.d(tag, "connected? ");
         }
     }
 
@@ -337,12 +346,14 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.i("Made", "Can't connect to Google Play Services!");
+        Log.i(tag, "Can't connect to Google Play Services!");
     }
 
+
+/*
     public int sentGPS(LatLng latLng) {
 
-        Log.d("AlarmReceiver", "Sending GPS");
+        Log.d(tag, "Sending GPS");
 
         Boolean noError = true;
         Boolean result = true;
@@ -352,12 +363,6 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
 
         String GPSAsJsonString = gpsObjectConverter.serialize(gps, GPS.class);
         HttpResponse closeableHttpResponse = null;
-
-        final ResultReceiver resultReceiver = intent.getParcelableExtra(CommunicationKeys.RECEICER);
-
-        Bundle bundle = new Bundle();
-        bundle.putString(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
-        bundle.putString(CommunicationKeys.SERVICE, CommunicationKeys.FROM_GPS_SERVICE);
 
         URI_GPS_Builder uri_gps_builder = new URI_GPS_Builder();
 
@@ -379,11 +384,27 @@ public class AlarmReceiver extends BroadcastReceiver implements GoogleApiClient.
         }
 
         if (result && noError) {
-            Log.d("AlarmReceiver", "Successful execut! StatusCode=" + closeableHttpResponse.getStatusLine().getStatusCode());
-            return closeableHttpResponse.getStatusLine().getStatusCode();
+            int statusCode = closeableHttpResponse.getStatusLine().getStatusCode();
+            Log.d(tag, "Successful execut! StatusCode=" + statusCode);
+            return statusCode;
+
         } else {
             return 500;
         }
+    }
+    */
+
+    private void startingGPSServicePut(LatLng latLng) {
+        GPS gps = new GPS(latLng.longitude, latLng.latitude, 0);
+        ObjectConverter<GPS> gpsObjectConverter = new ObjectConverter<>();
+
+        String GPSAsJsonString = gpsObjectConverter.serialize(gps, GPS.class);
+
+        Intent i = new Intent(context, GPS_Service.class);
+        i.putExtra(CommunicationKeys.GPS, GPSAsJsonString);
+        i.putExtra(CommunicationKeys.COMMAND, CommunicationKeys.PUT);
+        context.startService(i);
+
     }
 }
 
