@@ -57,5 +57,15 @@
         android:paddingBottom="8dp"
         />
 
+    <TextView
+        android:id="@+id/info_Meeting_duration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Meeting Duration"
+        android:paddingLeft="10dp"
+        android:paddingBottom="8dp"
+        />
+
 
 </LinearLayout>

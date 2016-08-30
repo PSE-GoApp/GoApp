@@ -35,6 +35,7 @@ import edu.kit.pse.client.goapp.CommunicationKeys;
 import edu.kit.pse.client.goapp.ServiceResultReceiver;
 import edu.kit.pse.client.goapp.converter.ObjectConverter;
 import edu.kit.pse.client.goapp.databaseadapter.DataBaseAdapter;
+import edu.kit.pse.client.goapp.datamodels.Event;
 import edu.kit.pse.client.goapp.datamodels.Meeting;
 import edu.kit.pse.client.goapp.datamodels.MeetingConfirmation;
 import edu.kit.pse.client.goapp.datamodels.Participant;
@@ -319,21 +320,34 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         View infoApoitment = inflater.inflate(R.layout.information_apoitment, null, false);
 
         // set the Meeting information in information_apoitment xml
+        TextView title = (TextView) infoApoitment.findViewById(R.id.title_information_apoitment);
+        TextView duration = (TextView) infoApoitment.findViewById(R.id.info_Meeting_duration);
         TextView time = (TextView) infoApoitment.findViewById(R.id.meeting_info_time);
         TextView name = (TextView) infoApoitment.findViewById(R.id.meeting_info_name);
         // TextView place = (TextView) infoApoitment.findViewById(R.id.meeting_info_adress);
         TextView creator = (TextView) infoApoitment.findViewById(R.id.info_Meeting_creator);
 
+        if (meeting.getClass() == Event.class) {
+            title.setText("Verantstaltung: " + meeting.getName());
+        } else {
+            title.setText("Tour: " + meeting.getName());
+        }
+
+
         // Convert TimeStampt with a Calendar
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(meeting.getTimestamp());
 
-        time.setText("Am " + calendar.get(Calendar.DAY_OF_MONTH)+1 + "." + calendar.get(Calendar.MONTH) + "."
+        int month = calendar.get(Calendar.MONTH) + 1;
+
+        time.setText("Am " + calendar.get(Calendar.DAY_OF_MONTH) + "." + month + "."
                 + calendar.get(Calendar.YEAR) + " um " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
 
         name.setText("Termin Name: " + meeting.getName());
         //Todo  GPS getPlace as String!
         creator.setText("Ersteller: " + meeting.getCreator().getUser().getName());
+
+        duration.setText("Dauer: " + meeting.getDuration() + " Minuten");
 
        /*   (Priority B)
         TextView memo = (TextView) infoApoitment.findViewById(R.id.info_MeetingMemo);
@@ -679,7 +693,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(m.getTimestamp());
 
-            String date = calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH)+1 + "." + calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH) + 1;
+
+            String date = calendar.get(Calendar.DAY_OF_MONTH) + "." + month + "." + calendar.get(Calendar.YEAR);
             String clockTime;
             String minute = null;
             String hour = null;
